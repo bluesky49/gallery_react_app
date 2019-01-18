@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * @file
+ * Contains grid_gallery.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\SettingsCommand;
+
+
+/**
+ * Implements hook_help().
+ */
+// the callback command.
+
+function grid_gallery_help($route_name, RouteMatchInterface $route_match)
+{
+    switch ($route_name) {
+        // Main module help for the react_gallery module.
+        case 'help.page.grid_gallery':
+            $output = '';
+            $output .= '<h3>' . t('About') . '</h3>';
+            $output .= '<p>' . t('Implementation of React Square Grid Gallery') . '</p>';
+            return $output;
+
+        default:
+    }
+}
+
+function grid_gallery_preprocess_paragraph__grid_gallery(&$variables)
+{
+    $paragraph = $variables['paragraph'];
+    $variables['#cache']['max-age'] = 0;
+
+    // Set default content of paragraph.
+    $variables['content']['#markup'] = '<div id="grid_gallery">&nbsp;</div>';
+
+    // Attach required libraries.
+
+    $variables['content']['#attached']['library'] = [
+        'grid_gallery/grid_gallery_chunk',
+        'grid_gallery/grid_gallery_runtime',
+        'grid_gallery/grid_gallery_component',
+    ];
+
+    // Set component settings into drupal settings.
+    $code = \Drupal::request()->get('EventAccessCode');
+
+    $variables['#attached']['drupalSettings']['eventAccessCode'] = $code;
+}

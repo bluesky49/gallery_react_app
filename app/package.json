@@ -1,0 +1,43 @@
+{
+  "name": "grid_gallery",
+  "version": "2.0.0",
+  "private": true,
+  "dependencies": {
+    "@appbaseio/reactivesearch": "2.16.1",
+    "@ungap/url-search-params": "^0.1.2",
+    "antd": "^3.12.3",
+    "axios": "^0.18.0",
+    "filestack-adaptive": "^0.2.3",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-fullscreenable": "^2.5.1-0",
+    "react-images": "^0.5.19",
+    "react-loader-spinner": "^2.3.0",
+    "react-measure": "^2.2.2",
+    "react-photo-gallery": "^6.3.0",
+    "react-redux": "^6.0.0",
+    "react-scripts": "2.1.3",
+    "react-scroll": "^1.7.10",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.1.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && yarn run build:dist",
+    "build:dist": "cd build && copy static\\js\\main.*.js static\\js\\grid_gallery.main.js && copy static\\js\\runtime~main.*.js static\\js\\grid_gallery.runtime~main.js && copy static\\js\\*.chunk.js static\\js\\grid_gallery.chunk.js && copy static\\css\\main.*.chunk.css static\\css\\grid_gallery.main.css && copy static\\css\\*.chunk.css static\\css\\grid_gallery.chunk.css",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

@@ -1,0 +1,17 @@
+/*
+.react-photo-gallery--gallery div img {
+    height: 201px !important;
+}*/
+
+#lightboxBackdrop {
+    z-index: 16777271 !important;
+}
+
+.css-evf80z {
+    margin-bottom: 5px !important;
+    margin-left: 5px !important;
+}
+
+.css-14pyrcn {
+    margin-top: 5px !important;
+}

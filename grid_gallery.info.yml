@@ -1,0 +1,8 @@
+name: 'Grid Gallery'
+type: module
+description: 'Implementation of React Grid Gallery'
+core: 8.x
+package: 'Custom'
+dependencies:
+  - jsonapi
+  - paragraphs
