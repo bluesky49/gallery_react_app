@@ -15,3 +15,22 @@
 .css-14pyrcn {
     margin-top: 5px !important;
 }
+
+#SearchSensor-downshift-input,
+#SearchAttendee-downshift-input,
+#SearchAuthor-downshift-input{
+    font-size: 14px !important;
+}
+
+.css-1pwe92q,
+.css-evf80z {
+    font-size: 16px !important;
+}
+
+.css-14pyrcn {
+    font-size: 14px !important;
+}
+
+.css-1xdhyk6 {
+    margin-bottom: 5px;
+}
