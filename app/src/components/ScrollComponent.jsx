@@ -19,7 +19,7 @@ class ScrollComponent extends React.Component {
             this.setState({
                 isFullscreen: this.props.isFullscreen,
                 overflowY: 'scroll',
-                height: '93vh'
+                height: '100vh'
             });
             if (this.props.isFullscreen === true) {
                 this.setState({
