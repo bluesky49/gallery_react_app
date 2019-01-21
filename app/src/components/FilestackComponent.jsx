@@ -5,6 +5,7 @@ import {picture} from 'filestack-adaptive';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import {filestackPolicy, filestackSignature} from "../keys";
 import GalleryComponent from "./GalleryComponent";
 import {toggleGalleryLoading, disableLoading, disableGalleryLoading, setPhotosToRender} from "../actions/dataActions";
 
@@ -20,7 +21,7 @@ const StyledWrapper = styled.div`
 
 // CSS ends
 
-class FilestackImages extends Component {
+class FilestackComponent extends Component {
 
     loadFromFilestack() {
         new Promise((resolve) => {
@@ -31,8 +32,8 @@ class FilestackImages extends Component {
                             transformOptions: {
                                 alt: 'alt',
                                 security: {
-                                    policy: 'eyJleHBpcnkiOjIwODAwNzI4MDB9',
-                                    signature: 'b2d2458ecac6d894570690d1a64897201524e857d3f813e7507763c7d99c513c'
+                                    policy: filestackPolicy,
+                                    signature: filestackSignature
                                 },
                                 formats: ['pjpg'],
                                 keys: true,
@@ -65,8 +66,8 @@ class FilestackImages extends Component {
                             transformOptionsLightbox: {
                                 alt: 'alt',
                                 security: {
-                                    policy: 'eyJleHBpcnkiOjIwODAwNzI4MDB9',
-                                    signature: 'b2d2458ecac6d894570690d1a64897201524e857d3f813e7507763c7d99c513c'
+                                    policy: filestackPolicy,
+                                    signature: filestackSignature
                                 },
                                 formats: ['pjpg'],
                                 keys: true,
@@ -98,8 +99,8 @@ class FilestackImages extends Component {
                             transformOptions: {
                                 alt: 'alt',
                                 security: {
-                                    policy: 'eyJleHBpcnkiOjIwODAwNzI4MDB9',
-                                    signature: 'b2d2458ecac6d894570690d1a64897201524e857d3f813e7507763c7d99c513c'
+                                    policy: filestackPolicy,
+                                    signature: filestackSignature
                                 },
                                 formats: ['pjpg'],
                                 keys: true,
@@ -131,8 +132,8 @@ class FilestackImages extends Component {
                             transformOptionsLightbox: {
                                 alt: 'alt',
                                 security: {
-                                    policy: 'eyJleHBpcnkiOjIwODAwNzI4MDB9',
-                                    signature: 'b2d2458ecac6d894570690d1a64897201524e857d3f813e7507763c7d99c513c'
+                                    policy: filestackPolicy,
+                                    signature: filestackSignature
                                 },
                                 formats: ['pjpg'],
                                 keys: true,
@@ -163,8 +164,8 @@ class FilestackImages extends Component {
                             transformOptions: {
                                 alt: 'alt',
                                 security: {
-                                    policy: 'eyJleHBpcnkiOjIwODAwNzI4MDB9',
-                                    signature: 'b2d2458ecac6d894570690d1a64897201524e857d3f813e7507763c7d99c513c'
+                                    policy: filestackPolicy,
+                                    signature: filestackSignature
                                 },
                                 formats: ['pjpg'],
                                 keys: true,
@@ -194,8 +195,8 @@ class FilestackImages extends Component {
                             transformOptionsLightbox: {
                                 alt: 'alt',
                                 security: {
-                                    policy: 'eyJleHBpcnkiOjIwODAwNzI4MDB9',
-                                    signature: 'b2d2458ecac6d894570690d1a64897201524e857d3f813e7507763c7d99c513c'
+                                    policy: filestackPolicy,
+                                    signature: filestackSignature
                                 },
                                 formats: ['pjpg'],
                                 keys: true,
@@ -296,7 +297,7 @@ class FilestackImages extends Component {
     }
 }
 
-FilestackImages.propTypes = {
+FilestackComponent.propTypes = {
     isLoading: PropTypes.bool,
     galleryIsLoading: PropTypes.bool,
     finalResponse: PropTypes.array,
@@ -312,4 +313,4 @@ export default connect(mapStateToProps, {
     disableLoading,
     disableGalleryLoading,
     setPhotosToRender
-})(FilestackImages);
+})(FilestackComponent);

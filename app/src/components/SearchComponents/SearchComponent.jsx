@@ -1,47 +1,25 @@
 import React, {Component} from 'react';
 import {ReactiveBase, DataSearch, ReactiveList, MultiList} from '@appbaseio/reactivesearch';
-import FilestackImages from "../FilestackImages";
-import {Button, Pagination} from "antd";
+import {Button} from "antd";
 import styled from "styled-components";
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import 'antd/lib/button/style/css';
-import 'antd/lib/icon/style/css';
-import 'antd/lib/pagination/style/css';
 import {
     toggleGalleryLoading,
     disableGalleryLoading,
     setFinalResponse,
-    setInitialResponse
+    setInitialResponse,
+    setTotalResults,
+    setSearchResult
 } from "../../actions/dataActions";
 
 // CSS starts
 
-const StyledWrapper = styled.div`
-   margin-top: 5px;
-   display: flex;
-      @media(max-width: 800px) {
-      flex-direction: column;
-      }
-`;
-const StyledGallery = styled.div`
-   width:100%;
-   padding-left: 5px;
-   padding-right: 5px;
-   height: auto;
-`;
 const StyledSearchWrapper = styled.div`
    padding: 4px 10px 10px 10px;
    min-width: 250px; 
-`;
-
-const PaginationWrapper = styled.div`
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   margin: 20px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -56,9 +34,7 @@ class SearchComponent extends Component {
         super(props);
 
         this.state = {
-            searchResult: [],
             chunkedResults: [],
-            totalResults: 0,
             initialResult: ['empty'],
             firstLoad: true,
             firstUpdate: true,
@@ -72,10 +48,8 @@ class SearchComponent extends Component {
 
         const chunkedResults = _.chunk(this.result, 50);
 
-        await this.setState({
-            searchResult: chunkedResults,
-            totalResults: this.result.length
-        });
+        await this.props.setSearchResult(chunkedResults);
+        await this.props.setTotalResults(this.result.length);
         await this.props.setFinalResponse(chunkedResults[0]);
 
         if (!this.state.initialResponseSet) {
@@ -90,6 +64,7 @@ class SearchComponent extends Component {
 
     handleSearchResult = results => {
         this.result = results;
+        console.log(results);
 
         if (this.result[0] && this.state.firstLoad) {
             this.setState({
@@ -102,15 +77,7 @@ class SearchComponent extends Component {
     handleClearFilters = () => {
         this.props.toggleGalleryLoading();
         this.props.setFinalResponse(this.props.data.initialResponse);
-        this.setState({
-            totalResults: this.state.initialTotalResults
-        });
-    };
-
-    onChange = (page, pageSize) => {
-        this.props.toggleGalleryLoading();
-        const {searchResult} = this.state;
-        this.props.setFinalResponse(searchResult[page - 1]);
+        this.props.setTotalResults(this.state.initialTotalResults);
     };
 
     componentDidUpdate(prevState, prevProps) {
@@ -123,12 +90,9 @@ class SearchComponent extends Component {
     }
 
     render() {
-        let totalPages = this.state.totalResults;
-        let elasticIndex = {['app']: `elasticsearch_index_bitnami_drupal8_${this.props.eventAccessCode}`};
-        //console.log(this.props.eventAccessCode);
+        let elasticIndex = {['app']: `elasticsearch_index_bitnami_drupal8_${this.props.data.eventAccessCode}`};
 
         return (
-            <StyledWrapper>
                 <StyledSearchWrapper>
                     <ReactiveBase
                         {...elasticIndex}
@@ -195,17 +159,6 @@ class SearchComponent extends Component {
                     </ButtonWrapper>
 
                 </StyledSearchWrapper>
-
-                <StyledGallery>
-
-                    <FilestackImages/>
-
-                    <PaginationWrapper>
-                        <Pagination onChange={this.onChange} defaultPageSize={50} total={totalPages}/>
-                    </PaginationWrapper>
-
-                </StyledGallery>
-            </StyledWrapper>
         );
     }
 }
@@ -214,7 +167,9 @@ SearchComponent.propTypes = {
     initialResponse: PropTypes.array,
     finalResponse: PropTypes.array,
     galleryIsLoading: PropTypes.bool,
-    eventAccessCode: PropTypes.string
+    eventAccessCode: PropTypes.string,
+    totalResults: PropTypes.number,
+    searchResult: PropTypes.array
 };
 
 const mapStateToProps = state => ({
@@ -225,5 +180,7 @@ export default connect(mapStateToProps, {
     toggleGalleryLoading,
     disableGalleryLoading,
     setFinalResponse,
-    setInitialResponse
+    setInitialResponse,
+    setTotalResults,
+    setSearchResult
 })(SearchComponent);

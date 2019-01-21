@@ -1,22 +1,85 @@
 import React from 'react';
-import SearchComponent from "./components/SearchComponents/SearchComponent";
+import styled from "styled-components";
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import SidebarComponent from "./components/SidebarComponent";
+import FilestackComponent from "./components/FilestackComponent";
+import {Pagination} from "antd";
+import {setEventCode, toggleGalleryLoading, setFinalResponse} from "./actions/dataActions";
 
+// CSS starts
 
-//const eventAccessCode = '123456';
-//const eventAccessCode = '071404';
-//const eventAccessCode = '164111';
-const eventAccessCode = '736303';
+const StyledWrapper = styled.div`
+   margin-top: 5px;
+   display: flex;
+      @media(max-width: 800px) {
+      flex-direction: column;
+      }
+`;
+const StyledGallery = styled.div`
+   width:100%;
+   padding-left: 5px;
+   padding-right: 5px;
+   height: auto;
+`;
 
-/*global drupalSettings:true*/
-/*eslint no-undef: "error"*/
-//const eventAccessCode = drupalSettings.eventAccessCode;
+const PaginationWrapper = styled.div`
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 20px;
+`;
 
-const App = () => {
-    //console.log("Event code is " + eventAccessCode);
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-    return (
-        <SearchComponent eventAccessCode={eventAccessCode} />
-    );
+    onChange = (page, pageSize) => {
+        this.props.toggleGalleryLoading();
+        const {searchResult} = this.props.data;
+        this.props.setFinalResponse(searchResult[page - 1]);
+    };
+
+    componentDidMount() {
+    /*global drupalSettings:true*/
+    /*eslint no-undef: "error"*/
+        //this.props.setEventCode(drupalSettings.eventAccessCode);
+    }
+
+    render() {
+
+        return (
+            <StyledWrapper>
+                <SidebarComponent/>
+                <StyledGallery>
+
+                    <FilestackComponent/>
+
+                    <PaginationWrapper>
+                        <Pagination onChange={this.onChange} defaultPageSize={50} total={this.props.data.totalResults}/>
+                    </PaginationWrapper>
+
+                </StyledGallery>
+            </StyledWrapper>
+        );
+    }
+}
+
+App.propTypes = {
+    initialResponse: PropTypes.array,
+    finalResponse: PropTypes.array,
+    totalResults: PropTypes.number,
+    eventAccessCode: PropTypes.string,
+    searchResult: PropTypes.array
 };
 
-export default App;
+const mapStateToProps = state => ({
+    data: state.data
+});
+
+export default connect(mapStateToProps, {
+    setEventCode,
+    toggleGalleryLoading,
+    setFinalResponse
+})(App);

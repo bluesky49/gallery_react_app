@@ -36,16 +36,40 @@ export const disableLoading = () => dispatch => {
     })
 };
 
-// Toggle loading
+// Toggle gallery loading
 export const toggleGalleryLoading = () => dispatch => {
     dispatch({
         type:'TOGGLE_GALLERY_LOADING'
     })
 };
 
-// Disable loading
+// Disable gallery loading
 export const disableGalleryLoading = () => dispatch => {
     dispatch({
         type:'DISABLE_GALLERY_LOADING'
+    })
+};
+
+// Set Event code
+export const setEventCode = response => dispatch => {
+    dispatch({
+        type:'SET_EVENT_CODE',
+        payload: response
+    })
+};
+
+// Set total pages for the pager
+export const setTotalResults = response => dispatch => {
+    dispatch({
+        type:'SET_TOTAL_RESULTS',
+        payload: response
+    })
+};
+
+// Set search result
+export const setSearchResult = response => dispatch => {
+    dispatch({
+        type:'SET_SEARCH_RESULT',
+        payload: response
     })
 };
