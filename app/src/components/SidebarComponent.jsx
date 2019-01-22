@@ -11,15 +11,15 @@ const StyledSidebar = styled.div`
    top: 45px;
    left: 0;
    background-color: transparent;
-   z-index: 2147483647;
+   z-index: 2147483646;
 `;
 const StyledIcon = styled(Icon)`
 position: absolute;
     margin: 20px;
     color: #1890ff;
-    z-index: 100;
     font-size: 1.5em;
     cursor: pointer;
+    z-index: 2147483647;
 `;
 //CSS Ends
 
@@ -54,14 +54,31 @@ class SidebarComponent extends React.Component {
         super(props);
 
         this.state = {
-            open: undefined
+            open: false,
+            sidebarWidth: 0
         };
     }
 
     toggle = () => this.setState(state => ({open: !state.open}));
 
+    componentDidUpdate(prevProps, prevState) {
+        const {open} = this.state;
+
+        if (open !== prevState.open && open) {
+            this.setState({
+                sidebarWidth: 280,
+            });
+        } else if (open !== prevState.open && !open) {
+            setTimeout(() => {
+                this.setState({
+                    sidebarWidth: 0,
+                });
+            }, 800);
+        }
+    }
+
     render() {
-        const state = this.state.open === undefined ? 'peek' : this.state.open ? 'open' : 'close';
+        const state = this.state.open ? 'open' : 'close';
         const icon = this.state.open ? 'fold' : 'unfold';
         const items = [
             <SearchComponent/>
@@ -79,6 +96,7 @@ class SidebarComponent extends React.Component {
                             className="sidebar"
                             style={{
                                 transform: x.interpolate(x => `translate3d(${x}%,0,0)`),
+                                width: this.state.sidebarWidth
                             }}>
                             <Content
                                 native
