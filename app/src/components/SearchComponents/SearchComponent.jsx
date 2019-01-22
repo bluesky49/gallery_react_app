@@ -19,7 +19,7 @@ import {
 
 const StyledSearchWrapper = styled.div`
    min-width: 250px;
-   margin-top: 60px; 
+   margin-top: 60px;
 `;
 
 const ButtonWrapper = styled.div`

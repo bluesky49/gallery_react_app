@@ -7,10 +7,11 @@ import SearchComponent from './SearchComponents/SearchComponent'
 
 //CSS starts
 const StyledSidebar = styled.div`
-   position: absolute;
-   top: 0;
+   position: fixed;
+   top: 45px;
    left: 0;
    background-color: transparent;
+   z-index: 2147483647;
 `;
 const StyledIcon = styled(Icon)`
 position: absolute;

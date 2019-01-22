@@ -14,10 +14,14 @@ const StyledFullScreen = styled.div`
 `;
 const ButtonWrapper = styled.div`
     text-align: right;
-    position: absolute;
-    top: 15px;
-    right: 30px;
+    position: fixed;
+    top: 63px;
+    right: 10px;
     z-index: 9999;
+`;
+const StyledButton = styled(Button)`
+    border-style: none !important;
+    box-shadow: none !important;
 `;
 
 // CSS ends
@@ -64,9 +68,9 @@ export class FullscreenComponent extends Component {
         return (
             <StyledFullScreen>
                 <ButtonWrapper>
-                    <Button type="ghost" onClick={toggleFullscreen}>
+                    <StyledButton type="ghost" onClick={toggleFullscreen}>
                         {buttonLabel}
-                    </Button>
+                    </StyledButton>
                 </ButtonWrapper>
                 <ScrollComponent isFullscreen={isFullscreen}/>
             </StyledFullScreen>
@@ -92,4 +96,9 @@ const mapStateToProps = state => ({
     view: state.view
 });
 
-export default connect(mapStateToProps, {fullscreenON, fullscreenOFF, disableTempFullscreen, toggleTempFullscreen})(FullscreenToggleComponent);
+export default connect(mapStateToProps, {
+    fullscreenON,
+    fullscreenOFF,
+    disableTempFullscreen,
+    toggleTempFullscreen
+})(FullscreenToggleComponent);
