@@ -18,8 +18,8 @@ import {
 // CSS starts
 
 const StyledSearchWrapper = styled.div`
-   padding: 4px 10px 10px 10px;
-   min-width: 250px; 
+   min-width: 250px;
+   margin-top: 60px; 
 `;
 
 const ButtonWrapper = styled.div`

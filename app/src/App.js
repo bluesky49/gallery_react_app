@@ -10,16 +10,10 @@ import {setEventCode, toggleGalleryLoading, setFinalResponse} from "./actions/da
 // CSS starts
 
 const StyledWrapper = styled.div`
-   margin-top: 5px;
-   display: flex;
-      @media(max-width: 800px) {
-      flex-direction: column;
-      }
+   margin-top: 0;
 `;
 const StyledGallery = styled.div`
    width:100%;
-   padding-left: 5px;
-   padding-right: 5px;
    height: auto;
 `;
 
@@ -42,25 +36,25 @@ class App extends React.Component {
     };
 
     componentDidMount() {
-    /*global drupalSettings:true*/
-    /*eslint no-undef: "error"*/
-        //this.props.setEventCode(drupalSettings.eventAccessCode);
+        /*global drupalSettings:true*/
+        /*eslint no-undef: "error"*/
+        this.props.setEventCode(drupalSettings.eventAccessCode);
     }
 
     render() {
 
         return (
             <StyledWrapper>
+
                 <SidebarComponent/>
+
                 <StyledGallery>
-
                     <FilestackComponent/>
-
                     <PaginationWrapper>
                         <Pagination onChange={this.onChange} defaultPageSize={50} total={this.props.data.totalResults}/>
                     </PaginationWrapper>
-
                 </StyledGallery>
+
             </StyledWrapper>
         );
     }

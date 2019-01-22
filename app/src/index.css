@@ -17,13 +17,18 @@
     font-size: 14px !important;
 }
 
-.css-1pwe92q,
+.css-1pwe92q {
+    font-size: 16px !important;
+    color: white !important;
+}
+
 .css-evf80z {
     font-size: 16px !important;
 }
 
 .css-14pyrcn {
     font-size: 14px !important;
+    color: white !important;
 }
 
 .css-1xdhyk6 {
@@ -35,18 +40,11 @@
     overflow: hidden;
     height: 100%;
     width: 280px;
-    background: white;
-    padding: 20px;
+    background-color: rgba(30, 30, 30, 0.5);
+    padding: 0 10px 10px 10px;
     font-size: 15px;
-}
-
-.sidebar-toggle {
-    position: absolute;
-    margin: 20px;
-    color: #a0a0a0;
-    z-index: 100;
-    font-size: 1.5em;
-    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px rgba(30, 30, 30, 0.5);
 }
 
 .login-form-forgot {

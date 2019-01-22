@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a64dbb82-062f-4db9-bfe4-227ddf365b6a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/components/SidebarComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/actions/dataActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/actions/dataActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/actions/types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/FilestackImages.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/FilestackComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/FilestackComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/FilestackComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/SidebarComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/SidebarComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/keys.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/keys.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/reducers/dataReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/reducers/dataReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,12 +20,12 @@
     <drupalPath />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/components/GalleryComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1452">
-              <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+            <state relative-caret-position="594">
+              <caret line="36" column="6" lean-forward="true" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -42,8 +36,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1848">
-              <caret line="84" column="8" lean-forward="true" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
+            <state relative-caret-position="374">
+              <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -51,44 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/components/FilestackComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/keys.js">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="110">
-              <caret line="5" column="33" lean-forward="true" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/reducers/dataReducer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-44">
-              <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
-              <folding>
-                <element signature="e#0#227#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/actions/dataActions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="64" column="25" lean-forward="true" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
+              <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -96,8 +57,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/index.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1145">
-              <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
+            <state relative-caret-position="572">
+              <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/reducers/dataReducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="24" column="29" lean-forward="true" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -105,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/components/SidebarComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="571">
-              <caret line="88" column="1" lean-forward="true" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
+            <state relative-caret-position="-814">
+              <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -115,19 +85,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/actions/types.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="23" column="53" lean-forward="true" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="164" lean-forward="true" selection-start-line="164" selection-end-line="164" />
+            <state relative-caret-position="417">
+              <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -164,16 +125,16 @@
         <option value="$PROJECT_DIR$/app/src/components/ScrollComponent.jsx" />
         <option value="$PROJECT_DIR$/app/src/components/Sidebar.jsx" />
         <option value="$PROJECT_DIR$/app/src/index.js" />
-        <option value="$PROJECT_DIR$/app/src/index.css" />
         <option value="$PROJECT_DIR$/app/src/actions/dataActions.js" />
         <option value="$PROJECT_DIR$/app/src/actions/types.js" />
         <option value="$PROJECT_DIR$/app/src/components/FilestackImages.jsx" />
-        <option value="$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx" />
-        <option value="$PROJECT_DIR$/app/src/reducers/dataReducer.js" />
-        <option value="$PROJECT_DIR$/app/src/components/SidebarComponent.jsx" />
-        <option value="$PROJECT_DIR$/app/src/App.js" />
         <option value="$PROJECT_DIR$/app/src/keys.js" />
         <option value="$PROJECT_DIR$/app/src/components/FilestackComponent.jsx" />
+        <option value="$PROJECT_DIR$/app/src/components/SidebarComponent.jsx" />
+        <option value="$PROJECT_DIR$/app/src/index.css" />
+        <option value="$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx" />
+        <option value="$PROJECT_DIR$/app/src/App.js" />
+        <option value="$PROJECT_DIR$/app/src/reducers/dataReducer.js" />
       </list>
     </option>
   </component>
@@ -219,13 +180,6 @@
               <item name="grid_gallery" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="actions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grid_gallery" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grid_gallery" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -235,6 +189,13 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="SearchComponents" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="grid_gallery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="grid_gallery" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="reducers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -275,12 +236,13 @@
       <workItem from="1547888143670" duration="216000" />
       <workItem from="1547888495221" duration="5370000" />
       <workItem from="1547998859236" duration="1932000" />
-      <workItem from="1548063444786" duration="19543000" />
+      <workItem from="1548063444786" duration="22260000" />
+      <workItem from="1548149374288" duration="5136000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32285000" />
+    <option name="totallyTimeSpent" value="40138000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-8" width="1936" height="1056" extended-state="6" />
@@ -400,10 +362,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/index.css">
+    <entry file="file://$PROJECT_DIR$/app/src/actions/dataActions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1145">
-          <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
+        <state relative-caret-position="1408">
+          <caret line="64" column="25" lean-forward="true" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -414,77 +376,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx">
+    <entry file="file://$PROJECT_DIR$/app/src/keys.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="164" lean-forward="true" selection-start-line="164" selection-end-line="164" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="110">
+          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/reducers/dataReducer.js">
+    <entry file="file://$PROJECT_DIR$/app/src/components/FilestackComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-44">
-          <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#227#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="110">
+          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/components/SidebarComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="88" column="1" lean-forward="true" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
+        <state relative-caret-position="-814">
+          <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/App.js">
+    <entry file="file://$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1848">
-          <caret line="84" column="8" lean-forward="true" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
+        <state relative-caret-position="417">
+          <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/components/GalleryComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1452">
-          <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+        <state relative-caret-position="594">
+          <caret line="36" column="6" lean-forward="true" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/keys.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="33" lean-forward="true" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/actions/dataActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="64" column="25" lean-forward="true" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/FilestackComponent.jsx">
+    <entry file="file://$PROJECT_DIR$/app/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/reducers/dataReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="24" column="29" lean-forward="true" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
         </state>
       </provider>
     </entry>
