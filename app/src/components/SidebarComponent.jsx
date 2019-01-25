@@ -7,19 +7,25 @@ import SearchComponent from './SearchComponents/SearchComponent'
 
 //CSS starts
 const StyledSidebar = styled.div`
-   position: fixed;
-   top: 45px;
+   position: absolute;
+   top: 5px;
    left: 0;
    background-color: transparent;
    z-index: 2147483646;
 `;
 const StyledIcon = styled(Icon)`
 position: absolute;
-    margin: 20px;
+    margin: 20px 20px 20px 25px;
     color: #1890ff;
-    font-size: 1.5em;
+    font-size: 20px;
     cursor: pointer;
+    padding: 5px 15px;
+    border-radius: 4px;
     z-index: 2147483647;
+    background-color: rgba(30, 30, 30, 0.8) !important;
+    box-shadow: 2px 2px 4px rgba(24, 144, 255, 0.4) !important;
+       &:hover {
+                box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
 `;
 //CSS Ends
 

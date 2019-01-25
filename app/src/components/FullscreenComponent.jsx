@@ -14,14 +14,19 @@ const StyledFullScreen = styled.div`
 `;
 const ButtonWrapper = styled.div`
     text-align: right;
-    position: fixed;
-    top: 63px;
-    right: 10px;
+    position: absolute;
+    top: 25px;
+    right: 30px;
     z-index: 9999;
 `;
 const StyledButton = styled(Button)`
     border-style: none !important;
-    box-shadow: none !important;
+    background-color: rgba(30, 30, 30, 0.8) !important;
+    box-shadow: 2px 2px 4px rgba(24, 144, 255, 0.4) !important;
+     &:hover {
+    box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
+  }
+    //box-shadow: 2px 2px 2px rgba(30, 30, 30, 0.5) !important;
 `;
 
 // CSS ends
@@ -61,9 +66,9 @@ export class FullscreenComponent extends Component {
         const {isFullscreen, toggleFullscreen} = this.props;
 
         const buttonLabel = isFullscreen ?
-            <Icon type="fullscreen-exit" theme="outlined" style={{fontSize: '24px', color: '#1890ff'}}/>
+            <Icon type="fullscreen-exit" theme="outlined" style={{fontSize: '22px', color: '#1890ff'}}/>
             :
-            <Icon type="fullscreen" theme="outlined" style={{fontSize: '24px', color: '#1890ff'}}/>;
+            <Icon type="fullscreen" theme="outlined" style={{fontSize: '22px', color: '#1890ff'}}/>;
 
         return (
             <StyledFullScreen>
