@@ -103,14 +103,20 @@ class SearchComponent extends Component {
                             showClear={true}
                             componentId="SearchSensor"
                             dataField={["attendee_first_name", "author_last_name", "author_first_name", "author_email",
-                                "attendee_last_name", "attendee_first_name", "attendee_email", "attendee_group", "image_locality", "image_filestack_handle"]}
+                                "attendee_last_name", "attendee_first_name", "attendee_email", "attendee_group", "image_locality"]}
                             autosuggest={true}
                         />
                         <MultiList
-                            componentId="MultiList"
+                            componentId="multiList_attendee_group"
                             dataField="attendee_group"
                             showSearch={false}
                             title="Attendee group"
+                        />
+                        <MultiList
+                            componentId="multiList_image_moment"
+                            dataField="image_moment"
+                            showSearch={false}
+                            title="Moments"
                         />
                         <DataSearch
                             showClear={true}
@@ -132,7 +138,7 @@ class SearchComponent extends Component {
                             componentId="SearchResult"
                             dataField="SearchSensor"
                             react={{
-                                "and": ["SearchSensor", "MultiList", "SearchAttendee", "SearchAuthor"]
+                                "and": ["SearchSensor", "multiList_attendee_group", "multiList_image_moment", "SearchAttendee", "SearchAuthor"]
                             }}
                             size={9999}
                             pagination={false}

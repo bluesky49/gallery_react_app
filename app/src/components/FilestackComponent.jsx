@@ -238,6 +238,7 @@ class FilestackComponent extends Component {
                                 srcSet: `${picture(item.filestack_handle[0], item.transformOptionsLightbox).firstChild.attributes.srcset.textContent}`,
                                 caption: "By " + authorEmail + " on " + date,
                                 alt: `${item.image_alt !== undefined ? item.image_alt[0] : "EventStory Image"}`,
+                                uuid: item.uuid[0]
                             }
                         )
                     } else {
@@ -253,7 +254,8 @@ class FilestackComponent extends Component {
                                 sizes: '(max-width: 180px) 180px, (max-width: 360px) 360px, (max-width: 540px) 540px, (max-width: 720px) 720px, (max-width: 900px) 900px, (max-width: 1080px) 1080px, (max-width: 1296px) 1296px, (min-width: 1512px) 1512px, (max-width: 1728px) 1728px, (max-width: 1944px) 1944px, (max-width: 2160px) 2160px, (max-width: 2376px) 2376px, (max-width: 2592px) 2592px, (max-width: 2808px) 2808px, (max-width: 3024px) 3024px',
                                 srcSet: `${picture(item.filestack_handle[0], item.transformOptionsLightbox).firstChild.attributes.srcset.textContent}`,
                                 caption: "By " + authorEmail + " on " + date,
-                                alt: `${item.image_alt !== undefined ? item.image_alt[0] : "EventStory Image"}`
+                                alt: `${item.image_alt !== undefined ? item.image_alt[0] : "EventStory Image"}`,
+                                uuid: item.uuid[0]
                             }
                         )
                     }
