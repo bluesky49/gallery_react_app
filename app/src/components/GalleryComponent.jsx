@@ -4,11 +4,14 @@ import Measure from 'react-measure';
 import Lightbox from 'react-images';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Button, Icon} from "antd";
+import {Button, Icon, Input} from "antd";
 import axios from "axios";
+import Select from 'react-select';
+import _ from 'lodash';
 
 import {toggleLightbox, disableLightbox} from '../actions/viewActions';
 import {fetchPassword, fetchUsername, prodURL} from "../keys";
+
 
 class GalleryComponent extends Component {
 
@@ -19,6 +22,8 @@ class GalleryComponent extends Component {
             galleryPhotos: [],
             width: -1,
             currentImage: 0,
+            selectedOption: null,
+            albums: []
         };
         this.lightboxRef = React.createRef();
     }
@@ -46,7 +51,7 @@ class GalleryComponent extends Component {
         });
     };
     addToAlbum = () => {
-        /*const currentLightboxImage = this.lightboxRef.current.props.currentImage;
+        const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
 
         axios({
@@ -96,11 +101,16 @@ class GalleryComponent extends Component {
                     console.log('Error', error.message);
                 }
                 console.log(error.config);
-            });*/
+            });
     };
     deleteFromAlbum = () => {
         console.log("delete button is pressed")
     };
+
+    handleChange = (selectedOption) => {
+        this.setState({selectedOption});
+        console.log(`Option selected:`, selectedOption);
+    }
 
     componentDidUpdate(prevProps) {
         if (this.props.data.photosToRender !== prevProps.data.photosToRender && this.props.data.photosToRender !== ['empty']) {
@@ -119,22 +129,75 @@ class GalleryComponent extends Component {
                 galleryPhotos: galleryPhotos
             });
         }
+        if (this.props.view.lightboxIsOpen !== prevProps.view.lightboxIsOpen &&
+            this.props.view.lightboxIsOpen === true &&
+            this.props.data.photosToRender[this.lightboxRef.current.props.currentImage].albumTitles !== null) {
+            const currentLightboxImage = this.lightboxRef.current.props.currentImage;
+
+            const albumTitles = this.props.data.photosToRender[currentLightboxImage].albumTitles;
+            const albumUuids = this.props.data.photosToRender[currentLightboxImage].albumUuids;
+
+            const titlesObject = albumTitles.map((item) => {
+                return (
+                    {label: item}
+                )
+            });
+
+            const uuidsObject = albumUuids.map((item) => {
+                return (
+                    {value: item}
+                )
+            });
+
+            const albums = _.merge(titlesObject, uuidsObject);
+
+            this.setState({
+                albums: albums,
+            });
+        } else if (this.props.view.lightboxIsOpen !== prevProps.view.lightboxIsOpen &&
+            this.props.view.lightboxIsOpen === true &&
+            this.props.data.photosToRender[this.lightboxRef.current.props.currentImage].albumTitles == null) {
+            this.setState({
+                albums: null,
+            });
+        }
     }
 
     render() {
         const width = this.state.width;
-        const ButtonGroup = Button.Group;
-        const albumButtons = <ButtonGroup key="12345">
-            <Button size="small" type="primary" onClick={this.addToAlbum}>
-                <Icon type="plus"/>
-                To album
-            </Button>;
 
-            <Button size="small" type="danger" onClick={this.deleteFromAlbum}>
-                <Icon type="minus"/>
-                Remove
-            </Button>;
-        </ButtonGroup>;
+        const ButtonGroup = Button.Group;
+
+        const options = [
+            {value: 'chocolate', label: 'Chocolate'},
+            {value: 'strawberry', label: 'Strawberry'},
+            {value: 'vanilla', label: 'Vanilla'}
+        ];
+
+        const {albums} = this.state;
+
+        const albumButtons = <div key="11">
+            <ButtonGroup key="1">
+                <Button size="small" type="primary" onClick={this.addToAlbum}>
+                    <Icon type="plus"/>
+                    To album
+                </Button>;
+
+                <Button size="small" type="danger" onClick={this.deleteFromAlbum}>
+                    <Icon type="minus"/>
+                    Remove
+                </Button>;
+            </ButtonGroup>,
+            {albums ?
+                <Select
+                    value={this.state.selectedOption}
+                    onChange={this.handleChange}
+                    options={albums}
+                    key="2"
+                /> : null}
+
+            <Input key="3" placeholder="Enter new album name"/>
+        </div>;
 
         return (
             <Measure bounds onResize={(contentRect) => this.setState({width: contentRect.bounds.width})}>

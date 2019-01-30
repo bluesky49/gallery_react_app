@@ -23,7 +23,7 @@ const initialState = {
     photosToRender: ['empty'],
     isLoading: true,
     galleryIsLoading: false,
-    eventAccessCode: 'empty',
+    eventAccessCode: 444121,//'empty',
     totalResults: null,
     searchResult: ['empty']
 };

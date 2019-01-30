@@ -223,8 +223,8 @@ class FilestackComponent extends Component {
                 });
 
                 const galleryPhotos = transformOptionsAttached.map((item) => {
-
-                    if (item.image_rotation !== undefined && item.image_rotation[0] === "Rotated 90 CW") {
+                   // if (item.album_titles !== undefined) {
+                        if (item.image_rotation !== undefined && item.image_rotation[0] === "Rotated 90 CW") {
 
                         const date = item.image_date !== undefined ? new Date(item.image_date[0] * 1000).toLocaleString() : "The date is not specified";
                         const authorEmail = item.author_email !== undefined ? item.author_email[0] : "unknown author";
@@ -238,6 +238,8 @@ class FilestackComponent extends Component {
                                 srcSet: `${picture(item.filestack_handle[0], item.transformOptionsLightbox).firstChild.attributes.srcset.textContent}`,
                                 caption: "By " + authorEmail + " on " + date,
                                 alt: `${item.image_alt !== undefined ? item.image_alt[0] : "EventStory Image"}`,
+                                albumTitles: item.album_titles !== undefined ? item.album_titles : null,
+                                albumUuids: item.album_uuids !== undefined ? item.album_uuids : null,
                                 uuid: item.uuid[0]
                             }
                         )
@@ -255,6 +257,8 @@ class FilestackComponent extends Component {
                                 srcSet: `${picture(item.filestack_handle[0], item.transformOptionsLightbox).firstChild.attributes.srcset.textContent}`,
                                 caption: "By " + authorEmail + " on " + date,
                                 alt: `${item.image_alt !== undefined ? item.image_alt[0] : "EventStory Image"}`,
+                                albumTitles: item.album_titles !== undefined ? item.album_titles : null,
+                                albumUuids: item.album_uuids !== undefined ? item.album_uuids : null,
                                 uuid: item.uuid[0]
                             }
                         )

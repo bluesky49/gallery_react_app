@@ -38,7 +38,7 @@ class App extends React.Component {
     componentDidMount() {
         /*global drupalSettings:true*/
         /*eslint no-undef: "error"*/
-       this.props.setEventCode(drupalSettings.eventAccessCode);
+       //this.props.setEventCode(drupalSettings.eventAccessCode);
     }
 
     render() {
