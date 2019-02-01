@@ -240,7 +240,8 @@ class FilestackComponent extends Component {
                                 alt: `${item.image_alt !== undefined ? item.image_alt[0] : "EventStory Image"}`,
                                 albumTitles: item.album_titles !== undefined ? item.album_titles : null,
                                 albumUuids: item.album_uuids !== undefined ? item.album_uuids : null,
-                                uuid: item.uuid[0]
+                                uuid: item.uuid[0],
+                                attendeeEmail: item.album_owner_emails !== undefined ? item.album_owner_emails : null
                             }
                         )
                     } else {
@@ -259,7 +260,8 @@ class FilestackComponent extends Component {
                                 alt: `${item.image_alt !== undefined ? item.image_alt[0] : "EventStory Image"}`,
                                 albumTitles: item.album_titles !== undefined ? item.album_titles : null,
                                 albumUuids: item.album_uuids !== undefined ? item.album_uuids : null,
-                                uuid: item.uuid[0]
+                                uuid: item.uuid[0],
+                                attendeeEmail: item.album_owner_emails !== undefined ? item.album_owner_emails : null
                             }
                         )
                     }

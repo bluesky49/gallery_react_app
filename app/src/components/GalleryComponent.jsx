@@ -134,8 +134,21 @@ class GalleryComponent extends Component {
             this.props.data.photosToRender[this.lightboxRef.current.props.currentImage].albumTitles !== null) {
             const currentLightboxImage = this.lightboxRef.current.props.currentImage;
 
-            const albumTitles = this.props.data.photosToRender[currentLightboxImage].albumTitles;
-            const albumUuids = this.props.data.photosToRender[currentLightboxImage].albumUuids;
+            const albumTitlesUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumTitles;
+            const albumUuidsUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumUuids;
+            const attendeeEmails = this.props.data.photosToRender[currentLightboxImage].attendeeEmail;
+
+            const attendeeIndexes = attendeeEmails.reduce((total, item, index) => {
+                const currentAttendee = this.props.data.attendee;
+
+                if (item === currentAttendee) {
+                    total.push(index);
+                }
+                return total;
+            }, []);
+
+            const albumTitles = _.pullAt(albumTitlesUnfiltered, attendeeIndexes);
+            const albumUuids = _.pullAt(albumUuidsUnfiltered, attendeeIndexes);
 
             const titlesObject = albumTitles.map((item) => {
                 return (
@@ -165,15 +178,7 @@ class GalleryComponent extends Component {
 
     render() {
         const width = this.state.width;
-
         const ButtonGroup = Button.Group;
-
-        const options = [
-            {value: 'chocolate', label: 'Chocolate'},
-            {value: 'strawberry', label: 'Strawberry'},
-            {value: 'vanilla', label: 'Vanilla'}
-        ];
-
         const {albums} = this.state;
 
         const albumButtons = <div key="11">

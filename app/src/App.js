@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import SidebarComponent from "./components/SidebarComponent";
 import FilestackComponent from "./components/FilestackComponent";
 import {Pagination} from "antd";
-import {setEventCode, toggleGalleryLoading, setFinalResponse} from "./actions/dataActions";
+import {setEventCode, setAttendee, toggleGalleryLoading, setFinalResponse} from "./actions/dataActions";
 
 // CSS starts
 
@@ -39,6 +39,7 @@ class App extends React.Component {
         /*global drupalSettings:true*/
         /*eslint no-undef: "error"*/
        //this.props.setEventCode(drupalSettings.eventAccessCode);
+       //this.props.setAttendee(drupalSettings.setAttendee);
     }
 
     render() {
@@ -74,6 +75,7 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
     setEventCode,
+    setAttendee,
     toggleGalleryLoading,
     setFinalResponse
 })(App);

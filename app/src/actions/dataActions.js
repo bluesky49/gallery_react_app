@@ -5,7 +5,6 @@ export const setInitialResponse = response => dispatch => {
         payload: response
     })
 };
-
 // Set final response
 export const setFinalResponse = response => dispatch => {
     dispatch({
@@ -13,7 +12,6 @@ export const setFinalResponse = response => dispatch => {
         payload: response
     })
 };
-
 // Set photos to be rendered
 export const setPhotosToRender = response => dispatch => {
     dispatch({
@@ -21,35 +19,30 @@ export const setPhotosToRender = response => dispatch => {
         payload: response
     })
 };
-
 // Toggle loading
 export const toggleLoading = () => dispatch => {
     dispatch({
         type:'TOGGLE_LOADING'
     })
 };
-
 // Disable loading
 export const disableLoading = () => dispatch => {
     dispatch({
         type:'DISABLE_LOADING'
     })
 };
-
 // Toggle gallery loading
 export const toggleGalleryLoading = () => dispatch => {
     dispatch({
         type:'TOGGLE_GALLERY_LOADING'
     })
 };
-
 // Disable gallery loading
 export const disableGalleryLoading = () => dispatch => {
     dispatch({
         type:'DISABLE_GALLERY_LOADING'
     })
 };
-
 // Set Event code
 export const setEventCode = response => dispatch => {
     dispatch({
@@ -57,7 +50,13 @@ export const setEventCode = response => dispatch => {
         payload: response
     })
 };
-
+// Set Attendee
+export const setAttendee = response => dispatch => {
+    dispatch({
+        type:'SET_ATTENDEE',
+        payload: response
+    })
+};
 // Set total pages for the pager
 export const setTotalResults = response => dispatch => {
     dispatch({
@@ -65,7 +64,6 @@ export const setTotalResults = response => dispatch => {
         payload: response
     })
 };
-
 // Set search result
 export const setSearchResult = response => dispatch => {
     dispatch({

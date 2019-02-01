@@ -7,6 +7,7 @@ import {
     TOGGLE_GALLERY_LOADING,
     DISABLE_GALLERY_LOADING,
     SET_EVENT_CODE,
+    SET_ATTENDEE,
     SET_TOTAL_RESULTS,
     SET_SEARCH_RESULT
 } from '../actions/types';
@@ -17,6 +18,9 @@ import {
 //const eventAccessCode = '736303';
 //const eventAccessCode = '444121';
 
+//const attendee = 'fbracq@pauzzle.pro';
+// const attendee = 'salon1@mariage.pro';
+
 const initialState = {
     initialResponse: [],
     finalResponse: ['empty'],
@@ -24,6 +28,7 @@ const initialState = {
     isLoading: true,
     galleryIsLoading: false,
     eventAccessCode: 444121,//'empty',
+    attendee: 'fbracq@pauzzle.pro',//'empty',
     totalResults: null,
     searchResult: ['empty']
 };
@@ -69,6 +74,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 eventAccessCode: action.payload
+            };
+            case SET_ATTENDEE:
+            return {
+                ...state,
+                attendee: action.payload
             };
         case SET_TOTAL_RESULTS:
             return {
