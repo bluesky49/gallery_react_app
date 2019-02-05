@@ -134,35 +134,21 @@ class GalleryComponent extends Component {
             this.props.data.photosToRender[this.lightboxRef.current.props.currentImage].albumTitles !== null) {
             const currentLightboxImage = this.lightboxRef.current.props.currentImage;
 
-            const albumTitlesUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumTitles;
-            const albumUuidsUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumUuids;
             const attendeeEmails = this.props.data.photosToRender[currentLightboxImage].attendeeEmail;
 
-            const attendeeIndexes = attendeeEmails.reduce((total, item, index) => {
+            const albums = attendeeEmails.reduce((total, item, index) => {
                 const currentAttendee = this.props.data.attendee;
+                const albumTitlesUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumTitles;
+                const albumUuidsUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumUuids;
 
                 if (item === currentAttendee) {
-                    total.push(index);
+                    total.push({
+                        label: albumTitlesUnfiltered[index],
+                        value: albumUuidsUnfiltered[index]
+                    });
                 }
                 return total;
             }, []);
-
-            const albumTitles = _.pullAt(albumTitlesUnfiltered, attendeeIndexes);
-            const albumUuids = _.pullAt(albumUuidsUnfiltered, attendeeIndexes);
-
-            const titlesObject = albumTitles.map((item) => {
-                return (
-                    {label: item}
-                )
-            });
-
-            const uuidsObject = albumUuids.map((item) => {
-                return (
-                    {value: item}
-                )
-            });
-
-            const albums = _.merge(titlesObject, uuidsObject);
 
             this.setState({
                 albums: albums,
@@ -193,7 +179,7 @@ class GalleryComponent extends Component {
                     Remove
                 </Button>;
             </ButtonGroup>,
-            {albums ?
+            {albums && albums.length ?
                 <Select
                     value={this.state.selectedOption}
                     onChange={this.handleChange}

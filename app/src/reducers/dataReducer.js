@@ -20,6 +20,7 @@ import {
 
 //const attendee = 'fbracq@pauzzle.pro';
 // const attendee = 'salon1@mariage.pro';
+// const attendee = 'marion.durand@pauzzle.pro';
 
 const initialState = {
     initialResponse: [],
