@@ -4,10 +4,9 @@ import Measure from 'react-measure';
 import Lightbox from 'react-images';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Button, Icon, Input} from "antd";
+import {Form, Button, Icon, Input} from "antd";
 import axios from "axios";
 import Select from 'react-select';
-import _ from 'lodash';
 
 import {toggleLightbox, disableLightbox} from '../actions/viewActions';
 import {fetchPassword, fetchUsername, prodURL} from "../keys";
@@ -110,7 +109,16 @@ class GalleryComponent extends Component {
     handleChange = (selectedOption) => {
         this.setState({selectedOption});
         console.log(`Option selected:`, selectedOption);
-    }
+    };
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+    };
 
     componentDidUpdate(prevProps) {
         if (this.props.data.photosToRender !== prevProps.data.photosToRender && this.props.data.photosToRender !== ['empty']) {
@@ -163,6 +171,7 @@ class GalleryComponent extends Component {
     }
 
     render() {
+        const { getFieldDecorator } = this.props.form;
         const width = this.state.width;
         const ButtonGroup = Button.Group;
         const {albums} = this.state;
@@ -185,9 +194,20 @@ class GalleryComponent extends Component {
                     onChange={this.handleChange}
                     options={albums}
                     key="2"
+                    placeholder="Select existing album"
                 /> : null}
-
-            <Input key="3" placeholder="Enter new album name"/>
+            <Form onSubmit={this.handleSubmit}>
+                <Form.Item>
+                    {getFieldDecorator('albumName', {
+                        rules: [{ required: true, message: 'Please enter album name' }],
+                    })(
+                        <Input key="3" placeholder="Enter new album name"/>
+                    )}
+                </Form.Item>
+                <Form.Item>
+                    <Button htmlType="submit" type="primary">Submit</Button>
+                </Form.Item>
+            </Form>
         </div>;
 
         return (
@@ -275,4 +295,6 @@ const mapStateToProps = state => ({
     data: state.data
 });
 
-export default connect(mapStateToProps, {toggleLightbox, disableLightbox})(GalleryComponent);
+const WrappedGalleryComponent = Form.create({name: 'register'})(GalleryComponent);
+
+export default connect(mapStateToProps, {toggleLightbox, disableLightbox})(WrappedGalleryComponent);
