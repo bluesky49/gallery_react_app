@@ -52,10 +52,11 @@ class GalleryComponent extends Component {
     addToAlbum = () => {
         const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
+        const album_uuid = this.state.selectedOption.value;
 
         axios({
-            method: 'post',
-            url: `${prodURL}/jsonapi/node/album`,
+            method: 'patch',
+            url: `${prodURL}/jsonapi/node/album/${album_uuid}`,
             auth: {
                 username: `${fetchUsername}`,
                 password: `${fetchPassword}`
@@ -67,9 +68,7 @@ class GalleryComponent extends Component {
             data: {
                 "data": {
                     "type": "node--album",
-                    "attributes": {
-                        "title": "Test title"
-                    },
+                    "id": album_uuid,
                     "relationships": {
                         "field_puzzles": {
                             "data": [
@@ -108,14 +107,69 @@ class GalleryComponent extends Component {
 
     handleChange = (selectedOption) => {
         this.setState({selectedOption});
-        console.log(`Option selected:`, selectedOption);
     };
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                const currentLightboxImage = this.lightboxRef.current.props.currentImage;
+                const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
+
+                axios({
+                    method: 'post',
+                    url: `${prodURL}/jsonapi/node/album`,
+                    auth: {
+                        username: `${fetchUsername}`,
+                        password: `${fetchPassword}`
+                    },
+                    headers: {
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/vnd.api+json',
+                    },
+                    data: {
+                        "data": {
+                            "type": "node--album",
+                            "attributes": {
+                                "title": values.albumName
+                            },
+                            "relationships": {
+                                "field_puzzles": {
+                                    "data": [
+                                        {
+                                            "type": "node--puzzle",
+                                            "id": uuid
+                                        }
+                                    ]
+                                },
+                                "field_album_owner": {
+                                    "data": {
+                                        "type": "node--attendee",
+                                        "id": "dc8a8a16-e712-4b77-86f0-c9b84155c193"
+                                    },
+                                }
+                            }
+                        }
+                    }
+                })
+                    .catch(function (error) {
+                        if (error.response) {
+                            // The request was made and the server responded with a status code
+                            // that falls out of the range of 2xx
+                            console.log(error.response.data);
+                            console.log(error.response.status);
+                            console.log(error.response.headers);
+                        } else if (error.request) {
+                            // The request was made but no response was received
+                            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                            // http.ClientRequest in node.js
+                            console.log(error.request);
+                        } else {
+                            // Something happened in setting up the request that triggered an Error
+                            console.log('Error', error.message);
+                        }
+                        console.log(error.config);
+                    });
             }
         });
     };
@@ -171,7 +225,7 @@ class GalleryComponent extends Component {
     }
 
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const {getFieldDecorator} = this.props.form;
         const width = this.state.width;
         const ButtonGroup = Button.Group;
         const {albums} = this.state;
@@ -196,16 +250,16 @@ class GalleryComponent extends Component {
                     key="2"
                     placeholder="Select existing album"
                 /> : null}
-            <Form onSubmit={this.handleSubmit}>
+            <Form layout="inline" onSubmit={this.handleSubmit}>
                 <Form.Item>
                     {getFieldDecorator('albumName', {
-                        rules: [{ required: true, message: 'Please enter album name' }],
+                        rules: [{required: true, message: 'Please enter album name'}],
                     })(
-                        <Input key="3" placeholder="Enter new album name"/>
+                        <Input size="small" key="3" placeholder="Enter new album name"/>
                     )}
                 </Form.Item>
                 <Form.Item>
-                    <Button htmlType="submit" type="primary">Submit</Button>
+                    <Button size="small" htmlType="submit" type="primary">Add to new album</Button>
                 </Form.Item>
             </Form>
         </div>;
