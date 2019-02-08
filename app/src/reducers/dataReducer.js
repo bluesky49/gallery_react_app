@@ -1,6 +1,7 @@
 import {
     SET_INITIAL_RESPONSE,
     SET_FINAL_RESPONSE,
+    SET_ALBUM_RESPONSE,
     SET_PHOTOS_TO_RENDER,
     TOGGLE_LOADING,
     DISABLE_LOADING,
@@ -24,6 +25,7 @@ import {
 
 const initialState = {
     initialResponse: [],
+    albumResponse: ['empty'],
     finalResponse: ['empty'],
     photosToRender: ['empty'],
     isLoading: true,
@@ -45,6 +47,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 finalResponse: action.payload
+            };
+        case SET_ALBUM_RESPONSE:
+            return {
+                ...state,
+                albumResponse: action.payload
             };
         case SET_PHOTOS_TO_RENDER:
             return {

@@ -5,7 +5,13 @@ import {connect} from 'react-redux';
 import SidebarComponent from "./components/SidebarComponent";
 import FilestackComponent from "./components/FilestackComponent";
 import {Pagination} from "antd";
-import {setEventCode, setAttendee, toggleGalleryLoading, setFinalResponse} from "./actions/dataActions";
+import {
+    setEventCode,
+    setAttendee,
+    toggleGalleryLoading,
+    setFinalResponse,
+    setAlbumResponse
+} from "./actions/dataActions";
 
 // CSS starts
 
@@ -38,8 +44,8 @@ class App extends React.Component {
     componentDidMount() {
         /*global drupalSettings:true*/
         /*eslint no-undef: "error"*/
-       //this.props.setEventCode(drupalSettings.eventAccessCode);
-       //this.props.setAttendee(drupalSettings.setAttendee);
+        //this.props.setEventCode(drupalSettings.eventAccessCode);
+        //this.props.setAttendee(drupalSettings.setAttendee);
     }
 
     render() {
@@ -66,7 +72,8 @@ App.propTypes = {
     finalResponse: PropTypes.array,
     totalResults: PropTypes.number,
     eventAccessCode: PropTypes.string,
-    searchResult: PropTypes.array
+    searchResult: PropTypes.array,
+    attendee: PropTypes.string
 };
 
 const mapStateToProps = state => ({
@@ -77,5 +84,6 @@ export default connect(mapStateToProps, {
     setEventCode,
     setAttendee,
     toggleGalleryLoading,
-    setFinalResponse
+    setFinalResponse,
+    setAlbumResponse
 })(App);

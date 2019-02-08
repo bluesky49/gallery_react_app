@@ -71,3 +71,10 @@ export const setSearchResult = response => dispatch => {
         payload: response
     })
 };
+// Set response from Drupal
+export const setAlbumResponse = response => dispatch => {
+    dispatch({
+        type:'SET_ALBUM_RESPONSE',
+        payload: response
+    })
+};

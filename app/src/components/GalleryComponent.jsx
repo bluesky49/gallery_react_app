@@ -9,6 +9,7 @@ import axios from "axios";
 import Select from 'react-select';
 
 import {toggleLightbox, disableLightbox} from '../actions/viewActions';
+import {setAlbumResponse} from '../actions/dataActions';
 import {fetchPassword, fetchUsername, prodURL} from "../keys";
 
 
@@ -25,6 +26,27 @@ class GalleryComponent extends Component {
             albums: []
         };
         this.lightboxRef = React.createRef();
+    }
+
+    fetchFromDrupal() {
+        const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}`;
+
+        axios({
+            method: 'get',
+            url: `${fetchURL}`,
+            auth: {
+                username: `${fetchUsername}`,
+                password: `${fetchPassword}`
+            },
+            headers: {
+                'Accept': 'application/vnd.api+json',
+                'Content-Type': 'application/vnd.api+json',
+            }
+        })
+            .then(response => {
+                this.props.setAlbumResponse(response.data.data)
+            })
+            .catch(error => console.log(error));
     }
 
     openLightbox = (event, obj) => {
@@ -174,6 +196,10 @@ class GalleryComponent extends Component {
         });
     };
 
+    componentDidMount() {
+        this.fetchFromDrupal();
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.data.photosToRender !== prevProps.data.photosToRender && this.props.data.photosToRender !== ['empty']) {
 
@@ -192,13 +218,22 @@ class GalleryComponent extends Component {
             });
         }
         if (this.props.view.lightboxIsOpen !== prevProps.view.lightboxIsOpen &&
-            this.props.view.lightboxIsOpen === true &&
-            this.props.data.photosToRender[this.lightboxRef.current.props.currentImage].albumTitles !== null) {
+            this.props.view.lightboxIsOpen === true) {
+
             const currentLightboxImage = this.lightboxRef.current.props.currentImage;
 
             const attendeeEmails = this.props.data.photosToRender[currentLightboxImage].attendeeEmail;
 
-            const albums = attendeeEmails.reduce((total, item, index) => {
+            const albums = this.props.data.albumResponse.map((item) => {
+                return (
+                    {
+                        label: item.attributes.title,
+                        value: item.id
+                    }
+                )
+            });
+
+            /*const albums = attendeeEmails.reduce((total, item, index) => {
                 const currentAttendee = this.props.data.attendee;
                 const albumTitlesUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumTitles;
                 const albumUuidsUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumUuids;
@@ -210,16 +245,10 @@ class GalleryComponent extends Component {
                     });
                 }
                 return total;
-            }, []);
+            }, []);*/
 
             this.setState({
                 albums: albums,
-            });
-        } else if (this.props.view.lightboxIsOpen !== prevProps.view.lightboxIsOpen &&
-            this.props.view.lightboxIsOpen === true &&
-            this.props.data.photosToRender[this.lightboxRef.current.props.currentImage].albumTitles == null) {
-            this.setState({
-                albums: null,
             });
         }
     }
@@ -341,7 +370,8 @@ GalleryComponent.propTypes = {
     toggleLightbox: PropTypes.func,
     disableLightbox: PropTypes.func,
     lightboxIsOpen: PropTypes.bool,
-    photosToRender: PropTypes.array
+    photosToRender: PropTypes.array,
+    albumResponse: PropTypes.array
 };
 
 const mapStateToProps = state => ({
@@ -351,4 +381,4 @@ const mapStateToProps = state => ({
 
 const WrappedGalleryComponent = Form.create({name: 'register'})(GalleryComponent);
 
-export default connect(mapStateToProps, {toggleLightbox, disableLightbox})(WrappedGalleryComponent);
+export default connect(mapStateToProps, {toggleLightbox, disableLightbox, setAlbumResponse})(WrappedGalleryComponent);
