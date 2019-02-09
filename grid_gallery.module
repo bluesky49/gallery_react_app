@@ -51,5 +51,5 @@ function grid_gallery_preprocess_paragraph__grid_gallery(&$variables)
     $attendee = \Drupal::request()->get('Attendee');
 
     $variables['#attached']['drupalSettings']['eventAccessCode'] = $code;
-    $variables['#attached']['drupalSettings']['Attendee'] = $attendee;
+    $variables['#attached']['drupalSettings']['attendee'] = $attendee;
 }

@@ -78,3 +78,10 @@ export const setAlbumResponse = response => dispatch => {
         payload: response
     })
 };
+// Set X-CSRF-Token
+export const setXcsrfToken = response => dispatch => {
+    dispatch({
+        type:'SET_XCSRF_TOKEN',
+        payload: response
+    })
+};

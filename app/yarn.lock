@@ -9514,9 +9514,9 @@ react-slick@~0.23.2:
     resize-observer-polyfill "^1.5.0"
 
 react-spring@^8.0.2:
-  version "8.0.4"
-  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-8.0.4.tgz#410da78ddb1f30a4567492288f9be963aa9c3d30"
-  integrity sha512-cNAs+ChoA4ZcUnVzd0KjJpkZCWOQSO82FtvYS6JlCgt4aRvpg7qbeq5ySTzFnAHo02mj0vhqQWf5MVpBZexuYA==
+  version "8.0.5"
+  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-8.0.5.tgz#4e9f9ba7a2ee7c0c3a4d3c920604c8703c036302"
+  integrity sha512-n8G4NWfbye26SUT9lmU43q70nhIfojD2LSV0gafvYK6jFIAAlP52k5aK6EYs1xxRPRs+1r+ndcPveXYOwEEl2g==
   dependencies:
     "@babel/runtime" "^7.0.0"
 

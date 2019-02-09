@@ -10,7 +10,8 @@ import {
     SET_EVENT_CODE,
     SET_ATTENDEE,
     SET_TOTAL_RESULTS,
-    SET_SEARCH_RESULT
+    SET_SEARCH_RESULT,
+    SET_XCSRF_TOKEN
 } from '../actions/types';
 
 //const eventAccessCode = '123456';
@@ -30,10 +31,11 @@ const initialState = {
     photosToRender: ['empty'],
     isLoading: true,
     galleryIsLoading: false,
-    eventAccessCode: 444121,//'empty',
-    attendee: 'fbracq@pauzzle.pro',//'empty',
+    eventAccessCode: 'empty',
+    attendee: 'empty',
     totalResults: null,
-    searchResult: ['empty']
+    searchResult: ['empty'],
+    xcsrfToken: 'empty'
 };
 
 export default function (state = initialState, action) {
@@ -83,7 +85,7 @@ export default function (state = initialState, action) {
                 ...state,
                 eventAccessCode: action.payload
             };
-            case SET_ATTENDEE:
+        case SET_ATTENDEE:
             return {
                 ...state,
                 attendee: action.payload
@@ -98,7 +100,12 @@ export default function (state = initialState, action) {
                 ...state,
                 searchResult: action.payload
             };
-       default:
+        case SET_XCSRF_TOKEN:
+            return {
+                ...state,
+                xcsrfToken: action.payload
+            };
+        default:
             return state;
     }
 }
