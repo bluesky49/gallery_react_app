@@ -4,7 +4,7 @@ import Measure from 'react-measure';
 import Lightbox from 'react-images';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Form, Button, Icon, Input, Modal} from "antd";
+import {Button, Icon, Modal} from "antd";
 import axios from "axios";
 import Select from 'react-select';
 
@@ -28,7 +28,7 @@ class GalleryComponent extends Component {
         this.lightboxRef = React.createRef();
     }
 
-    fetchFromDrupal() {
+    fetchAllAlbums() {
         const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}`;
 
         axios({
@@ -49,6 +49,38 @@ class GalleryComponent extends Component {
             .catch(error => console.log(error));
     }
 
+    fetchAlbumsSpecificToCurrentPhoto() {
+        const currentLightboxImage = this.lightboxRef.current.props.currentImage;
+        const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
+        const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&filter[puzzle-filter][condition][path]=field_puzzles.id&filter[puzzle-filter][condition][operator]=%3D&filter[puzzle-filter][condition][value]=${uuid}`;
+
+        axios({
+            method: 'get',
+            url: `${fetchURL}`,
+            auth: {
+                username: `${fetchUsername}`,
+                password: `${fetchPassword}`
+            },
+            headers: {
+                'Accept': 'application/vnd.api+json',
+                'Content-Type': 'application/vnd.api+json',
+            }
+        }).then(response => response.data.data.map((item) => {
+            return (
+                {
+                    label: item.attributes.title,
+                    value: item.id
+                }
+            )
+        })).then(response => {
+
+            this.setState({
+                albumsWithPhoto: response
+            });
+        })
+            .catch(error => console.log(error));
+    }
+
     getXcsrfToken() {
         const fetchURL = `${prodURL}/rest/session/token`;
 
@@ -65,19 +97,6 @@ class GalleryComponent extends Component {
             })
             .catch(error => console.log(error));
     }
-
-    newAlbumCreated = () => {
-        let secondsToGo = 2;
-        const modal = Modal.success({
-            title: 'New album created!',
-            zIndex: 16777201,
-            width: 250,
-            centered: true
-        });
-        setTimeout(() => {
-            modal.destroy();
-        }, secondsToGo * 1000);
-    };
 
     photoAdded = () => {
         let secondsToGo = 2;
@@ -116,12 +135,46 @@ class GalleryComponent extends Component {
         }, secondsToGo * 1000);
     };
 
-    openLightbox = (event, obj) => {
-        this.setState({
-            currentImage: obj.index,
-        });
-        this.props.toggleLightbox();
+    openLightbox = async (event, obj) => {
+        const currentLightboxImage = this.lightboxRef.current.props.currentImage;
+        const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
+        const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&filter[puzzle-filter][condition][path]=field_puzzles.id&filter[puzzle-filter][condition][operator]=%3D&filter[puzzle-filter][condition][value]=${uuid}`;
+
+        axios({
+            method: 'get',
+            url: `${fetchURL}`,
+            auth: {
+                username: `${fetchUsername}`,
+                password: `${fetchPassword}`
+            },
+            headers: {
+                'Accept': 'application/vnd.api+json',
+                'Content-Type': 'application/vnd.api+json',
+            }
+        }).then(response => response.data.data.map((item) => {
+            return (
+                {
+                    label: item.attributes.title,
+                    value: item.id
+                }
+            )
+        })).then(response => {
+
+            this.setState({
+                albumsWithPhoto: response
+            });
+        })
+            .catch(error => console.log(error))
+            .then((response) => {
+                this.setState({
+                    currentImage: obj.index,
+                })
+            }).then((response) => {
+                    this.props.toggleLightbox();
+                }
+            )
     };
+
     closeLightbox = () => {
         this.setState({
             currentImage: 0,
@@ -165,7 +218,8 @@ class GalleryComponent extends Component {
                     ]
                 }
             }).then(response => {
-                this.fetchFromDrupal();
+                this.fetchAllAlbums();
+                this.fetchAlbumsSpecificToCurrentPhoto();
             }).then(response => {
                 this.photoAdded();
             })
@@ -218,7 +272,8 @@ class GalleryComponent extends Component {
                     ]
                 }
             }).then(response => {
-                this.fetchFromDrupal();
+                this.fetchAllAlbums();
+                this.fetchAlbumsSpecificToCurrentPhoto();
             }).then(response => {
                 this.photoDeleted();
             })
@@ -252,79 +307,8 @@ class GalleryComponent extends Component {
         });
     };
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                const currentLightboxImage = this.lightboxRef.current.props.currentImage;
-                const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
-                const albumOwnerId = this.props.data.albumResponse[0].relationships.field_album_owner.data.id;
-
-                axios({
-                    method: 'post',
-                    url: `${prodURL}/jsonapi/node/album`,
-                    auth: {
-                        username: `${fetchUsername}`,
-                        password: `${fetchPassword}`
-                    },
-                    headers: {
-                        'Accept': 'application/vnd.api+json',
-                        'Content-Type': 'application/vnd.api+json',
-                        'X-CSRF-Token': this.props.data.xcsrfToken
-                    },
-                    data: {
-                        "data": {
-                            "type": "node--album",
-                            "attributes": {
-                                "title": values.albumName
-                            },
-                            "relationships": {
-                                "field_puzzles": {
-                                    "data": [
-                                        {
-                                            "type": "node--puzzle",
-                                            "id": uuid
-                                        }
-                                    ]
-                                },
-                                "field_album_owner": {
-                                    "data": {
-                                        "type": "node--attendee",
-                                        "id": albumOwnerId
-                                    },
-                                }
-                            }
-                        }
-                    }
-                }).then(response => {
-                    this.fetchFromDrupal();
-                }).then(response => {
-                    this.newAlbumCreated();
-                })
-                    .catch(function (error) {
-                        if (error.response) {
-                            // The request was made and the server responded with a status code
-                            // that falls out of the range of 2xx
-                            console.log(error.response.data);
-                            console.log(error.response.status);
-                            console.log(error.response.headers);
-                        } else if (error.request) {
-                            // The request was made but no response was received
-                            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                            // http.ClientRequest in node.js
-                            console.log(error.request);
-                        } else {
-                            // Something happened in setting up the request that triggered an Error
-                            console.log('Error', error.message);
-                        }
-                        console.log(error.config);
-                    });
-            }
-        });
-    };
-
     componentDidMount() {
-        this.fetchFromDrupal();
+        this.fetchAllAlbums();
         this.getXcsrfToken();
     }
 
@@ -347,31 +331,7 @@ class GalleryComponent extends Component {
         }
         if (this.props.view.lightboxIsOpen !== prevProps.view.lightboxIsOpen &&
             this.props.view.lightboxIsOpen === true) {
-
-            const currentLightboxImage = this.lightboxRef.current.props.currentImage;
-
-            if (this.props.data.photosToRender[currentLightboxImage].attendeeEmail) {
-
-                const attendeeEmails = this.props.data.photosToRender[currentLightboxImage].attendeeEmail;
-
-                const albumsWithPhoto = attendeeEmails.reduce((total, item, index) => {
-                    const currentAttendee = this.props.data.attendee;
-                    const albumTitlesUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumTitles;
-                    const albumUuidsUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumUuids;
-
-                    if (item === currentAttendee) {
-                        total.push({
-                            label: albumTitlesUnfiltered[index],
-                            value: albumUuidsUnfiltered[index]
-                        });
-                    }
-                    return total;
-                }, []);
-                this.setState({
-                    albumsWithPhoto: albumsWithPhoto
-                });
-            }
-
+            this.fetchAlbumsSpecificToCurrentPhoto();
             const albums = this.props.data.albumResponse.map((item) => {
                 return (
                     {
@@ -380,18 +340,41 @@ class GalleryComponent extends Component {
                     }
                 )
             });
-
             this.setState({
                 albums: albums,
             });
         }
+        /*
+            const currentLightboxImage = this.lightboxRef.current.props.currentImage;
+
+                        if (this.props.data.photosToRender[currentLightboxImage].attendeeEmail) {
+
+                            const attendeeEmails = this.props.data.photosToRender[currentLightboxImage].attendeeEmail;
+
+                            const albumsWithPhoto = attendeeEmails.reduce((total, item, index) => {
+                                const currentAttendee = this.props.data.attendee;
+                                const albumTitlesUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumTitles;
+                                const albumUuidsUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumUuids;
+
+                                if (item === currentAttendee) {
+                                    total.push({
+                                        label: albumTitlesUnfiltered[index],
+                                        value: albumUuidsUnfiltered[index]
+                                    });
+                                }
+                                return total;
+                            }, []);
+                            this.setState({
+                                albumsWithPhoto: albumsWithPhoto
+                            });
+                        }*/
     }
 
     render() {
-        const {getFieldDecorator} = this.props.form;
         const width = this.state.width;
         const ButtonGroup = Button.Group;
         const {albums} = this.state;
+        const {albumsWithPhoto} = this.state;
 
         const albumButtons = <div key="11">
             <ButtonGroup key="1">
@@ -408,25 +391,13 @@ class GalleryComponent extends Component {
             {albums && albums.length ?
                 <Select
                     //value={this.state.selectedOption}
-                    defaultValue={this.state.albumsWithPhoto}
+                    defaultValue={albumsWithPhoto}
                     isMulti
-                    onChange={this.handleChange}
+                    //onChange={this.handleChange}
                     options={albums}
                     key="2"
-                    placeholder="Select existing album"
+                    placeholder="Select album"
                 /> : null}
-            <Form layout="inline" onSubmit={this.handleSubmit}>
-                <Form.Item>
-                    {getFieldDecorator('albumName', {
-                        rules: [{required: true, message: 'Please enter album name'}],
-                    })(
-                        <Input size="small" key="3" placeholder="Enter new album name"/>
-                    )}
-                </Form.Item>
-                <Form.Item>
-                    <Button size="small" htmlType="submit" type="primary">Add to new album</Button>
-                </Form.Item>
-            </Form>
         </div>;
 
         return (
@@ -483,7 +454,8 @@ class GalleryComponent extends Component {
                             columns = 16;
                         }
                         return <div ref={measureRef}>
-                            <Gallery photos={this.state.galleryPhotos} columns={columns} onClick={this.openLightbox}/>
+                            <Gallery photos={this.state.galleryPhotos} columns={columns}
+                                     onClick={this.openLightbox}/>
 
                             <Lightbox images={this.props.data.photosToRender}
                                       onClose={this.closeLightbox}
@@ -502,7 +474,8 @@ class GalleryComponent extends Component {
     }
 }
 
-GalleryComponent.propTypes = {
+GalleryComponent
+    .propTypes = {
     toggleLightbox: PropTypes.func,
     disableLightbox: PropTypes.func,
     lightboxIsOpen: PropTypes.bool,
@@ -512,16 +485,20 @@ GalleryComponent.propTypes = {
     xcsrfToken: PropTypes.string
 };
 
-const mapStateToProps = state => ({
-    view: state.view,
-    data: state.data
-});
-
-const WrappedGalleryComponent = Form.create({name: 'register'})(GalleryComponent);
+const
+    mapStateToProps = state => ({
+        view: state.view,
+        data: state.data
+    });
 
 export default connect(mapStateToProps, {
     toggleLightbox,
     disableLightbox,
     setAlbumResponse,
     setXcsrfToken
-})(WrappedGalleryComponent);
+})
+
+(
+    GalleryComponent
+)
+;

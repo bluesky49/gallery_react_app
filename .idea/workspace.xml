@@ -3,13 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a64dbb82-062f-4db9-bfe4-227ddf365b6a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/actions/dataActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/actions/dataActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/actions/types.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/GalleryComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/GalleryComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/reducers/dataReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/reducers/dataReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grid_gallery.module" beforeDir="false" afterPath="$PROJECT_DIR$/grid_gallery.module" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,32 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/App.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="47" column="56" selection-start-line="47" selection-start-column="56" selection-end-line="47" selection-end-column="56" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Temp/scp49357/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="163" column="34" selection-start-line="163" selection-start-column="22" selection-end-line="163" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/components/GalleryComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="326" column="31" lean-forward="true" selection-start-line="326" selection-start-column="31" selection-end-line="326" selection-end-column="31" />
+            <state relative-caret-position="580">
+              <caret line="169" column="44" lean-forward="true" selection-start-line="169" selection-start-column="44" selection-end-line="169" selection-end-column="44" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -58,11 +35,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/reducers/dataReducer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#316#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="198">
+              <caret line="23" column="39" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -79,7 +53,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/actions/dataActions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
+            <state relative-caret-position="646">
               <caret line="81" column="26" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="26" />
             </state>
           </provider>
@@ -88,8 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/components/FilestackComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="243" column="70" selection-start-line="243" selection-start-column="52" selection-end-line="243" selection-end-column="70" />
+            <state relative-caret-position="-1316">
+              <caret line="26" column="8" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="34" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -100,7 +74,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/index.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-308">
+            <state relative-caret-position="22">
               <caret line="1" column="21" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="21" />
             </state>
           </provider>
@@ -109,11 +83,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grid_gallery.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1100">
+            <state relative-caret-position="646">
               <caret line="53" column="70" selection-start-line="53" selection-start-column="70" selection-end-line="53" selection-end-column="70" />
               <folding>
                 <element signature="e#7#56#0#PHP" expanded="true" />
-                <element signature="e#23#29#1" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -127,11 +100,14 @@
       <find>crop</find>
       <find>totalPages</find>
       <find>'b2d2458ecac6d894570690d1a64897201524e857d3f813e7507763c7d99c513c'</find>
+      <find>fetchFromDrupal</find>
+      <find>item.attr</find>
     </findStrings>
     <replaceStrings>
       <replace>grid_gallery</replace>
       <replace>totalResults</replace>
       <replace>filestackSignature</replace>
+      <replace>fetchAllAlbums</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -159,15 +135,15 @@
         <option value="$USER_HOME$/AppData/Local/Temp/scp43142/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
         <option value="$USER_HOME$/AppData/Local/Temp/scp55139/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
         <option value="$USER_HOME$/AppData/Local/Temp/scp16879/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
-        <option value="$PROJECT_DIR$/app/package.json" />
         <option value="$PROJECT_DIR$/app/src/components/SidebarComponent.jsx" />
         <option value="$PROJECT_DIR$/grid_gallery.module" />
-        <option value="$PROJECT_DIR$/app/src/App.js" />
         <option value="$USER_HOME$/AppData/Local/Temp/scp40477/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
         <option value="$USER_HOME$/AppData/Local/Temp/scp49357/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
         <option value="$PROJECT_DIR$/app/src/actions/types.js" />
         <option value="$PROJECT_DIR$/app/src/actions/dataActions.js" />
         <option value="$PROJECT_DIR$/app/src/reducers/dataReducer.js" />
+        <option value="$PROJECT_DIR$/app/package.json" />
+        <option value="$PROJECT_DIR$/app/src/App.js" />
         <option value="$PROJECT_DIR$/app/src/components/GalleryComponent.jsx" />
       </list>
     </option>
@@ -177,6 +153,9 @@
     <exe-path />
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/app/package.json" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1592" />
@@ -190,7 +169,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -221,12 +199,20 @@
               <item name="grid_gallery" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="grid_gallery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="grid_gallery" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="reducers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -287,12 +273,17 @@
       <workItem from="1549621389818" duration="2379000" />
       <workItem from="1549624506204" duration="10137000" />
       <workItem from="1549703023732" duration="10367000" />
-      <workItem from="1549719597073" duration="5497000" />
+      <workItem from="1549719597073" duration="6211000" />
+      <workItem from="1549796777297" duration="1337000" />
+      <workItem from="1549876436840" duration="3146000" />
+      <workItem from="1549966773607" duration="5730000" />
+      <workItem from="1550049711731" duration="1718000" />
+      <workItem from="1550052432340" duration="15369000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="224751000" />
+    <option name="totallyTimeSpent" value="252765000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-8" width="1936" height="1056" extended-state="6" />
@@ -304,7 +295,7 @@
       <window_info anchor="bottom" id="Tail" order="0" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="RNConsole" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" visible="true" weight="0.13823858" />
+      <window_info anchor="bottom" id="Terminal" order="3" visible="true" weight="0.15273133" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="5" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32998884" />
@@ -364,16 +355,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/ScrollComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
@@ -384,56 +365,16 @@
     <entry file="file://$USER_HOME$/AppData/Roaming/Mozilla/Firefox/Profiles/wjriglhb.horo-dev-1530099295257/chrome/userChrome.css" />
     <entry file="file://$USER_HOME$/AppData/Roaming/Mozilla/Firefox/Profiles/xzwv41hs.dev-edition-default-1518196492863/chrome/userChrome-example.css" />
     <entry file="file://$USER_HOME$/AppData/Roaming/Mozilla/Firefox/Profiles/xzwv41hs.dev-edition-default-1518196492863/chrome/userChrome.css" />
-    <entry file="file://$PROJECT_DIR$/app/src/components/FullscreenComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="95" column="2" selection-start-line="95" selection-start-column="2" selection-end-line="95" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Temp/scp57970/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/scp17864/opt/bitnami/apps/drupal/htdocs/web/sites/development.services.yml" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/scp27250/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/scp43142/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/scp55139/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/scp16879/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
-    <entry file="file://$PROJECT_DIR$/app/src/reducers/viewReducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#196#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/keys.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="3" column="49" lean-forward="true" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/SidebarComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2302">
-          <caret line="1" column="60" lean-forward="true" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -447,54 +388,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp40477/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml">
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp40477/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp49357/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
+    <entry file="file://$PROJECT_DIR$/app/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="167" column="25" lean-forward="true" selection-start-line="167" selection-start-column="25" selection-end-line="167" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grid_gallery.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="53" column="70" selection-start-line="53" selection-start-column="70" selection-end-line="53" selection-end-column="70" />
-          <folding>
-            <element signature="e#7#56#0#PHP" expanded="true" />
-            <element signature="e#23#29#1" expanded="true" />
-          </folding>
+        <state relative-caret-position="462">
+          <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-308">
+        <state relative-caret-position="22">
           <caret line="1" column="21" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/FilestackComponent.jsx">
+    <entry file="file://$PROJECT_DIR$/grid_gallery.module">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="243" column="70" selection-start-line="243" selection-start-column="52" selection-end-line="243" selection-end-column="70" />
+        <state relative-caret-position="646">
+          <caret line="53" column="70" selection-start-line="53" selection-start-column="70" selection-end-line="53" selection-end-column="70" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp49357/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="163" column="34" selection-start-line="163" selection-start-column="22" selection-end-line="163" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="47" column="56" selection-start-line="47" selection-start-column="56" selection-end-line="47" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#7#56#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -508,25 +423,94 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/actions/dataActions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
+        <state relative-caret-position="646">
           <caret line="81" column="26" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/reducers/viewReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-396">
+          <folding>
+            <element signature="e#0#196#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/reducers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1386">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/SidebarComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="60" lean-forward="true" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/ScrollComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/FullscreenComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2090">
+          <caret line="95" column="2" selection-start-line="95" selection-start-column="2" selection-end-line="95" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/reducers/dataReducer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
+        <state relative-caret-position="198">
+          <caret line="23" column="39" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/FilestackComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1316">
+          <caret line="26" column="8" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="34" />
           <folding>
-            <element signature="e#0#316#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/components/GalleryComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="326" column="31" lean-forward="true" selection-start-line="326" selection-start-column="31" selection-end-line="326" selection-end-column="31" />
+        <state relative-caret-position="580">
+          <caret line="169" column="44" lean-forward="true" selection-start-line="169" selection-start-column="44" selection-end-line="169" selection-end-column="44" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
