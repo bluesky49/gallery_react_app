@@ -135,7 +135,7 @@ class GalleryComponent extends Component {
         }, secondsToGo * 1000);
     };
 
-    openLightbox = async (event, obj) => {
+    openLightbox2 = () => {
         const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
         const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&filter[puzzle-filter][condition][path]=field_puzzles.id&filter[puzzle-filter][condition][operator]=%3D&filter[puzzle-filter][condition][value]=${uuid}`;
@@ -166,13 +166,18 @@ class GalleryComponent extends Component {
         })
             .catch(error => console.log(error))
             .then((response) => {
-                this.setState({
-                    currentImage: obj.index,
-                })
-            }).then((response) => {
                     this.props.toggleLightbox();
                 }
             )
+    };
+
+    openLightbox = (event, obj) => {
+        this.setState({
+                currentImage: obj.index,
+            }, () => {
+                this.openLightbox2()
+            }
+        )
     };
 
     closeLightbox = () => {
@@ -393,7 +398,7 @@ class GalleryComponent extends Component {
                     //value={this.state.selectedOption}
                     defaultValue={albumsWithPhoto}
                     isMulti
-                    //onChange={this.handleChange}
+                    onChange={this.handleChange}
                     options={albums}
                     key="2"
                     placeholder="Select album"
