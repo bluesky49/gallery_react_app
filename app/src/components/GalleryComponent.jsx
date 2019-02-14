@@ -23,7 +23,8 @@ class GalleryComponent extends Component {
             currentImage: 0,
             selectedOption: null,
             albums: [],
-            albumsWithPhoto: []
+            albumsWithPhoto: [],
+            showSelect: true
         };
         this.lightboxRef = React.createRef();
     }
@@ -49,44 +50,53 @@ class GalleryComponent extends Component {
             .catch(error => console.log(error));
     }
 
-    async fetchAlbumsSpecificToCurrentPhoto() {
+    async fetchAlbumsSpecificToCurrentPhoto(method) {
+        let currentLightboxImage;
+        switch (method) {
+            case 'prev':
+                currentLightboxImage = this.lightboxRef.current.props.currentImage - 1;
+                break;
+            case 'next':
+                currentLightboxImage = this.lightboxRef.current.props.currentImage + 1;
+                break;
+            default:
+                currentLightboxImage = this.lightboxRef.current.props.currentImage;
+        }
 
-            const currentLightboxImage = this.lightboxRef.current.props.currentImage;
-            const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
-            const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&filter[puzzle-filter][condition][path]=field_puzzles.id&filter[puzzle-filter][condition][operator]=%3D&filter[puzzle-filter][condition][value]=${uuid}`;
+        const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
+        const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&filter[puzzle-filter][condition][path]=field_puzzles.id&filter[puzzle-filter][condition][operator]=%3D&filter[puzzle-filter][condition][value]=${uuid}`;
 
-            await axios({
-                method: 'get',
-                url: `${fetchURL}`,
-                auth: {
-                    username: `${fetchUsername}`,
-                    password: `${fetchPassword}`
-                },
-                headers: {
-                    'Accept': 'application/vnd.api+json',
-                    'Content-Type': 'application/vnd.api+json',
+        await axios({
+            method: 'get',
+            url: `${fetchURL}`,
+            auth: {
+                username: `${fetchUsername}`,
+                password: `${fetchPassword}`
+            },
+            headers: {
+                'Accept': 'application/vnd.api+json',
+                'Content-Type': 'application/vnd.api+json',
+            }
+        }).then(response => response.data.data.map((item) => {
+            return (
+                {
+                    label: item.attributes.title,
+                    value: item.id
                 }
-            }).then(response => response.data.data.map((item) => {
-                return (
-                    {
-                        label: item.attributes.title,
-                        value: item.id
-                    }
-                )
-            })).then(response => {
+            )
+        })).then(response => {
 
-                this.setState({
-                    albumsWithPhoto: response
-                });
-            })
-                .catch(error => console.log(error));
+            this.setState({
+                albumsWithPhoto: response
+            });
+        })
+            .catch(error => console.log(error));
     }
 
     openLightbox2 = async () => {
         await this.fetchAlbumsSpecificToCurrentPhoto();
         this.props.toggleLightbox();
     };
-
     openLightbox = (event, obj) => {
         this.setState({
                 currentImage: obj.index,
@@ -94,6 +104,33 @@ class GalleryComponent extends Component {
                 this.openLightbox2()
             }
         )
+    };
+    gotoPrevious2 = () => {
+        this.setState({
+            currentImage: this.state.currentImage - 1,
+            showSelect: true
+        });
+    };
+    gotoPrevious = async () => {
+        this.setState({
+            showSelect: false
+        });
+        await this.fetchAlbumsSpecificToCurrentPhoto('prev');
+        this.gotoPrevious2();
+    };
+
+    gotoNext2 = () => {
+        this.setState({
+            currentImage: this.state.currentImage + 1,
+            showSelect: true
+        });
+    };
+    gotoNext = async () => {
+        this.setState({
+            showSelect: false
+        });
+        await this.fetchAlbumsSpecificToCurrentPhoto('next');
+        this.gotoNext2();
     };
 
     getXcsrfToken() {
@@ -156,16 +193,7 @@ class GalleryComponent extends Component {
         });
         this.props.disableLightbox();
     };
-    gotoPrevious = () => {
-        this.setState({
-            currentImage: this.state.currentImage - 1,
-        });
-    };
-    gotoNext = () => {
-        this.setState({
-            currentImage: this.state.currentImage + 1,
-        });
-    };
+
     addToAlbum = () => {
         if (this.state.selectedOption) {
             const currentLightboxImage = this.lightboxRef.current.props.currentImage;
@@ -348,8 +376,7 @@ class GalleryComponent extends Component {
     render() {
         const width = this.state.width;
         const ButtonGroup = Button.Group;
-        const {albums} = this.state;
-        const {albumsWithPhoto} = this.state;
+        const {albums, albumsWithPhoto, showSelect} = this.state;
 
         const albumButtons = <div key="11">
             <ButtonGroup key="1">
@@ -363,7 +390,7 @@ class GalleryComponent extends Component {
                     Remove
                 </Button>;
             </ButtonGroup>,
-            {albums && albums.length ?
+            {albums && albums.length && showSelect ?
                 <Select
                     //value={this.state.selectedOption}
                     defaultValue={albumsWithPhoto}
