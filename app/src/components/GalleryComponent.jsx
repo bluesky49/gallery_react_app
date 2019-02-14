@@ -49,37 +49,52 @@ class GalleryComponent extends Component {
             .catch(error => console.log(error));
     }
 
-    fetchAlbumsSpecificToCurrentPhoto() {
-        const currentLightboxImage = this.lightboxRef.current.props.currentImage;
-        const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
-        const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&filter[puzzle-filter][condition][path]=field_puzzles.id&filter[puzzle-filter][condition][operator]=%3D&filter[puzzle-filter][condition][value]=${uuid}`;
+    async fetchAlbumsSpecificToCurrentPhoto() {
 
-        axios({
-            method: 'get',
-            url: `${fetchURL}`,
-            auth: {
-                username: `${fetchUsername}`,
-                password: `${fetchPassword}`
-            },
-            headers: {
-                'Accept': 'application/vnd.api+json',
-                'Content-Type': 'application/vnd.api+json',
-            }
-        }).then(response => response.data.data.map((item) => {
-            return (
-                {
-                    label: item.attributes.title,
-                    value: item.id
+            const currentLightboxImage = this.lightboxRef.current.props.currentImage;
+            const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
+            const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&filter[puzzle-filter][condition][path]=field_puzzles.id&filter[puzzle-filter][condition][operator]=%3D&filter[puzzle-filter][condition][value]=${uuid}`;
+
+            await axios({
+                method: 'get',
+                url: `${fetchURL}`,
+                auth: {
+                    username: `${fetchUsername}`,
+                    password: `${fetchPassword}`
+                },
+                headers: {
+                    'Accept': 'application/vnd.api+json',
+                    'Content-Type': 'application/vnd.api+json',
                 }
-            )
-        })).then(response => {
+            }).then(response => response.data.data.map((item) => {
+                return (
+                    {
+                        label: item.attributes.title,
+                        value: item.id
+                    }
+                )
+            })).then(response => {
 
-            this.setState({
-                albumsWithPhoto: response
-            });
-        })
-            .catch(error => console.log(error));
+                this.setState({
+                    albumsWithPhoto: response
+                });
+            })
+                .catch(error => console.log(error));
     }
+
+    openLightbox2 = async () => {
+        await this.fetchAlbumsSpecificToCurrentPhoto();
+        this.props.toggleLightbox();
+    };
+
+    openLightbox = (event, obj) => {
+        this.setState({
+                currentImage: obj.index,
+            }, () => {
+                this.openLightbox2()
+            }
+        )
+    };
 
     getXcsrfToken() {
         const fetchURL = `${prodURL}/rest/session/token`;
@@ -133,51 +148,6 @@ class GalleryComponent extends Component {
         setTimeout(() => {
             modal.destroy();
         }, secondsToGo * 1000);
-    };
-
-    openLightbox2 = () => {
-        const currentLightboxImage = this.lightboxRef.current.props.currentImage;
-        const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
-        const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&filter[puzzle-filter][condition][path]=field_puzzles.id&filter[puzzle-filter][condition][operator]=%3D&filter[puzzle-filter][condition][value]=${uuid}`;
-
-        axios({
-            method: 'get',
-            url: `${fetchURL}`,
-            auth: {
-                username: `${fetchUsername}`,
-                password: `${fetchPassword}`
-            },
-            headers: {
-                'Accept': 'application/vnd.api+json',
-                'Content-Type': 'application/vnd.api+json',
-            }
-        }).then(response => response.data.data.map((item) => {
-            return (
-                {
-                    label: item.attributes.title,
-                    value: item.id
-                }
-            )
-        })).then(response => {
-
-            this.setState({
-                albumsWithPhoto: response
-            });
-        })
-            .catch(error => console.log(error))
-            .then((response) => {
-                    this.props.toggleLightbox();
-                }
-            )
-    };
-
-    openLightbox = (event, obj) => {
-        this.setState({
-                currentImage: obj.index,
-            }, () => {
-                this.openLightbox2()
-            }
-        )
     };
 
     closeLightbox = () => {
@@ -501,9 +471,4 @@ export default connect(mapStateToProps, {
     disableLightbox,
     setAlbumResponse,
     setXcsrfToken
-})
-
-(
-    GalleryComponent
-)
-;
+})(GalleryComponent);
