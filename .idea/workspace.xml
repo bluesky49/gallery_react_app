@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a64dbb82-062f-4db9-bfe4-227ddf365b6a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/components/GalleryComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/GalleryComponent.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/FilestackComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/FilestackComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/GalleryComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Gallery/GalleryComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,10 +33,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/components/FilestackComponent.jsx">
+        <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/GalleryComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="26" column="8" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="34" />
+            <state relative-caret-position="132">
+              <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="484">
+              <caret line="294" column="30" selection-start-line="294" selection-start-column="30" selection-end-line="294" selection-end-column="30" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -39,13 +53,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/components/GalleryComponent.jsx">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/reducers/viewReducer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
+            <state>
               <folding>
-                <element signature="e#0#39#0" expanded="true" />
+                <element signature="e#0#196#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/components/SidebarComponent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="638">
+              <caret line="90" column="10" lean-forward="true" selection-start-line="90" selection-start-column="10" selection-end-line="90" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -61,10 +86,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/actions/types.js">
+        <entry file="file://$PROJECT_DIR$/app/src/components/FilestackComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+            <state relative-caret-position="-6262">
+              <caret line="13" column="23" lean-forward="true" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,12 +137,14 @@
       <find>'b2d2458ecac6d894570690d1a64897201524e857d3f813e7507763c7d99c513c'</find>
       <find>fetchFromDrupal</find>
       <find>item.attr</find>
+      <find>GalleryComponent</find>
     </findStrings>
     <replaceStrings>
       <replace>grid_gallery</replace>
       <replace>totalResults</replace>
       <replace>filestackSignature</replace>
       <replace>fetchAllAlbums</replace>
+      <replace>LightboxComponent</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -136,7 +166,6 @@
         <option value="$USER_HOME$/AppData/Roaming/Mozilla/Firefox/Profiles/xzwv41hs.dev-edition-default-1518196492863/chrome/userChrome.css" />
         <option value="$PROJECT_DIR$/app/src/index.css" />
         <option value="$PROJECT_DIR$/app/src/keys.js" />
-        <option value="$PROJECT_DIR$/app/src/components/FilestackComponent.jsx" />
         <option value="$USER_HOME$/AppData/Local/Temp/scp57970/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
         <option value="$USER_HOME$/AppData/Local/Temp/scp27250/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
         <option value="$USER_HOME$/AppData/Local/Temp/scp43142/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
@@ -152,6 +181,9 @@
         <option value="$PROJECT_DIR$/app/src/App.js" />
         <option value="$PROJECT_DIR$/app/src/reducers/dataReducer.js" />
         <option value="$PROJECT_DIR$/app/src/components/GalleryComponent.jsx" />
+        <option value="$PROJECT_DIR$/app/src/components/FilestackComponent.jsx" />
+        <option value="$PROJECT_DIR$/app/src/components/Gallery/GalleryComponent.jsx" />
+        <option value="$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx" />
       </list>
     </option>
   </component>
@@ -214,6 +246,14 @@
               <item name="grid_gallery" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Gallery" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="grid_gallery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="grid_gallery" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="reducers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -229,6 +269,11 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript.Linters.JSHint" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\server\grid_gallery\app\src\components\Gallery" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -286,12 +331,12 @@
       <workItem from="1549966773607" duration="5730000" />
       <workItem from="1550049711731" duration="1718000" />
       <workItem from="1550052432340" duration="19633000" />
-      <workItem from="1550134887435" duration="13521000" />
+      <workItem from="1550134887435" duration="21606000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="270550000" />
+    <option name="totallyTimeSpent" value="278635000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-8" width="1936" height="1056" extended-state="6" />
@@ -405,15 +450,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/reducers/viewReducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-396">
-          <folding>
-            <element signature="e#0#196#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/reducers/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -427,23 +463,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/SidebarComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="60" lean-forward="true" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/ScrollComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -498,16 +517,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/FilestackComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="26" column="8" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/reducers/dataReducer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-770">
@@ -515,10 +524,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/GalleryComponent.jsx">
+    <entry file="file://$PROJECT_DIR$/app/src/components/ScrollComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
+        <state relative-caret-position="462">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/SidebarComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="90" column="10" lean-forward="true" selection-start-line="90" selection-start-column="10" selection-end-line="90" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/FilestackComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6262">
+          <caret line="13" column="23" lean-forward="true" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/actions/viewActions.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/reducers/viewReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#196#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/GalleryComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="294" column="30" selection-start-line="294" selection-start-column="30" selection-end-line="294" selection-end-column="30" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

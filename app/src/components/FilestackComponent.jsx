@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {filestackPolicy, filestackSignature} from "../keys";
-import GalleryComponent from "./GalleryComponent";
+import GalleryComponent from "./Gallery/GalleryComponent";
 import {toggleGalleryLoading, disableLoading, disableGalleryLoading, setPhotosToRender} from "../actions/dataActions";
 
 // CSS starts

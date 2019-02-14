@@ -1,25 +1,23 @@
 import React, {Component} from 'react';
 import Gallery from "react-photo-gallery";
-import Measure from 'react-measure';
 import Lightbox from 'react-images';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Button, Icon, Modal} from "antd";
 import axios from "axios";
 import Select from 'react-select';
+import { IoMdImages } from 'react-icons/io';
 
-import {toggleLightbox, disableLightbox} from '../actions/viewActions';
-import {setAlbumResponse, setXcsrfToken} from '../actions/dataActions';
-import {fetchPassword, fetchUsername, prodURL} from "../keys";
+import {toggleLightbox, disableLightbox} from '../../actions/viewActions';
+import {setAlbumResponse, setXcsrfToken} from '../../actions/dataActions';
+import {fetchPassword, fetchUsername, prodURL} from "../../keys";
 
-class GalleryComponent extends Component {
+class LightboxComponent extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            galleryPhotos: [],
-            width: -1,
             currentImage: 0,
             selectedOption: null,
             albums: [],
@@ -132,23 +130,6 @@ class GalleryComponent extends Component {
         await this.fetchAlbumsSpecificToCurrentPhoto('next');
         this.gotoNext2();
     };
-
-    getXcsrfToken() {
-        const fetchURL = `${prodURL}/rest/session/token`;
-
-        axios({
-            method: 'get',
-            url: `${fetchURL}`,
-            headers: {
-                'Accept': 'application/vnd.api+json',
-                'Content-Type': 'application/vnd.api+json',
-            }
-        })
-            .then(response => {
-                this.props.setXcsrfToken(response.data)
-            })
-            .catch(error => console.log(error));
-    }
 
     photoAdded = () => {
         let secondsToGo = 2;
@@ -312,26 +293,10 @@ class GalleryComponent extends Component {
 
     componentDidMount() {
         this.fetchAllAlbums();
-        this.getXcsrfToken();
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.data.photosToRender !== prevProps.data.photosToRender && this.props.data.photosToRender !== ['empty']) {
 
-            const galleryPhotos = this.props.data.photosToRender.map((item) => {
-                return (
-                    {
-                        src: item.src,
-                        height: item.height,
-                        width: item.width,
-                        alt: item.alt,
-                    }
-                )
-            });
-            this.setState({
-                galleryPhotos: galleryPhotos
-            });
-        }
         if (this.props.view.lightboxIsOpen !== prevProps.view.lightboxIsOpen &&
             this.props.view.lightboxIsOpen === true) {
             this.fetchAlbumsSpecificToCurrentPhoto();
@@ -347,34 +312,9 @@ class GalleryComponent extends Component {
                 albums: albums,
             });
         }
-        /*
-            const currentLightboxImage = this.lightboxRef.current.props.currentImage;
-
-                        if (this.props.data.photosToRender[currentLightboxImage].attendeeEmail) {
-
-                            const attendeeEmails = this.props.data.photosToRender[currentLightboxImage].attendeeEmail;
-
-                            const albumsWithPhoto = attendeeEmails.reduce((total, item, index) => {
-                                const currentAttendee = this.props.data.attendee;
-                                const albumTitlesUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumTitles;
-                                const albumUuidsUnfiltered = this.props.data.photosToRender[currentLightboxImage].albumUuids;
-
-                                if (item === currentAttendee) {
-                                    total.push({
-                                        label: albumTitlesUnfiltered[index],
-                                        value: albumUuidsUnfiltered[index]
-                                    });
-                                }
-                                return total;
-                            }, []);
-                            this.setState({
-                                albumsWithPhoto: albumsWithPhoto
-                            });
-                        }*/
     }
 
     render() {
-        const width = this.state.width;
         const ButtonGroup = Button.Group;
         const {albums, albumsWithPhoto, showSelect} = this.state;
 
@@ -402,61 +342,9 @@ class GalleryComponent extends Component {
                 /> : null}
         </div>;
 
-        return (
-            <Measure bounds onResize={(contentRect) => this.setState({width: contentRect.bounds.width})}>
-                {
-                    ({measureRef}) => {
-                        if (width < 1) {
-                            return <div ref={measureRef}></div>;
-                        }
-                        let columns = 1;
-                        if (width >= 268) {
-                            columns = 2;
-                        }
-                        if (width >= 536) {
-                            columns = 3;
-                        }
-                        if (width >= 804) {
-                            columns = 4;
-                        }
-                        if (width >= 1072) {
-                            columns = 5;
-                        }
-                        if (width >= 1340) {
-                            columns = 6;
-                        }
-                        if (width >= 1608) {
-                            columns = 7;
-                        }
-                        if (width >= 1876) {
-                            columns = 8;
-                        }
-                        if (width >= 2144) {
-                            columns = 9;
-                        }
-                        if (width >= 2412) {
-                            columns = 10;
-                        }
-                        if (width >= 2680) {
-                            columns = 11;
-                        }
-                        if (width >= 2948) {
-                            columns = 12;
-                        }
-                        if (width >= 3216) {
-                            columns = 13;
-                        }
-                        if (width >= 3484) {
-                            columns = 14;
-                        }
-                        if (width >= 3752) {
-                            columns = 15;
-                        }
-                        if (width >= 4020) {
-                            columns = 16;
-                        }
-                        return <div ref={measureRef}>
-                            <Gallery photos={this.state.galleryPhotos} columns={columns}
+                        return (
+                        <React.Fragment>
+                            <Gallery photos={this.props.photos} columns={this.props.columns}
                                      onClick={this.openLightbox}/>
 
                             <Lightbox images={this.props.data.photosToRender}
@@ -468,16 +356,12 @@ class GalleryComponent extends Component {
                                       customControls={[albumButtons]}
                                       ref={this.lightboxRef}
                             />
-                        </div>
+                        </React.Fragment>
+                        )
                     }
                 }
-            </Measure>
-        );
-    }
-}
 
-GalleryComponent
-    .propTypes = {
+LightboxComponent.propTypes = {
     toggleLightbox: PropTypes.func,
     disableLightbox: PropTypes.func,
     lightboxIsOpen: PropTypes.bool,
@@ -498,4 +382,4 @@ export default connect(mapStateToProps, {
     disableLightbox,
     setAlbumResponse,
     setXcsrfToken
-})(GalleryComponent);
+})(LightboxComponent);

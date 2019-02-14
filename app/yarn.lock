@@ -9234,6 +9234,11 @@ react-fullscreenable@^2.5.1-0:
     fullscreen "^1.1.1"
     react-display-name "^0.2.0"
 
+react-icons@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.4.0.tgz#3be5139a81bad5fa8ffbc0a87137275dc7a75737"
+  integrity sha512-5cyYrl34KGovU/MH3YO+wN1k787vv3EKLeGDyaGOY92jSTQ/xRjkQ7iim5Ml9rgMLU1i0vszev80kWV4uRZ3Bw==
+
 react-images@^0.5.19:
   version "0.5.19"
   resolved "https://registry.yarnpkg.com/react-images/-/react-images-0.5.19.tgz#9339570029e065f9f28a19f03fdb5d9d5aa109d3"
