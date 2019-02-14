@@ -1,9 +1,9 @@
-import React from 'react'
-import {Keyframes, animated} from 'react-spring/renderprops'
-import {Form, Icon} from 'antd'
-import delay from 'delay'
-import styled from "styled-components"
-import SearchComponent from './SearchComponents/SearchComponent'
+import React from 'react';
+import {Keyframes, animated} from 'react-spring/renderprops';
+import {Form, Icon} from 'antd';
+import delay from 'delay';
+import styled from "styled-components";
+import SearchComponent from './SearchComponents/SearchComponent';
 
 //CSS starts
 const StyledSidebar = styled.div`

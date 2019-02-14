@@ -3,14 +3,58 @@ import Gallery from "react-photo-gallery";
 import Lightbox from 'react-images';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Button, Icon, Modal} from "antd";
+import {Button, Icon, Modal, Form} from "antd";
 import axios from "axios";
 import Select from 'react-select';
+import { IconContext } from "react-icons";
 import { IoMdImages } from 'react-icons/io';
+import {Keyframes, animated} from 'react-spring/renderprops';
+import delay from 'delay';
+import styled from "styled-components";
 
 import {toggleLightbox, disableLightbox} from '../../actions/viewActions';
 import {setAlbumResponse, setXcsrfToken} from '../../actions/dataActions';
 import {fetchPassword, fetchUsername, prodURL} from "../../keys";
+
+//CSS starts
+const StyledAlbumControls = styled.div`
+   position: absolute;
+   top: 2px;
+   left: 0;
+   background-color: transparent;
+   z-index: 2147483646;
+`;
+const StyledButton = styled(Button)`
+   margin-bottom: 10px;
+   font-stretch: normal !important;
+`;
+//CSS Ends
+
+// Creates a spring with predefined animation slots
+const Sidebar = Keyframes.Spring({
+    // Slots can take arrays/chains,
+    peek: [
+        {x: 0, from: {x: -100}, delay: 500},
+        {x: -100, delay: 800},
+    ],
+    // single items,
+    open: {delay: 0, x: 0},
+    // or async functions with side-effects
+    close: async call => {
+        await delay(400)
+        await call({delay: 0, x: -100})
+    },
+})
+
+// Creates a keyframed trail
+const Content = Keyframes.Trail({
+    peek: [
+        {x: 0, opacity: 1, from: {x: -100, opacity: 0}, delay: 600},
+        {x: -100, opacity: 0, delay: 0},
+    ],
+    open: {x: 0, opacity: 1, delay: 100},
+    close: {x: -100, opacity: 0, delay: 0},
+})
 
 class LightboxComponent extends Component {
 
@@ -22,10 +66,14 @@ class LightboxComponent extends Component {
             selectedOption: null,
             albums: [],
             albumsWithPhoto: [],
-            showSelect: true
+            showSelect: true,
+            open: false,
+            sidebarWidth: 0
         };
         this.lightboxRef = React.createRef();
     }
+
+    toggle = () => this.setState(state => ({open: !state.open}));
 
     fetchAllAlbums() {
         const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}`;
@@ -295,7 +343,7 @@ class LightboxComponent extends Component {
         this.fetchAllAlbums();
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
 
         if (this.props.view.lightboxIsOpen !== prevProps.view.lightboxIsOpen &&
             this.props.view.lightboxIsOpen === true) {
@@ -312,6 +360,20 @@ class LightboxComponent extends Component {
                 albums: albums,
             });
         }
+
+        const {open} = this.state;
+
+        if (open !== prevState.open && open) {
+            this.setState({
+                sidebarWidth: 280,
+            });
+        } else if (open !== prevState.open && !open) {
+            setTimeout(() => {
+                this.setState({
+                    sidebarWidth: 0,
+                });
+            }, 800);
+        }
     }
 
     render() {
@@ -320,19 +382,18 @@ class LightboxComponent extends Component {
 
         const albumButtons = <div key="11">
             <ButtonGroup key="1">
-                <Button size="small" type="primary" onClick={this.addToAlbum}>
+                <StyledButton size="small" type="primary" onClick={this.addToAlbum}>
                     <Icon type="plus"/>
                     To album
-                </Button>;
+                </StyledButton>;
 
-                <Button size="small" type="danger" onClick={this.deleteFromAlbum}>
+                <StyledButton size="small" type="danger" onClick={this.deleteFromAlbum}>
                     <Icon type="minus"/>
                     Remove
-                </Button>;
+                </StyledButton>;
             </ButtonGroup>,
             {albums && albums.length && showSelect ?
                 <Select
-                    //value={this.state.selectedOption}
                     defaultValue={albumsWithPhoto}
                     isMulti
                     onChange={this.handleChange}
@@ -341,6 +402,43 @@ class LightboxComponent extends Component {
                     placeholder="Select album"
                 /> : null}
         </div>;
+        const state = this.state.open ? 'open' : 'close';
+        const items = [
+            albumButtons
+        ];
+        const albumControls = <StyledAlbumControls>
+            <IconContext.Provider value={{ color: "blue", className: "album-icon" }}>
+                <div>
+                    <IoMdImages onClick={this.toggle}/>
+                </div>
+            </IconContext.Provider>
+            <Sidebar native state={state}>
+                {({x}) => (
+                    <animated.div
+                        className="album-controls"
+                        style={{
+                            transform: x.interpolate(x => `translate3d(0,${x}%,0)`),
+                            width: this.state.sidebarWidth
+                        }}>
+                        <Content
+                            native
+                            items={items}
+                            reverse={!this.state.open}
+                            state={state}>
+                            {(item, i) => ({x, ...props}) => (
+                                <animated.div
+                                    style={{
+                                        transform: x.interpolate(x => `translate3d(0,${x}%,0)`),
+                                        ...props,
+                                    }}>
+                                        {item}
+                                </animated.div>
+                            )}
+                        </Content>
+                    </animated.div>
+                )}
+            </Sidebar>
+        </StyledAlbumControls>;
 
                         return (
                         <React.Fragment>
@@ -353,7 +451,7 @@ class LightboxComponent extends Component {
                                       onClickNext={this.gotoNext}
                                       currentImage={this.state.currentImage}
                                       isOpen={this.props.view.lightboxIsOpen}
-                                      customControls={[albumButtons]}
+                                      customControls={[albumControls]}
                                       ref={this.lightboxRef}
                             />
                         </React.Fragment>
