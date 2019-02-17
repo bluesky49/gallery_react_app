@@ -223,169 +223,182 @@ class LightboxComponent extends Component {
         this.props.disableLightbox();
     };
 
-    addToAlbum = () => {
+    addToAlbum = async () => {
         if (this.state.selectedOption && this.state.selectedOption.length) {
             const currentLightboxImage = this.lightboxRef.current.props.currentImage;
             const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
-            const album_uuid = this.state.selectedOption.value;
 
-            axios.all([
-                //Updates Album node
-                axios({
-                    method: 'post',
-                    url: `${prodURL}/jsonapi/node/album/${album_uuid}/relationships/field_puzzles`,
-                    auth: {
-                        username: `${fetchUsername}`,
-                        password: `${fetchPassword}`
-                    },
-                    headers: {
-                        'Accept': 'application/vnd.api+json',
-                        'Content-Type': 'application/vnd.api+json',
-                        'X-CSRF-Token': this.props.data.xcsrfToken
-                    },
-                    data: {
-                        "data": [
-                            {
-                                "type": "node--puzzle",
-                                "id": uuid
+            await this.state.selectedOption.map((item) => {
+                const album_uuid = item.value;
+                return (
+                    axios.all([
+                        axios({
+                            method: 'post',
+                            url: `${prodURL}/jsonapi/node/album/${album_uuid}/relationships/field_puzzles`,
+                            auth: {
+                                username: `${fetchUsername}`,
+                                password: `${fetchPassword}`
+                            },
+                            headers: {
+                                'Accept': 'application/vnd.api+json',
+                                'Content-Type': 'application/vnd.api+json',
+                                'X-CSRF-Token': this.props.data.xcsrfToken
+                            },
+                            data: {
+                                "data": [
+                                    {
+                                        "type": "node--puzzle",
+                                        "id": uuid
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                }),
-                //Updates Puzzle node
-                axios({
-                    method: 'post',
-                    url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
-                    auth: {
-                        username: `${fetchUsername}`,
-                        password: `${fetchPassword}`
-                    },
-                    headers: {
-                        'Accept': 'application/vnd.api+json',
-                        'Content-Type': 'application/vnd.api+json',
-                        'X-CSRF-Token': this.props.data.xcsrfToken
-                    },
-                    data: {
-                        "data": [
-                            {
-                                "type": "node--album",
-                                "id": album_uuid
+                        }),
+
+                        axios({
+                            method: 'post',
+                            url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
+                            auth: {
+                                username: `${fetchUsername}`,
+                                password: `${fetchPassword}`
+                            },
+                            headers: {
+                                'Accept': 'application/vnd.api+json',
+                                'Content-Type': 'application/vnd.api+json',
+                                'X-CSRF-Token': this.props.data.xcsrfToken
+                            },
+                            data: {
+                                "data": [
+                                    {
+                                        "type": "node--album",
+                                        "id": album_uuid
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                }),
-            ])
-                .then(response => {
-                    this.fetchAllAlbums();
-                    this.fetchAlbumsSpecificToCurrentPhoto();
-                }).then(response => {
-                this.photoAdded();
-            })
-                .catch(function (error) {
-                    if (error.response) {
-                        // The request was made and the server responded with a status code
-                        // that falls out of the range of 2xx
-                        console.log(error.response.data);
-                        console.log(error.response.status);
-                        console.log(error.response.headers);
-                    } else if (error.request) {
-                        // The request was made but no response was received
-                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                        // http.ClientRequest in node.js
-                        console.log(error.request);
-                    } else {
-                        // Something happened in setting up the request that triggered an Error
-                        console.log('Error', error.message);
-                    }
-                    console.log(error.config);
-                });
+                        })
+                    ])
+                        .catch(function (error) {
+                            if (error.response) {
+                                // The request was made and the server responded with a status code
+                                // that falls out of the range of 2xx
+                                console.log(error.response.data);
+                                console.log(error.response.status);
+                                console.log(error.response.headers);
+                            } else if (error.request) {
+                                // The request was made but no response was received
+                                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                                // http.ClientRequest in node.js
+                                console.log(error.request);
+                            } else {
+                                // Something happened in setting up the request that triggered an Error
+                                console.log('Error', error.message);
+                            }
+                            console.log(error.config);
+                        })
+                )
+            });
+
+            this.fetchAllAlbums();
+            this.fetchAlbumsSpecificToCurrentPhoto();
+            this.photoAdded();
+            this.setState({
+                selectedOption: null
+            });
+
         } else {
             this.selectAlbumMessage();
         }
     };
-    deleteFromAlbum = () => {
+
+    deleteFromAlbum = async () => {
         if (this.state.selectedOption && this.state.selectedOption.length) {
             const currentLightboxImage = this.lightboxRef.current.props.currentImage;
             const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
-            const album_uuid = this.state.selectedOption.value;
 
-            axios.all([
-                //Deletes Album node
-                axios({
-                    method: 'delete',
-                    url: `${prodURL}/jsonapi/node/album/${album_uuid}/relationships/field_puzzles`,
-                    auth: {
-                        username: `${fetchUsername}`,
-                        password: `${fetchPassword}`
-                    },
-                    headers: {
-                        'Accept': 'application/vnd.api+json',
-                        'Content-Type': 'application/vnd.api+json',
-                        'X-CSRF-Token': this.props.data.xcsrfToken
-                    },
-                    data: {
-                        "data": [
-                            {
-                                "type": "node--puzzle",
-                                "id": uuid
+            await this.state.selectedOption.map((item) => {
+                const album_uuid = item.value;
+                return (
+                    axios.all([
+                        //Deletes Album node
+                        axios({
+                            method: 'delete',
+                            url: `${prodURL}/jsonapi/node/album/${album_uuid}/relationships/field_puzzles`,
+                            auth: {
+                                username: `${fetchUsername}`,
+                                password: `${fetchPassword}`
+                            },
+                            headers: {
+                                'Accept': 'application/vnd.api+json',
+                                'Content-Type': 'application/vnd.api+json',
+                                'X-CSRF-Token': this.props.data.xcsrfToken
+                            },
+                            data: {
+                                "data": [
+                                    {
+                                        "type": "node--puzzle",
+                                        "id": uuid
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                }),
-                //Deletes Puzzle node
-                axios({
-                    method: 'delete',
-                    url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
-                    auth: {
-                        username: `${fetchUsername}`,
-                        password: `${fetchPassword}`
-                    },
-                    headers: {
-                        'Accept': 'application/vnd.api+json',
-                        'Content-Type': 'application/vnd.api+json',
-                        'X-CSRF-Token': this.props.data.xcsrfToken
-                    },
-                    data: {
-                        "data": [
-                            {
-                                "type": "node--album",
-                                "id": album_uuid
+                        }),
+                        //Deletes Puzzle node
+                        axios({
+                            method: 'delete',
+                            url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
+                            auth: {
+                                username: `${fetchUsername}`,
+                                password: `${fetchPassword}`
+                            },
+                            headers: {
+                                'Accept': 'application/vnd.api+json',
+                                'Content-Type': 'application/vnd.api+json',
+                                'X-CSRF-Token': this.props.data.xcsrfToken
+                            },
+                            data: {
+                                "data": [
+                                    {
+                                        "type": "node--album",
+                                        "id": album_uuid
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                })
-            ])
-                .then(response => {
-                    this.fetchAllAlbums();
-                    this.fetchAlbumsSpecificToCurrentPhoto();
-                }).then(response => {
-                this.photoDeleted();
-            })
-                .catch(function (error) {
-                    if (error.response) {
-                        // The request was made and the server responded with a status code
-                        // that falls out of the range of 2xx
-                        console.log(error.response.data);
-                        console.log(error.response.status);
-                        console.log(error.response.headers);
-                    } else if (error.request) {
-                        // The request was made but no response was received
-                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                        // http.ClientRequest in node.js
-                        console.log(error.request);
-                    } else {
-                        // Something happened in setting up the request that triggered an Error
-                        console.log('Error', error.message);
-                    }
-                    console.log(error.config);
-                });
+                        })
+                    ])
+                        .catch(function (error) {
+                            if (error.response) {
+                                // The request was made and the server responded with a status code
+                                // that falls out of the range of 2xx
+                                console.log(error.response.data);
+                                console.log(error.response.status);
+                                console.log(error.response.headers);
+                            } else if (error.request) {
+                                // The request was made but no response was received
+                                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                                // http.ClientRequest in node.js
+                                console.log(error.request);
+                            } else {
+                                // Something happened in setting up the request that triggered an Error
+                                console.log('Error', error.message);
+                            }
+                            console.log(error.config);
+                        })
+                )
+            });
+
+            this.fetchAllAlbums();
+            this.fetchAlbumsSpecificToCurrentPhoto();
+            this.photoDeleted();
+
+            this.setState({
+                selectedOption: null
+            });
+
         } else {
             this.selectAlbumMessage();
         }
     };
 
     handleChange = (selectedOption) => {
-        const selectedOptionLast = selectedOption[selectedOption.length - 1];
+        //const selectedOptionLast = selectedOption[selectedOption.length - 1];
         this.setState({
             //selectedOption: selectedOptionLast,
             selectedOption: selectedOption,
@@ -512,7 +525,8 @@ class LightboxComponent extends Component {
     }
 }
 
-LightboxComponent.propTypes = {
+LightboxComponent
+    .propTypes = {
     toggleLightbox: PropTypes.func,
     disableLightbox: PropTypes.func,
     lightboxIsOpen: PropTypes.bool,
@@ -533,4 +547,9 @@ export default connect(mapStateToProps, {
     disableLightbox,
     setAlbumResponse,
     setXcsrfToken
-})(LightboxComponent);
+})
+
+(
+    LightboxComponent
+)
+;
