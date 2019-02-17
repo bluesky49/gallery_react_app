@@ -224,7 +224,7 @@ class LightboxComponent extends Component {
     };
 
     addToAlbum = () => {
-        if (this.state.selectedOption) {
+        if (this.state.selectedOption && this.state.selectedOption.length) {
             const currentLightboxImage = this.lightboxRef.current.props.currentImage;
             const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
             const album_uuid = this.state.selectedOption.value;
@@ -304,7 +304,7 @@ class LightboxComponent extends Component {
         }
     };
     deleteFromAlbum = () => {
-        if (this.state.selectedOption) {
+        if (this.state.selectedOption && this.state.selectedOption.length) {
             const currentLightboxImage = this.lightboxRef.current.props.currentImage;
             const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
             const album_uuid = this.state.selectedOption.value;
@@ -387,7 +387,8 @@ class LightboxComponent extends Component {
     handleChange = (selectedOption) => {
         const selectedOptionLast = selectedOption[selectedOption.length - 1];
         this.setState({
-            selectedOption: selectedOptionLast,
+            //selectedOption: selectedOptionLast,
+            selectedOption: selectedOption,
         });
     };
 

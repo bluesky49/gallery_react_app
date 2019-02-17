@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a64dbb82-062f-4db9-bfe4-227ddf365b6a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/reducers/dataReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/reducers/dataReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="355" column="18" selection-start-line="355" selection-start-column="18" selection-end-line="355" selection-end-column="18" />
+            <state relative-caret-position="308">
+              <caret line="306" column="76" lean-forward="true" selection-start-line="306" selection-start-column="76" selection-end-line="306" selection-end-column="76" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -322,12 +318,12 @@
       <workItem from="1550052432340" duration="19633000" />
       <workItem from="1550134887435" duration="30104000" />
       <workItem from="1550400040460" duration="1337000" />
-      <workItem from="1550406956797" duration="5245000" />
+      <workItem from="1550406956797" duration="7566000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="293715000" />
+    <option name="totallyTimeSpent" value="296036000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-8" width="1936" height="1056" extended-state="6" />
@@ -566,8 +562,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="355" column="18" selection-start-line="355" selection-start-column="18" selection-end-line="355" selection-end-column="18" />
+        <state relative-caret-position="308">
+          <caret line="306" column="76" lean-forward="true" selection-start-line="306" selection-start-column="76" selection-end-line="306" selection-end-column="76" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
