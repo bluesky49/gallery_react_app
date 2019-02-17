@@ -6,8 +6,8 @@ import {connect} from 'react-redux';
 import {Button, Icon, Modal, Form} from "antd";
 import axios from "axios";
 import Select from 'react-select';
-import { IconContext } from "react-icons";
-import { IoMdImages } from 'react-icons/io';
+import {IconContext} from "react-icons";
+import {IoMdImages} from 'react-icons/io';
 import {Keyframes, animated} from 'react-spring/renderprops';
 import delay from 'delay';
 import styled from "styled-components";
@@ -229,30 +229,56 @@ class LightboxComponent extends Component {
             const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
             const album_uuid = this.state.selectedOption.value;
 
-            axios({
-                method: 'post',
-                url: `${prodURL}/jsonapi/node/album/${album_uuid}/relationships/field_puzzles`,
-                auth: {
-                    username: `${fetchUsername}`,
-                    password: `${fetchPassword}`
-                },
-                headers: {
-                    'Accept': 'application/vnd.api+json',
-                    'Content-Type': 'application/vnd.api+json',
-                    'X-CSRF-Token': this.props.data.xcsrfToken
-                },
-                data: {
-                    "data": [
-                        {
-                            "type": "node--puzzle",
-                            "id": uuid
-                        }
-                    ]
-                }
-            }).then(response => {
-                this.fetchAllAlbums();
-                this.fetchAlbumsSpecificToCurrentPhoto();
-            }).then(response => {
+            axios.all([
+                //Updates Album node
+                axios({
+                    method: 'post',
+                    url: `${prodURL}/jsonapi/node/album/${album_uuid}/relationships/field_puzzles`,
+                    auth: {
+                        username: `${fetchUsername}`,
+                        password: `${fetchPassword}`
+                    },
+                    headers: {
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/vnd.api+json',
+                        'X-CSRF-Token': this.props.data.xcsrfToken
+                    },
+                    data: {
+                        "data": [
+                            {
+                                "type": "node--puzzle",
+                                "id": uuid
+                            }
+                        ]
+                    }
+                }),
+                //Updates Puzzle node
+                axios({
+                    method: 'post',
+                    url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
+                    auth: {
+                        username: `${fetchUsername}`,
+                        password: `${fetchPassword}`
+                    },
+                    headers: {
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/vnd.api+json',
+                        'X-CSRF-Token': this.props.data.xcsrfToken
+                    },
+                    data: {
+                        "data": [
+                            {
+                                "type": "node--album",
+                                "id": album_uuid
+                            }
+                        ]
+                    }
+                }),
+            ])
+                .then(response => {
+                    this.fetchAllAlbums();
+                    this.fetchAlbumsSpecificToCurrentPhoto();
+                }).then(response => {
                 this.photoAdded();
             })
                 .catch(function (error) {
@@ -283,30 +309,56 @@ class LightboxComponent extends Component {
             const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
             const album_uuid = this.state.selectedOption.value;
 
-            axios({
-                method: 'delete',
-                url: `${prodURL}/jsonapi/node/album/${album_uuid}/relationships/field_puzzles`,
-                auth: {
-                    username: `${fetchUsername}`,
-                    password: `${fetchPassword}`
-                },
-                headers: {
-                    'Accept': 'application/vnd.api+json',
-                    'Content-Type': 'application/vnd.api+json',
-                    'X-CSRF-Token': this.props.data.xcsrfToken
-                },
-                data: {
-                    "data": [
-                        {
-                            "type": "node--puzzle",
-                            "id": uuid
-                        }
-                    ]
-                }
-            }).then(response => {
-                this.fetchAllAlbums();
-                this.fetchAlbumsSpecificToCurrentPhoto();
-            }).then(response => {
+            axios.all([
+                //Deletes Album node
+                axios({
+                    method: 'delete',
+                    url: `${prodURL}/jsonapi/node/album/${album_uuid}/relationships/field_puzzles`,
+                    auth: {
+                        username: `${fetchUsername}`,
+                        password: `${fetchPassword}`
+                    },
+                    headers: {
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/vnd.api+json',
+                        'X-CSRF-Token': this.props.data.xcsrfToken
+                    },
+                    data: {
+                        "data": [
+                            {
+                                "type": "node--puzzle",
+                                "id": uuid
+                            }
+                        ]
+                    }
+                }),
+                //Deletes Puzzle node
+                axios({
+                    method: 'delete',
+                    url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
+                    auth: {
+                        username: `${fetchUsername}`,
+                        password: `${fetchPassword}`
+                    },
+                    headers: {
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/vnd.api+json',
+                        'X-CSRF-Token': this.props.data.xcsrfToken
+                    },
+                    data: {
+                        "data": [
+                            {
+                                "type": "node--album",
+                                "id": album_uuid
+                            }
+                        ]
+                    }
+                })
+            ])
+                .then(response => {
+                    this.fetchAllAlbums();
+                    this.fetchAlbumsSpecificToCurrentPhoto();
+                }).then(response => {
                 this.photoDeleted();
             })
                 .catch(function (error) {
@@ -407,7 +459,7 @@ class LightboxComponent extends Component {
             albumButtons
         ];
         const albumControls = <StyledAlbumControls>
-            <IconContext.Provider value={{ color: "blue", className: "album-icon" }}>
+            <IconContext.Provider value={{color: "blue", className: "album-icon"}}>
                 <div>
                     <IoMdImages onClick={this.toggle}/>
                 </div>
@@ -431,7 +483,7 @@ class LightboxComponent extends Component {
                                         transform: x.interpolate(x => `translate3d(0,${x}%,0)`),
                                         ...props,
                                     }}>
-                                        {item}
+                                    {item}
                                 </animated.div>
                             )}
                         </Content>
@@ -440,24 +492,24 @@ class LightboxComponent extends Component {
             </Sidebar>
         </StyledAlbumControls>;
 
-                        return (
-                        <React.Fragment>
-                            <Gallery photos={this.props.photos} columns={this.props.columns}
-                                     onClick={this.openLightbox}/>
+        return (
+            <React.Fragment>
+                <Gallery photos={this.props.photos} columns={this.props.columns}
+                         onClick={this.openLightbox}/>
 
-                            <Lightbox images={this.props.data.photosToRender}
-                                      onClose={this.closeLightbox}
-                                      onClickPrev={this.gotoPrevious}
-                                      onClickNext={this.gotoNext}
-                                      currentImage={this.state.currentImage}
-                                      isOpen={this.props.view.lightboxIsOpen}
-                                      customControls={[albumControls]}
-                                      ref={this.lightboxRef}
-                            />
-                        </React.Fragment>
-                        )
-                    }
-                }
+                <Lightbox images={this.props.data.photosToRender}
+                          onClose={this.closeLightbox}
+                          onClickPrev={this.gotoPrevious}
+                          onClickNext={this.gotoNext}
+                          currentImage={this.state.currentImage}
+                          isOpen={this.props.view.lightboxIsOpen}
+                          customControls={[albumControls]}
+                          ref={this.lightboxRef}
+                />
+            </React.Fragment>
+        )
+    }
+}
 
 LightboxComponent.propTypes = {
     toggleLightbox: PropTypes.func,
