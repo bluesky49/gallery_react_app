@@ -19,14 +19,37 @@ import {fetchPassword, fetchUsername, prodURL} from "../../keys";
 //CSS starts
 const StyledAlbumControls = styled.div`
    position: absolute;
-   top: 2px;
+   top: 38px;
    left: 0;
    background-color: transparent;
    z-index: 2147483646;
 `;
+const AlbumInfo = styled.div`
+   color: white;
+   font-size: 14px !important;
+   margin-right: 20px;
+`;
 const StyledButton = styled(Button)`
    margin-bottom: 10px;
    font-stretch: normal !important;
+`;
+const ControlsWrapper = styled.div`
+   display: flex;
+   padding: 30px 20px 20px 20px;
+   @media (max-width: 550px) {
+    flex-direction: column;
+  }
+`;
+const ControlsInner = styled.div`
+   display: flex;
+   flex-direction: column;
+   max-width: 50%;
+   min-width: 200px;
+`;
+const StyledH3 = styled.h3`
+   color: white;
+   padding: 0 10px;
+   font-size: 16px !important;
 `;
 //CSS Ends
 
@@ -126,8 +149,7 @@ class LightboxComponent extends Component {
         }).then(response => response.data.data.map((item) => {
             return (
                 {
-                    label: item.attributes.title,
-                    value: item.id
+                    albumName: item.attributes.title,
                 }
             )
         })).then(response => {
@@ -154,7 +176,8 @@ class LightboxComponent extends Component {
     gotoPrevious2 = () => {
         this.setState({
             currentImage: this.state.currentImage - 1,
-            showSelect: true
+            showSelect: true,
+            selectedOption: null
         });
     };
     gotoPrevious = async () => {
@@ -168,7 +191,9 @@ class LightboxComponent extends Component {
     gotoNext2 = () => {
         this.setState({
             currentImage: this.state.currentImage + 1,
-            showSelect: true
+            showSelect: true,
+            selectedOption: null
+
         });
     };
     gotoNext = async () => {
@@ -219,6 +244,7 @@ class LightboxComponent extends Component {
     closeLightbox = () => {
         this.setState({
             currentImage: 0,
+            selectedOption: null
         });
         this.props.disableLightbox();
     };
@@ -297,12 +323,8 @@ class LightboxComponent extends Component {
                 )
             });
 
-            this.fetchAllAlbums();
             this.fetchAlbumsSpecificToCurrentPhoto();
             this.photoAdded();
-            this.setState({
-                selectedOption: null
-            });
 
         } else {
             this.selectAlbumMessage();
@@ -384,13 +406,8 @@ class LightboxComponent extends Component {
                 )
             });
 
-            this.fetchAllAlbums();
             this.fetchAlbumsSpecificToCurrentPhoto();
             this.photoDeleted();
-
-            this.setState({
-                selectedOption: null
-            });
 
         } else {
             this.selectAlbumMessage();
@@ -431,7 +448,7 @@ class LightboxComponent extends Component {
 
         if (open !== prevState.open && open) {
             this.setState({
-                sidebarWidth: 280,
+                sidebarWidth: "100%",
             });
         } else if (open !== prevState.open && !open) {
             setTimeout(() => {
@@ -446,33 +463,48 @@ class LightboxComponent extends Component {
         const ButtonGroup = Button.Group;
         const {albums, albumsWithPhoto, showSelect} = this.state;
 
-        const albumButtons = <div key="11">
+        const albumButtons = <ControlsWrapper key="11">
+            {albumsWithPhoto && albumsWithPhoto.length ?
+                <AlbumInfo>
+                    <StyledH3>Included in albums:</StyledH3>
+                    <ul>
+                        {albumsWithPhoto.map((item, index) => {
+                            return (
+                                <li key={index}>{item.albumName}</li>
+                            )}
+                        )
+                        }
+                    </ul>
+                </AlbumInfo> :
+                <StyledH3>The photo is not in your albums yet</StyledH3>}
+            <ControlsInner>
             <ButtonGroup key="1">
-                <StyledButton size="small" type="primary" onClick={this.addToAlbum}>
+                <StyledButton key="2"size="small" type="primary" onClick={this.addToAlbum}>
                     <Icon type="plus"/>
                     To album
                 </StyledButton>;
 
-                <StyledButton size="small" type="danger" onClick={this.deleteFromAlbum}>
+                <StyledButton key="3" size="small" type="danger" onClick={this.deleteFromAlbum}>
                     <Icon type="minus"/>
                     Remove
                 </StyledButton>;
             </ButtonGroup>,
             {albums && albums.length && showSelect ?
                 <Select
-                    defaultValue={albumsWithPhoto}
                     isMulti
                     onChange={this.handleChange}
                     options={albums}
-                    key="2"
                     placeholder="Select album"
+                    className='react-select-container'
+                    classNamePrefix="react-select"
                 /> : null}
-        </div>;
+            </ControlsInner>
+        </ControlsWrapper>;
         const state = this.state.open ? 'open' : 'close';
         const items = [
             albumButtons
         ];
-        const albumControls = <StyledAlbumControls>
+        const albumControls = <StyledAlbumControls key="56841">
             <IconContext.Provider value={{color: "blue", className: "album-icon"}}>
                 <div>
                     <IoMdImages onClick={this.toggle}/>
@@ -547,9 +579,4 @@ export default connect(mapStateToProps, {
     disableLightbox,
     setAlbumResponse,
     setXcsrfToken
-})
-
-(
-    LightboxComponent
-)
-;
+})(LightboxComponent);

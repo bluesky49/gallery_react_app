@@ -83,14 +83,14 @@ ul.css-8wmgpq.eekr4lp2 {
 }
 
 .album-controls {
-    background-color: rgba(30, 30, 30, 0.7);
-    padding: 50px 10px 10px 10px;
+    background-color: rgba(30, 30, 30, 0.8);
     border-radius: 4px;
     box-shadow: 2px 2px 2px rgba(30, 30, 30, 0.5);
 }
 .album-icon {
     position: absolute;
     margin-left: 50px;
+    margin-top: -38px;
     color: #1890ff !important;
     font-size: 35px;
     cursor: pointer;
@@ -103,4 +103,29 @@ ul.css-8wmgpq.eekr4lp2 {
 }
 .album-icon:hover {
      box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
+}
+.react-select__control {
+    background-color: transparent !important;
+    border: 1px solid black !important;
+}
+.react-select__placeholder {
+    color: white !important;
+}
+.react-select__menu {
+    background-color: rgba(30, 30, 30, 0.8) !important;
+    box-shadow: 2px 2px 2px rgba(30, 30, 30, 0.5) !important;
+    color: white !important;
+}
+.react-select__option--is-focused {
+    background-color: black !important;
+}
+.react-select__multi-value {
+    background-color: transparent !important;
+    border-style: none !important;
+}
+.react-select__multi-value__label {
+    color: white !important;
+}
+.react-select__multi-value__remove {
+    color: rgba(245, 34, 45, 1) !important;
 }

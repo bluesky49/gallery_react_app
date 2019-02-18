@@ -64,7 +64,7 @@ class SearchComponent extends Component {
 
     handleSearchResult = results => {
         this.result = results;
-        console.log(results);
+        //console.log(results);
 
         if (this.result[0] && this.state.firstLoad) {
             this.setState({
