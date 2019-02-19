@@ -505,7 +505,7 @@ class LightboxComponent extends Component {
             albumButtons
         ];
         const albumControls = <StyledAlbumControls key="56841">
-            <IconContext.Provider value={{color: "blue", className: "album-icon"}}>
+            <IconContext.Provider value={{color: albumsWithPhoto && albumsWithPhoto.length ? "rgba(18, 175, 10, 1)" : "#1890ff", className: "album-icon"}}>
                 <div>
                     <IoMdImages onClick={this.toggle}/>
                 </div>
