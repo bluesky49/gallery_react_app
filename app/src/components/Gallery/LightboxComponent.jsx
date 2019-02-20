@@ -3,7 +3,7 @@ import Gallery from "react-photo-gallery";
 import Lightbox from 'react-images';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Button, Icon, Modal, Form} from "antd";
+import {Button, Icon, Modal} from "antd";
 import axios from "axios";
 import Select from 'react-select';
 import {IconContext} from "react-icons";

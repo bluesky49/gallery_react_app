@@ -1,6 +1,6 @@
 {
-  "name": "grid_gallery",
-  "version": "2.0.0",
+  "name": "eventstory_gallery",
+  "version": "2.1.0",
   "private": true,
   "dependencies": {
     "@appbaseio/reactivesearch": "2.16.1",
