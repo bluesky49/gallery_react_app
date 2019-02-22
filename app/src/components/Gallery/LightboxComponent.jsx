@@ -248,80 +248,100 @@ class LightboxComponent extends Component {
         });
         this.props.disableLightbox();
     };
+    randomId = (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        let randomInt = Math.floor(Math.random() * (max - min)) + min;
+
+        return `${randomInt}`; //The maximum is exclusive and the minimum is inclusive`
+    };
 
     addToAlbum = async () => {
         if (this.state.selectedOption && this.state.selectedOption.length) {
             const currentLightboxImage = this.lightboxRef.current.props.currentImage;
             const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
 
-            await this.state.selectedOption.map((item) => {
+            const albums = await this.state.selectedOption.map((item, index) => {
                 const album_uuid = item.value;
-                return (
-                    axios.all([
-                        axios({
-                            method: 'post',
-                            url: `${prodURL}/jsonapi/node/album/${album_uuid}/relationships/field_puzzles`,
-                            auth: {
-                                username: `${fetchUsername}`,
-                                password: `${fetchPassword}`
-                            },
-                            headers: {
-                                'Accept': 'application/vnd.api+json',
-                                'Content-Type': 'application/vnd.api+json',
-                                'X-CSRF-Token': this.props.data.xcsrfToken
-                            },
-                            data: {
-                                "data": [
-                                    {
-                                        "type": "node--puzzle",
-                                        "id": uuid
-                                    }
-                                ]
-                            }
-                        }),
 
-                        axios({
-                            method: 'post',
-                            url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
-                            auth: {
-                                username: `${fetchUsername}`,
-                                password: `${fetchPassword}`
-                            },
-                            headers: {
-                                'Accept': 'application/vnd.api+json',
-                                'Content-Type': 'application/vnd.api+json',
-                                'X-CSRF-Token': this.props.data.xcsrfToken
-                            },
-                            data: {
-                                "data": [
-                                    {
-                                        "type": "node--album",
-                                        "id": album_uuid
-                                    }
-                                ]
-                            }
-                        })
-                    ])
-                        .catch(function (error) {
-                            if (error.response) {
-                                // The request was made and the server responded with a status code
-                                // that falls out of the range of 2xx
-                                console.log(error.response.data);
-                                console.log(error.response.status);
-                                console.log(error.response.headers);
-                            } else if (error.request) {
-                                // The request was made but no response was received
-                                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                                // http.ClientRequest in node.js
-                                console.log(error.request);
-                            } else {
-                                // Something happened in setting up the request that triggered an Error
-                                console.log('Error', error.message);
-                            }
-                            console.log(error.config);
-                        })
+                return (
+                    {
+                        requestId: this.randomId(1, 1000000000),
+                        uri: `${prodURL}/jsonapi/node/album/${album_uuid}/relationships/field_puzzles`,
+                        action: 'create',
+                        body: JSON.stringify({
+                            "data": [
+                                {
+                                    "type": "node--puzzle",
+                                    "id": uuid
+                                }
+                            ]
+                        }),
+                        headers: {
+                            'Accept': 'application/vnd.api+json',
+                            'Content-Type': 'application/vnd.api+json',
+                            'X-CSRF-Token': this.props.data.xcsrfToken,
+                            'Authorization': 'Basic anNvbmFwaXVzZXJAZXZlbnRzdG9yeS5saXZlOlVCZGRHSk5HNGVlbQ=='
+                        }
+
+                    }
                 )
             });
+            const puzzles = await this.state.selectedOption.map((item, index) => {
+                const album_uuid = item.value;
+
+                return (
+                    {
+                        requestId: this.randomId(1, 1000000000),
+                        uri: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
+                        action: 'create',
+                        body: JSON.stringify({
+                            "data": [
+                                {
+                                    "type": "node--album",
+                                    "id": album_uuid
+                                }
+                            ]
+                        }),
+                        headers: {
+                            'Accept': 'application/vnd.api+json',
+                            'Content-Type': 'application/vnd.api+json',
+                            'X-CSRF-Token': this.props.data.xcsrfToken,
+                            'Authorization': 'Basic anNvbmFwaXVzZXJAZXZlbnRzdG9yeS5saXZlOlVCZGRHSk5HNGVlbQ=='
+                        }
+
+                    }
+                )
+            });
+            const blueprint = [...albums, ...puzzles];
+
+            await axios({
+                method: 'post',
+                url: `${prodURL}/subrequests`,
+                auth: {
+                    username: `${fetchUsername}`,
+                    password: `${fetchPassword}`
+                },
+                data: JSON.stringify(blueprint)
+            })
+                .catch(function (error) {
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                        // http.ClientRequest in node.js
+                        console.log(error.request);
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        console.log('Error', error.message);
+                    }
+                    console.log(error.config);
+                });
 
             this.fetchAlbumsSpecificToCurrentPhoto();
             this.photoAdded();
@@ -336,75 +356,87 @@ class LightboxComponent extends Component {
             const currentLightboxImage = this.lightboxRef.current.props.currentImage;
             const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
 
-            await this.state.selectedOption.map((item) => {
+            const albums = await this.state.selectedOption.map((item, index) => {
                 const album_uuid = item.value;
+
                 return (
-                    axios.all([
-                        //Deletes Album node
-                        axios({
-                            method: 'delete',
-                            url: `${prodURL}/jsonapi/node/album/${album_uuid}/relationships/field_puzzles`,
-                            auth: {
-                                username: `${fetchUsername}`,
-                                password: `${fetchPassword}`
-                            },
-                            headers: {
-                                'Accept': 'application/vnd.api+json',
-                                'Content-Type': 'application/vnd.api+json',
-                                'X-CSRF-Token': this.props.data.xcsrfToken
-                            },
-                            data: {
-                                "data": [
-                                    {
-                                        "type": "node--puzzle",
-                                        "id": uuid
-                                    }
-                                ]
-                            }
+                    {
+                        requestId: this.randomId(1, 1000000000),
+                        uri: `${prodURL}/jsonapi/node/album/${album_uuid}/relationships/field_puzzles`,
+                        action: 'delete',
+                        body: JSON.stringify({
+                            "data": [
+                                {
+                                    "type": "node--puzzle",
+                                    "id": uuid
+                                }
+                            ]
                         }),
-                        //Deletes Puzzle node
-                        axios({
-                            method: 'delete',
-                            url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
-                            auth: {
-                                username: `${fetchUsername}`,
-                                password: `${fetchPassword}`
-                            },
-                            headers: {
-                                'Accept': 'application/vnd.api+json',
-                                'Content-Type': 'application/vnd.api+json',
-                                'X-CSRF-Token': this.props.data.xcsrfToken
-                            },
-                            data: {
-                                "data": [
-                                    {
-                                        "type": "node--album",
-                                        "id": album_uuid
-                                    }
-                                ]
-                            }
-                        })
-                    ])
-                        .catch(function (error) {
-                            if (error.response) {
-                                // The request was made and the server responded with a status code
-                                // that falls out of the range of 2xx
-                                console.log(error.response.data);
-                                console.log(error.response.status);
-                                console.log(error.response.headers);
-                            } else if (error.request) {
-                                // The request was made but no response was received
-                                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                                // http.ClientRequest in node.js
-                                console.log(error.request);
-                            } else {
-                                // Something happened in setting up the request that triggered an Error
-                                console.log('Error', error.message);
-                            }
-                            console.log(error.config);
-                        })
+                        headers: {
+                            'Accept': 'application/vnd.api+json',
+                            'Content-Type': 'application/vnd.api+json',
+                            'X-CSRF-Token': this.props.data.xcsrfToken,
+                            'Authorization': 'Basic anNvbmFwaXVzZXJAZXZlbnRzdG9yeS5saXZlOlVCZGRHSk5HNGVlbQ=='
+                        }
+
+                    }
                 )
             });
+            const puzzles = await this.state.selectedOption.map((item, index) => {
+                const album_uuid = item.value;
+
+                return (
+                    {
+                        requestId: this.randomId(1, 1000000000),
+                        uri: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
+                        action: 'delete',
+                        body: JSON.stringify({
+                            "data": [
+                                {
+                                    "type": "node--album",
+                                    "id": album_uuid
+                                }
+                            ]
+                        }),
+                        headers: {
+                            'Accept': 'application/vnd.api+json',
+                            'Content-Type': 'application/vnd.api+json',
+                            'X-CSRF-Token': this.props.data.xcsrfToken,
+                            'Authorization': 'Basic anNvbmFwaXVzZXJAZXZlbnRzdG9yeS5saXZlOlVCZGRHSk5HNGVlbQ=='
+                        }
+
+                    }
+                )
+            });
+            const blueprint = [...albums, ...puzzles];
+
+            await axios({
+                method: 'post',
+                url: `${prodURL}/subrequests`,
+                auth: {
+                    username: `${fetchUsername}`,
+                    password: `${fetchPassword}`
+                },
+                data: JSON.stringify(blueprint)
+            })
+                .catch(function (error) {
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                        // http.ClientRequest in node.js
+                        console.log(error.request);
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        console.log('Error', error.message);
+                    }
+                    console.log(error.config);
+                });
 
             this.fetchAlbumsSpecificToCurrentPhoto();
             this.photoDeleted();
@@ -469,35 +501,36 @@ class LightboxComponent extends Component {
                     <StyledH3>Included in albums:</StyledH3>
                     <ul>
                         {albumsWithPhoto.map((item, index) => {
-                            return (
-                                <li key={index}>{item.albumName}</li>
-                            )}
+                                return (
+                                    <li key={index}>{item.albumName}</li>
+                                )
+                            }
                         )
                         }
                     </ul>
                 </AlbumInfo> :
                 <StyledH3>The photo is not in your albums yet</StyledH3>}
             <ControlsInner>
-            <ButtonGroup key="1">
-                <StyledButton key="2"size="small" type="primary" onClick={this.addToAlbum}>
-                    <Icon type="plus"/>
-                    To album
-                </StyledButton>;
+                <ButtonGroup key="1">
+                    <StyledButton key="2" size="small" type="primary" onClick={this.addToAlbum}>
+                        <Icon type="plus"/>
+                        To album
+                    </StyledButton>;
 
-                <StyledButton key="3" size="small" type="danger" onClick={this.deleteFromAlbum}>
-                    <Icon type="minus"/>
-                    Remove
-                </StyledButton>;
-            </ButtonGroup>,
-            {albums && albums.length && showSelect ?
-                <Select
-                    isMulti
-                    onChange={this.handleChange}
-                    options={albums}
-                    placeholder="Select album"
-                    className='react-select-container'
-                    classNamePrefix="react-select"
-                /> : null}
+                    <StyledButton key="3" size="small" type="danger" onClick={this.deleteFromAlbum}>
+                        <Icon type="minus"/>
+                        Remove
+                    </StyledButton>;
+                </ButtonGroup>,
+                {albums && albums.length && showSelect ?
+                    <Select
+                        isMulti
+                        onChange={this.handleChange}
+                        options={albums}
+                        placeholder="Select album"
+                        className='react-select-container'
+                        classNamePrefix="react-select"
+                    /> : null}
             </ControlsInner>
         </ControlsWrapper>;
         const state = this.state.open ? 'open' : 'close';
@@ -505,7 +538,10 @@ class LightboxComponent extends Component {
             albumButtons
         ];
         const albumControls = <StyledAlbumControls key="56841">
-            <IconContext.Provider value={{color: albumsWithPhoto && albumsWithPhoto.length ? "rgba(18, 175, 10, 1)" : "#1890ff", className: "album-icon"}}>
+            <IconContext.Provider value={{
+                color: albumsWithPhoto && albumsWithPhoto.length ? "rgba(18, 175, 10, 1)" : "#1890ff",
+                className: "album-icon"
+            }}>
                 <div>
                     <IoMdImages onClick={this.toggle}/>
                 </div>
