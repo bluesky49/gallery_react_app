@@ -31,8 +31,8 @@ const initialState = {
     photosToRender: ['empty'],
     isLoading: true,
     galleryIsLoading: false,
-    eventAccessCode: 'empty',//'444121'
-    attendee: 'empty',//'fbracq@pauzzle.pro',
+    eventAccessCode: '444121',//'empty',//
+    attendee: 'fbracq@pauzzle.pro',//fbracq@pauzzle.pro',//'empty',//,
     totalResults: null,
     searchResult: ['empty'],
     xcsrfToken: 'empty'

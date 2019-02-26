@@ -109,8 +109,7 @@ class LightboxComponent extends Component {
     toggle = () => this.setState(state => ({open: !state.open}));
 
     fetchAllAlbums() {
-        const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}`;
-
+        const fetchURL = `${prodURL}/jsonapi/node/attendee/?fields[node--attendee]=title,uuid,field_attendee_albums&filter[attendee-filter][condition][path]=field_email&filter[attendee-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&include=field_attendee_albums`;
         axios({
             method: 'get',
             url: `${fetchURL}`,
@@ -124,7 +123,7 @@ class LightboxComponent extends Component {
             }
         })
             .then(response => {
-                this.props.setAlbumResponse(response.data.data)
+                this.props.setAlbumResponse(response.data)
             })
             .catch(error => console.log(error));
     }
@@ -425,14 +424,6 @@ class LightboxComponent extends Component {
         this.photoDeleted();
     };
 
-    handleChange = (selectedOption) => {
-        //const selectedOptionLast = selectedOption[selectedOption.length - 1];
-        this.setState({
-            //selectedOption: selectedOptionLast,
-            selectedOption: selectedOption,
-        });
-    };
-
     componentDidMount() {
         this.fetchAllAlbums();
     }
@@ -440,9 +431,13 @@ class LightboxComponent extends Component {
     componentDidUpdate(prevProps, prevState) {
 
         if (this.props.view.lightboxIsOpen !== prevProps.view.lightboxIsOpen &&
-            this.props.view.lightboxIsOpen === true) {
+            this.props.view.lightboxIsOpen === true
+            && this.props.data.albumResponse.included !== undefined
+        ) {
+
             this.fetchAlbumsSpecificToCurrentPhoto();
-            const albums = this.props.data.albumResponse.map((item) => {
+
+            const albums = this.props.data.albumResponse.included.map((item) => {
                 return (
                     {
                         label: item.attributes.title,
@@ -471,8 +466,7 @@ class LightboxComponent extends Component {
     }
 
     render() {
-        const ButtonGroup = Button.Group;
-        const {albums, albumsWithPhoto, showSelect} = this.state;
+        const {albums, albumsWithPhoto} = this.state;
         const albumsWithoutPhoto = albums.filter(o =>
             albumsWithPhoto.every(p =>
                 !['label', 'value'].some(k => o[k] === p[k])));
@@ -485,7 +479,8 @@ class LightboxComponent extends Component {
                         {albumsWithPhoto.map((item, index) => {
                                 return (
                                     <li key={index}><DeleteIcon type="close"
-                                                          onClick={this.deleteFromAlbum(item.value)}/>{item.label}</li>
+                                                                onClick={this.deleteFromAlbum(item.value)}/>{item.label}
+                                    </li>
                                 )
                             }
                         )
