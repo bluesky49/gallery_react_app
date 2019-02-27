@@ -3,7 +3,7 @@ import Gallery from "react-photo-gallery";
 import Lightbox from 'react-images';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Button, Icon, Modal} from "antd";
+import {Icon, Modal} from "antd";
 import axios from "axios";
 import {IconContext} from "react-icons";
 import {IoMdImages} from 'react-icons/io';
@@ -27,10 +27,6 @@ const AlbumInfo = styled.div`
    color: white;
    font-size: 14px !important;
    margin-right: 20px;
-`;
-const StyledButton = styled(Button)`
-   margin-bottom: 10px;
-   font-stretch: normal !important;
 `;
 const ControlsWrapper = styled.div`
    display: flex;
@@ -172,7 +168,7 @@ class LightboxComponent extends Component {
     }
 
     openLightbox2 = async () => {
-        await this.fetchAlbumsSpecificToCurrentPhoto();
+        //await this.fetchAlbumsSpecificToCurrentPhoto();
         this.props.toggleLightbox();
     };
     openLightbox = (event, obj) => {
@@ -194,7 +190,7 @@ class LightboxComponent extends Component {
         this.setState({
             showSelect: false
         });
-        await this.fetchAlbumsSpecificToCurrentPhoto('prev');
+        //await this.fetchAlbumsSpecificToCurrentPhoto('prev');
         this.gotoPrevious2();
     };
 
@@ -210,7 +206,7 @@ class LightboxComponent extends Component {
         this.setState({
             showSelect: false
         });
-        await this.fetchAlbumsSpecificToCurrentPhoto('next');
+        //await this.fetchAlbumsSpecificToCurrentPhoto('next');
         this.gotoNext2();
     };
 
@@ -270,57 +266,30 @@ class LightboxComponent extends Component {
         e.preventDefault();
         const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
-        const blueprint = [
-            {
-                requestId: this.randomId(1, 1000000000),
-                uri: `${prodURL}/jsonapi/node/album/${albumUUID}/relationships/field_puzzles`,
-                action: 'create',
-                body: JSON.stringify({
-                    "data": [
-                        {
-                            "type": "node--puzzle",
-                            "id": uuid
-                        }
-                    ]
-                }),
-                headers: {
-                    'Accept': 'application/vnd.api+json',
-                    'Content-Type': 'application/vnd.api+json',
-                    'X-CSRF-Token': this.props.data.xcsrfToken,
-                    'Authorization': 'Basic anNvbmFwaXVzZXJAZXZlbnRzdG9yeS5saXZlOlVCZGRHSk5HNGVlbQ=='
-                }
-
-            },
-            {
-                requestId: this.randomId(1, 1000000000),
-                uri: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
-                action: 'create',
-                body: JSON.stringify({
-                    "data": [
-                        {
-                            "type": "node--album",
-                            "id": albumUUID
-                        }
-                    ]
-                }),
-                headers: {
-                    'Accept': 'application/vnd.api+json',
-                    'Content-Type': 'application/vnd.api+json',
-                    'X-CSRF-Token': this.props.data.xcsrfToken,
-                    'Authorization': 'Basic anNvbmFwaXVzZXJAZXZlbnRzdG9yeS5saXZlOlVCZGRHSk5HNGVlbQ=='
-                }
-
-            }
-        ];
-
+        console.log(uuid);
         axios({
             method: 'post',
-            url: `${prodURL}/subrequests`,
+            url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
             auth: {
                 username: `${fetchUsername}`,
                 password: `${fetchPassword}`
             },
-            data: JSON.stringify(blueprint)
+            headers: {
+                'Accept': 'application/vnd.api+json',
+                'Content-Type': 'application/vnd.api+json',
+                'X-CSRF-Token': this.props.data.xcsrfToken
+            },
+            data: {
+                "data": [
+                    {
+                        "type": "node--album",
+                        "id": albumUUID
+                    }
+                ]
+            }
+        }).then((res) => {
+            this.photoAdded();
+            console.log(res);
         })
             .catch(function (error) {
                 if (error.response) {
@@ -340,66 +309,33 @@ class LightboxComponent extends Component {
                 }
                 console.log(error.config);
             });
-        this.fetchAlbumsSpecificToCurrentPhoto();
-        this.photoAdded();
+        //this.fetchAlbumsSpecificToCurrentPhoto();
     };
 
     deleteFromAlbum = albumUUID => e => {
         e.preventDefault();
         const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
-
-        const blueprint = [
-            {
-                requestId: this.randomId(1, 1000000000),
-                uri: `${prodURL}/jsonapi/node/album/${albumUUID}/relationships/field_puzzles`,
-                action: 'delete',
-                body: JSON.stringify({
-                    "data": [
-                        {
-                            "type": "node--puzzle",
-                            "id": uuid
-                        }
-                    ]
-                }),
-                headers: {
-                    'Accept': 'application/vnd.api+json',
-                    'Content-Type': 'application/vnd.api+json',
-                    'X-CSRF-Token': this.props.data.xcsrfToken,
-                    'Authorization': 'Basic anNvbmFwaXVzZXJAZXZlbnRzdG9yeS5saXZlOlVCZGRHSk5HNGVlbQ=='
-                }
-
-            },
-            {
-                requestId: this.randomId(1, 1000000000),
-                uri: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
-                action: 'delete',
-                body: JSON.stringify({
-                    "data": [
-                        {
-                            "type": "node--album",
-                            "id": albumUUID
-                        }
-                    ]
-                }),
-                headers: {
-                    'Accept': 'application/vnd.api+json',
-                    'Content-Type': 'application/vnd.api+json',
-                    'X-CSRF-Token': this.props.data.xcsrfToken,
-                    'Authorization': 'Basic anNvbmFwaXVzZXJAZXZlbnRzdG9yeS5saXZlOlVCZGRHSk5HNGVlbQ=='
-                }
-
-            }];
-
-
         axios({
-            method: 'post',
-            url: `${prodURL}/subrequests`,
+            method: 'delete',
+            url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
             auth: {
                 username: `${fetchUsername}`,
                 password: `${fetchPassword}`
             },
-            data: JSON.stringify(blueprint)
+            headers: {
+                'Accept': 'application/vnd.api+json',
+                'Content-Type': 'application/vnd.api+json',
+                'X-CSRF-Token': this.props.data.xcsrfToken
+            },
+            data: {
+                "data": [
+                    {
+                        "type": "node--album",
+                        "id": albumUUID
+                    }
+                ]
+            }
         })
             .catch(function (error) {
                 if (error.response) {
@@ -420,7 +356,7 @@ class LightboxComponent extends Component {
                 console.log(error.config);
             });
 
-        this.fetchAlbumsSpecificToCurrentPhoto();
+        //this.fetchAlbumsSpecificToCurrentPhoto();
         this.photoDeleted();
     };
 
@@ -435,7 +371,7 @@ class LightboxComponent extends Component {
             && this.props.data.albumResponse.included !== undefined
         ) {
 
-            this.fetchAlbumsSpecificToCurrentPhoto();
+            //this.fetchAlbumsSpecificToCurrentPhoto();
 
             const albums = this.props.data.albumResponse.included.map((item) => {
                 return (
