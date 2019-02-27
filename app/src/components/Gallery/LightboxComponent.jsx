@@ -10,6 +10,7 @@ import {IoMdImages} from 'react-icons/io';
 import {Keyframes, animated} from 'react-spring/renderprops';
 import delay from 'delay';
 import styled from "styled-components";
+import _ from 'lodash';
 
 import {toggleLightbox, disableLightbox} from '../../actions/viewActions';
 import {setAlbumResponse, setXcsrfToken} from '../../actions/dataActions';
@@ -92,10 +93,9 @@ class LightboxComponent extends Component {
 
         this.state = {
             currentImage: 0,
-            selectedOption: null,
+            loading: false,
             albums: [],
-            albumsWithPhoto: [],
-            showSelect: true,
+            albumsWithPhotoUnfiltered: [],
             open: false,
             sidebarWidth: 0
         };
@@ -138,7 +138,7 @@ class LightboxComponent extends Component {
         }
 
         const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
-        const fetchURL = `${prodURL}/jsonapi/node/album/?fields[node--album]=field_album_owner,title&filter[owner-filter][condition][path]=field_album_owner.field_email&filter[owner-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_album_owner.field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&filter[puzzle-filter][condition][path]=field_puzzles.id&filter[puzzle-filter][condition][operator]=%3D&filter[puzzle-filter][condition][value]=${uuid}`;
+        const fetchURL = `${prodURL}/jsonapi/node/puzzle/${uuid}?fields[node--puzzle]=field_albums&include=field_albums`;
 
         await axios({
             method: 'get',
@@ -151,24 +151,24 @@ class LightboxComponent extends Component {
                 'Accept': 'application/vnd.api+json',
                 'Content-Type': 'application/vnd.api+json',
             }
-        }).then(response => response.data.data.map((item) => {
+        }).then(response => response.data.included.map((item) => {
             return (
                 {
                     label: item.attributes.title,
                     value: item.id
                 }
             )
-        })).then(response => {
-
-            this.setState({
-                albumsWithPhoto: response
-            });
-        })
+        }))
+            .then(response => {
+                this.setState({
+                    albumsWithPhotoUnfiltered: response
+                });
+            })
             .catch(error => console.log(error));
     }
 
     openLightbox2 = async () => {
-        //await this.fetchAlbumsSpecificToCurrentPhoto();
+        await this.fetchAlbumsSpecificToCurrentPhoto();
         this.props.toggleLightbox();
     };
     openLightbox = (event, obj) => {
@@ -190,7 +190,7 @@ class LightboxComponent extends Component {
         this.setState({
             showSelect: false
         });
-        //await this.fetchAlbumsSpecificToCurrentPhoto('prev');
+        await this.fetchAlbumsSpecificToCurrentPhoto('prev');
         this.gotoPrevious2();
     };
 
@@ -206,7 +206,7 @@ class LightboxComponent extends Component {
         this.setState({
             showSelect: false
         });
-        //await this.fetchAlbumsSpecificToCurrentPhoto('next');
+        await this.fetchAlbumsSpecificToCurrentPhoto('next');
         this.gotoNext2();
     };
 
@@ -266,7 +266,6 @@ class LightboxComponent extends Component {
         e.preventDefault();
         const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
-        console.log(uuid);
         axios({
             method: 'post',
             url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
@@ -288,8 +287,8 @@ class LightboxComponent extends Component {
                 ]
             }
         }).then((res) => {
+            this.fetchAlbumsSpecificToCurrentPhoto();
             this.photoAdded();
-            console.log(res);
         })
             .catch(function (error) {
                 if (error.response) {
@@ -309,7 +308,6 @@ class LightboxComponent extends Component {
                 }
                 console.log(error.config);
             });
-        //this.fetchAlbumsSpecificToCurrentPhoto();
     };
 
     deleteFromAlbum = albumUUID => e => {
@@ -336,6 +334,9 @@ class LightboxComponent extends Component {
                     }
                 ]
             }
+        }).then((res) => {
+            this.fetchAlbumsSpecificToCurrentPhoto();
+            this.photoDeleted();
         })
             .catch(function (error) {
                 if (error.response) {
@@ -355,9 +356,6 @@ class LightboxComponent extends Component {
                 }
                 console.log(error.config);
             });
-
-        //this.fetchAlbumsSpecificToCurrentPhoto();
-        this.photoDeleted();
     };
 
     componentDidMount() {
@@ -371,7 +369,7 @@ class LightboxComponent extends Component {
             && this.props.data.albumResponse.included !== undefined
         ) {
 
-            //this.fetchAlbumsSpecificToCurrentPhoto();
+            this.fetchAlbumsSpecificToCurrentPhoto();
 
             const albums = this.props.data.albumResponse.included.map((item) => {
                 return (
@@ -402,7 +400,18 @@ class LightboxComponent extends Component {
     }
 
     render() {
-        const {albums, albumsWithPhoto} = this.state;
+        const {albums, albumsWithPhotoUnfiltered} = this.state;
+        const albumsWithPhotoWithDuplicates = albumsWithPhotoUnfiltered.concat(albums).filter(({label, value}) => {
+            let foundOnFirst = albumsWithPhotoUnfiltered.some(
+                x => x.label === label && x.value === value
+            );
+            let foundOnSecond = albums.some(
+                y => y.label === label && y.value === value
+            );
+            return (foundOnFirst && foundOnSecond);
+        });
+        const albumsWithPhoto = _.uniqBy(albumsWithPhotoWithDuplicates, 'value');
+
         const albumsWithoutPhoto = albums.filter(o =>
             albumsWithPhoto.every(p =>
                 !['label', 'value'].some(k => o[k] === p[k])));
