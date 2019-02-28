@@ -72,7 +72,7 @@ class SidebarComponent extends React.Component {
 
         if (open !== prevState.open && open) {
             this.setState({
-                sidebarWidth: 280,
+                sidebarWidth: 'auto',
             });
         } else if (open !== prevState.open && !open) {
             setTimeout(() => {

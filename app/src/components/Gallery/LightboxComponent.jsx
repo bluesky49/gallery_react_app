@@ -430,7 +430,7 @@ class LightboxComponent extends Component {
         } else if (open !== prevState.open && !open) {
             setTimeout(() => {
                 this.setState({
-                    sidebarWidth: 0,
+                    sidebarWidth: '0',
                 });
             }, 800);
         }
