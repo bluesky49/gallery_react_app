@@ -11,6 +11,7 @@ import {Keyframes, animated} from 'react-spring/renderprops';
 import delay from 'delay';
 import styled from "styled-components";
 import _ from 'lodash';
+import Loader from 'react-loader-spinner';
 
 import {toggleLightbox, disableLightbox} from '../../actions/viewActions';
 import {setAlbumResponse, setXcsrfToken} from '../../actions/dataActions';
@@ -31,24 +32,8 @@ const AlbumInfo = styled.div`
 `;
 const ControlsWrapper = styled.div`
    display: flex;
+   flex-wrap: wrap;
    padding: 30px 20px 20px 20px;
-   @media (max-width: 550px) {
-    flex-direction: column;
-  }
-`;
-const DeleteIcon = styled(Icon)`
-   color: red !important;
-   padding-right: 5px !important;
-   margin-top: 5px !important;
-   font-weight: bold !important;
-   font-size: 18px !important; 
-`;
-const AddIcon = styled(Icon)`
-   color: rgba(18, 175, 10, 1) !important;
-   padding-right: 5px !important;
-   margin-top: 5px !important;
-   font-weight: bold !important;
-   font-size: 18px !important; 
 `;
 const StyledH3 = styled.h3`
    color: white;
@@ -57,8 +42,43 @@ const StyledH3 = styled.h3`
 `;
 const StyledUL = styled.ul`
    list-style-type: none !important;
+   padding-left: 15px !important;
+`;
+const StyledLI = styled.li`
+   display: flex;
+   align-items: center; !important;
+   margin-bottom: 7px !important;
+`;
+const DeleteIcon = styled(Icon)`
+   color: red !important;
+   padding-right: 5px !important;
+   font-weight: bold !important;
+   font-size: 18px !important; 
+`;
+const AddIcon = styled(Icon)`
+   color: rgba(18, 175, 10, 1) !important;
+   padding-right: 5px !important;
+   font-weight: bold !important;
+   font-size: 18px !important; 
+`;
+const StyledAlbumTitles = styled.div`
+   display: flex;
+   align-items: center;
+   margin-top: -4px;
+`;
+const StyledSpinner = styled.div`
+   display: flex;
+   padding-right: 5px;
 `;
 //CSS Ends
+
+const spinner = <StyledSpinner>
+    <Loader
+    type="Watch"
+    color="rgba(18, 175, 10, 1)"
+    height="16"
+    width="16"/>
+        </StyledSpinner>;
 
 // Creates a spring with predefined animation slots
 const Sidebar = Keyframes.Spring({
@@ -93,7 +113,7 @@ class LightboxComponent extends Component {
 
         this.state = {
             currentImage: 0,
-            loading: false,
+            isLoading: false,
             albums: [],
             albumsWithPhotoUnfiltered: [],
             open: false,
@@ -211,7 +231,8 @@ class LightboxComponent extends Component {
     };
 
     photoAdded = () => {
-        let secondsToGo = 2;
+        let secondsToGo = 1
+        ;
         const modal = Modal.success({
             title: 'Photo added to album!',
             zIndex: 16777201,
@@ -223,7 +244,8 @@ class LightboxComponent extends Component {
         }, secondsToGo * 1000);
     };
     photoDeleted = () => {
-        let secondsToGo = 2;
+        let secondsToGo = 1
+        ;
         const modal = Modal.success({
             title: 'Photo deleted from album!',
             zIndex: 16777201,
@@ -235,7 +257,8 @@ class LightboxComponent extends Component {
         }, secondsToGo * 1000);
     };
     selectAlbumMessage = () => {
-        let secondsToGo = 2;
+        let secondsToGo = 1
+        ;
         const modal = Modal.error({
             title: 'Please select the album!',
             zIndex: 16777201,
@@ -264,6 +287,10 @@ class LightboxComponent extends Component {
 
     addToAlbum = albumUUID => e => {
         e.preventDefault();
+        this.setState({
+            isLoading: true
+        });
+
         const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
         axios({
@@ -288,6 +315,9 @@ class LightboxComponent extends Component {
             }
         }).then((res) => {
             this.fetchAlbumsSpecificToCurrentPhoto();
+            this.setState({
+                isLoading: false
+            });
             this.photoAdded();
         })
             .catch(function (error) {
@@ -312,6 +342,10 @@ class LightboxComponent extends Component {
 
     deleteFromAlbum = albumUUID => e => {
         e.preventDefault();
+        this.setState({
+            isLoading: true
+        });
+
         const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
         axios({
@@ -336,6 +370,9 @@ class LightboxComponent extends Component {
             }
         }).then((res) => {
             this.fetchAlbumsSpecificToCurrentPhoto();
+            this.setState({
+                isLoading: false
+            });
             this.photoDeleted();
         })
             .catch(function (error) {
@@ -423,9 +460,14 @@ class LightboxComponent extends Component {
                     <StyledUL>
                         {albumsWithPhoto.map((item, index) => {
                                 return (
-                                    <li key={index}><DeleteIcon type="close"
-                                                                onClick={this.deleteFromAlbum(item.value)}/>{item.label}
-                                    </li>
+                                    <StyledLI key={index}>
+                                        {this.state.isLoading ? spinner
+                                            :
+                                            <DeleteIcon type="close"
+                                                        onClick={this.deleteFromAlbum(item.value)}/>
+                                        }
+                                        <StyledAlbumTitles>{item.label}</StyledAlbumTitles>
+                                    </StyledLI>
                                 )
                             }
                         )
@@ -440,8 +482,14 @@ class LightboxComponent extends Component {
                     <StyledUL>
                         {albumsWithoutPhoto.map((item, index) => {
                                 return (
-                                    <li key={index}><AddIcon type="plus" onClick={this.addToAlbum(item.value)}/>{item.label}
-                                    </li>
+                                    <StyledLI key={index}>
+                                        {this.state.isLoading ? spinner
+                                            :
+                                            <AddIcon type="plus"
+                                                     onClick={this.addToAlbum(item.value)}/>
+                                        }
+                                        <StyledAlbumTitles>{item.label}</StyledAlbumTitles>
+                                    </StyledLI>
                                 )
                             }
                         )

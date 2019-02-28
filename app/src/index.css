@@ -45,7 +45,7 @@ ul.css-8wmgpq.eekr4lp2 {
     position: relative;
     overflow: hidden;
     height: 100%;
-    width: 280px;
+    width: auto !important;
     background-color: rgba(30, 30, 30, 0.7);
     padding: 0 10px 10px 10px;
     font-size: 15px;

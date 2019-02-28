@@ -118,6 +118,12 @@ class SearchComponent extends Component {
                             showSearch={false}
                             title="Moments"
                         />
+                        <MultiList
+                            componentId="multiList_album_titles"
+                            dataField="album_titles"
+                            showSearch={false}
+                            title="Albums"
+                        />
                         <DataSearch
                             showClear={true}
                             componentId="SearchAttendee"
@@ -138,7 +144,7 @@ class SearchComponent extends Component {
                             componentId="SearchResult"
                             dataField="SearchSensor"
                             react={{
-                                "and": ["SearchSensor", "multiList_attendee_group", "multiList_image_moment", "SearchAttendee", "SearchAuthor"]
+                                "and": ["SearchSensor", "multiList_attendee_group", "multiList_image_moment", "SearchAttendee", "SearchAuthor","multiList_album_titles"]
                             }}
                             size={9999}
                             pagination={false}
