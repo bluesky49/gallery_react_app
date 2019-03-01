@@ -2,43 +2,36 @@
     z-index: 16777200 !important;
 }
 
-.css-evf80z {
-    margin-bottom: 5px !important;
-    margin-left: 5px !important;
-}
-
-.css-14pyrcn {
+.datasearch__input {
+    font-size: 14px !important;
     margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+.reactivelist__sortOptions {
+    font-size: 14px !important;
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
 }
 
-#SearchSensor-downshift-input,
-#SearchAttendee-downshift-input,
-#SearchAuthor-downshift-input{
+.datasearch__list li {
     font-size: 14px !important;
 }
 
-.css-1pwe92q {
+.multilist__label{
+    font-size: 14px !important;
+    color: white !important;
+}
+.multilist__count {
+    padding-right: 10px;
+    font-size: 14px !important;
+    color: white !important;
+}
+
+.datasearch__title,
+.multilist__title {
+    margin-top: 5px !important;
     font-size: 16px !important;
     color: white !important;
-}
-
-ul.css-8wmgpq.eekr4lp2 li label span,
-ul.css-8wmgpq.eekr4lp2 {
-    font-size: 14px !important;
-    color: white !important;
-}
-
-.css-evf80z {
-    font-size: 16px !important;
-}
-
-.css-14pyrcn {
-    font-size: 14px !important;
-    color: white !important;
-}
-
-.css-1xdhyk6 {
-    margin-bottom: 5px;
 }
 
 .sidebar {

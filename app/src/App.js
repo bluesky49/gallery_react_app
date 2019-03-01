@@ -31,10 +31,6 @@ const PaginationWrapper = styled.div`
 `;
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     onChange = async (page, pageSize) => {
         await this.props.toggleGalleryLoading();
         const {searchResult} = this.props.data;

@@ -67,12 +67,12 @@ class SearchComponent extends Component {
     };
 
     handleSearchResult = results => {
-        this.result = results;
-        //console.log(results);
+        this.result = results.results;
+        //console.log(this.result);
 
         if (this.result[0] && this.state.firstLoad) {
             this.setState({
-                initialResult: results,
+                initialResult: results.results,
                 firstLoad: false
             });
         }
@@ -110,24 +110,53 @@ class SearchComponent extends Component {
                             dataField={["attendee_first_name", "author_last_name", "author_first_name", "author_email",
                                 "attendee_last_name", "attendee_first_name", "attendee_email", "attendee_group", "image_locality"]}
                             autosuggest={true}
+                            innerClass={{
+                                title: 'datasearch__title',
+                                input: 'datasearch__input',
+                                list: 'datasearch__list'
+                            }}
                         />
                         <MultiList
                             componentId="multiList_attendee_group"
                             dataField="attendee_group"
                             showSearch={false}
                             title="Attendee group"
+                            innerClass={{
+                                title: 'multilist__title',
+                                input: 'multilist__input',
+                                list: 'multilist__list',
+                                checkbox: 'multilist__checkbox',
+                                label: 'multilist__label',
+                                count: 'multilist__count'
+                            }}
                         />
                         <MultiList
                             componentId="multiList_image_moment"
                             dataField="image_moment"
                             showSearch={false}
                             title="Moments"
+                            innerClass={{
+                                title: 'multilist__title',
+                                input: 'multilist__input',
+                                list: 'multilist__list',
+                                checkbox: 'multilist__checkbox',
+                                label: 'multilist__label',
+                                count: 'multilist__count'
+                            }}
                         />
                         <MultiList
                             componentId="multiList_album_titles"
                             dataField="album_titles"
                             showSearch={false}
                             title="Albums"
+                            innerClass={{
+                                title: 'multilist__title',
+                                input: 'multilist__input',
+                                list: 'multilist__list',
+                                checkbox: 'multilist__checkbox',
+                                label: 'multilist__label',
+                                count: 'multilist__count'
+                            }}
                         />
                         <DataSearch
                             showClear={true}
@@ -136,6 +165,11 @@ class SearchComponent extends Component {
                             dataField={["attendee_first_name", "attendee_last_name", "attendee_email"]}
                             autosuggest={true}
                             placeholder={"Enter attendee's name"}
+                            innerClass={{
+                                title: 'datasearch__title',
+                                input: 'datasearch__input',
+                                list: 'datasearch__list'
+                            }}
                         />
                         <DataSearch
                             showClear={true}
@@ -144,6 +178,11 @@ class SearchComponent extends Component {
                             dataField={["author_last_name", "author_first_name", "author_email"]}
                             autosuggest={true}
                             placeholder={"Enter author's name"}
+                            innerClass={{
+                                title: 'datasearch__title',
+                                input: 'datasearch__input',
+                                list: 'datasearch__list'
+                            }}
                         />
                         <ReactiveList
                             componentId="SearchResult"
@@ -154,11 +193,11 @@ class SearchComponent extends Component {
                             size={9999}
                             pagination={false}
                             loader="Loading..."
-                            onAllData={this.handleSearchResult}
+                            renderAllData={this.handleSearchResult}
                             sortOptions={[
                                 {
                                     "label": "By date",
-                                    "dataField": "created",
+                                    "dataField": "image_date",
                                     "sortBy": "desc"
                                 },
                                 {
@@ -167,6 +206,17 @@ class SearchComponent extends Component {
                                     "sortBy": "desc"
                                 }
                             ]}
+                            innerClass={{
+                                resultsInfo: 'reactivelist__resultsInfo',
+                                sortOptions: 'reactivelist__sortOptions',
+                                resultStats: 'reactivelist__resultStats',
+                                noResults: 'reactivelist__noResults',
+                                button: 'reactivelist__button',
+                                pagination: 'reactivelist__pagination',
+                                active: 'reactivelist__active',
+                                list: 'reactivelist__list',
+                                poweredBy: 'reactivelist__poweredBy'
+                            }}
                         />
                     </ReactiveBase>
 
