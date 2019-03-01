@@ -3,13 +3,16 @@ import {TOGGLE_FULLSCREEN,
         TOGGLE_LIGHTBOX,
         DISABLE_LIGHTBOX,
         TOGGLE_TEMP_FULLSCREEN,
-        DISABLE_TEMP_FULLSCREEN
+        DISABLE_TEMP_FULLSCREEN,
+        OPEN_SEARCH_PANEL,
+        CLOSE_SEARCH_PANEL
 } from '../actions/types';
 
 const initialState = {
     fullscreenCustom: false,
     lightboxIsOpen: false,
-    fullscreenTempDisabled: false
+    fullscreenTempDisabled: false,
+    searchPanelIsOpen: false
 };
 
 export default function (state = initialState, action) {
@@ -33,6 +36,16 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 lightboxIsOpen: false
+            };
+        case OPEN_SEARCH_PANEL:
+            return {
+                ...state,
+                searchPanelIsOpen: true
+            };
+        case CLOSE_SEARCH_PANEL:
+            return {
+                ...state,
+                searchPanelIsOpen: false
             };
         case TOGGLE_TEMP_FULLSCREEN:
             return {

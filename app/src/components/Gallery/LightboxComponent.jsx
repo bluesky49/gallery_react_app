@@ -3,7 +3,7 @@ import Gallery from "react-photo-gallery";
 import Lightbox from 'react-images';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Icon, Modal} from "antd";
+import {Icon} from "antd";
 import axios from "axios";
 import {IconContext} from "react-icons";
 import {IoMdImages} from 'react-icons/io';
@@ -63,22 +63,21 @@ const AddIcon = styled(Icon)`
 `;
 const StyledAlbumTitles = styled.div`
    display: flex;
-   align-items: center;
-   margin-top: -4px;
 `;
 const StyledSpinner = styled.div`
    display: flex;
    padding-right: 5px;
+   margin-bottom: -3px;
 `;
 //CSS Ends
 
 const spinner = <StyledSpinner>
     <Loader
-    type="Watch"
-    color="rgba(18, 175, 10, 1)"
-    height="16"
-    width="16"/>
-        </StyledSpinner>;
+        type="Watch"
+        color="rgba(18, 175, 10, 1)"
+        height="16"
+        width="16"/>
+</StyledSpinner>;
 
 // Creates a spring with predefined animation slots
 const Sidebar = Keyframes.Spring({
@@ -95,7 +94,6 @@ const Sidebar = Keyframes.Spring({
         await call({delay: 0, x: -100})
     },
 })
-
 // Creates a keyframed trail
 const Content = Keyframes.Trail({
     peek: [
@@ -171,22 +169,33 @@ class LightboxComponent extends Component {
                 'Accept': 'application/vnd.api+json',
                 'Content-Type': 'application/vnd.api+json',
             }
-        }).then(response => response.data.included.map((item) => {
-            return (
-                {
-                    label: item.attributes.title,
-                    value: item.id
-                }
-            )
-        }))
-            .then(response => {
-                this.setState({
-                    albumsWithPhotoUnfiltered: response
+        }).then(response => {
+            if (response.data.included !== undefined) {
+                const result = response.data.included.map(item => {
+                    return (
+                        {
+                            label: item.attributes.title,
+                            value: item.id
+                        }
+                    )
                 });
-            })
+                return result
+            } else {
+                return (
+                    [{
+                        label: 'na',
+                        value: 'na'
+                    }]
+                )
+            }
+        }).then(response => {
+            //console.log(response);
+            this.setState({
+                albumsWithPhotoUnfiltered: response
+            });
+        })
             .catch(error => console.log(error));
     }
-
     openLightbox2 = async () => {
         await this.fetchAlbumsSpecificToCurrentPhoto();
         this.props.toggleLightbox();
@@ -213,7 +222,6 @@ class LightboxComponent extends Component {
         await this.fetchAlbumsSpecificToCurrentPhoto('prev');
         this.gotoPrevious2();
     };
-
     gotoNext2 = () => {
         this.setState({
             currentImage: this.state.currentImage + 1,
@@ -229,47 +237,6 @@ class LightboxComponent extends Component {
         await this.fetchAlbumsSpecificToCurrentPhoto('next');
         this.gotoNext2();
     };
-
-    photoAdded = () => {
-        let secondsToGo = 1
-        ;
-        const modal = Modal.success({
-            title: 'Photo added to album!',
-            zIndex: 16777201,
-            width: 300,
-            centered: true
-        });
-        setTimeout(() => {
-            modal.destroy();
-        }, secondsToGo * 1000);
-    };
-    photoDeleted = () => {
-        let secondsToGo = 1
-        ;
-        const modal = Modal.success({
-            title: 'Photo deleted from album!',
-            zIndex: 16777201,
-            width: 300,
-            centered: true
-        });
-        setTimeout(() => {
-            modal.destroy();
-        }, secondsToGo * 1000);
-    };
-    selectAlbumMessage = () => {
-        let secondsToGo = 1
-        ;
-        const modal = Modal.error({
-            title: 'Please select the album!',
-            zIndex: 16777201,
-            width: 300,
-            centered: true
-        });
-        setTimeout(() => {
-            modal.destroy();
-        }, secondsToGo * 1000);
-    };
-
     closeLightbox = () => {
         this.setState({
             currentImage: 0,
@@ -284,13 +251,11 @@ class LightboxComponent extends Component {
 
         return `${randomInt}`; //The maximum is exclusive and the minimum is inclusive`
     };
-
     addToAlbum = albumUUID => e => {
         e.preventDefault();
         this.setState({
             isLoading: true
         });
-
         const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
         axios({
@@ -318,7 +283,6 @@ class LightboxComponent extends Component {
             this.setState({
                 isLoading: false
             });
-            this.photoAdded();
         })
             .catch(function (error) {
                 if (error.response) {
@@ -345,7 +309,6 @@ class LightboxComponent extends Component {
         this.setState({
             isLoading: true
         });
-
         const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
         axios({
@@ -373,7 +336,6 @@ class LightboxComponent extends Component {
             this.setState({
                 isLoading: false
             });
-            this.photoDeleted();
         })
             .catch(function (error) {
                 if (error.response) {

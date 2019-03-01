@@ -35,8 +35,8 @@ class App extends React.Component {
         super(props);
     }
 
-    onChange = (page, pageSize) => {
-        this.props.toggleGalleryLoading();
+    onChange = async (page, pageSize) => {
+        await this.props.toggleGalleryLoading();
         const {searchResult} = this.props.data;
         this.props.setFinalResponse(searchResult[page - 1]);
     };

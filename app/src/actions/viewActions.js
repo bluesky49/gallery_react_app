@@ -16,6 +16,9 @@ export const fullscreenOFF = () => dispatch => {
 export const toggleLightbox = () => dispatch => {
     dispatch({
         type:'TOGGLE_LIGHTBOX'
+    });
+    dispatch({
+        type:'CLOSE_SEARCH_PANEL'
     })
 };
 
@@ -37,5 +40,17 @@ export const disableTempFullscreen = () => dispatch => {
 export const toggleTempFullscreen = () => dispatch => {
     dispatch({
         type:'TOGGLE_TEMP_FULLSCREEN'
+    })
+};
+// Open search panel
+export const openSearchPanel = () => dispatch => {
+    dispatch({
+        type:'OPEN_SEARCH_PANEL'
+    })
+};
+// Close search panel
+export const closeSearchPanel = () => dispatch => {
+    dispatch({
+        type:'CLOSE_SEARCH_PANEL'
     })
 };

@@ -4,6 +4,12 @@ import {Form, Icon} from 'antd';
 import delay from 'delay';
 import styled from "styled-components";
 import SearchComponent from './SearchComponents/SearchComponent';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {
+    openSearchPanel,
+    closeSearchPanel
+} from "../actions/viewActions";
 
 //CSS starts
 const StyledSidebar = styled.div`
@@ -60,21 +66,31 @@ class SidebarComponent extends React.Component {
         super(props);
 
         this.state = {
-            open: false,
             sidebarWidth: 0
         };
     }
 
-    toggle = () => this.setState(state => ({open: !state.open}));
+    toggle = () => {
+        switch (this.props.view.searchPanelIsOpen) {
+            case false:
+                return (
+                    this.props.openSearchPanel()
+                );
+            case true:
+                return (
+                    this.props.closeSearchPanel()
+                );
+        }
+    };
 
     componentDidUpdate(prevProps, prevState) {
-        const {open} = this.state;
+        const open = this.props.view.searchPanelIsOpen;
 
-        if (open !== prevState.open && open) {
+        if (open !== prevProps.view.searchPanelIsOpen && open) {
             this.setState({
                 sidebarWidth: 'auto',
             });
-        } else if (open !== prevState.open && !open) {
+        } else if (open !== prevProps.view.searchPanelIsOpen && !open) {
             setTimeout(() => {
                 this.setState({
                     sidebarWidth: 0,
@@ -84,8 +100,8 @@ class SidebarComponent extends React.Component {
     }
 
     render() {
-        const state = this.state.open ? 'open' : 'close';
-        const icon = this.state.open ? 'fold' : 'unfold';
+        const state = this.props.view.searchPanelIsOpen ? 'open' : 'close';
+        const icon = this.props.view.searchPanelIsOpen ? 'fold' : 'unfold';
         const items = [
             <SearchComponent/>
         ];
@@ -108,7 +124,7 @@ class SidebarComponent extends React.Component {
                                 native
                                 items={items}
                                 //keys={items.map((_, i) => i)}
-                                reverse={!this.state.open}
+                                reverse={!this.props.view.searchPanelIsOpen}
                                 state={state}>
                                 {(item, i) => ({x, ...props}) => (
                                     <animated.div
@@ -130,4 +146,15 @@ class SidebarComponent extends React.Component {
     }
 }
 
-export default SidebarComponent;
+SidebarComponent.propTypes = {
+    searchPanelIsOpen: PropTypes.bool
+};
+
+const mapStateToProps = state => ({
+    view: state.view
+});
+
+export default connect(mapStateToProps, {
+    openSearchPanel,
+    closeSearchPanel
+})(SidebarComponent);

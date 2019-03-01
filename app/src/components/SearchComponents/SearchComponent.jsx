@@ -5,6 +5,9 @@ import styled from "styled-components";
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {
+    closeSearchPanel
+} from "../../actions/viewActions";
 
 import {
     toggleGalleryLoading,
@@ -44,7 +47,8 @@ class SearchComponent extends Component {
     }
 
     handleApplyFilters = async () => {
-        this.props.toggleGalleryLoading();
+        await this.props.toggleGalleryLoading();
+        await this.props.closeSearchPanel();
 
         const chunkedResults = _.chunk(this.result, 50);
 
@@ -74,8 +78,9 @@ class SearchComponent extends Component {
         }
     };
 
-    handleClearFilters = () => {
-        this.props.toggleGalleryLoading();
+    handleClearFilters = async () => {
+        await this.props.toggleGalleryLoading();
+        await this.props.closeSearchPanel();
         this.props.setFinalResponse(this.props.data.initialResponse);
         this.props.setTotalResults(this.state.initialTotalResults);
     };
@@ -181,11 +186,13 @@ SearchComponent.propTypes = {
     galleryIsLoading: PropTypes.bool,
     eventAccessCode: PropTypes.string,
     totalResults: PropTypes.number,
-    searchResult: PropTypes.array
+    searchResult: PropTypes.array,
+    searchPanelIsOpen: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-    data: state.data
+    data: state.data,
+    view: state.view
 });
 
 export default connect(mapStateToProps, {
@@ -194,5 +201,6 @@ export default connect(mapStateToProps, {
     setFinalResponse,
     setInitialResponse,
     setTotalResults,
-    setSearchResult
+    setSearchResult,
+    closeSearchPanel
 })(SearchComponent);

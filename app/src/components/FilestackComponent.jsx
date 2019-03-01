@@ -223,7 +223,7 @@ class FilestackComponent extends Component {
                 });
 
                 const galleryPhotos = transformOptionsAttached.map((item) => {
-                   // if (item.album_titles !== undefined) {
+
                         if (item.image_rotation !== undefined && item.image_rotation[0] === "Rotated 90 CW") {
 
                         const date = item.image_date !== undefined ? new Date(item.image_date[0] * 1000).toLocaleString() : "The date is not specified";

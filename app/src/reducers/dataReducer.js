@@ -32,7 +32,7 @@ const initialState = {
     isLoading: true,
     galleryIsLoading: false,
     eventAccessCode: 'empty',
-    attendee: 'empty',//fbracq@pauzzle.pro''empty'
+    attendee: 'empty',//fbracq@pauzzle.pro''empty
     totalResults: null,
     searchResult: ['empty'],
     xcsrfToken: 'empty'
