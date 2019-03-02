@@ -144,20 +144,6 @@ class SearchComponent extends Component {
                                 count: 'multilist__count'
                             }}
                         />
-                        <MultiList
-                            componentId="multiList_album_titles"
-                            dataField="album_titles"
-                            showSearch={false}
-                            title="Albums"
-                            innerClass={{
-                                title: 'multilist__title',
-                                input: 'multilist__input',
-                                list: 'multilist__list',
-                                checkbox: 'multilist__checkbox',
-                                label: 'multilist__label',
-                                count: 'multilist__count'
-                            }}
-                        />
                         <DataSearch
                             showClear={true}
                             componentId="SearchAttendee"
