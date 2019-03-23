@@ -1,6 +1,6 @@
 {
   "name": "eventstory_gallery",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "dependencies": {
     "@appbaseio/reactivesearch": "^3.0.0-beta.8",
@@ -19,8 +19,8 @@
     "react-loader-spinner": "^2.3.0",
     "react-measure": "^2.2.2",
     "react-photo-gallery": "^6.3.0",
-    "react-redux": "^6.0.0",
-    "react-scripts": "2.1.5",
+    "react-redux": "^7.0.0-beta.0",
+    "react-scripts": "2.1.8",
     "react-scroll": "^1.7.10",
     "react-spring": "^8.0.2",
     "redux": "^4.0.1",

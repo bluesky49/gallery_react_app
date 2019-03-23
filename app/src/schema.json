@@ -1,0 +1,64 @@
+{
+  "attendees": {
+    "Frank": {
+      "album_1": [
+        {
+          "id": "5555-5555-5555",
+          "filestack_handle": "1111-1111-1111",
+          "image_width": 250,
+          "image_height": 300
+        },
+        {
+          "id": "6666-6666-6666",
+          "filestack_handle": "2222-2222-2222",
+          "image_width": 250,
+          "image_height": 300
+        }
+      ],
+      "album_2": [
+        {
+          "id": "5555-5555-5555",
+          "filestack_handle": "1111-1111-1111",
+          "image_width": 250,
+          "image_height": 300
+        },
+        {
+          "id": "6666-6666-6666",
+          "filestack_handle": "2222-2222-2222",
+          "image_width": 250,
+          "image_height": 300
+        }
+      ]
+    },
+    "Max": {
+      "album_3": [
+        {
+          "id": "5555-5555-5555",
+          "filestack_handle": "1111-1111-1111",
+          "image_width": 250,
+          "image_height": 300
+        },
+        {
+          "id": "6666-6666-6666",
+          "filestack_handle": "2222-2222-2222",
+          "image_width": 250,
+          "image_height": 300
+        }
+      ],
+      "album_4": [
+        {
+          "id": "5555-5555-5555",
+          "filestack_handle": "1111-1111-1111",
+          "image_width": 250,
+          "image_height": 300
+        },
+        {
+          "id": "6666-6666-6666",
+          "filestack_handle": "2222-2222-2222",
+          "image_width": 250,
+          "image_height": 300
+        }
+      ]
+    }
+  }
+}

@@ -40,8 +40,8 @@ class App extends React.Component {
     componentDidMount() {
         /*global drupalSettings:true*/
         /*eslint no-undef: "error"*/
-        this.props.setEventCode(drupalSettings.eventAccessCode);
-        this.props.setAttendee(drupalSettings.attendee);
+        //this.props.setEventCode(drupalSettings.eventAccessCode);
+        //this.props.setAttendee(drupalSettings.attendee);
     }
 
     render() {
@@ -64,7 +64,6 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    initialResponse: PropTypes.array,
     finalResponse: PropTypes.array,
     totalResults: PropTypes.number,
     eventAccessCode: PropTypes.string,

@@ -1,5 +1,4 @@
 import {
-    SET_INITIAL_RESPONSE,
     SET_FINAL_RESPONSE,
     SET_ALBUM_RESPONSE,
     SET_PHOTOS_TO_RENDER,
@@ -15,7 +14,7 @@ import {
 } from '../actions/types';
 
 //const eventAccessCode = '123456';
-//const eventAccessCode = '071404';
+//const eventAccessCode = '214672';
 //const eventAccessCode = '164111';
 //const eventAccessCode = '736303';
 //const eventAccessCode = '444121';
@@ -25,14 +24,13 @@ import {
 // const attendee = 'marion.durand@pauzzle.pro';
 
 const initialState = {
-    initialResponse: [],
     albumResponse: ['empty'],
     finalResponse: ['empty'],
     photosToRender: ['empty'],
     isLoading: true,
     galleryIsLoading: false,
-    eventAccessCode: 'empty',
-    attendee: 'empty',//fbracq@pauzzle.pro'empty
+    eventAccessCode: '444121',
+    attendee: 'fbracq@pauzzle.pro',//fbracq@pauzzle.pro'empty//davos@popoi.com
     totalResults: null,
     searchResult: ['empty'],
     xcsrfToken: 'empty'
@@ -40,11 +38,6 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case SET_INITIAL_RESPONSE:
-            return {
-                ...state,
-                initialResponse: action.payload
-            };
         case SET_FINAL_RESPONSE:
             return {
                 ...state,

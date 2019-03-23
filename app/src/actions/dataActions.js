@@ -1,10 +1,3 @@
-// Set initial response
-export const setInitialResponse = response => dispatch => {
-    dispatch({
-        type:'SET_INITIAL_RESPONSE',
-        payload: response
-    })
-};
 // Set final response
 export const setFinalResponse = response => dispatch => {
     dispatch({

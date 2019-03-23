@@ -13,7 +13,6 @@ import {
     toggleGalleryLoading,
     disableGalleryLoading,
     setFinalResponse,
-    setInitialResponse,
     setTotalResults,
     setSearchResult
 } from "../../actions/dataActions";
@@ -29,6 +28,9 @@ const ButtonWrapper = styled.div`
    display: flex;
    justify-content: space-between;
 `;
+const DisplayResultsButton = styled(Button)`
+   width: 100% !important;
+`;
 
 // CSS ends
 
@@ -37,16 +39,16 @@ class SearchComponent extends Component {
         super(props);
 
         this.state = {
-            chunkedResults: [],
-            initialResult: ['empty'],
             firstLoad: true,
             firstUpdate: true,
-            initialResponseSet: false,
-            initialTotalResults: 0
         };
     }
 
     handleApplyFilters = async () => {
+        if (this.firstLoad === undefined) {
+            this.firstLoad = false
+        }
+
         await this.props.toggleGalleryLoading();
         await this.props.closeSearchPanel();
 
@@ -55,46 +57,18 @@ class SearchComponent extends Component {
         await this.props.setSearchResult(chunkedResults);
         await this.props.setTotalResults(this.result.length);
         await this.props.setFinalResponse(chunkedResults[0]);
-
-        if (!this.state.initialResponseSet) {
-            await this.props.setInitialResponse(chunkedResults[0]);
-
-            await this.setState({
-                initialResponseSet: true,
-                initialTotalResults: this.result.length
-            });
-        }
     };
 
     handleSearchResult = results => {
         this.result = results.results;
-        //console.log(this.result);
 
-        if (this.result[0] && this.state.firstLoad) {
-            this.setState({
-                initialResult: results.results,
-                firstLoad: false
-            });
-        }
-    };
-
-    handleClearFilters = async () => {
-        await this.props.toggleGalleryLoading();
-        await this.props.closeSearchPanel();
-        this.props.setFinalResponse(this.props.data.initialResponse);
-        this.props.setTotalResults(this.state.initialTotalResults);
-    };
-
-    componentDidUpdate(prevState, prevProps) {
-        if (this.state.initialResult !== ['empty'] && this.state.firstUpdate) {
-            this.setState({
-                firstUpdate: false
-            });
+        if (this.result[0] && this.firstLoad === undefined) {
             this.handleApplyFilters();
         }
-    }
+    };
 
     render() {
+
         let elasticIndex = {['app']: `elasticsearch_index_bitnami_drupal8_${this.props.data.eventAccessCode}`};
 
         return (
@@ -121,6 +95,7 @@ class SearchComponent extends Component {
                             dataField="attendee_group"
                             showSearch={false}
                             title="Attendee group"
+                            showCheckbox={true}
                             innerClass={{
                                 title: 'multilist__title',
                                 input: 'multilist__input',
@@ -135,6 +110,7 @@ class SearchComponent extends Component {
                             dataField="image_moment"
                             showSearch={false}
                             title="Moments"
+                            showCheckbox={true}
                             innerClass={{
                                 title: 'multilist__title',
                                 input: 'multilist__input',
@@ -180,18 +156,6 @@ class SearchComponent extends Component {
                             pagination={false}
                             loader="Loading..."
                             renderAllData={this.handleSearchResult}
-                            sortOptions={[
-                                {
-                                    "label": "By date",
-                                    "dataField": "image_date",
-                                    "sortBy": "desc"
-                                },
-                                {
-                                    "label": "By order",
-                                    "dataField": "display_order",
-                                    "sortBy": "desc"
-                                }
-                            ]}
                             innerClass={{
                                 resultsInfo: 'reactivelist__resultsInfo',
                                 sortOptions: 'reactivelist__sortOptions',
@@ -207,8 +171,7 @@ class SearchComponent extends Component {
                     </ReactiveBase>
 
                     <ButtonWrapper>
-                        <Button type="primary" onClick={this.handleApplyFilters}>Display Results</Button>
-                        <Button type="danger" ghost onClick={this.handleClearFilters}>Clear Filters</Button>
+                        <DisplayResultsButton type="primary" onClick={this.handleApplyFilters}>Display Results</DisplayResultsButton>
                     </ButtonWrapper>
 
                 </StyledSearchWrapper>
@@ -217,7 +180,6 @@ class SearchComponent extends Component {
 }
 
 SearchComponent.propTypes = {
-    initialResponse: PropTypes.array,
     finalResponse: PropTypes.array,
     galleryIsLoading: PropTypes.bool,
     eventAccessCode: PropTypes.string,
@@ -235,7 +197,6 @@ export default connect(mapStateToProps, {
     toggleGalleryLoading,
     disableGalleryLoading,
     setFinalResponse,
-    setInitialResponse,
     setTotalResults,
     setSearchResult,
     closeSearchPanel

@@ -527,7 +527,8 @@ LightboxComponent.propTypes = {
     photosToRender: PropTypes.array,
     albumResponse: PropTypes.array,
     setXcsrfToken: PropTypes.func,
-    xcsrfToken: PropTypes.string
+    xcsrfToken: PropTypes.string,
+    attendee: PropTypes.string
 };
 
 const
