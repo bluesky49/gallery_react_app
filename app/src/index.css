@@ -15,6 +15,7 @@
 
 .reactivelist__resultStats {
     color: white !important;
+    font-size: 12px !important;
 }
 
 .datasearch__list li {

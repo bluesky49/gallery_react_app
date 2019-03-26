@@ -10,11 +10,10 @@ import {IoMdImages} from 'react-icons/io';
 import {Keyframes, animated} from 'react-spring/renderprops';
 import delay from 'delay';
 import styled from "styled-components";
-import _ from 'lodash';
 import Loader from 'react-loader-spinner';
 
 import {toggleLightbox, disableLightbox} from '../../actions/viewActions';
-import {setAlbumResponse, setXcsrfToken} from '../../actions/dataActions';
+import {setAlbumResponse, setXcsrfToken, setAlbumOwnerID} from '../../actions/dataActions';
 import {fetchPassword, fetchUsername, prodURL} from "../../keys";
 
 //CSS starts
@@ -112,8 +111,8 @@ class LightboxComponent extends Component {
         this.state = {
             currentImage: 0,
             isLoading: false,
-            albums: [],
-            albumsWithPhotoUnfiltered: [],
+            albumsWithPhoto: [],
+            albumsWithoutPhoto: [],
             open: false,
             sidebarWidth: 0
         };
@@ -122,82 +121,7 @@ class LightboxComponent extends Component {
 
     toggle = () => this.setState(state => ({open: !state.open}));
 
-    fetchAllAlbums() {
-        const fetchURL = `${prodURL}/jsonapi/node/attendee/?fields[node--attendee]=title,uuid,field_attendee_albums&filter[attendee-filter][condition][path]=field_email&filter[attendee-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&include=field_attendee_albums`;
-        axios({
-            method: 'get',
-            url: `${fetchURL}`,
-            auth: {
-                username: `${fetchUsername}`,
-                password: `${fetchPassword}`
-            },
-            headers: {
-                'Accept': 'application/vnd.api+json',
-                'Content-Type': 'application/vnd.api+json',
-            }
-        })
-            .then(response => {
-                this.props.setAlbumResponse(response.data)
-            })
-            .catch(error => console.log(error));
-    }
-
-    async fetchAlbumsSpecificToCurrentPhoto(method) {
-        let currentLightboxImage;
-        switch (method) {
-            case 'prev':
-                currentLightboxImage = this.lightboxRef.current.props.currentImage - 1;
-                break;
-            case 'next':
-                currentLightboxImage = this.lightboxRef.current.props.currentImage + 1;
-                break;
-            default:
-                currentLightboxImage = this.lightboxRef.current.props.currentImage;
-        }
-
-        const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
-        const fetchURL = `${prodURL}/jsonapi/node/puzzle/${uuid}?fields[node--puzzle]=field_albums&include=field_albums`;
-
-        await axios({
-            method: 'get',
-            url: `${fetchURL}`,
-            auth: {
-                username: `${fetchUsername}`,
-                password: `${fetchPassword}`
-            },
-            headers: {
-                'Accept': 'application/vnd.api+json',
-                'Content-Type': 'application/vnd.api+json',
-            }
-        }).then(response => {
-            if (response.data.included !== undefined) {
-                const result = response.data.included.map(item => {
-                    return (
-                        {
-                            label: item.attributes.title,
-                            value: item.id
-                        }
-                    )
-                });
-                return result
-            } else {
-                return (
-                    [{
-                        label: 'na',
-                        value: 'na'
-                    }]
-                )
-            }
-        }).then(response => {
-            //console.log(response);
-            this.setState({
-                albumsWithPhotoUnfiltered: response
-            });
-        })
-            .catch(error => console.log(error));
-    }
     openLightbox2 = async () => {
-        await this.fetchAlbumsSpecificToCurrentPhoto();
         this.props.toggleLightbox();
     };
     openLightbox = (event, obj) => {
@@ -219,7 +143,6 @@ class LightboxComponent extends Component {
         this.setState({
             showSelect: false
         });
-        await this.fetchAlbumsSpecificToCurrentPhoto('prev');
         this.gotoPrevious2();
     };
     gotoNext2 = () => {
@@ -234,7 +157,6 @@ class LightboxComponent extends Component {
         this.setState({
             showSelect: false
         });
-        await this.fetchAlbumsSpecificToCurrentPhoto('next');
         this.gotoNext2();
     };
     closeLightbox = () => {
@@ -244,23 +166,12 @@ class LightboxComponent extends Component {
         });
         this.props.disableLightbox();
     };
-    randomId = (min, max) => {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        let randomInt = Math.floor(Math.random() * (max - min)) + min;
+    fetchAlbumInfo() {
+        const fetchURL = `${prodURL}/jsonapi/node/attendee/?filter[attendee-filter][condition][path]=field_email&filter[attendee-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&fields[node--attendee]=field_attendee_albums_puzzles`;
 
-        return `${randomInt}`; //The maximum is exclusive and the minimum is inclusive`
-    };
-    addToAlbum = albumUUID => e => {
-        e.preventDefault();
-        this.setState({
-            isLoading: true
-        });
-        const currentLightboxImage = this.lightboxRef.current.props.currentImage;
-        const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
         axios({
-            method: 'post',
-            url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
+            method: 'get',
+            url: `${fetchURL}`,
             auth: {
                 username: `${fetchUsername}`,
                 password: `${fetchPassword}`
@@ -268,22 +179,117 @@ class LightboxComponent extends Component {
             headers: {
                 'Accept': 'application/vnd.api+json',
                 'Content-Type': 'application/vnd.api+json',
-                'X-CSRF-Token': this.props.data.xcsrfToken
-            },
-            data: {
-                "data": [
-                    {
-                        "type": "node--album",
-                        "id": albumUUID
-                    }
-                ]
             }
-        }).then((res) => {
-            this.fetchAlbumsSpecificToCurrentPhoto();
-            this.setState({
-                isLoading: false
-            });
         })
+            .then(response => {
+                this.props.setAlbumResponse(response.data.data);
+                this.props.setAlbumOwnerID(response.data.data[0].id);
+            })
+            .catch(error => console.log(error));
+    }
+
+    setAlbumsLists = () => {
+
+        const JSONfield = JSON.parse(this.props.data.albumResponse[0].attributes.field_attendee_albums_puzzles);
+
+        if (JSONfield !== null && JSONfield.length) {
+            var allAlbums = JSONfield.map(item => {
+                return (
+                    {
+                        label: item.albumTitle,
+                        value: item.albumID
+                    }
+                )
+            });
+        } else {
+            return (
+                [{
+                    label: 'No albums created',
+                    value: 'na'
+                }]
+            )
+        }
+        const currentLightboxImage = this.lightboxRef.current.props.currentImage;
+        const puzzleID = this.props.data.photosToRender[currentLightboxImage].uuid;
+
+        const albumsWithPhoto = JSONfield.reduce((total, item, index) => {
+
+            const puzzlesArray = item.puzzles;
+            puzzlesArray.map(i => {
+                if (i.id === puzzleID) {
+                    return (
+                        total.push({
+                            label: item.albumTitle,
+                            value: item.albumID
+                        })
+                    )
+                }
+            });
+            return total;
+        }, []);
+
+        const albumsWithoutPhoto = (allAlbums, albumsWithPhoto) => allAlbums.filter(o1 => albumsWithPhoto.map(o2 => o2.value).indexOf(o1.value) === -1);
+
+        this.setState({
+            albumsWithPhoto: albumsWithPhoto,
+            albumsWithoutPhoto: albumsWithoutPhoto(allAlbums, albumsWithPhoto)
+        });
+    };
+    addToAlbum = albumID => e => {
+        e.preventDefault();
+        this.setState({isLoading: true});
+
+        const currentLightboxImage = this.lightboxRef.current.props.currentImage;
+        const puzzleID = this.props.data.photosToRender[currentLightboxImage].uuid;
+        const albumOwnerId = this.props.data.albumOwnerID;
+
+        const JSONfield = JSON.parse(this.props.data.albumResponse[0].attributes.field_attendee_albums_puzzles);
+
+        const newJSONfield = JSONfield.map(item => {
+            if (item.albumID === albumID) {
+
+                const newPuzzle = {
+                    id: puzzleID
+                };
+                const puzzlesArray = item.puzzles;
+                const newPuzzlesArray = [...puzzlesArray, newPuzzle];
+
+                item = {...item, puzzles: newPuzzlesArray};
+            }
+            return item;
+        });
+
+        return (
+            axios({
+                method: 'patch',
+                url: `${prodURL}/jsonapi/node/attendee/${albumOwnerId}`,
+                auth: {
+                    username: `${fetchUsername}`,
+                    password: `${fetchPassword}`
+                },
+                headers: {
+                    'Accept': 'application/vnd.api+json',
+                    'Content-Type': 'application/vnd.api+json',
+                    'X-CSRF-Token': this.props.data.xcsrfToken
+                },
+                data: {
+                    "data": {
+                        "type": "node--attendee",
+                        "id": albumOwnerId,
+                        "attributes": {
+                            "field_attendee_albums_puzzles": JSON.stringify(newJSONfield)
+                        }
+                    }
+                }
+            }))
+            .then((res) => {
+                this.fetchAlbumInfo()
+            })
+            .then((res) => {
+                this.setState({
+                    isLoading: false
+                });
+            })
             .catch(function (error) {
                 if (error.response) {
                     // The request was made and the server responded with a status code
@@ -304,39 +310,58 @@ class LightboxComponent extends Component {
             });
     };
 
-    deleteFromAlbum = albumUUID => e => {
+    deleteFromAlbum = albumID => e => {
         e.preventDefault();
-        this.setState({
-            isLoading: true
-        });
+        this.setState({isLoading: true});
+
         const currentLightboxImage = this.lightboxRef.current.props.currentImage;
-        const uuid = this.props.data.photosToRender[currentLightboxImage].uuid;
-        axios({
-            method: 'delete',
-            url: `${prodURL}/jsonapi/node/puzzle/${uuid}/relationships/field_albums`,
-            auth: {
-                username: `${fetchUsername}`,
-                password: `${fetchPassword}`
-            },
-            headers: {
-                'Accept': 'application/vnd.api+json',
-                'Content-Type': 'application/vnd.api+json',
-                'X-CSRF-Token': this.props.data.xcsrfToken
-            },
-            data: {
-                "data": [
-                    {
-                        "type": "node--album",
-                        "id": albumUUID
-                    }
-                ]
+        const puzzleID = this.props.data.photosToRender[currentLightboxImage].uuid;
+        const albumOwnerId = this.props.data.albumOwnerID;
+
+        const JSONfield = JSON.parse(this.props.data.albumResponse[0].attributes.field_attendee_albums_puzzles);
+
+        const newJSONfield = JSONfield.map(item => {
+            if (item.albumID === albumID) {
+
+                const puzzlesArray = item.puzzles;
+                const newPuzzlesArray = puzzlesArray.filter(item => item.id !== puzzleID);
+
+                item = {...item, puzzles: newPuzzlesArray};
             }
-        }).then((res) => {
-            this.fetchAlbumsSpecificToCurrentPhoto();
-            this.setState({
-                isLoading: false
-            });
-        })
+            return item;
+        });
+
+        return (
+            axios({
+                method: 'patch',
+                url: `${prodURL}/jsonapi/node/attendee/${albumOwnerId}`,
+                auth: {
+                    username: `${fetchUsername}`,
+                    password: `${fetchPassword}`
+                },
+                headers: {
+                    'Accept': 'application/vnd.api+json',
+                    'Content-Type': 'application/vnd.api+json',
+                    'X-CSRF-Token': this.props.data.xcsrfToken
+                },
+                data: {
+                    "data": {
+                        "type": "node--attendee",
+                        "id": albumOwnerId,
+                        "attributes": {
+                            "field_attendee_albums_puzzles": JSON.stringify(newJSONfield)
+                        }
+                    }
+                }
+            }))
+            .then((res) => {
+                this.fetchAlbumInfo()
+            })
+            .then((res) => {
+                this.setState({
+                    isLoading: false
+                });
+            })
             .catch(function (error) {
                 if (error.response) {
                     // The request was made and the server responded with a status code
@@ -358,29 +383,17 @@ class LightboxComponent extends Component {
     };
 
     componentDidMount() {
-        this.fetchAllAlbums();
+        this.fetchAlbumInfo();
     }
 
     componentDidUpdate(prevProps, prevState) {
 
         if (this.props.view.lightboxIsOpen !== prevProps.view.lightboxIsOpen &&
             this.props.view.lightboxIsOpen === true
-            && this.props.data.albumResponse.included !== undefined
+            ||
+            this.props.data.albumResponse !== prevProps.data.albumResponse
         ) {
-
-            this.fetchAlbumsSpecificToCurrentPhoto();
-
-            const albums = this.props.data.albumResponse.included.map((item) => {
-                return (
-                    {
-                        label: item.attributes.title,
-                        value: item.id
-                    }
-                )
-            });
-            this.setState({
-                albums: albums,
-            });
+            this.setAlbumsLists();
         }
 
         const {open} = this.state;
@@ -396,24 +409,12 @@ class LightboxComponent extends Component {
                 });
             }, 800);
         }
+
     }
 
     render() {
-        const {albums, albumsWithPhotoUnfiltered} = this.state;
-        const albumsWithPhotoWithDuplicates = albumsWithPhotoUnfiltered.concat(albums).filter(({label, value}) => {
-            let foundOnFirst = albumsWithPhotoUnfiltered.some(
-                x => x.label === label && x.value === value
-            );
-            let foundOnSecond = albums.some(
-                y => y.label === label && y.value === value
-            );
-            return (foundOnFirst && foundOnSecond);
-        });
-        const albumsWithPhoto = _.uniqBy(albumsWithPhotoWithDuplicates, 'value');
 
-        const albumsWithoutPhoto = albums.filter(o =>
-            albumsWithPhoto.every(p =>
-                !['label', 'value'].some(k => o[k] === p[k])));
+        const {albumsWithPhoto, albumsWithoutPhoto} = this.state;
 
         const albumButtons = <ControlsWrapper key="11">
             {albumsWithPhoto && albumsWithPhoto.length ?
@@ -528,7 +529,8 @@ LightboxComponent.propTypes = {
     albumResponse: PropTypes.array,
     setXcsrfToken: PropTypes.func,
     xcsrfToken: PropTypes.string,
-    attendee: PropTypes.string
+    attendee: PropTypes.string,
+    albumOwnerID: PropTypes.string
 };
 
 const
@@ -541,5 +543,6 @@ export default connect(mapStateToProps, {
     toggleLightbox,
     disableLightbox,
     setAlbumResponse,
-    setXcsrfToken
+    setXcsrfToken,
+    setAlbumOwnerID
 })(LightboxComponent);

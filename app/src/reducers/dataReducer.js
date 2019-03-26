@@ -10,7 +10,8 @@ import {
     SET_ATTENDEE,
     SET_TOTAL_RESULTS,
     SET_SEARCH_RESULT,
-    SET_XCSRF_TOKEN
+    SET_XCSRF_TOKEN,
+    SET_ALBUM_OWNER_ID
 } from '../actions/types';
 
 //const eventAccessCode = '123456';
@@ -29,8 +30,9 @@ const initialState = {
     photosToRender: ['empty'],
     isLoading: true,
     galleryIsLoading: false,
-    eventAccessCode: '444121',
-    attendee: 'fbracq@pauzzle.pro',//fbracq@pauzzle.pro'empty//davos@popoi.com
+    eventAccessCode: 'empty',
+    attendee: 'empty',//fbracq@pauzzle.pro'empty//davos@popoi.com
+    albumOwnerID: 'empty',
     totalResults: null,
     searchResult: ['empty'],
     xcsrfToken: 'empty'
@@ -97,6 +99,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 xcsrfToken: action.payload
+            };
+        case SET_ALBUM_OWNER_ID:
+            return {
+                ...state,
+                albumOwnerID: action.payload
             };
         default:
             return state;
