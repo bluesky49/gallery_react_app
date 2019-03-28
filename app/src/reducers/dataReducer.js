@@ -31,7 +31,7 @@ const initialState = {
     isLoading: true,
     galleryIsLoading: false,
     eventAccessCode: 'empty',
-    attendee: 'empty',//fbracq@pauzzle.pro'empty//davos@popoi.com
+    attendee: 'empty',//fbracq@pauzzle.pro'empty//davos@popoi.com//frank@fr.com
     albumOwnerID: 'empty',
     totalResults: null,
     searchResult: ['empty'],

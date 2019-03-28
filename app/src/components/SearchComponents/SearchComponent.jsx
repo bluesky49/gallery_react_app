@@ -39,7 +39,6 @@ class SearchComponent extends Component {
         super(props);
 
         this.state = {
-            firstLoad: true,
             firstUpdate: true,
         };
     }

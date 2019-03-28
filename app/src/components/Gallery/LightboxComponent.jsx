@@ -240,8 +240,8 @@ class LightboxComponent extends Component {
         this.setState({isLoading: true});
 
         const currentLightboxImage = this.lightboxRef.current.props.currentImage;
-        const puzzleID = this.props.data.photosToRender[currentLightboxImage].uuid;
         const albumOwnerId = this.props.data.albumOwnerID;
+        const puzzle = this.props.data.photosToRender[currentLightboxImage];
 
         const JSONfield = JSON.parse(this.props.data.albumResponse[0].attributes.field_attendee_albums_puzzles);
 
@@ -249,7 +249,11 @@ class LightboxComponent extends Component {
             if (item.albumID === albumID) {
 
                 const newPuzzle = {
-                    id: puzzleID
+                    id: puzzle.uuid,
+                    src: puzzle.src,
+                    width: puzzle.width,
+                    height: puzzle.height,
+                    alt: puzzle.alt,
                 };
                 const puzzlesArray = item.puzzles;
                 const newPuzzlesArray = [...puzzlesArray, newPuzzle];
@@ -530,7 +534,8 @@ LightboxComponent.propTypes = {
     setXcsrfToken: PropTypes.func,
     xcsrfToken: PropTypes.string,
     attendee: PropTypes.string,
-    albumOwnerID: PropTypes.string
+    albumOwnerID: PropTypes.string,
+    finalResponse: PropTypes.array
 };
 
 const
