@@ -71,13 +71,6 @@ export const setAlbumResponse = response => dispatch => {
         payload: response
     })
 };
-// Set selected album ID
-export const setSelectedAlbumID = response => dispatch => {
-    dispatch({
-        type:'SET_SELECTED_ALBUM_ID',
-        payload: response
-    })
-};
 // Set Album Owner ID
 export const setAlbumOwnerID = response => dispatch => {
     dispatch({
@@ -89,6 +82,13 @@ export const setAlbumOwnerID = response => dispatch => {
 export const setXcsrfToken = response => dispatch => {
     dispatch({
         type:'SET_XCSRF_TOKEN',
+        payload: response
+    })
+};
+// Set X-CSRF-Token
+export const setSearchResultStatus = response => dispatch => {
+    dispatch({
+        type:'SEARCH_RESULT_IS_SHOWN',
         payload: response
     })
 };

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains grid_gallery.module.
+ * Contains gallery.module.
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -16,34 +16,34 @@ use Drupal\Core\Ajax\SettingsCommand;
  */
 // the callback command.
 
-function grid_gallery_help($route_name, RouteMatchInterface $route_match)
+function gallery_help($route_name, RouteMatchInterface $route_match)
 {
     switch ($route_name) {
         // Main module help for the react_gallery module.
-        case 'help.page.grid_gallery':
+        case 'help.page.gallery':
             $output = '';
             $output .= '<h3>' . t('About') . '</h3>';
-            $output .= '<p>' . t('Implementation of React Square Grid Gallery') . '</p>';
+            $output .= '<p>' . t('Implementation of React Gallery') . '</p>';
             return $output;
 
         default:
     }
 }
 
-function grid_gallery_preprocess_paragraph__grid_gallery(&$variables)
+function gallery_preprocess_paragraph__gallery(&$variables)
 {
     $paragraph = $variables['paragraph'];
     $variables['#cache']['max-age'] = 0;
 
     // Set default content of paragraph.
-    $variables['content']['#markup'] = '<div id="grid_gallery">&nbsp;</div>';
+    $variables['content']['#markup'] = '<div id="gallery">&nbsp;</div>';
 
     // Attach required libraries.
 
     $variables['content']['#attached']['library'] = [
-        'grid_gallery/grid_gallery_chunk',
-        'grid_gallery/grid_gallery_runtime',
-        'grid_gallery/grid_gallery_component',
+        'gallery/gallery_chunk',
+        'gallery/gallery_runtime',
+        'gallery/gallery_component',
     ];
 
     // Set component settings into drupal settings.

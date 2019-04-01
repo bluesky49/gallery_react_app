@@ -10,7 +10,7 @@ import store from "./store";
 ReactDOM.render(
     <Provider store={store}>
         <FullscreenComponent/>
-    </Provider>, document.getElementById('grid_gallery'));
+    </Provider>, document.getElementById('gallery'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

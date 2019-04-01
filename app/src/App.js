@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import SidebarComponent from "./components/SidebarComponent";
+import TopBarComponent from "./components/TopBarComponent";
 import FilestackComponent from "./components/FilestackComponent";
 import {Pagination} from "antd";
 import {
@@ -31,6 +32,7 @@ const PaginationWrapper = styled.div`
 `;
 
 class App extends React.Component {
+
     onChange = async (page, pageSize) => {
         await this.props.toggleGalleryLoading();
         const {searchResult} = this.props.data;
@@ -40,8 +42,8 @@ class App extends React.Component {
     componentDidMount() {
         /*global drupalSettings:true*/
         /*eslint no-undef: "error"*/
-        this.props.setEventCode(drupalSettings.eventAccessCode);
-        this.props.setAttendee(drupalSettings.attendee);
+        //this.props.setEventCode(drupalSettings.eventAccessCode);
+        //this.props.setAttendee(drupalSettings.attendee);
     }
 
     render() {
@@ -50,6 +52,8 @@ class App extends React.Component {
             <StyledWrapper>
 
                 <SidebarComponent/>
+                {this.props.data.searchResultIsShown ?
+                <TopBarComponent /> : null}
 
                 <StyledGallery>
                     <FilestackComponent/>
@@ -68,7 +72,8 @@ App.propTypes = {
     totalResults: PropTypes.number,
     eventAccessCode: PropTypes.string,
     searchResult: PropTypes.array,
-    attendee: PropTypes.string
+    attendee: PropTypes.string,
+    searchResultIsShown: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

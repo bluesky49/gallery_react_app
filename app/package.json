@@ -29,7 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && yarn run build:dist",
-    "build:dist": "cd build && copy static\\js\\main.*.js static\\js\\grid_gallery.main.js && copy static\\js\\runtime~main.*.js static\\js\\grid_gallery.runtime~main.js && copy static\\js\\*.chunk.js static\\js\\grid_gallery.chunk.js && copy static\\css\\main.*.chunk.css static\\css\\grid_gallery.main.css && copy static\\css\\*.chunk.css static\\css\\grid_gallery.chunk.css",
+    "build:dist": "cd build && copy static\\js\\main.*.js static\\js\\gallery.main.js && copy static\\js\\runtime~main.*.js static\\js\\gallery.runtime~main.js && copy static\\js\\*.chunk.js static\\js\\gallery.chunk.js && copy static\\css\\main.*.chunk.css static\\css\\gallery.main.css && copy static\\css\\*.chunk.css static\\css\\gallery.chunk.css",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

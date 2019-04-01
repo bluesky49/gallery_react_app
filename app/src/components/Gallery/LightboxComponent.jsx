@@ -166,6 +166,7 @@ class LightboxComponent extends Component {
         });
         this.props.disableLightbox();
     };
+
     fetchAlbumInfo() {
         const fetchURL = `${prodURL}/jsonapi/node/attendee/?filter[attendee-filter][condition][path]=field_email&filter[attendee-filter][condition][value]=${this.props.data.attendee}&filter[event-filter][condition][path]=field_event_reference.field_event_access_code&filter[event-filter][condition][value]=${this.props.data.eventAccessCode}&fields[node--attendee]=field_attendee_albums_puzzles`;
 

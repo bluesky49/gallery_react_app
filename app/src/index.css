@@ -13,7 +13,8 @@
     margin-bottom: 10px !important;
 }
 
-.reactivelist__resultStats {
+.reactivelist__resultStats,
+.reactivelist__noResults{
     color: white !important;
     font-size: 12px !important;
 }

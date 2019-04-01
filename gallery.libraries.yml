@@ -1,0 +1,21 @@
+gallery_chunk:
+  version: 1.x
+  js:
+    app/build/static/js/gallery.chunk.js: {}
+
+gallery_runtime:
+  version: 1.x
+  js:
+    app/build/static/js/gallery.runtime~main.js: {}
+
+gallery_component:
+  version: 1.x
+  js:
+    app/build/static/js/gallery.main.js: {}
+  css:
+    component:
+      app/build/static/css/gallery.chunk.css: {}
+      app/build/static/css/gallery.main.css: {}
+  dependencies:
+  - core/drupal
+  - core/drupalSettings

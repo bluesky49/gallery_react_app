@@ -2,11 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a64dbb82-062f-4db9-bfe4-227ddf365b6a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/components/TopBarComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/actions/dataActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/actions/dataActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/actions/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/FilestackComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/FilestackComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/reducers/dataReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/reducers/dataReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_gallery.info.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gallery.info.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_gallery.libraries.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gallery.libraries.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_gallery.module" beforeDir="false" afterPath="$PROJECT_DIR$/gallery.module" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,11 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="43" column="56" selection-start-line="43" selection-start-column="56" selection-end-line="43" selection-end-column="56" />
+            <state relative-caret-position="369">
+              <caret line="45" column="58" lean-forward="true" selection-start-line="45" selection-start-column="58" selection-end-line="45" selection-end-column="58" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -32,22 +44,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx">
+        <entry file="file://$PROJECT_DIR$/app/src/components/SidebarComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1034">
-              <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
+            <state relative-caret-position="2068">
+              <caret line="94" column="30" selection-start-line="94" selection-start-column="30" selection-end-line="94" selection-end-column="30" />
               <folding>
-                <element signature="e#0#39#0" expanded="true" />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx">
+        <entry file="file://$PROJECT_DIR$/app/src/components/TopBarComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3036">
-              <caret line="255" column="36" selection-start-line="255" selection-start-column="36" selection-end-line="255" selection-end-column="36" />
+            <state relative-caret-position="-6231">
+              <caret line="12" column="62" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -58,8 +70,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/components/FilestackComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-358">
-              <caret line="27" column="78" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="78" />
+            <state relative-caret-position="-2640">
+              <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="169" column="125" selection-start-line="169" selection-start-column="125" selection-end-line="169" selection-end-column="125" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -68,10 +92,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/package.json">
+        <entry file="file://$PROJECT_DIR$/app/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+            <state relative-caret-position="264">
+              <caret line="12" column="53" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="11814">
+              <caret line="537" column="4" selection-start-line="537" selection-start-column="4" selection-end-line="537" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,11 +118,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/reducers/dataReducer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="33" column="79" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
-              <folding>
-                <element signature="e#0#335#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="418">
+              <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/actions/dataActions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1095">
+              <caret line="89" column="14" selection-start-line="89" selection-start-column="14" selection-end-line="89" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -91,8 +136,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/index.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+            <state relative-caret-position="352">
+              <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -108,10 +153,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>'b2d2458ecac6d894570690d1a64897201524e857d3f813e7507763c7d99c513c'</find>
-      <find>fetchFromDrupal</find>
-      <find>item.attr</find>
-      <find>GalleryComponent</find>
       <find>Sidebar</find>
       <find>280</find>
       <find>100</find>
@@ -132,12 +173,16 @@
       <find>setState</find>
       <find>260</find>
       <find>sidebarWidth</find>
-      <find>width</find>
       <find>the photo is</find>
       <find>addToAlbum</find>
       <find>fetchAllAlbums</find>
       <find>albumsWithoutPuzzle</find>
       <find>setstate</find>
+      <find>cache</find>
+      <find>format: 'pjpg'</find>
+      <find>LightboxComponent</find>
+      <find>width</find>
+      <find>grid_gallery</find>
     </findStrings>
     <replaceStrings>
       <replace>grid_gallery</replace>
@@ -152,6 +197,10 @@
       <replace>albumsWithPhotoUnfiltered</replace>
       <replace>await this.getAlbumsSpecificToCurrentPhoto</replace>
       <replace>albumsWithoutPhoto</replace>
+      <replace>formats: ['webp', 'pjpg']</replace>
+      <replace>format: 'webp'</replace>
+      <replace>TopBarComponent</replace>
+      <replace>gallery</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -164,9 +213,7 @@
         <option value="$PROJECT_DIR$/grid_gallery.info.yml" />
         <option value="$PROJECT_DIR$/app/src/components/ScrollComponent.jsx" />
         <option value="$PROJECT_DIR$/app/src/components/Sidebar.jsx" />
-        <option value="$PROJECT_DIR$/app/src/index.js" />
         <option value="$PROJECT_DIR$/app/src/components/FilestackImages.jsx" />
-        <option value="$PROJECT_DIR$/app/public/index.html" />
         <option value="$PROJECT_DIR$/app/src/components/FullscreenComponent.jsx" />
         <option value="$USER_HOME$/AppData/Roaming/Mozilla/Firefox/Profiles/wjriglhb.horo-dev-1530099295257/chrome/userChrome.css" />
         <option value="$USER_HOME$/AppData/Roaming/Mozilla/Firefox/Profiles/xzwv41hs.dev-edition-default-1518196492863/chrome/userChrome.css" />
@@ -184,20 +231,26 @@
         <option value="$USER_HOME$/Downloads/request.json" />
         <option value="$USER_HOME$/Downloads/request.js" />
         <option value="$PROJECT_DIR$/app/src/reducers/viewReducer.js" />
-        <option value="$PROJECT_DIR$/app/src/components/FilestackComponent.jsx" />
         <option value="$PROJECT_DIR$/app/src/components/SidebarComponent.jsx" />
         <option value="$PROJECT_DIR$/app/src/actions/viewActions.js" />
         <option value="$PROJECT_DIR$/../albums_admin/app/package.json" />
         <option value="$PROJECT_DIR$/app/src/schema.js" />
         <option value="$PROJECT_DIR$/app/src/schema.json" />
+        <option value="$PROJECT_DIR$/app/src/components/FilestackComponent.jsx" />
         <option value="$PROJECT_DIR$/app/src/actions/types.js" />
         <option value="$PROJECT_DIR$/app/src/actions/dataActions.js" />
-        <option value="$PROJECT_DIR$/app/package.json" />
-        <option value="$PROJECT_DIR$/app/src/index.css" />
         <option value="$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx" />
-        <option value="$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx" />
+        <option value="$PROJECT_DIR$/app/src/index.css" />
+        <option value="$PROJECT_DIR$/gallery.info.yml" />
+        <option value="$PROJECT_DIR$/gallery.libraries.yml" />
+        <option value="$PROJECT_DIR$/app/package.json" />
+        <option value="$PROJECT_DIR$/gallery.module" />
+        <option value="$PROJECT_DIR$/app/public/index.html" />
+        <option value="$PROJECT_DIR$/app/src/index.js" />
+        <option value="$PROJECT_DIR$/app/src/components/TopBarComponent.jsx" />
         <option value="$PROJECT_DIR$/app/src/App.js" />
         <option value="$PROJECT_DIR$/app/src/reducers/dataReducer.js" />
+        <option value="$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx" />
       </list>
     </option>
   </component>
@@ -211,10 +264,10 @@
     <dismissed value="$PROJECT_DIR$/app/package.json" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
+    <option name="x" value="1592" />
     <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="876" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -291,6 +344,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore_missing_gitignore" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -402,24 +456,31 @@
       <workItem from="1553591074849" duration="15778000" />
       <workItem from="1553610577402" duration="568000" />
       <workItem from="1553684500590" duration="3371000" />
-      <workItem from="1553762913616" duration="8745000" />
+      <workItem from="1553762913616" duration="9303000" />
+      <workItem from="1553853033055" duration="5035000" />
+      <workItem from="1553858758335" duration="1216000" />
+      <workItem from="1553974931559" duration="2616000" />
+      <workItem from="1554023646118" duration="673000" />
+      <workItem from="1554025070066" duration="16874000" />
+      <workItem from="1554061381246" duration="5603000" />
+      <workItem from="1554105554796" duration="8948000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="581347000" />
+    <option name="totallyTimeSpent" value="622870000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="1592" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.15874036" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.13166311" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Tail" order="0" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="RNConsole" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.14086471" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.12820514" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="5" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32998884" />
@@ -467,13 +528,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grid_gallery.info.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="51" lean-forward="true" selection-start-line="2" selection-start-column="51" selection-end-line="2" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Mozilla/Firefox/Profiles/wjriglhb.horo-dev-1530099295257/chrome/userChrome.css" />
     <entry file="file://$USER_HOME$/AppData/Roaming/Mozilla/Firefox/Profiles/xzwv41hs.dev-edition-default-1518196492863/chrome/userChrome-example.css" />
     <entry file="file://$USER_HOME$/AppData/Roaming/Mozilla/Firefox/Profiles/xzwv41hs.dev-edition-default-1518196492863/chrome/userChrome.css" />
@@ -492,46 +546,14 @@
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Temp/scp40477/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/scp49357/opt/bitnami/apps/drupal/htdocs/web/sites/default/services.yml" />
-    <entry file="file://$PROJECT_DIR$/app/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grid_gallery.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="54" column="1" lean-forward="true" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
-          <folding>
-            <element signature="e#7#56#0#PHP" expanded="true" />
-            <element signature="e#23#29#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/public/manifest.json">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$USER_HOME$/Downloads/SPECIFICATION.md" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/scp25155/opt/bitnami/apps/drupal/htdocs/web/modules/contrib/decoupled_router/decoupled_router.module" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/scp25963/opt/bitnami/apps/drupal/htdocs/web/modules/contrib/decoupled_router/LICENSE.txt" />
     <entry file="file://$USER_HOME$/Downloads/request.json" />
     <entry file="file://$USER_HOME$/Downloads/request.js" />
-    <entry file="file://$PROJECT_DIR$/grid_gallery.libraries.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-100" />
@@ -594,27 +616,104 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/SidebarComponent.jsx">
+    <entry file="file://$PROJECT_DIR$/app/src/actions/types.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="94" column="30" lean-forward="true" selection-start-line="94" selection-start-column="30" selection-end-line="94" selection-end-column="30" />
+        <state relative-caret-position="588">
+          <caret line="34" column="63" lean-forward="true" selection-start-line="34" selection-start-column="63" selection-end-line="34" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/GalleryComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="633">
+          <caret line="130" column="31" selection-start-line="130" selection-start-column="31" selection-end-line="130" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery.info.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="46" lean-forward="true" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery.libraries.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+          <folding>
+            <element signature="e#7#51#0#PHP" expanded="true" />
+            <element signature="e#53#97#0#PHP" expanded="true" />
+            <element signature="e#18#24#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="28" column="28" lean-forward="true" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11814">
+          <caret line="537" column="4" selection-start-line="537" selection-start-column="4" selection-end-line="537" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="53" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/actions/types.js">
+    <entry file="file://$PROJECT_DIR$/app/src/index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="584">
-          <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
+        <state relative-caret-position="352">
+          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/GalleryComponent.jsx">
+    <entry file="file://$PROJECT_DIR$/app/src/components/SidebarComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3036">
-          <caret line="138" column="41" lean-forward="true" selection-start-line="138" selection-start-column="41" selection-end-line="138" selection-end-column="41" />
+        <state relative-caret-position="2068">
+          <caret line="94" column="30" selection-start-line="94" selection-start-column="30" selection-end-line="94" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/TopBarComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6231">
+          <caret line="12" column="62" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -623,29 +722,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/actions/dataActions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="628">
-          <caret line="86" column="2" selection-start-line="86" selection-start-column="2" selection-end-line="86" selection-end-column="2" />
+        <state relative-caret-position="1095">
+          <caret line="89" column="14" selection-start-line="89" selection-start-column="14" selection-end-line="89" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/index.css">
+    <entry file="file://$PROJECT_DIR$/app/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+        <state relative-caret-position="369">
+          <caret line="45" column="58" lean-forward="true" selection-start-line="45" selection-start-column="58" selection-end-line="45" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/package.json">
+    <entry file="file://$PROJECT_DIR$/app/src/reducers/dataReducer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+        <state relative-caret-position="418">
+          <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/components/FilestackComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-358">
-          <caret line="27" column="78" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="78" />
+        <state relative-caret-position="-2640">
+          <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -654,40 +756,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/components/SearchComponents/SearchComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1034">
-          <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
+        <state relative-caret-position="468">
+          <caret line="169" column="125" selection-start-line="169" selection-start-column="125" selection-end-line="169" selection-end-column="125" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3036">
-          <caret line="255" column="36" selection-start-line="255" selection-start-column="36" selection-end-line="255" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/reducers/dataReducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="33" column="79" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
-          <folding>
-            <element signature="e#0#335#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="43" column="56" selection-start-line="43" selection-start-column="56" selection-end-line="43" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,6 +1,6 @@
-name: 'Grid Gallery'
+name: 'Gallery'
 type: module
-description: 'Implementation of React Grid Gallery'
+description: 'Implementation of React Gallery'
 core: 8.x
 package: 'Custom'
 dependencies:

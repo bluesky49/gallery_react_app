@@ -35,13 +35,10 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['pjpg'],
+                                formats: ['webp', 'pjpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
-                                },
-                                cache: {
-                                    expiry: 31536000
                                 },
                                 transforms: {
                                     resize: {
@@ -53,10 +50,13 @@ class FilestackComponent extends Component {
                                         deg: 180
                                     },
                                     output: {
-                                        format: 'pjpg',
+                                        format: 'webp',
                                         strip: true,
                                         quality: 80,
                                         compress: true
+                                    },
+                                    cache: {
+                                        expiry: 31536000
                                     }
                                 }
                             }
@@ -69,23 +69,23 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['pjpg'],
+                                formats: ['webp', 'pjpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
-                                },
-                                cache: {
-                                    expiry: 31536000
                                 },
                                 transforms: {
                                     rotate: {
                                         deg: 180
                                     },
                                     output: {
-                                        format: 'pjpg',
+                                        format: 'webp',
                                         strip: true,
                                         quality: 80,
                                         compress: true
+                                    },
+                                    cache: {
+                                        expiry: 31536000
                                     }
                                 }
                             }
@@ -102,13 +102,10 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['pjpg'],
+                                formats: ['webp', 'pjpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
-                                },
-                                cache: {
-                                    expiry: 31536000
                                 },
                                 transforms: {
                                     resize: {
@@ -120,10 +117,13 @@ class FilestackComponent extends Component {
                                         deg: 90
                                     },
                                     output: {
-                                        format: 'pjpg',
+                                        format: 'webp',
                                         strip: true,
                                         quality: 80,
                                         compress: true
+                                    },
+                                    cache: {
+                                        expiry: 31536000
                                     }
                                 }
                             }
@@ -135,23 +135,23 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['pjpg'],
+                                formats: ['webp', 'pjpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
-                                },
-                                cache: {
-                                    expiry: 31536000
                                 },
                                 transforms: {
                                     rotate: {
                                         deg: 90
                                     },
                                     output: {
-                                        format: 'pjpg',
+                                        format: 'webp',
                                         strip: true,
                                         quality: 80,
                                         compress: true
+                                    },
+                                    cache: {
+                                        expiry: 31536000
                                     }
                                 }
                             }
@@ -167,13 +167,10 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['pjpg'],
+                                formats: ['webp', 'pjpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
-                                },
-                                cache: {
-                                    expiry: 31536000
                                 },
                                 transforms: {
                                     resize: {
@@ -182,10 +179,13 @@ class FilestackComponent extends Component {
                                         fit: 'max'
                                     },
                                     output: {
-                                        format: 'pjpg',
+                                        format: 'webp',
                                         strip: true,
                                         quality: 80,
                                         compress: true
+                                    },
+                                    cache: {
+                                        expiry: 31536000
                                     }
                                 }
                             }
@@ -198,20 +198,20 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['pjpg'],
+                                formats: ['webp', 'pjpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
                                 },
-                                cache: {
-                                    expiry: 31536000
-                                },
                                 transforms: {
                                     output: {
-                                        format: 'pjpg',
+                                        format: 'webp',
                                         strip: true,
                                         quality: 80,
                                         compress: true
+                                    },
+                                    cache: {
+                                        expiry: 31536000
                                     }
                                 }
                             }
@@ -224,7 +224,7 @@ class FilestackComponent extends Component {
 
                 const galleryPhotos = transformOptionsAttached.map((item) => {
 
-                        if (item.image_rotation !== undefined && item.image_rotation[0] === "Rotated 90 CW") {
+                    if (item.image_rotation !== undefined && item.image_rotation[0] === "Rotated 90 CW") {
 
                         const date = item.image_date !== undefined ? new Date(item.image_date[0] * 1000).toLocaleString() : "The date is not specified";
                         const authorEmail = item.author_email !== undefined ? item.author_email[0] : "unknown author";

@@ -11,7 +11,8 @@ import {
     SET_TOTAL_RESULTS,
     SET_SEARCH_RESULT,
     SET_XCSRF_TOKEN,
-    SET_ALBUM_OWNER_ID
+    SET_ALBUM_OWNER_ID,
+    SEARCH_RESULT_IS_SHOWN
 } from '../actions/types';
 
 //const eventAccessCode = '123456';
@@ -30,12 +31,13 @@ const initialState = {
     photosToRender: ['empty'],
     isLoading: true,
     galleryIsLoading: false,
-    eventAccessCode: 'empty',
-    attendee: 'empty',//fbracq@pauzzle.pro'empty//davos@popoi.com//frank@fr.com
+    eventAccessCode: '584981',//'697652',
+    attendee: 'test@massupload.com',//'mariage@fougeront.com',//fbracq@pauzzle.pro'empty//davos@popoi.com//frank@fr.com
     albumOwnerID: 'empty',
     totalResults: null,
     searchResult: ['empty'],
-    xcsrfToken: 'empty'
+    xcsrfToken: 'empty',
+    searchResultIsShown: false
 };
 
 export default function (state = initialState, action) {
@@ -104,6 +106,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 albumOwnerID: action.payload
+            };
+        case SEARCH_RESULT_IS_SHOWN:
+            return {
+                ...state,
+                searchResultIsShown: action.payload
             };
         default:
             return state;
