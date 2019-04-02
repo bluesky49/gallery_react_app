@@ -132,32 +132,19 @@ class LightboxComponent extends Component {
             }
         )
     };
-    gotoPrevious2 = () => {
-        this.setState({
-            currentImage: this.state.currentImage - 1,
-            showSelect: true,
-            selectedOption: null
-        });
-    };
     gotoPrevious = async () => {
-        this.setState({
-            showSelect: false
-        });
-        this.gotoPrevious2();
-    };
-    gotoNext2 = () => {
-        this.setState({
-            currentImage: this.state.currentImage + 1,
-            showSelect: true,
-            selectedOption: null
+        await this.setState({
+            currentImage: this.state.currentImage - 1,
 
         });
+        this.setAlbumsLists();
     };
     gotoNext = async () => {
-        this.setState({
-            showSelect: false
+        await this.setState({
+            currentImage: this.state.currentImage + 1,
+
         });
-        this.gotoNext2();
+        this.setAlbumsLists();
     };
     closeLightbox = () => {
         this.setState({
@@ -414,7 +401,6 @@ class LightboxComponent extends Component {
                 });
             }, 800);
         }
-
     }
 
     render() {

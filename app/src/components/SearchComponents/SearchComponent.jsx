@@ -24,7 +24,6 @@ const StyledSearchWrapper = styled.div`
    min-width: 250px;
    margin-top: 60px;
 `;
-
 const ButtonWrapper = styled.div`
    display: flex;
    justify-content: space-between;
@@ -95,9 +94,10 @@ class SearchComponent extends Component {
 
         this.state = {
             firstUpdate: true,
+            showDisplayButton: true,
+            methodAllowed: null
         };
     }
-
     handleApplyFilters = async () => {
         if (this.firstLoad === undefined) {
             this.firstLoad = false
@@ -112,19 +112,39 @@ class SearchComponent extends Component {
 
         await this.props.setSearchResult(chunkedResults);
         await this.props.setTotalResults(this.result.length);
-        await this.props.setFinalResponse(chunkedResults[0]);
-    };
 
+        setTimeout(() => {
+                this.props.setFinalResponse(chunkedResults[0]);
+            },
+            10);
+    };
     handleSearchResult = results => {
         this.result = results.results;
 
         if (this.result[0] && this.firstLoad === undefined) {
             this.handleApplyFilters();
         }
+        if (this.result[0] && !this.state.showDisplayButton && this.state.methodAllowed === "handleSearchResult") {
+
+            this.setState({
+                showDisplayButton: true,
+                methodAllowed: "handleNoResults"
+            })
+        }
+    };
+    handleNoResults = () => {
+        if (this.state.methodAllowed === "handleNoResults")
+            this.setState({
+                showDisplayButton: false,
+                methodAllowed: "handleSearchResult"
+            })
     };
 
-    render() {
+    componentDidMount() {
+        this.setState({methodAllowed: "handleNoResults"})
+    }
 
+    render() {
         let elasticIndex = {['app']: `elasticsearch_index_bitnami_drupal8_${this.props.data.eventAccessCode}`};
 
         return (
@@ -188,6 +208,7 @@ class SearchComponent extends Component {
                         pagination={false}
                         loader="Loading..."
                         renderAllData={this.handleSearchResult}
+                        renderNoResults={this.handleNoResults}
                         innerClass={{
                             resultsInfo: 'reactivelist__resultsInfo',
                             sortOptions: 'reactivelist__sortOptions',
@@ -201,11 +222,11 @@ class SearchComponent extends Component {
                         }}
                     />
                 </ReactiveBase>
-
-                <ButtonWrapper>
-                    <DisplayResultsButton type="primary" onClick={this.handleApplyFilters}>Display
-                        Results</DisplayResultsButton>
-                </ButtonWrapper>
+                {this.state.showDisplayButton ?
+                    <ButtonWrapper>
+                        <DisplayResultsButton type="primary" onClick={this.handleApplyFilters}>Display
+                            Results</DisplayResultsButton>
+                    </ButtonWrapper> : null}
 
             </StyledSearchWrapper>
         );

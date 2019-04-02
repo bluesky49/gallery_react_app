@@ -36,14 +36,18 @@ class App extends React.Component {
     onChange = async (page, pageSize) => {
         await this.props.toggleGalleryLoading();
         const {searchResult} = this.props.data;
-        this.props.setFinalResponse(searchResult[page - 1]);
+
+        setTimeout(() => {
+            this.props.setFinalResponse(searchResult[page - 1]);
+            },
+            10);
     };
 
     componentDidMount() {
         /*global drupalSettings:true*/
         /*eslint no-undef: "error"*/
-        //this.props.setEventCode(drupalSettings.eventAccessCode);
-        //this.props.setAttendee(drupalSettings.attendee);
+        this.props.setEventCode(drupalSettings.eventAccessCode);
+        this.props.setAttendee(drupalSettings.attendee);
     }
 
     render() {

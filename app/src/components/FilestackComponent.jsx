@@ -12,7 +12,7 @@ import {toggleGalleryLoading, disableLoading, disableGalleryLoading, setPhotosTo
 // CSS starts
 const StyledWrapper = styled.div`
     text-align: center;
-    min-height: 50vh;
+    min-height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -287,7 +287,7 @@ class FilestackComponent extends Component {
             this.props.data.galleryIsLoading || this.props.data.isLoading ?
                 <StyledWrapper>
                     <Loader
-                        type="Oval"
+                        type="Watch"
                         color="#eb5d68"
                         height="60"
                         width="60"
