@@ -35,7 +35,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                formats: ['pjpg','webp'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -50,7 +50,7 @@ class FilestackComponent extends Component {
                                         deg: 180
                                     },
                                     output: {
-                                        format: 'webp',
+                                        format: 'pjpg',
                                         strip: true,
                                         quality: 80,
                                         compress: true
@@ -69,7 +69,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                formats: ['pjpg','webp'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -79,7 +79,7 @@ class FilestackComponent extends Component {
                                         deg: 180
                                     },
                                     output: {
-                                        format: 'webp',
+                                        format: 'pjpg',
                                         strip: true,
                                         quality: 80,
                                         compress: true
@@ -102,7 +102,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                formats: ['pjpg','webp'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -117,7 +117,7 @@ class FilestackComponent extends Component {
                                         deg: 90
                                     },
                                     output: {
-                                        format: 'webp',
+                                        format: 'pjpg',
                                         strip: true,
                                         quality: 80,
                                         compress: true
@@ -135,7 +135,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                formats: ['pjpg','webp'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -145,7 +145,7 @@ class FilestackComponent extends Component {
                                         deg: 90
                                     },
                                     output: {
-                                        format: 'webp',
+                                        format: 'pjpg',
                                         strip: true,
                                         quality: 80,
                                         compress: true
@@ -167,7 +167,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                formats: ['pjpg','webp'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -179,7 +179,7 @@ class FilestackComponent extends Component {
                                         fit: 'max'
                                     },
                                     output: {
-                                        format: 'webp',
+                                        format: 'pjpg',
                                         strip: true,
                                         quality: 80,
                                         compress: true
@@ -198,14 +198,14 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                formats: ['pjpg','webp'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
                                 },
                                 transforms: {
                                     output: {
-                                        format: 'webp',
+                                        format: 'pjpg',
                                         strip: true,
                                         quality: 80,
                                         compress: true

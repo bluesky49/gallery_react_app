@@ -15,7 +15,7 @@ import {fetchPassword, fetchUsername, prodURL} from "../keys";
 
 //CSS starts
 const StyledAlbumControls = styled.div`
-   position: absolute;
+   position: fixed;
    top: 62px;
    left: 95px;
    background-color: transparent;

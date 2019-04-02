@@ -125,3 +125,9 @@
 .react-select__multi-value__remove {
     color: rgba(245, 34, 45, 1) !important;
 }
+.ant-collapse-item {
+    border-bottom-style: none !important;
+}
+.ant-collapse-header {
+    color: white !important;
+}
