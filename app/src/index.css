@@ -7,6 +7,7 @@
     margin-top: 5px !important;
     margin-bottom: 5px !important;
 }
+
 .reactivelist__sortOptions {
     font-size: 14px !important;
     margin-top: 5px !important;
@@ -14,7 +15,7 @@
 }
 
 .reactivelist__resultStats,
-.reactivelist__noResults{
+.reactivelist__noResults {
     color: white !important;
     font-size: 12px !important;
 }
@@ -23,15 +24,17 @@
     font-size: 14px !important;
 }
 
-.multilist__label{
+.multilist__label {
     font-size: 14px !important;
     color: white !important;
 }
+
 .multilist__count {
     padding-right: 10px;
     font-size: 14px !important;
     color: white !important;
 }
+
 .datasearch__title,
 .multilist__title {
     margin-top: 5px !important;
@@ -84,6 +87,7 @@
     border-radius: 4px;
     box-shadow: 2px 2px 2px rgba(30, 30, 30, 0.5);
 }
+
 .album-icon {
     position: absolute;
     margin-left: 50px;
@@ -97,37 +101,48 @@
     background-color: rgba(30, 30, 30, 0.8) !important;
     box-shadow: 2px 2px 4px rgba(24, 144, 255, 0.4) !important;
 }
+
 .album-icon:hover {
-     box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
+    box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
 }
+
 .react-select__control {
     background-color: transparent !important;
     border: 1px solid black !important;
 }
+
 .react-select__placeholder {
     color: white !important;
 }
+
 .react-select__menu {
     background-color: rgba(30, 30, 30, 0.8) !important;
     box-shadow: 2px 2px 2px rgba(30, 30, 30, 0.5) !important;
     color: white !important;
 }
+
 .react-select__option--is-focused {
     background-color: black !important;
 }
+
 .react-select__multi-value {
     background-color: transparent !important;
     border-style: none !important;
 }
+
 .react-select__multi-value__label {
     color: white !important;
 }
+
 .react-select__multi-value__remove {
     color: rgba(245, 34, 45, 1) !important;
 }
+
 .ant-collapse-item {
     border-bottom-style: none !important;
 }
+
 .ant-collapse-header {
     color: white !important;
+    font-size: 16px !important;
 }

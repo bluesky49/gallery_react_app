@@ -24,15 +24,34 @@ const StyledSearchWrapper = styled.div`
    min-width: 250px;
    margin-top: 60px;
 `;
-const ButtonWrapper = styled.div`
+const StyledReactiveBase = styled(ReactiveBase)`
    display: flex;
-   justify-content: space-between;
+   flex-direction: column;
+   flex-wrap: wrap;
+`;
+const ButtonWrapper = styled.div`
+width: 210px !important;
 `;
 const DisplayResultsButton = styled(Button)`
    width: 100% !important;
 `;
 const StyledCollapse = styled(Collapse)`
    background-color: transparent !important;
+   display: flex;
+   flex-wrap: wrap;
+`;
+const StyledNoResults = styled.div`
+    color: white !important;
+    font-size: 12px !important;
+`;
+const SearchComponentsWrapper = styled.div`
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+`;
+const LeftColumn = styled.div`
+`;
+const RightColumn = styled.div`
 `;
 
 // CSS ends
@@ -98,6 +117,7 @@ class SearchComponent extends Component {
             methodAllowed: null
         };
     }
+
     handleApplyFilters = async () => {
         if (this.firstLoad === undefined) {
             this.firstLoad = false
@@ -149,85 +169,95 @@ class SearchComponent extends Component {
 
         return (
             <StyledSearchWrapper>
-                <ReactiveBase
+                <StyledReactiveBase
                     {...elasticIndex}
                     url="https://db170860be1944a39e20206e398f370c.eu-west-1.aws.found.io:9243"
                     credentials="elastic:Uh44gjyJ78iGYMzMez0WJI7L"
                 >
-                    <DataSearch
-                        showClear={true}
-                        componentId="SearchSensor"
-                        dataField={["attendee_first_name", "author_last_name", "author_first_name", "author_email",
-                            "attendee_last_name", "attendee_first_name", "attendee_email", "attendee_group", "image_locality"]}
-                        autosuggest={true}
-                        innerClass={{
-                            title: 'datasearch__title',
-                            input: 'datasearch__input',
-                            list: 'datasearch__list'
-                        }}
-                    />
-                    <StyledCollapse bordered={false} defaultActiveKey={['1']}>
-                        {multiListAttendeeGroup ? multiListAttendeeGroup : null}
-                        {multiListMoments ? multiListMoments : null}
-                        {multiListLocality ? multiListLocality : null}
-                    </StyledCollapse>
+                    <SearchComponentsWrapper>
+                        <LeftColumn>
+                            <DataSearch
+                                showClear={true}
+                                componentId="SearchSensor"
+                                dataField={["attendee_first_name", "author_last_name", "author_first_name", "author_email",
+                                    "attendee_last_name", "attendee_first_name", "attendee_email", "attendee_group", "image_locality"]}
+                                autosuggest={true}
+                                innerClass={{
+                                    title: 'datasearch__title',
+                                    input: 'datasearch__input',
+                                    list: 'datasearch__list'
+                                }}
+                            />
+                            <DataSearch
+                                showClear={true}
+                                componentId="SearchAttendee"
+                                title="Filter by attendee"
+                                dataField={["attendee_first_name", "attendee_last_name", "attendee_email"]}
+                                autosuggest={true}
+                                placeholder={"Enter attendee's name"}
+                                innerClass={{
+                                    title: 'datasearch__title',
+                                    input: 'datasearch__input',
+                                    list: 'datasearch__list'
+                                }}
+                            />
+                            <DataSearch
+                                showClear={true}
+                                componentId="SearchAuthor"
+                                title="Filter by author"
+                                dataField={["author_last_name", "author_first_name", "author_email"]}
+                                autosuggest={true}
+                                placeholder={"Enter author's name"}
+                                innerClass={{
+                                    title: 'datasearch__title',
+                                    input: 'datasearch__input',
+                                    list: 'datasearch__list'
+                                }}
+                            />
+                            <ReactiveList
+                                componentId="SearchResult"
+                                dataField="SearchSensor"
+                                react={{
+                                    "and": ["SearchSensor", "multiList_attendee_group", "multiList_image_moment", "multiList_locality", "SearchAttendee", "SearchAuthor", "multiList_album_titles"]
+                                }}
+                                size={9999}
+                                pagination={false}
+                                loader="Loading..."
+                                renderAllData={this.handleSearchResult}
+                                renderNoResults={this.handleNoResults}
+                                innerClass={{
+                                    resultsInfo: 'reactivelist__resultsInfo',
+                                    sortOptions: 'reactivelist__sortOptions',
+                                    resultStats: 'reactivelist__resultStats',
+                                    noResults: 'reactivelist__noResults',
+                                    button: 'reactivelist__button',
+                                    pagination: 'reactivelist__pagination',
+                                    active: 'reactivelist__active',
+                                    list: 'reactivelist__list',
+                                    poweredBy: 'reactivelist__poweredBy'
+                                }}
+                            />
+                        </LeftColumn>
 
-                    <DataSearch
-                        showClear={true}
-                        componentId="SearchAttendee"
-                        title="Filter by attendee"
-                        dataField={["attendee_first_name", "attendee_last_name", "attendee_email"]}
-                        autosuggest={true}
-                        placeholder={"Enter attendee's name"}
-                        innerClass={{
-                            title: 'datasearch__title',
-                            input: 'datasearch__input',
-                            list: 'datasearch__list'
-                        }}
-                    />
-                    <DataSearch
-                        showClear={true}
-                        componentId="SearchAuthor"
-                        title="Filter by author"
-                        dataField={["author_last_name", "author_first_name", "author_email"]}
-                        autosuggest={true}
-                        placeholder={"Enter author's name"}
-                        innerClass={{
-                            title: 'datasearch__title',
-                            input: 'datasearch__input',
-                            list: 'datasearch__list'
-                        }}
-                    />
-                    <ReactiveList
-                        componentId="SearchResult"
-                        dataField="SearchSensor"
-                        react={{
-                            "and": ["SearchSensor", "multiList_attendee_group", "multiList_image_moment", "multiList_locality", "SearchAttendee", "SearchAuthor", "multiList_album_titles"]
-                        }}
-                        size={9999}
-                        pagination={false}
-                        loader="Loading..."
-                        renderAllData={this.handleSearchResult}
-                        renderNoResults={this.handleNoResults}
-                        innerClass={{
-                            resultsInfo: 'reactivelist__resultsInfo',
-                            sortOptions: 'reactivelist__sortOptions',
-                            resultStats: 'reactivelist__resultStats',
-                            noResults: 'reactivelist__noResults',
-                            button: 'reactivelist__button',
-                            pagination: 'reactivelist__pagination',
-                            active: 'reactivelist__active',
-                            list: 'reactivelist__list',
-                            poweredBy: 'reactivelist__poweredBy'
-                        }}
-                    />
-                </ReactiveBase>
-                {this.state.showDisplayButton ?
+                        <RightColumn>
+                            <StyledCollapse bordered={false} defaultActiveKey={['1']}>
+                                {multiListAttendeeGroup ? multiListAttendeeGroup : null}
+                                {multiListMoments ? multiListMoments : null}
+                                {multiListLocality ? multiListLocality : null}
+                            </StyledCollapse>
+                        </RightColumn>
+                    </SearchComponentsWrapper>
                     <ButtonWrapper>
-                        <DisplayResultsButton type="primary" onClick={this.handleApplyFilters}>Display
-                            Results</DisplayResultsButton>
-                    </ButtonWrapper> : null}
-
+                        {this.state.showDisplayButton ?
+                            <DisplayResultsButton type="primary" onClick={this.handleApplyFilters}>Display
+                                Results</DisplayResultsButton>
+                            :
+                            <StyledNoResults>
+                                No results
+                            </StyledNoResults>
+                        }
+                    </ButtonWrapper>
+                </StyledReactiveBase>
             </StyledSearchWrapper>
         );
     }
