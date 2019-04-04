@@ -52,4 +52,10 @@ function gallery_preprocess_paragraph__gallery(&$variables)
 
     $variables['#attached']['drupalSettings']['eventAccessCode'] = $code;
     $variables['#attached']['drupalSettings']['attendee'] = $attendee;
+
+    $configPusher = \Drupal::config('comic_pusher.config');
+    $pusherKey = $configPusher->get('key');
+    $pusherCluster = $configPusher->get('cluster');
+    $variables['#attached']['drupalSettings']['pusherKey'] = $pusherKey;
+    $variables['#attached']['drupalSettings']['pusherCluster'] = $pusherCluster;
 }

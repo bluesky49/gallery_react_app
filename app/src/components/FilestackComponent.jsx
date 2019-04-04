@@ -228,6 +228,7 @@ class FilestackComponent extends Component {
 
                         const date = item.image_date !== undefined ? new Date(item.image_date[0] * 1000).toLocaleString() : "The date is not specified";
                         const authorEmail = item.author_email !== undefined ? item.author_email[0] : "unknown author";
+                        const filestackHandle = item.filestack_handle[0] ? item.filestack_handle[0] : item.filestack_handle;
 
                         return (
                             {

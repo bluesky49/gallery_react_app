@@ -35,9 +35,13 @@
     color: white !important;
 }
 
-.datasearch__title,
-.multilist__title {
+.datasearch__title {
     margin-top: 5px !important;
+    font-size: 16px !important;
+    color: white !important;
+}
+.multilist__title {
+    margin-top: -4px !important;
     font-size: 16px !important;
     color: white !important;
 }

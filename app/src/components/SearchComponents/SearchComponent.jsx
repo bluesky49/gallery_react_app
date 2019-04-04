@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {ReactiveBase, DataSearch, ReactiveList, MultiList} from '@appbaseio/reactivesearch';
-import {Button, Collapse} from "antd";
+import {Button} from "antd";
 import styled from "styled-components";
 import _ from 'lodash';
 import PropTypes from 'prop-types';
@@ -35,11 +35,6 @@ width: 210px !important;
 const DisplayResultsButton = styled(Button)`
    width: 100% !important;
 `;
-const StyledCollapse = styled(Collapse)`
-   background-color: transparent !important;
-   display: flex;
-   flex-wrap: wrap;
-`;
 const StyledNoResults = styled.div`
     color: white !important;
     font-size: 12px !important;
@@ -52,60 +47,18 @@ const SearchComponentsWrapper = styled.div`
 const LeftColumn = styled.div`
 `;
 const RightColumn = styled.div`
+   display: flex;
+   flex-wrap: wrap;
+   margin-left: 0;
+   margin-right: 15px;
+   
+   @media (min-width: 600px) {
+   margin-left: 10px;
+   margin-right: 10px;
+   }
 `;
 
 // CSS ends
-
-const Panel = Collapse.Panel;
-
-const multiListAttendeeGroup = <Panel header="Attendee group" key="1001">
-    <MultiList
-        componentId="multiList_attendee_group"
-        dataField="attendee_group"
-        showSearch={false}
-        showCheckbox={true}
-        innerClass={{
-            title: 'multilist__title',
-            input: 'multilist__input',
-            list: 'multilist__list',
-            checkbox: 'multilist__checkbox',
-            label: 'multilist__label',
-            count: 'multilist__count'
-        }}
-    />
-</Panel>;
-
-const multiListMoments = <Panel header="Moments" key="2002">
-    <MultiList
-        componentId="multiList_image_moment"
-        dataField="image_moment"
-        showSearch={false}
-        showCheckbox={true}
-        innerClass={{
-            title: 'multilist__title',
-            input: 'multilist__input',
-            list: 'multilist__list',
-            checkbox: 'multilist__checkbox',
-            label: 'multilist__label',
-            count: 'multilist__count'
-        }}
-    />
-</Panel>;
-
-const multiListLocality = <MultiList
-    componentId="multiList_locality"
-    dataField="image_locality"
-    showSearch={false}
-    showCheckbox={true}
-    innerClass={{
-        title: 'multilist__title',
-        input: 'multilist__input',
-        list: 'multilist__list',
-        checkbox: 'multilist__checkbox',
-        label: 'multilist__label',
-        count: 'multilist__count'
-    }}
-/>;
 
 class SearchComponent extends Component {
     constructor(props) {
@@ -240,11 +193,51 @@ class SearchComponent extends Component {
                         </LeftColumn>
 
                         <RightColumn>
-                            <StyledCollapse bordered={false} defaultActiveKey={['1']}>
-                                {multiListAttendeeGroup ? multiListAttendeeGroup : null}
-                                {multiListMoments ? multiListMoments : null}
-                                {multiListLocality ? multiListLocality : null}
-                            </StyledCollapse>
+                            <MultiList
+                                componentId="multiList_attendee_group"
+                                dataField="attendee_group"
+                                title="Attendee group"
+                                showSearch={false}
+                                showCheckbox={true}
+                                innerClass={{
+                                    title: 'multilist__title',
+                                    input: 'multilist__input',
+                                    list: 'multilist__list',
+                                    checkbox: 'multilist__checkbox',
+                                    label: 'multilist__label',
+                                    count: 'multilist__count'
+                                }}
+                            />
+                            <MultiList
+                                componentId="multiList_image_moment"
+                                dataField="image_moment"
+                                title="Moment"
+                                showSearch={false}
+                                showCheckbox={true}
+                                innerClass={{
+                                    title: 'multilist__title',
+                                    input: 'multilist__input',
+                                    list: 'multilist__list',
+                                    checkbox: 'multilist__checkbox',
+                                    label: 'multilist__label',
+                                    count: 'multilist__count'
+                                }}
+                            />
+                            <MultiList
+                                componentId="multiList_locality"
+                                dataField="image_locality"
+                                title="Location"
+                                showSearch={false}
+                                showCheckbox={true}
+                                innerClass={{
+                                    title: 'multilist__title',
+                                    input: 'multilist__input',
+                                    list: 'multilist__list',
+                                    checkbox: 'multilist__checkbox',
+                                    label: 'multilist__label',
+                                    count: 'multilist__count'
+                                }}
+                            />
                         </RightColumn>
                     </SearchComponentsWrapper>
                     <ButtonWrapper>

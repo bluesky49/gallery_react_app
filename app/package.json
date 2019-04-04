@@ -11,6 +11,7 @@
     "filestack-adaptive": "0.2.4",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
+    "pusher-js": "^4.4.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-fullscreenable": "^2.5.1-0",
