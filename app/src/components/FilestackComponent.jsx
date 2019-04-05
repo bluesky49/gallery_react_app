@@ -27,7 +27,11 @@ class FilestackComponent extends Component {
         new Promise((resolve) => {
                 const transformOptionsAttached = this.props.data.finalResponse.map((item) => {
 
-                    if (item.image_rotation !== undefined && item.image_rotation[0] === "Rotated 180") {
+                    const imageRotation = item.image_rotation ?
+                        typeof item.image_rotation === 'string' ? item.image_rotation : item.image_rotation[0]
+                        : null;
+
+                    if (imageRotation == "Rotated 180") {
                         const transformOptions = {
                             transformOptions: {
                                 alt: 'alt',
@@ -35,7 +39,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['pjpg','webp'],
+                                formats: ['pjpg', 'webp'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -69,7 +73,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['pjpg','webp'],
+                                formats: ['pjpg', 'webp'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -94,7 +98,7 @@ class FilestackComponent extends Component {
                             {...item, ...transformOptions, ...transformOptionsLightbox}
                         )
                     }
-                    if (item.image_rotation !== undefined && item.image_rotation[0] === "Rotated 90 CW") {
+                    if (imageRotation == "Rotated 90 CW") {
                         const transformOptions = {
                             transformOptions: {
                                 alt: 'alt',
@@ -102,7 +106,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['pjpg','webp'],
+                                formats: ['pjpg', 'webp'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -135,7 +139,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['pjpg','webp'],
+                                formats: ['pjpg', 'webp'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -167,7 +171,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['pjpg','webp'],
+                                formats: ['pjpg', 'webp'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -198,7 +202,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['pjpg','webp'],
+                                formats: ['pjpg', 'webp'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -224,39 +228,66 @@ class FilestackComponent extends Component {
 
                 const galleryPhotos = transformOptionsAttached.map((item) => {
 
-                    if (item.image_rotation !== undefined && item.image_rotation[0] === "Rotated 90 CW") {
+                    const imageRotation = item.image_rotation ?
+                        typeof item.image_rotation === 'string' ? item.image_rotation : item.image_rotation[0]
+                        : null;
 
-                        const date = item.image_date !== undefined ? new Date(item.image_date[0] * 1000).toLocaleString() : "The date is not specified";
-                        const authorEmail = item.author_email !== undefined ? item.author_email[0] : "unknown author";
-                        const filestackHandle = item.filestack_handle[0] ? item.filestack_handle[0] : item.filestack_handle;
+                    const date = item.image_date ?
+                        new Date(typeof item.image_date === 'number' ? item.image_date : item.image_date[0] * 1000).toLocaleString()
+                        : "unknown date";
+
+                    const authorEmail = item.author_email ?
+                        typeof item.author_email === 'string' ? item.author_email : item.author_email[0]
+                        :
+                        "unknown author";
+                    const filestackHandle = typeof item.filestack_handle === 'string' ? item.filestack_handle : item.filestack_handle[0];
+
+                    const imageHeight = item.image_height ?
+                        typeof item.image_height === 'string' || typeof item.image_height === 'number' ?
+                            item.image_height : item.image_height[0]
+                        : 3;
+
+                    const imageWidth = item.image_width ?
+                        typeof item.image_width === 'string' || typeof item.image_width === 'number' ?
+                            item.image_width : item.image_width[0]
+                        : 4;
+
+                    const imageAlt = item.image_alt ?
+                        typeof item.image_alt === 'string' ? item.image_alt : item.image_alt[0]
+                        : "EventStory Image";
+
+                    const imageLocality = item.image_locality ?
+                        typeof item.image_locality === 'string' ? item.image_locality : item.image_locality[0]
+                        : " ";
+
+                    const UUID = typeof item.uuid === 'string' ? item.uuid : item.uuid[0];
+
+                    if (imageRotation == "Rotated 90 CW") {
 
                         return (
                             {
-                                src: `${picture(item.filestack_handle[0], item.transformOptions).lastChild.src}`,
-                                width: parseInt(`${item.image_height !== undefined ? item.image_height[0] : 3}`, 10),
-                                height: parseInt(`${item.image_width !== undefined ? item.image_width[0] : 4}`, 10),
+                                src: `${picture(filestackHandle, item.transformOptions).lastChild.src}`,
+                                width: parseInt(`${imageHeight}`, 10),
+                                height: parseInt(`${imageWidth}`, 10),
                                 sizes: '(max-width: 180px) 180px, (max-width: 360px) 360px, (max-width: 540px) 540px, (max-width: 720px) 720px, (max-width: 900px) 900px, (max-width: 1080px) 1080px, (max-width: 1296px) 1296px, (min-width: 1512px) 1512px, (max-width: 1728px) 1728px, (max-width: 1944px) 1944px, (max-width: 2160px) 2160px, (max-width: 2376px) 2376px, (max-width: 2592px) 2592px, (max-width: 2808px) 2808px, (max-width: 3024px) 3024px',
-                                srcSet: `${picture(item.filestack_handle[0], item.transformOptionsLightbox).firstChild.attributes.srcset.textContent}`,
-                                caption: "By " + authorEmail + " on " + date,
-                                alt: `${item.image_alt !== undefined ? item.image_alt[0] : "EventStory Image"}`,
-                                uuid: item.uuid[0]
+                                srcSet: `${picture(filestackHandle, item.transformOptionsLightbox).firstChild.attributes.srcset.textContent}`,
+                                caption: "By " + authorEmail + " on " + date + ". " + imageLocality,
+                                alt: imageAlt,
+                                uuid: UUID
                             }
                         )
                     } else {
 
-                        const date = item.image_date !== undefined ? new Date(item.image_date[0] * 1000).toLocaleString() : "The date is not specified";
-                        const authorEmail = item.author_email !== undefined ? item.author_email[0] : "unknown author";
-
                         return (
                             {
-                                src: `${picture(item.filestack_handle[0], item.transformOptions).lastChild.src}`,
-                                width: parseInt(`${item.image_width !== undefined ? item.image_width[0] : 4}`, 10),
-                                height: parseInt(`${item.image_height !== undefined ? item.image_height[0] : 3}`, 10),
+                                src: `${picture(filestackHandle, item.transformOptions).lastChild.src}`,
+                                width: parseInt(`${imageWidth}`, 10),
+                                height: parseInt(`${imageHeight}`, 10),
                                 sizes: '(max-width: 180px) 180px, (max-width: 360px) 360px, (max-width: 540px) 540px, (max-width: 720px) 720px, (max-width: 900px) 900px, (max-width: 1080px) 1080px, (max-width: 1296px) 1296px, (min-width: 1512px) 1512px, (max-width: 1728px) 1728px, (max-width: 1944px) 1944px, (max-width: 2160px) 2160px, (max-width: 2376px) 2376px, (max-width: 2592px) 2592px, (max-width: 2808px) 2808px, (max-width: 3024px) 3024px',
-                                srcSet: `${picture(item.filestack_handle[0], item.transformOptionsLightbox).firstChild.attributes.srcset.textContent}`,
-                                caption: "By " + authorEmail + " on " + date,
-                                alt: `${item.image_alt !== undefined ? item.image_alt[0] : "EventStory Image"}`,
-                                uuid: item.uuid[0]
+                                srcSet: `${picture(filestackHandle, item.transformOptionsLightbox).firstChild.attributes.srcset.textContent}`,
+                                caption: "By " + authorEmail + " on " + date + ". " + imageLocality,
+                                alt: imageAlt,
+                                uuid: UUID
                             }
                         )
                     }

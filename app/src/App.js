@@ -14,8 +14,10 @@ import {
     setAttendee,
     toggleGalleryLoading,
     setFinalResponse,
-    setAlbumResponse
+    setAlbumResponse,
+    setSearchResult
 } from "./actions/dataActions";
+import {closeSearchPanel} from "./actions/viewActions";
 
 // CSS starts
 
@@ -36,7 +38,7 @@ const PaginationWrapper = styled.div`
 const StyledBadge = styled(Badge)`
    position: absolute;
    padding: 7px 15px;
-   top: 23px;
+   top: 24px;
    right: 120px;
    cursor: pointer;
    z-index: 9999;
@@ -49,20 +51,13 @@ const StyledBadge = styled(Badge)`
               }
 `;
 
-//const pusherKey = drupalSettings.pusherKey;
-//const pusherCluster = drupalSettings.pusherCluster;
-
-const pusherKey = 'cca8fcdd475e44334b1c';
-const pusherCluster = 'eu';
-
 class App extends React.Component {
     constructor() {
         super();
 
         this.state = {
             pusherUpdate: [],
-            newPuzzles: 0,
-            pusherData: []
+            newPuzzles: 0
         };
     }
 
@@ -79,15 +74,22 @@ class App extends React.Component {
     componentDidMount() {
         /*global drupalSettings:true*/
         /*eslint no-undef: "error"*/
-        //this.props.setEventCode(drupalSettings.eventAccessCode);
-        //this.props.setAttendee(drupalSettings.attendee);
+        this.props.setEventCode(drupalSettings.eventAccessCode);
+        this.props.setAttendee(drupalSettings.attendee);
+        const pusherKey = drupalSettings.pusherKey;
+        const pusherCluster = drupalSettings.pusherCluster;
+        //const pusherKey = 'cca8fcdd475e44334b1c';
+        //const pusherCluster = 'eu';
 
         const pusher = new Pusher(pusherKey, {
             cluster: pusherCluster,
             encrypted: true,
         });
 
-        const channel = pusher.subscribe(this.props.data.eventAccessCode);
+        const channel = pusher.subscribe(
+            drupalSettings.eventAccessCode
+            //this.props.data.eventAccessCode
+        );
         channel.bind('upload', data => {
 
             this.setState({
@@ -97,31 +99,39 @@ class App extends React.Component {
         });
     }
 
-    /*componentDidUpdate(prevProps, prevState) {
-
-        if (this.state.pusherUpdate !== prevState.pusherUpdate) {
-            let {dataFinal} = this.state;
-            let dataSliced = dataFinal.pop();
-            dataFinal.unshift({attributes: this.state.pusherUpdate});
-            this.setState({
-                dataFinal: dataFinal
-            });
-        }
-    }*/
-
-    handleRefreshClick = e => {
+    handleRefreshClick = async e => {
         e.preventDefault();
-        console.log("click");
-    }
+        await this.props.toggleGalleryLoading();
+        await this.props.closeSearchPanel();
+
+        const updatedData = [...this.state.pusherUpdate, ...this.props.data.finalResponse];
+
+        const SearchResult = this.props.data.searchResult;
+       SearchResult[0] = updatedData;
+
+       this.props.setSearchResult(SearchResult);
+
+        await setTimeout(() => {
+                this.props.setFinalResponse(updatedData);
+            },
+            50);
+
+        this.setState({
+            pusherUpdate: [],
+            newPuzzles: 0
+        });
+
+    };
 
     render() {
         const {newPuzzles} = this.state;
 
         return (
             <StyledWrapper>
-                <StyledBadge count={newPuzzles} onClick={this.handleRefreshClick}>
-                    <Icon type="sync" theme="outlined" style={{fontSize: 20}}/>
-                </StyledBadge>
+                {newPuzzles > 0 ?
+                    <StyledBadge count={newPuzzles} onClick={this.handleRefreshClick}>
+                        <Icon type="sync" theme="outlined" style={{fontSize: 20}}/>
+                    </StyledBadge> : null}
 
                 <SidebarComponent/>
                 {this.props.data.searchResultIsShown ?
@@ -149,7 +159,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    data: state.data
+    data: state.data,
+    view: state.view
 });
 
 export default connect(mapStateToProps, {
@@ -157,5 +168,7 @@ export default connect(mapStateToProps, {
     setAttendee,
     toggleGalleryLoading,
     setFinalResponse,
-    setAlbumResponse
+    setAlbumResponse,
+    closeSearchPanel,
+    setSearchResult
 })(App);
