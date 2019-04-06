@@ -112,13 +112,13 @@ class FilestackComponent extends Component {
                                     fallback: '60vw',
                                 },
                                 transforms: {
-                                    resize: {
-                                        height: 201,
-                                        width: 268,
-                                        fit: 'max'
-                                    },
                                     rotate: {
                                         deg: 90
+                                    },
+                                    resize: {
+                                        height: 268,
+                                        width: 201,
+                                        fit: 'max'
                                     },
                                     output: {
                                         format: 'pjpg',

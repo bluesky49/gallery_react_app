@@ -92,7 +92,8 @@ class SearchComponent extends Component {
             10);
     };
     handleSearchResult = results => {
-        this.result = results.results;
+
+        this.result = results.data;
 
         if (this.result[0] && this.firstLoad === undefined) {
             this.handleApplyFilters();
@@ -176,7 +177,7 @@ class SearchComponent extends Component {
                                 size={9999}
                                 pagination={false}
                                 loader="Loading..."
-                                renderAllData={this.handleSearchResult}
+                                render={this.handleSearchResult}
                                 renderNoResults={this.handleNoResults}
                                 innerClass={{
                                     resultsInfo: 'reactivelist__resultsInfo',
