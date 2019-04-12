@@ -44,6 +44,7 @@ class FilestackComponent extends Component {
                                 sizes: {
                                     fallback: '60vw',
                                 },
+                                useValidator: false,
                                 transforms: {
                                     resize: {
                                         height: 201,
@@ -78,6 +79,7 @@ class FilestackComponent extends Component {
                                 sizes: {
                                     fallback: '60vw',
                                 },
+                                useValidator: false,
                                 transforms: {
                                     rotate: {
                                         deg: 180
@@ -111,6 +113,7 @@ class FilestackComponent extends Component {
                                 sizes: {
                                     fallback: '60vw',
                                 },
+                                useValidator: false,
                                 transforms: {
                                     rotate: {
                                         deg: 90
@@ -144,6 +147,7 @@ class FilestackComponent extends Component {
                                 sizes: {
                                     fallback: '60vw',
                                 },
+                                useValidator: false,
                                 transforms: {
                                     rotate: {
                                         deg: 90
@@ -176,6 +180,7 @@ class FilestackComponent extends Component {
                                 sizes: {
                                     fallback: '60vw',
                                 },
+                                useValidator: false,
                                 transforms: {
                                     resize: {
                                         height: 201,
@@ -207,6 +212,7 @@ class FilestackComponent extends Component {
                                 sizes: {
                                     fallback: '60vw',
                                 },
+                                useValidator: false,
                                 transforms: {
                                     output: {
                                         format: 'pjpg',

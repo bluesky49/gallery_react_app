@@ -230,6 +230,7 @@ class LightboxComponent extends Component {
         const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const albumOwnerId = this.props.data.albumOwnerID;
         const puzzle = this.props.data.photosToRender[currentLightboxImage];
+        const puzzleHandle = this.props.data.finalResponse[currentLightboxImage].filestack_handle[0];
 
         const JSONfield = JSON.parse(this.props.data.albumResponse[0].attributes.field_attendee_albums_puzzles);
 
@@ -242,6 +243,7 @@ class LightboxComponent extends Component {
                     width: puzzle.width,
                     height: puzzle.height,
                     alt: puzzle.alt,
+                    filestack_handle: puzzleHandle
                 };
                 const puzzlesArray = item.puzzles;
                 const newPuzzlesArray = [...puzzlesArray, newPuzzle];

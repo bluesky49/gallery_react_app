@@ -137,7 +137,9 @@ class TopBarComponent extends Component {
         e.preventDefault();
         this.setState({isLoading: true});
 
-        const newPuzzles = this.props.data.photosToRender.map(puzzle => {
+        const puzzleHandles = this.props.data.finalResponse.map(puzzle => puzzle.filestack_handle[0]);
+
+        const newPuzzles = this.props.data.photosToRender.map((puzzle, index) => {
             return (
                 {
                     id: puzzle.uuid,
@@ -145,6 +147,7 @@ class TopBarComponent extends Component {
                     width: puzzle.width,
                     height: puzzle.height,
                     alt: puzzle.alt,
+                    filestack_handle: puzzleHandles[index]
                 }
             )
         });
@@ -313,6 +316,7 @@ TopBarComponent.propTypes = {
     albumResponse: PropTypes.array,
     photosToRender: PropTypes.array,
     albumOwnerID: PropTypes.string,
+    finalResponse: PropTypes.array
 };
 
 const
