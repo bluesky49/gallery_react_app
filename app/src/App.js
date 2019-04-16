@@ -88,7 +88,7 @@ class App extends React.Component {
 
         const channel = pusher.subscribe(
             drupalSettings.eventAccessCode
-            //this.props.data.eventAccessCode
+            //his.props.data.eventAccessCode
         );
         channel.bind('upload', data => {
 
