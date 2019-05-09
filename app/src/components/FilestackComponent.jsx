@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Loader from 'react-loader-spinner';
+import SpinnerComponent from "./SpinnerComponent";
 import styled from "styled-components";
 import {picture} from 'filestack-adaptive';
 import {connect} from 'react-redux';
@@ -324,12 +324,7 @@ class FilestackComponent extends Component {
         return (
             this.props.data.galleryIsLoading || this.props.data.isLoading ?
                 <StyledWrapper>
-                    <Loader
-                        type="Watch"
-                        color="#eb5d68"
-                        height="60"
-                        width="60"
-                    />
+                    <SpinnerComponent/>
                 </StyledWrapper>
                 :
                 <GalleryComponent/>

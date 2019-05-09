@@ -7,7 +7,7 @@ import {IoMdImages} from 'react-icons/io';
 import {Keyframes, animated} from 'react-spring/renderprops';
 import delay from 'delay';
 import styled from "styled-components";
-import Loader from 'react-loader-spinner';
+import SpinnerComponent from "./SpinnerComponent";
 import axios from "axios";
 import _ from 'lodash';
 import {fetchPassword, fetchUsername, prodURL} from "../keys";
@@ -62,12 +62,8 @@ const StyledSpinner = styled.div`
 //CSS Ends
 
 const spinner = <StyledSpinner>
-    <Loader
-        type="Watch"
-        color="rgba(18, 175, 10, 1)"
-        height="16"
-        width="16"/>
-</StyledSpinner>;
+                    <SpinnerComponent/>
+                </StyledSpinner>;
 
 // Creates a spring with predefined animation slots
 const Sidebar = Keyframes.Spring({

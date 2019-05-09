@@ -78,8 +78,8 @@ class App extends React.Component {
         this.props.setAttendee(drupalSettings.attendee);
         const pusherKey = drupalSettings.pusherKey;
         const pusherCluster = drupalSettings.pusherCluster;
-        //const pusherKey = 'cca8fcdd475e44334b1c';
-        //const pusherCluster = 'eu';
+        /*const pusherKey = 'cca8fcdd475e44334b1c';
+        const pusherCluster = 'eu';*/
 
         const pusher = new Pusher(pusherKey, {
             cluster: pusherCluster,
@@ -88,7 +88,7 @@ class App extends React.Component {
 
         const channel = pusher.subscribe(
             drupalSettings.eventAccessCode
-            //his.props.data.eventAccessCode
+            //this.props.data.eventAccessCode
         );
         channel.bind('upload', data => {
 
