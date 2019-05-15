@@ -7,25 +7,35 @@ import Measure from 'react-measure';
 
 import {toggleLightbox, disableLightbox} from '../../actions/viewActions';
 
-
 //CSS starts
-
+const FaceTaggingWrapper = styled.div`
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 16777201;
+          width: 100%;
+          height: 100vh;
+         `;
+const FaceTaggingInner = styled.div`
+          position: relative;
+          width: 100%;
+          z-index: 16777201;
+         `;
 //CSS Ends
-
 
 class FaceTagComponent extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             width: -1
         };
     }
-
     render() {
-        const { width } = this.state;
-
+        const {currentImage} = this.props;
+        const maxWidth = this.props.data.photosToRender[currentImage].width;
+        const {width} = this.state;
+        const src = this.props.data.photosToRender[currentImage].originalSizeSRC;
         /*const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const originalSizeSRC = this.props.data.photosToRender[currentLightboxImage].originalSizeSRC;*/
 
@@ -41,14 +51,20 @@ class FaceTagComponent extends Component {
         };
         return (
             <Measure bounds onResize={(contentRect) => this.setState({width: contentRect.bounds.width})}>
-                {({ measureRef }) => (
-                    <div className="mapper__image--wrapper" ref={measureRef}>
-                        <ImageMapper src="https://cdn.filestackcontent.com/output=format:pjpg,strip:true,quality:80,compress:true/cache=expiry:31536000/security=policy:eyJleHBpcnkiOjIwODAwNzI4MDB9,signature:b2d2458ecac6d894570690d1a64897201524e857d3f813e7507763c7d99c513c/vEhHAcexRi2RWA520QRr"
-                                     map={map}
-                                     imgWidth={1024}
-                                     width={width}
+                {({measureRef}) => (
+                    <FaceTaggingWrapper>
+                        <FaceTaggingInner ref={measureRef}
+                                            style={{
+                                                maxWidth: maxWidth,
+                                            }}>
+                        <ImageMapper
+                            src={src}
+                            map={map}
+                            imgWidth={maxWidth}
+                            width={width}
                         />
-                    </div>
+                        </FaceTaggingInner>
+                    </FaceTaggingWrapper>
                 )}
             </Measure>
         )

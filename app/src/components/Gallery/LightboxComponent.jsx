@@ -14,7 +14,7 @@ import styled from "styled-components";
 import SpinnerComponent from "../SpinnerComponent";
 import FaceTagComponent from './FaceTagComponent';
 
-import {toggleLightbox, disableLightbox} from '../../actions/viewActions';
+import {toggleLightbox, disableLightbox, toggleFaceTagging} from '../../actions/viewActions';
 import {setAlbumResponse, setXcsrfToken, setAlbumOwnerID} from '../../actions/dataActions';
 import {fetchPassword, fetchUsername, prodURL} from "../../keys";
 
@@ -375,7 +375,7 @@ class LightboxComponent extends Component {
     };
 
     toggleFaceTag = () => {
-        console.log("Face Tag Clicked")
+        this.props.toggleFaceTagging(true);
     };
 
     componentDidMount() {
@@ -507,24 +507,35 @@ class LightboxComponent extends Component {
             </Sidebar>
         </StyledAlbumControls>;
 
-        //<ImageMapper src={originalSizeSRC} />
-
         return (
             <React.Fragment>
-                <Gallery photos={this.props.photos} columns={this.props.columns}
-                         onClick={this.openLightbox}
-                         direction={"column"}/>
-
-                <Lightbox images={this.props.data.photosToRender}
-                          onClose={this.closeLightbox}
-                          onClickPrev={this.gotoPrevious}
-                          onClickNext={this.gotoNext}
-                          currentImage={this.state.currentImage}
-                          isOpen={this.props.view.lightboxIsOpen}
-                          customControls={[albumControls]}
-                          ref={this.lightboxRef}/>
-
-                <FaceTagComponent/>
+                {this.props.view.faceTaggingIsOpen ?
+                    <React.Fragment>
+                        <FaceTagComponent currentImage={this.state.currentImage}/>
+                        <Lightbox images={this.props.data.photosToRender}
+                                  onClose={this.closeLightbox}
+                                  onClickPrev={this.gotoPrevious}
+                                  onClickNext={this.gotoNext}
+                                  currentImage={this.state.currentImage}
+                                  isOpen={this.props.view.lightboxIsOpen}
+                                  customControls={[albumControls]}
+                                  ref={this.lightboxRef}/>
+                    </React.Fragment>
+                    :
+                    <React.Fragment>
+                        <Gallery photos={this.props.photos} columns={this.props.columns}
+                                 onClick={this.openLightbox}
+                                 direction={"column"}/>
+                        <Lightbox images={this.props.data.photosToRender}
+                                  onClose={this.closeLightbox}
+                                  onClickPrev={this.gotoPrevious}
+                                  onClickNext={this.gotoNext}
+                                  currentImage={this.state.currentImage}
+                                  isOpen={this.props.view.lightboxIsOpen}
+                                  customControls={[albumControls]}
+                                  ref={this.lightboxRef}/>
+                    </React.Fragment>
+                }
             </React.Fragment>
         )
     }
@@ -540,7 +551,8 @@ LightboxComponent.propTypes = {
     xcsrfToken: PropTypes.string,
     attendee: PropTypes.string,
     albumOwnerID: PropTypes.string,
-    finalResponse: PropTypes.array
+    finalResponse: PropTypes.array,
+    faceTaggingIsOpen: PropTypes.bool
 };
 
 const
@@ -554,5 +566,6 @@ export default connect(mapStateToProps, {
     disableLightbox,
     setAlbumResponse,
     setXcsrfToken,
-    setAlbumOwnerID
+    setAlbumOwnerID,
+    toggleFaceTagging
 })(LightboxComponent);
