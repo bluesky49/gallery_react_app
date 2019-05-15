@@ -268,6 +268,9 @@ class FilestackComponent extends Component {
 
                     const UUID = typeof item.uuid === 'string' ? item.uuid : item.uuid[0];
 
+                    const responseWithLightboxOptions = picture(filestackHandle, item.transformOptionsLightbox);
+
+
                     if (imageRotation == "Rotated 90 CW") {
 
                         return (
@@ -276,10 +279,11 @@ class FilestackComponent extends Component {
                                 width: parseInt(`${imageHeight}`, 10),
                                 height: parseInt(`${imageWidth}`, 10),
                                 sizes: '(max-width: 180px) 180px, (max-width: 360px) 360px, (max-width: 540px) 540px, (max-width: 720px) 720px, (max-width: 900px) 900px, (max-width: 1080px) 1080px, (max-width: 1296px) 1296px, (min-width: 1512px) 1512px, (max-width: 1728px) 1728px, (max-width: 1944px) 1944px, (max-width: 2160px) 2160px, (max-width: 2376px) 2376px, (max-width: 2592px) 2592px, (max-width: 2808px) 2808px, (max-width: 3024px) 3024px',
-                                srcSet: `${picture(filestackHandle, item.transformOptionsLightbox).firstChild.attributes.srcset.textContent}`,
+                                srcSet: `${responseWithLightboxOptions.firstChild.attributes.srcset.textContent}`,
                                 caption: "By " + authorEmail + " on " + date + ". " + imageLocality,
                                 alt: imageAlt,
-                                uuid: UUID
+                                uuid: UUID,
+                                originalSizeSRC: `${responseWithLightboxOptions.lastChild.src}`
                             }
                         )
                     } else {
@@ -290,10 +294,11 @@ class FilestackComponent extends Component {
                                 width: parseInt(`${imageWidth}`, 10),
                                 height: parseInt(`${imageHeight}`, 10),
                                 sizes: '(max-width: 180px) 180px, (max-width: 360px) 360px, (max-width: 540px) 540px, (max-width: 720px) 720px, (max-width: 900px) 900px, (max-width: 1080px) 1080px, (max-width: 1296px) 1296px, (min-width: 1512px) 1512px, (max-width: 1728px) 1728px, (max-width: 1944px) 1944px, (max-width: 2160px) 2160px, (max-width: 2376px) 2376px, (max-width: 2592px) 2592px, (max-width: 2808px) 2808px, (max-width: 3024px) 3024px',
-                                srcSet: `${picture(filestackHandle, item.transformOptionsLightbox).firstChild.attributes.srcset.textContent}`,
+                                srcSet: `${responseWithLightboxOptions.firstChild.attributes.srcset.textContent}`,
                                 caption: "By " + authorEmail + " on " + date + ". " + imageLocality,
                                 alt: imageAlt,
-                                uuid: UUID
+                                uuid: UUID,
+                                originalSizeSRC: `${responseWithLightboxOptions.lastChild.src}`
                             }
                         )
                     }

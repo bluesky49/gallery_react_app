@@ -3,14 +3,16 @@ import Gallery from "react-photo-gallery";
 import Lightbox from 'react-images';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Icon} from "antd";
+import {Icon, Tooltip} from "antd";
 import axios from "axios";
 import {IconContext} from "react-icons";
 import {IoMdImages} from 'react-icons/io';
+import {MdFace} from 'react-icons/md';
 import {Keyframes, animated} from 'react-spring/renderprops';
 import delay from 'delay';
 import styled from "styled-components";
 import SpinnerComponent from "../SpinnerComponent";
+import FaceTagComponent from './FaceTagComponent';
 
 import {toggleLightbox, disableLightbox} from '../../actions/viewActions';
 import {setAlbumResponse, setXcsrfToken, setAlbumOwnerID} from '../../actions/dataActions';
@@ -71,8 +73,8 @@ const StyledSpinner = styled.div`
 //CSS Ends
 
 const spinner = <StyledSpinner>
-                    <SpinnerComponent/>
-                </StyledSpinner>;
+    <SpinnerComponent/>
+</StyledSpinner>;
 
 // Creates a spring with predefined animation slots
 const Sidebar = Keyframes.Spring({
@@ -372,6 +374,10 @@ class LightboxComponent extends Component {
             });
     };
 
+    toggleFaceTag = () => {
+        console.log("Face Tag Clicked")
+    };
+
     componentDidMount() {
         this.fetchAlbumInfo();
     }
@@ -402,7 +408,6 @@ class LightboxComponent extends Component {
     }
 
     render() {
-
         const {albumsWithPhoto, albumsWithoutPhoto} = this.state;
 
         const albumButtons = <ControlsWrapper key="11">
@@ -459,10 +464,21 @@ class LightboxComponent extends Component {
                 color: albumsWithPhoto && albumsWithPhoto.length ? "rgba(18, 175, 10, 1)" : "#1890ff",
                 className: "album-icon"
             }}>
-                <div>
+                <Tooltip placement="bottom" title="Manage albums" overlayClassName="lightbox__tooltip">
                     <IoMdImages onClick={this.toggle}/>
-                </div>
+                </Tooltip>
             </IconContext.Provider>
+
+            <IconContext.Provider value={{
+                color: albumsWithPhoto && albumsWithPhoto.length ? "rgba(18, 175, 10, 1)" : "#1890ff",
+                className: "faces-icon"
+            }}>
+                <Tooltip placement="bottom" title="Tag attendees" overlayClassName="lightbox__tooltip">
+                    <MdFace onClick={this.toggleFaceTag}/>
+                </Tooltip>
+
+            </IconContext.Provider>
+
             <Sidebar native state={state}>
                 {({x}) => (
                     <animated.div
@@ -491,12 +507,13 @@ class LightboxComponent extends Component {
             </Sidebar>
         </StyledAlbumControls>;
 
+        //<ImageMapper src={originalSizeSRC} />
+
         return (
             <React.Fragment>
                 <Gallery photos={this.props.photos} columns={this.props.columns}
                          onClick={this.openLightbox}
-                         direction={"column"}
-                />
+                         direction={"column"}/>
 
                 <Lightbox images={this.props.data.photosToRender}
                           onClose={this.closeLightbox}
@@ -505,8 +522,9 @@ class LightboxComponent extends Component {
                           currentImage={this.state.currentImage}
                           isOpen={this.props.view.lightboxIsOpen}
                           customControls={[albumControls]}
-                          ref={this.lightboxRef}
-                />
+                          ref={this.lightboxRef}/>
+
+                <FaceTagComponent/>
             </React.Fragment>
         )
     }
