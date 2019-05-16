@@ -145,6 +145,21 @@
 .lightbox__tooltip {
     z-index: 16777201 !important;
 }
+.ant-modal-content {
+    background-color: rgba(0,0,0,0.3) !important;
+}
+.ant-form-item-required {
+    color: white !important;
+}
+.ant-modal {
+    max-width: 300px !important;
+}
+.ant-modal-body {
+    padding-bottom: 0 !important;
+}
+.ant-modal-footer {
+    border-top-style: none !important;
+}
 /*
 .react-photo-gallery--gallery div img {
     height: 100% !important;

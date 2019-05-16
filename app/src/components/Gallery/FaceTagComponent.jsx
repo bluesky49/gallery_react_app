@@ -6,14 +6,13 @@ import ImageMapper from 'react-image-mapper';
 import Measure from 'react-measure';
 
 import {toggleFaceTagging} from '../../actions/viewActions';
-import {Button, Icon, Tooltip} from "antd";
+import {Button, Icon, Tooltip, Modal, Form, Input} from "antd";
 
 //CSS starts
 const FaceTaggingWrapper = styled.div`
           display: flex;
           justify-content: center;
           align-items: center;
-          z-index: 16777201;
           width: 100%;
           height: auto;
           padding-bottom: 65px;
@@ -21,10 +20,10 @@ const FaceTaggingWrapper = styled.div`
 const FaceTaggingInner = styled.div`
           position: relative;
           width: 100%;
-          z-index: 16777201;
          `;
 const ButtonWrapper = styled.div`
           margin: 24px 0 10px 0;
+          text-align: center;
 `;
 const StyledButton = styled(Button)`
     border-style: none !important;
@@ -34,20 +33,79 @@ const StyledButton = styled(Button)`
     box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
   }
 `;
-
 //CSS Ends
+
+const FormInModal = Form.create({name: 'form_in_modal'})(
+    // eslint-disable-next-line
+    class extends React.Component {
+        render() {
+            const {
+                visible, onCancel, onCreate, form,
+            } = this.props;
+            const {getFieldDecorator} = form;
+            return (
+                <Modal
+                    visible={visible}
+                    okText="Save"
+                    onCancel={onCancel}
+                    onOk={onCreate}
+                >
+                    <Form layout="vertical">
+                        <Form.Item
+                            label="Attendee name"
+                        >
+                            {getFieldDecorator('name', {
+                                rules: [{
+                                    type: 'string', message: 'The input is not valid name',
+                                }, {
+                                    required: true, message: 'Enter name',
+                                }],
+                            })(
+                                <Input/>
+                            )}
+                        </Form.Item>
+                    </Form>
+                </Modal>
+            );
+        }
+    }
+);
 
 class FaceTagComponent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            width: -1
+            width: -1,
+            visible: false
         };
     }
 
     doneTagging = () => {
         this.props.toggleFaceTagging(false);
+    };
+
+    handleMapperClick = (area) => {
+        console.log(area);
+        this.setState({visible: true});
+    };
+
+    handleCancel = () => {
+        this.setState({visible: false});
+    };
+
+    handleCreate = () => {
+        const form = this.formRef.props.form;
+        form.validateFields((err, values) => {
+            if (err) {
+                return;
+            }
+            form.resetFields();
+        })
+    };
+
+    saveFormRef = (formRef) => {
+        this.formRef = formRef;
     };
 
     render() {
@@ -77,7 +135,7 @@ class FaceTagComponent extends Component {
                                               maxWidth: maxWidth,
                                           }}>
                             <ButtonWrapper>
-                                <Tooltip placement="right" title="Done tagging" overlayClassName="lightbox__tooltip">
+                                <Tooltip placement="right" title="Done tagging">
                                     <StyledButton type="ghost" onClick={this.doneTagging}>
                                         <Icon type="check" theme="outlined"
                                               style={{fontSize: '22px', color: 'rgba(18, 175, 10, 1)'}}/>
@@ -88,10 +146,17 @@ class FaceTagComponent extends Component {
                             <ImageMapper
                                 src={src}
                                 map={map}
+                                onClick={area => this.handleMapperClick(area)}
                                 imgWidth={maxWidth}
                                 width={width}
                             />
                         </FaceTaggingInner>
+                        <FormInModal
+                            wrappedComponentRef={this.saveFormRef}
+                            visible={this.state.visible}
+                            onCancel={this.handleCancel}
+                            onCreate={this.handleCreate}
+                        />
                     </FaceTaggingWrapper>
                 )}
             </Measure>
