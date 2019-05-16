@@ -512,14 +512,14 @@ class LightboxComponent extends Component {
                 {this.props.view.faceTaggingIsOpen ?
                     <React.Fragment>
                         <FaceTagComponent currentImage={this.state.currentImage}/>
-                        <Lightbox images={this.props.data.photosToRender}
-                                  onClose={this.closeLightbox}
-                                  onClickPrev={this.gotoPrevious}
-                                  onClickNext={this.gotoNext}
-                                  currentImage={this.state.currentImage}
-                                  isOpen={this.props.view.lightboxIsOpen}
-                                  customControls={[albumControls]}
-                                  ref={this.lightboxRef}/>
+                            <Lightbox images={this.props.data.photosToRender}
+                                      onClose={this.closeLightbox}
+                                      onClickPrev={this.gotoPrevious}
+                                      onClickNext={this.gotoNext}
+                                      currentImage={this.state.currentImage}
+                                      isOpen={false}
+                                      customControls={[albumControls]}
+                                      ref={this.lightboxRef}/>
                     </React.Fragment>
                     :
                     <React.Fragment>

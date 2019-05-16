@@ -5,7 +5,8 @@ import styled from "styled-components";
 import ImageMapper from 'react-image-mapper';
 import Measure from 'react-measure';
 
-import {toggleLightbox, disableLightbox} from '../../actions/viewActions';
+import {toggleFaceTagging} from '../../actions/viewActions';
+import {Button, Icon, Tooltip} from "antd";
 
 //CSS starts
 const FaceTaggingWrapper = styled.div`
@@ -14,13 +15,26 @@ const FaceTaggingWrapper = styled.div`
           align-items: center;
           z-index: 16777201;
           width: 100%;
-          height: 100vh;
+          height: auto;
+          padding-bottom: 65px;
          `;
 const FaceTaggingInner = styled.div`
           position: relative;
           width: 100%;
           z-index: 16777201;
          `;
+const ButtonWrapper = styled.div`
+          margin: 24px 0 10px 0;
+`;
+const StyledButton = styled(Button)`
+    border-style: none !important;
+    background-color: rgba(30, 30, 30, 0.8) !important;
+    box-shadow: 2px 2px 4px rgba(24, 144, 255, 0.4) !important;
+     &:hover {
+    box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
+  }
+`;
+
 //CSS Ends
 
 class FaceTagComponent extends Component {
@@ -31,6 +45,11 @@ class FaceTagComponent extends Component {
             width: -1
         };
     }
+
+    doneTagging = () => {
+        this.props.toggleFaceTagging(false);
+    };
+
     render() {
         const {currentImage} = this.props;
         const maxWidth = this.props.data.photosToRender[currentImage].width;
@@ -54,15 +73,24 @@ class FaceTagComponent extends Component {
                 {({measureRef}) => (
                     <FaceTaggingWrapper>
                         <FaceTaggingInner ref={measureRef}
-                                            style={{
-                                                maxWidth: maxWidth,
-                                            }}>
-                        <ImageMapper
-                            src={src}
-                            map={map}
-                            imgWidth={maxWidth}
-                            width={width}
-                        />
+                                          style={{
+                                              maxWidth: maxWidth,
+                                          }}>
+                            <ButtonWrapper>
+                                <Tooltip placement="right" title="Done tagging" overlayClassName="lightbox__tooltip">
+                                    <StyledButton type="ghost" onClick={this.doneTagging}>
+                                        <Icon type="check" theme="outlined"
+                                              style={{fontSize: '22px', color: 'rgba(18, 175, 10, 1)'}}/>
+                                    </StyledButton>
+                                </Tooltip>
+                            </ButtonWrapper>
+
+                            <ImageMapper
+                                src={src}
+                                map={map}
+                                imgWidth={maxWidth}
+                                width={width}
+                            />
                         </FaceTaggingInner>
                     </FaceTaggingWrapper>
                 )}
@@ -82,6 +110,5 @@ const
     });
 
 export default connect(mapStateToProps, {
-    toggleLightbox,
-    disableLightbox
+    toggleFaceTagging
 })(FaceTagComponent);

@@ -4,5 +4,4 @@ description: 'Implementation of React Gallery'
 core: 8.x
 package: 'Custom'
 dependencies:
-  - jsonapi
   - paragraphs

@@ -79,7 +79,7 @@
 .album-icon {
     position: absolute;
     margin-left: 50px;
-    margin-top: -38px;
+    margin-top: -40px;
     font-size: 35px;
     cursor: pointer;
     padding: 5px 10px;
@@ -95,7 +95,7 @@
 .faces-icon {
     position: absolute;
     margin-left: 115px;
-    margin-top: -38px;
+    margin-top: -40px;
     font-size: 35px;
     cursor: pointer;
     padding: 5px 10px;

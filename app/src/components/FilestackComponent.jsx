@@ -18,7 +18,6 @@ const StyledWrapper = styled.div`
     justify-content: center;
     align-items: center;
 `;
-
 // CSS ends
 
 class FilestackComponent extends Component {
@@ -325,7 +324,6 @@ class FilestackComponent extends Component {
     }
 
     render() {
-
         return (
             this.props.data.galleryIsLoading || this.props.data.isLoading ?
                 <StyledWrapper>
