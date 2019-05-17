@@ -46,13 +46,14 @@ const FormInModal = Form.create({name: 'form_in_modal'})(
             return (
                 <Modal
                     visible={visible}
+                    closable={false}
                     okText="Save"
                     onCancel={onCancel}
                     onOk={onCreate}
+                    style={{ top: '50%' }}
                 >
                     <Form layout="vertical">
                         <Form.Item
-                            label="Attendee name"
                         >
                             {getFieldDecorator('name', {
                                 rules: [{
@@ -61,7 +62,7 @@ const FormInModal = Form.create({name: 'form_in_modal'})(
                                     required: true, message: 'Enter name',
                                 }],
                             })(
-                                <Input/>
+                                <Input placeholder="Attendee name"/>
                             )}
                         </Form.Item>
                     </Form>

@@ -160,6 +160,9 @@
 .ant-modal-footer {
     border-top-style: none !important;
 }
+.ant-form-item {
+    margin-bottom: 0 !important;
+}
 /*
 .react-photo-gallery--gallery div img {
     height: 100% !important;

@@ -31,8 +31,8 @@ const initialState = {
     photosToRender: ['empty'],
     isLoading: true,
     galleryIsLoading: false,
-    eventAccessCode: '444121',//'697652',//444121
-    attendee: 'test@frank.fr',//'mariage@fougeront.com',//fbracq@pauzzle.pro'empty//davos@popoi.com//frank@fr.com//test@frank.fr
+    eventAccessCode: 'empty',//'697652',//444121
+    attendee: 'empty',//'mariage@fougeront.com',//fbracq@pauzzle.pro'empty//davos@popoi.com//frank@fr.com//test@frank.fr
     albumOwnerID: 'empty',
     totalResults: null,
     searchResult: ['empty'],
