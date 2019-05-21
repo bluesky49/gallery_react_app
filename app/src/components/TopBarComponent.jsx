@@ -62,8 +62,8 @@ const StyledSpinner = styled.div`
 //CSS Ends
 
 const spinner = <StyledSpinner>
-                    <SpinnerComponent/>
-                </StyledSpinner>;
+    <SpinnerComponent/>
+</StyledSpinner>;
 
 // Creates a spring with predefined animation slots
 const Sidebar = Keyframes.Spring({

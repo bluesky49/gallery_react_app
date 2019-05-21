@@ -18,6 +18,7 @@ const StyledWrapper = styled.div`
     justify-content: center;
     align-items: center;
 `;
+
 // CSS ends
 
 class FilestackComponent extends Component {
@@ -282,8 +283,7 @@ class FilestackComponent extends Component {
                                 originalSizeSRC: `${responseWithLightboxOptions.lastChild.src}`
                             }
                         )
-                    }
-                    else {
+                    } else {
 
                         return (
                             {

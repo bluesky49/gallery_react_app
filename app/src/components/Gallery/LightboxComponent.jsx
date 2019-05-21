@@ -409,8 +409,7 @@ class LightboxComponent extends Component {
 
     render() {
         const currentImage = this.state.currentImage;
-        const faceData = this.props.data.finalResponse[currentImage].image_face_rectangles ?
-            true : false;
+        const faceData = this.props.data.finalResponse[currentImage].image_face_rectangles ? true : false;
 
         const {albumsWithPhoto, albumsWithoutPhoto} = this.state;
 
