@@ -408,6 +408,10 @@ class LightboxComponent extends Component {
     }
 
     render() {
+        const currentImage = this.state.currentImage;
+        const faceData = this.props.data.finalResponse[currentImage].image_face_rectangles ?
+            true : false;
+
         const {albumsWithPhoto, albumsWithoutPhoto} = this.state;
 
         const albumButtons = <ControlsWrapper key="11">
@@ -469,15 +473,16 @@ class LightboxComponent extends Component {
                 </Tooltip>
             </IconContext.Provider>
 
-            <IconContext.Provider value={{
-                color: albumsWithPhoto && albumsWithPhoto.length ? "rgba(18, 175, 10, 1)" : "#1890ff",
-                className: "faces-icon"
-            }}>
-                <Tooltip placement="bottom" title="Tag attendees" overlayClassName="lightbox__tooltip">
-                    <MdFace onClick={this.toggleFaceTag}/>
-                </Tooltip>
+            {faceData ?
+                <IconContext.Provider value={{
+                    color: albumsWithPhoto && albumsWithPhoto.length ? "rgba(18, 175, 10, 1)" : "#1890ff",
+                    className: "faces-icon"
+                }}>
+                    <Tooltip placement="bottom" title="Tag attendees" overlayClassName="lightbox__tooltip">
+                        <MdFace onClick={this.toggleFaceTag}/>
+                    </Tooltip>
 
-            </IconContext.Provider>
+                </IconContext.Provider> : null}
 
             <Sidebar native state={state}>
                 {({x}) => (
@@ -511,15 +516,17 @@ class LightboxComponent extends Component {
             <React.Fragment>
                 {this.props.view.faceTaggingIsOpen ?
                     <React.Fragment>
-                        <FaceTagComponent currentImage={this.state.currentImage}/>
-                            <Lightbox images={this.props.data.photosToRender}
-                                      onClose={this.closeLightbox}
-                                      onClickPrev={this.gotoPrevious}
-                                      onClickNext={this.gotoNext}
-                                      currentImage={this.state.currentImage}
-                                      isOpen={false}
-                                      customControls={[albumControls]}
-                                      ref={this.lightboxRef}/>
+
+                        <FaceTagComponent currentImage={currentImage}/>
+
+                        <Lightbox images={this.props.data.photosToRender}
+                                  onClose={this.closeLightbox}
+                                  onClickPrev={this.gotoPrevious}
+                                  onClickNext={this.gotoNext}
+                                  currentImage={this.state.currentImage}
+                                  isOpen={false}
+                                  customControls={[albumControls]}
+                                  ref={this.lightboxRef}/>
                     </React.Fragment>
                     :
                     <React.Fragment>

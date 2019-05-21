@@ -8,7 +8,7 @@
     "antd": "^3.15.2",
     "axios": "^0.18.0",
     "delay": "^4.1.0",
-    "filestack-adaptive": "^0.2.7",
+    "filestack-adaptive": "^1.0.0",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
     "pusher-js": "^4.4.0",

@@ -50,7 +50,7 @@ const FormInModal = Form.create({name: 'form_in_modal'})(
                     okText="Save"
                     onCancel={onCancel}
                     onOk={onCreate}
-                    style={{ top: '50%' }}
+                    style={{top: '50%'}}
                 >
                     <Form layout="vertical">
                         <Form.Item
@@ -114,59 +114,56 @@ class FaceTagComponent extends Component {
         const maxWidth = this.props.data.photosToRender[currentImage].width;
         const {width} = this.state;
         const src = this.props.data.photosToRender[currentImage].originalSizeSRC;
+        const map = this.props.data.finalResponse[currentImage].image_face_rectangles ?
+            JSON.parse(this.props.data.finalResponse[currentImage].image_face_rectangles)
+            :
+            null;
         /*const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const originalSizeSRC = this.props.data.photosToRender[currentLightboxImage].originalSizeSRC;*/
 
-        const map = {
-            name: 'generated',
-            areas: [
-                {
-                    name: "attendee 1",
-                    shape: "rect",
-                    coords: [700, 161, 787, 262]
-                }
-            ]
-        };
         return (
-            <Measure bounds onResize={(contentRect) => this.setState({width: contentRect.bounds.width})}>
-                {({measureRef}) => (
-                    <FaceTaggingWrapper>
-                        <FaceTaggingInner ref={measureRef}
-                                          style={{
-                                              maxWidth: maxWidth,
-                                          }}>
-                            <ButtonWrapper>
-                                <Tooltip placement="right" title="Done tagging">
-                                    <StyledButton type="ghost" onClick={this.doneTagging}>
-                                        <Icon type="check" theme="outlined"
-                                              style={{fontSize: '22px', color: 'rgba(18, 175, 10, 1)'}}/>
-                                    </StyledButton>
-                                </Tooltip>
-                            </ButtonWrapper>
-
-                            <ImageMapper
-                                src={src}
-                                map={map}
-                                onClick={area => this.handleMapperClick(area)}
-                                imgWidth={maxWidth}
-                                width={width}
+            map ?
+                <Measure bounds onResize={(contentRect) => this.setState({width: contentRect.bounds.width})}>
+                    {({measureRef}) => (
+                        <FaceTaggingWrapper>
+                            <FaceTaggingInner ref={measureRef}
+                                              style={{
+                                                  maxWidth: maxWidth,
+                                              }}>
+                                <ButtonWrapper>
+                                    <Tooltip placement="right" title="Done tagging">
+                                        <StyledButton type="ghost" onClick={this.doneTagging}>
+                                            <Icon type="check" theme="outlined"
+                                                  style={{fontSize: '22px', color: 'rgba(18, 175, 10, 1)'}}/>
+                                        </StyledButton>
+                                    </Tooltip>
+                                </ButtonWrapper>
+                                <ImageMapper
+                                    src={src}
+                                    map={map}
+                                    onClick={area => this.handleMapperClick(area)}
+                                    imgWidth={maxWidth}
+                                    width={width}
+                                />
+                            </FaceTaggingInner>
+                            <FormInModal
+                                wrappedComponentRef={this.saveFormRef}
+                                visible={this.state.visible}
+                                onCancel={this.handleCancel}
+                                onCreate={this.handleCreate}
                             />
-                        </FaceTaggingInner>
-                        <FormInModal
-                            wrappedComponentRef={this.saveFormRef}
-                            visible={this.state.visible}
-                            onCancel={this.handleCancel}
-                            onCreate={this.handleCreate}
-                        />
-                    </FaceTaggingWrapper>
-                )}
-            </Measure>
+                        </FaceTaggingWrapper>
+                    )}
+                </Measure>
+                :
+                null
         )
     }
 }
 
 FaceTagComponent.propTypes = {
     photosToRender: PropTypes.array,
+    finalResponse: PropTypes.array,
 };
 
 const

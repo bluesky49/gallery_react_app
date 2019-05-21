@@ -46,7 +46,6 @@ class FilestackComponent extends Component {
                                 useValidator: false,
                                 transforms: {
                                     resize: {
-                                        height: 201,
                                         width: 268,
                                         fit: 'max'
                                     },
@@ -118,8 +117,7 @@ class FilestackComponent extends Component {
                                         deg: 90
                                     },
                                     resize: {
-                                        height: 268,
-                                        width: 201,
+                                        width: 268,
                                         fit: 'max'
                                     },
                                     output: {
@@ -182,7 +180,6 @@ class FilestackComponent extends Component {
                                 useValidator: false,
                                 transforms: {
                                     resize: {
-                                        height: 201,
                                         width: 268,
                                         fit: 'max'
                                     },
@@ -285,7 +282,8 @@ class FilestackComponent extends Component {
                                 originalSizeSRC: `${responseWithLightboxOptions.lastChild.src}`
                             }
                         )
-                    } else {
+                    }
+                    else {
 
                         return (
                             {
