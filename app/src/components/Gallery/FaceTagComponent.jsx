@@ -35,6 +35,16 @@ const StyledButton = styled(Button)`
     box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
   }
 `;
+const AttendeeTooltip = styled.span`
+    position: absolute;
+    color: #fff;
+    padding: 10px;
+    background: rgba(0,0,0,0.8);
+    transform: translate3d(-50%, -50%, 0);
+    border-radius: 5px;
+    pointer-events: none;
+    z-index: 16777201;
+`;
 //CSS Ends
 
 const FormInModal = Form.create({name: 'form_in_modal'})(
@@ -81,7 +91,9 @@ class FaceTagComponent extends Component {
         this.state = {
             width: -1,
             visible: false,
-            faceData: null
+            faceData: null,
+            currentAttendeeName: null,
+            hoveredArea: null
         }
     }
 
@@ -90,17 +102,31 @@ class FaceTagComponent extends Component {
     };
 
     handleMapperClick = (area) => {
-        console.log(area);
-        this.setState({visible: true});
+        this.setState({
+            currentAttendeeName: area.name,
+            visible: true
+        });
     };
 
     handleCancel = () => {
         this.setState({visible: false});
     };
 
+    enterArea(area) {
+        this.setState({hoveredArea: area});
+    }
+
+    leaveArea(area) {
+        this.setState({hoveredArea: null});
+    }
+
+    getTipPosition(area) {
+        return {top: `${area.center[1]}px`, left: `${area.center[0]}px`};
+    }
+
     getFaceData = () => {
         const {currentImage} = this.props;
-        const uuid = this.props.data.finalResponse[currentImage].uuid;
+        const uuid = this.props.data.finalResponse[currentImage].uuid[0];
         axios({
             method: 'get',
             url: `${prodURL}/jsonapi/node/puzzle/${uuid}`,
@@ -147,7 +173,16 @@ class FaceTagComponent extends Component {
             form.resetFields();
 
             const {currentImage} = this.props;
-            const uuid = this.props.data.finalResponse[currentImage].uuid;
+            const uuid = this.props.data.finalResponse[currentImage].uuid[0];
+            const areas = this.state.faceData.areas;
+
+            const newAreas = areas.map(i => {
+                if (this.state.currentAttendeeName === i.name) {
+                    i = {...i, name: values.name};
+                }
+                return i;
+            });
+            const newFaceData = {...this.state.faceData, areas: newAreas};
 
             axios({
                 method: 'patch',
@@ -166,11 +201,17 @@ class FaceTagComponent extends Component {
                         "type": "node--puzzle",
                         "id": uuid,
                         "attributes": {
-                            //"field_attendee_albums_puzzles": JSON.stringify(newJSONfield)
+                            "field_image_face_rectangles": JSON.stringify(newFaceData)
                         }
                     }
                 }
             })
+                .then(res => {
+                    this.setState({
+                        visible: false
+                    });
+                    this.getFaceData();
+                })
                 .catch(function (error) {
                     if (error.response) {
                         // The request was made and the server responded with a status code
@@ -205,13 +246,14 @@ class FaceTagComponent extends Component {
         const maxWidth = this.props.data.photosToRender[currentImage].width;
         const {width} = this.state;
         const src = this.props.data.photosToRender[currentImage].originalSizeSRC;
-        const map = this.props.data.finalResponse[currentImage].image_face_rectangles ?
+
+        /*const map = this.props.data.finalResponse[currentImage].image_face_rectangles ?
             JSON.parse(this.props.data.finalResponse[currentImage].image_face_rectangles)
             :
-            null;
+            null;*/
         /*const currentLightboxImage = this.lightboxRef.current.props.currentImage;
         const originalSizeSRC = this.props.data.photosToRender[currentLightboxImage].originalSizeSRC;*/
-
+        const map = this.state.faceData;
         return (
             map ?
                 <Measure bounds onResize={(contentRect) => this.setState({width: contentRect.bounds.width})}>
@@ -233,9 +275,16 @@ class FaceTagComponent extends Component {
                                     src={src}
                                     map={map}
                                     onClick={area => this.handleMapperClick(area)}
+                                    onMouseEnter={area => this.enterArea(area)}
+                                    onMouseLeave={area => this.leaveArea(area)}
                                     imgWidth={maxWidth}
                                     width={width}
                                 />
+                                {this.state.hoveredArea ?
+                                    <AttendeeTooltip style={{...this.getTipPosition(this.state.hoveredArea)}}>
+                                        {this.state.hoveredArea && this.state.hoveredArea.name}
+                                    </AttendeeTooltip> : null}
+
                             </FaceTaggingInner>
                             <FormInModal
                                 wrappedComponentRef={this.saveFormRef}
