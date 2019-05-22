@@ -11,7 +11,6 @@ import {MdFace} from 'react-icons/md';
 import {Keyframes, animated} from 'react-spring/renderprops';
 import delay from 'delay';
 import styled from "styled-components";
-import SpinnerComponent from "../SpinnerComponent";
 import FaceTagComponent from './FaceTagComponent';
 
 import {toggleLightbox, disableLightbox, toggleFaceTagging} from '../../actions/viewActions';
@@ -67,13 +66,19 @@ const StyledAlbumTitles = styled.div`
 `;
 const StyledSpinner = styled.div`
    display: flex;
-   padding-right: 5px;
+   margin-right: 10px;
    margin-bottom: -3px;
+   width: 15px !important;
 `;
 //CSS Ends
 
 const spinner = <StyledSpinner>
-    <SpinnerComponent/>
+    <img
+        src="https://eventstory.live/sites/default/files/loader.gif"
+        alt="Loading..."
+        height="20px"
+        width="20px"
+    />
 </StyledSpinner>;
 
 // Creates a spring with predefined animation slots
