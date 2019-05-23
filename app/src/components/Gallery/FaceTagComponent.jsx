@@ -186,11 +186,22 @@ class FaceTagComponent extends Component {
             });
             const newFaceData = {...this.state.faceData, areas: newAreas};
 
-            const faceNames = this.props.data.finalResponse[currentImage].image_face_names;
+            const faceNames = this.props.data.finalResponse[currentImage].image_face_names ?
+                this.props.data.finalResponse[currentImage].image_face_names
+                :
+                [];
+
             const nameAlreadyIncluded = faceNames.includes(enteredName);
+            const currentNameAlreadyIncluded = faceNames.includes(currentAttendeeName);
+
 
             if (!nameAlreadyIncluded) {
-                faceNames[faceNames.indexOf(currentAttendeeName)] = enteredName;
+                if (currentNameAlreadyIncluded) {
+                    faceNames[faceNames.indexOf(currentAttendeeName)] = enteredName
+                } else {
+                    faceNames.push(enteredName)
+                }
+
             }
 
             const attributes = nameAlreadyIncluded ?
@@ -202,6 +213,8 @@ class FaceTagComponent extends Component {
                     "field_image_face_rectangles": JSON.stringify(newFaceData),
                     "field_image_face_names": faceNames
                 };
+
+            console.log(attributes);
 
             axios({
                 method: 'patch',
