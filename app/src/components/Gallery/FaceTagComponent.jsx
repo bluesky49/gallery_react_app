@@ -74,7 +74,7 @@ const FormInModal = Form.create({name: 'form_in_modal'})(
                                     required: true, message: 'Enter name',
                                 }],
                             })(
-                                <Input placeholder="Attendee name"/>
+                                <Input placeholder={this.props.currentAttendeeName}/>
                             )}
                         </Form.Item>
                     </Form>
@@ -291,6 +291,7 @@ class FaceTagComponent extends Component {
                                 visible={this.state.visible}
                                 onCancel={this.handleCancel}
                                 onCreate={this.handleCreate}
+                                currentAttendeeName={this.state.currentAttendeeName}
                             />
                         </FaceTaggingWrapper>
                     )}
