@@ -133,8 +133,8 @@ class SearchComponent extends Component {
                             <DataSearch
                                 showClear={true}
                                 componentId="SearchSensor"
-                                dataField={["attendee_first_name", "author_last_name", "author_first_name", "author_email",
-                                    "attendee_last_name", "attendee_first_name", "attendee_email", "attendee_group", "image_locality"]}
+                                dataField={["image_face_names", "author_last_name", "author_first_name", "author_email",
+                                    "attendee_group", "image_locality"]}
                                 autosuggest={true}
                                 innerClass={{
                                     title: 'datasearch__title',
@@ -146,7 +146,7 @@ class SearchComponent extends Component {
                                 showClear={true}
                                 componentId="SearchAttendee"
                                 title="Filter by attendee"
-                                dataField={["attendee_first_name", "attendee_last_name", "attendee_email"]}
+                                dataField={["image_face_names"]}
                                 autosuggest={true}
                                 placeholder={"Enter attendee's name"}
                                 innerClass={{

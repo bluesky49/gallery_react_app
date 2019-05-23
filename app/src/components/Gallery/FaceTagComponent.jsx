@@ -175,14 +175,33 @@ class FaceTagComponent extends Component {
             const {currentImage} = this.props;
             const uuid = this.props.data.finalResponse[currentImage].uuid[0];
             const areas = this.state.faceData.areas;
+            const {currentAttendeeName} = this.state;
+            const enteredName = values.name;
 
             const newAreas = areas.map(i => {
-                if (this.state.currentAttendeeName === i.name) {
-                    i = {...i, name: values.name};
+                if (currentAttendeeName === i.name) {
+                    i = {...i, name: enteredName};
                 }
                 return i;
             });
             const newFaceData = {...this.state.faceData, areas: newAreas};
+
+            const faceNames = this.props.data.finalResponse[currentImage].image_face_names;
+            const nameAlreadyIncluded = faceNames.includes(enteredName);
+
+            if (!nameAlreadyIncluded) {
+                faceNames[faceNames.indexOf(currentAttendeeName)] = enteredName;
+            }
+
+            const attributes = nameAlreadyIncluded ?
+                {
+                    "field_image_face_rectangles": JSON.stringify(newFaceData),
+                }
+                :
+                {
+                    "field_image_face_rectangles": JSON.stringify(newFaceData),
+                    "field_image_face_names": faceNames
+                };
 
             axios({
                 method: 'patch',
@@ -200,9 +219,7 @@ class FaceTagComponent extends Component {
                     "data": {
                         "type": "node--puzzle",
                         "id": uuid,
-                        "attributes": {
-                            "field_image_face_rectangles": JSON.stringify(newFaceData)
-                        }
+                        "attributes": attributes
                     }
                 }
             })
