@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import styled from "styled-components";
 import ImageMapper from 'react-image-mapper';
 import Measure from 'react-measure';
+import _ from 'lodash';
 
 import {toggleFaceTagging} from '../../actions/viewActions';
 import {Button, Icon, Tooltip, Modal, Form, Input} from "antd";
@@ -92,7 +93,9 @@ class FaceTagComponent extends Component {
             width: -1,
             visible: false,
             faceData: null,
+            faceNames: null,
             currentAttendeeName: null,
+            currentAttendeeCoords: null,
             hoveredArea: null
         }
     }
@@ -102,8 +105,10 @@ class FaceTagComponent extends Component {
     };
 
     handleMapperClick = (area) => {
+
         this.setState({
             currentAttendeeName: area.name,
+            currentAttendeeCoords: area.coords,
             visible: true
         });
     };
@@ -140,7 +145,8 @@ class FaceTagComponent extends Component {
             }
         }).then(res => {
                 this.setState({
-                    faceData: JSON.parse(res.data.data.attributes.field_image_face_rectangles)
+                    faceData: JSON.parse(res.data.data.attributes.field_image_face_rectangles),
+                    faceNames: res.data.data.attributes.field_image_face_names
                 })
             }
         )
@@ -175,33 +181,32 @@ class FaceTagComponent extends Component {
             const {currentImage} = this.props;
             const uuid = this.props.data.finalResponse[currentImage].uuid[0];
             const areas = this.state.faceData.areas;
-            const {currentAttendeeName} = this.state;
+            const {currentAttendeeName, currentAttendeeCoords, faceNames} = this.state;
             const enteredName = values.name;
 
             const newAreas = areas.map(i => {
-                if (currentAttendeeName === i.name) {
+                if (_.isEqual(i.coords, currentAttendeeCoords)) {
                     i = {...i, name: enteredName};
                 }
                 return i;
             });
-            const newFaceData = {...this.state.faceData, areas: newAreas};
 
-            const faceNames = this.props.data.finalResponse[currentImage].image_face_names ?
-                this.props.data.finalResponse[currentImage].image_face_names
-                :
-                [];
+            const multipleNames = newAreas.some(i => i.name === currentAttendeeName);
+
+            const newFaceData = {...this.state.faceData, areas: newAreas};
 
             const nameAlreadyIncluded = faceNames.includes(enteredName);
             const currentNameAlreadyIncluded = faceNames.includes(currentAttendeeName);
-
+            console.log(faceNames);
+            console.log(currentAttendeeName);
+            console.log(currentNameAlreadyIncluded);
 
             if (!nameAlreadyIncluded) {
-                if (currentNameAlreadyIncluded) {
-                    faceNames[faceNames.indexOf(currentAttendeeName)] = enteredName
+                if (currentNameAlreadyIncluded && !multipleNames) {
+                    faceNames[faceNames.indexOf(currentAttendeeName)] = enteredName;
                 } else {
                     faceNames.push(enteredName)
                 }
-
             }
 
             const attributes = nameAlreadyIncluded ?
@@ -213,8 +218,6 @@ class FaceTagComponent extends Component {
                     "field_image_face_rectangles": JSON.stringify(newFaceData),
                     "field_image_face_names": faceNames
                 };
-
-            console.log(attributes);
 
             axios({
                 method: 'patch',
