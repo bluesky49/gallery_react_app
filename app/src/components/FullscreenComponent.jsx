@@ -71,11 +71,14 @@ export class FullscreenComponent extends Component {
 
         return (
             <StyledFullScreen>
-                <ButtonWrapper>
-                    <StyledButton type="ghost" onClick={toggleFullscreen}>
-                        {buttonLabel}
-                    </StyledButton>
-                </ButtonWrapper>
+
+                {this.props.view.showControls ?
+                    <ButtonWrapper>
+                        <StyledButton type="ghost" onClick={toggleFullscreen}>
+                            {buttonLabel}
+                        </StyledButton>
+                    </ButtonWrapper> : null}
+
                 <ScrollComponent isFullscreen={isFullscreen}/>
             </StyledFullScreen>
         );
@@ -91,7 +94,8 @@ FullscreenComponent.propTypes = {
     fullscreenON: PropTypes.func,
     fullscreenOFF: PropTypes.func,
     lightboxIsOpen: PropTypes.bool,
-    fullscreenTempDisabled: PropTypes.bool
+    fullscreenTempDisabled: PropTypes.bool,
+    showControls: PropTypes.bool
 };
 
 const FullscreenToggleComponent = Fullscreenable()(FullscreenComponent);

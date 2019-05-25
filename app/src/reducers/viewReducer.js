@@ -7,7 +7,8 @@ import {
     DISABLE_TEMP_FULLSCREEN,
     OPEN_SEARCH_PANEL,
     CLOSE_SEARCH_PANEL,
-    TOGGLE_FACE_TAGGING, SEARCH_RESULT_IS_SHOWN
+    TOGGLE_FACE_TAGGING,
+    TOGGLE_CONTROLS
 } from '../actions/types';
 
 const initialState = {
@@ -15,7 +16,8 @@ const initialState = {
     lightboxIsOpen: false,
     fullscreenTempDisabled: false,
     searchPanelIsOpen: false,
-    faceTaggingIsOpen: false
+    faceTaggingIsOpen: false,
+    showControls: true
 };
 
 export default function (state = initialState, action) {
@@ -64,6 +66,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 faceTaggingIsOpen: action.payload
+            };
+        case TOGGLE_CONTROLS:
+            return {
+                ...state,
+                showControls: action.payload
             };
         default:
             return state;

@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {
     openSearchPanel,
-    closeSearchPanel
+    closeSearchPanel,
+    toggleControls
 } from "../actions/viewActions";
 
 //CSS starts
@@ -108,10 +109,11 @@ class SidebarComponent extends React.Component {
 
         return (
             <StyledSidebar>
-                <StyledIcon
-                    type={`menu-${icon}`}
-                    onClick={this.toggle}
-                />
+                {this.props.view.showControls ?
+                    <StyledIcon
+                        type={`menu-${icon}`}
+                        onClick={this.toggle}
+                    /> : null}
                 <Sidebar native state={state}>
                     {({x}) => (
                         <animated.div
@@ -147,7 +149,8 @@ class SidebarComponent extends React.Component {
 }
 
 SidebarComponent.propTypes = {
-    searchPanelIsOpen: PropTypes.bool
+    searchPanelIsOpen: PropTypes.bool,
+    showControls: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
@@ -156,5 +159,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
     openSearchPanel,
-    closeSearchPanel
+    closeSearchPanel,
+    toggleControls
 })(SidebarComponent);

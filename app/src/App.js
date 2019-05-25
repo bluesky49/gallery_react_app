@@ -78,7 +78,7 @@ class App extends React.Component {
         this.props.setAttendee(drupalSettings.attendee);
         const pusherKey = drupalSettings.pusherKey;
         const pusherCluster = drupalSettings.pusherCluster;
-        /*const pusherKey = 'cca8fcdd475e44334b1c';
+       /* const pusherKey = 'cca8fcdd475e44334b1c';
         const pusherCluster = 'eu';*/
 
         const pusher = new Pusher(pusherKey, {

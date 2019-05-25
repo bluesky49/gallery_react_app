@@ -5,6 +5,7 @@ import styled from "styled-components";
 import ImageMapper from 'react-image-mapper';
 import Measure from 'react-measure';
 import _ from 'lodash';
+import SpinnerComponent from "../SpinnerComponent";
 
 import {toggleFaceTagging} from '../../actions/viewActions';
 import {Button, Icon, Tooltip, Modal, Form, Input} from "antd";
@@ -44,6 +45,32 @@ const AttendeeTooltip = styled.span`
     transform: translate3d(-50%, -50%, 0);
     border-radius: 5px;
     pointer-events: none;
+    z-index: 16777201;
+`;
+const StyledWrapper = styled.div`
+    position: fixed;
+    background-color: white;
+    top: 0;
+    left: 0;
+    text-align: center;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 16777201;
+`;
+const StyledWrapperBlack = styled.div`
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    text-align: center;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 16777201;
 `;
 //CSS Ends
@@ -96,7 +123,9 @@ class FaceTagComponent extends Component {
             faceNames: null,
             currentAttendeeName: null,
             currentAttendeeCoords: null,
-            hoveredArea: null
+            hoveredArea: null,
+            isLoading: true,
+            nameFetching: false
         }
     }
 
@@ -150,6 +179,12 @@ class FaceTagComponent extends Component {
                 })
             }
         )
+            .then(res => {
+                this.setState({
+                    isLoading: false,
+                    nameFetching: false,
+                });
+            })
             .catch(function (error) {
                 if (error.response) {
                     // The request was made and the server responded with a status code
@@ -197,9 +232,6 @@ class FaceTagComponent extends Component {
 
             const nameAlreadyIncluded = faceNames.includes(enteredName);
             const currentNameAlreadyIncluded = faceNames.includes(currentAttendeeName);
-            console.log(faceNames);
-            console.log(currentAttendeeName);
-            console.log(currentNameAlreadyIncluded);
 
             if (!nameAlreadyIncluded) {
                 if (currentNameAlreadyIncluded && !multipleNames) {
@@ -241,7 +273,8 @@ class FaceTagComponent extends Component {
             })
                 .then(res => {
                     this.setState({
-                        visible: false
+                        visible: false,
+                        nameFetching: true
                     });
                     this.getFaceData();
                 })
@@ -277,18 +310,11 @@ class FaceTagComponent extends Component {
     render() {
         const {currentImage} = this.props;
         const maxWidth = this.props.data.photosToRender[currentImage].width;
-        const {width} = this.state;
+        const {width, isLoading, currentAttendeeName, hoveredArea, visible, faceData, nameFetching} = this.state;
         const src = this.props.data.photosToRender[currentImage].originalSizeSRC;
 
-        /*const map = this.props.data.finalResponse[currentImage].image_face_rectangles ?
-            JSON.parse(this.props.data.finalResponse[currentImage].image_face_rectangles)
-            :
-            null;*/
-        /*const currentLightboxImage = this.lightboxRef.current.props.currentImage;
-        const originalSizeSRC = this.props.data.photosToRender[currentLightboxImage].originalSizeSRC;*/
-        const map = this.state.faceData;
         return (
-            map ?
+            !isLoading ?
                 <Measure bounds onResize={(contentRect) => this.setState({width: contentRect.bounds.width})}>
                     {({measureRef}) => (
                         <FaceTaggingWrapper>
@@ -306,31 +332,38 @@ class FaceTagComponent extends Component {
                                 </ButtonWrapper>
                                 <ImageMapper
                                     src={src}
-                                    map={map}
+                                    map={faceData}
                                     onClick={area => this.handleMapperClick(area)}
                                     onMouseEnter={area => this.enterArea(area)}
                                     onMouseLeave={area => this.leaveArea(area)}
                                     imgWidth={maxWidth}
                                     width={width}
                                 />
-                                {this.state.hoveredArea ?
-                                    <AttendeeTooltip style={{...this.getTipPosition(this.state.hoveredArea)}}>
-                                        {this.state.hoveredArea && this.state.hoveredArea.name}
+                                {nameFetching ?
+                                    <StyledWrapperBlack>
+                                        <SpinnerComponent/>
+                                    </StyledWrapperBlack> : null}
+
+                                {hoveredArea ?
+                                    <AttendeeTooltip style={{...this.getTipPosition(hoveredArea)}}>
+                                        {hoveredArea && hoveredArea.name}
                                     </AttendeeTooltip> : null}
 
                             </FaceTaggingInner>
                             <FormInModal
                                 wrappedComponentRef={this.saveFormRef}
-                                visible={this.state.visible}
+                                visible={visible}
                                 onCancel={this.handleCancel}
                                 onCreate={this.handleCreate}
-                                currentAttendeeName={this.state.currentAttendeeName}
+                                currentAttendeeName={currentAttendeeName}
                             />
                         </FaceTaggingWrapper>
                     )}
                 </Measure>
                 :
-                null
+                <StyledWrapper>
+                    <SpinnerComponent/>
+                </StyledWrapper>
         )
     }
 }

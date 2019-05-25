@@ -60,3 +60,9 @@ export const toggleFaceTagging = response => dispatch => {
         payload: response
     })
 };
+export const toggleControls = response => dispatch => {
+    dispatch({
+        type: 'TOGGLE_CONTROLS',
+        payload: response
+    })
+};

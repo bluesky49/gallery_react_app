@@ -13,7 +13,7 @@ import delay from 'delay';
 import styled from "styled-components";
 import FaceTagComponent from './FaceTagComponent';
 
-import {toggleLightbox, disableLightbox, toggleFaceTagging} from '../../actions/viewActions';
+import {toggleLightbox, disableLightbox, toggleFaceTagging,toggleControls} from '../../actions/viewActions';
 import {setAlbumResponse, setXcsrfToken, setAlbumOwnerID} from '../../actions/dataActions';
 import {fetchPassword, fetchUsername, prodURL} from "../../keys";
 
@@ -126,6 +126,7 @@ class LightboxComponent extends Component {
 
     openLightbox2 = async () => {
         this.props.toggleLightbox();
+        this.props.toggleControls(false);
     };
     openLightbox = (event, obj) => {
         this.setState({
@@ -155,6 +156,7 @@ class LightboxComponent extends Component {
             selectedOption: null
         });
         this.props.disableLightbox();
+        this.props.toggleControls(true);
     };
 
     fetchAlbumInfo() {
@@ -578,5 +580,6 @@ export default connect(mapStateToProps, {
     setAlbumResponse,
     setXcsrfToken,
     setAlbumOwnerID,
-    toggleFaceTagging
+    toggleFaceTagging,
+    toggleControls
 })(LightboxComponent);
