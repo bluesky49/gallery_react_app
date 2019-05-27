@@ -31,8 +31,8 @@ const initialState = {
     photosToRender: ['empty'],
     isLoading: true,
     galleryIsLoading: false,
-    eventAccessCode: 'empty',//'697652',//444121//332280
-    attendee: 'empty',//salon2@mariage.pro//test@frank.fr
+    eventAccessCode: '332280',//'697652',//444121//332280
+    attendee: 'salon2@mariage.pro',//salon2@mariage.pro//test@frank.fr
     albumOwnerID: 'empty',
     totalResults: null,
     searchResult: ['empty'],

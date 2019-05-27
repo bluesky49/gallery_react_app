@@ -16,8 +16,11 @@ import {
     setFinalResponse,
     setAlbumResponse,
     setSearchResult
-} from "./actions/dataActions";
-import {closeSearchPanel} from "./actions/viewActions";
+} from "./actions/dataActions"
+import {
+    toggleControls,
+    closeSearchPanel
+} from "./actions/viewActions";
 
 // CSS starts
 
@@ -74,12 +77,12 @@ class App extends React.Component {
     componentDidMount() {
         /*global drupalSettings:true*/
         /*eslint no-undef: "error"*/
-        this.props.setEventCode(drupalSettings.eventAccessCode);
+        /*this.props.setEventCode(drupalSettings.eventAccessCode);
         this.props.setAttendee(drupalSettings.attendee);
         const pusherKey = drupalSettings.pusherKey;
-        const pusherCluster = drupalSettings.pusherCluster;
-       /* const pusherKey = 'cca8fcdd475e44334b1c';
-        const pusherCluster = 'eu';*/
+        const pusherCluster = drupalSettings.pusherCluster;*/
+         const pusherKey = 'cca8fcdd475e44334b1c';
+         const pusherCluster = 'eu';
 
         const pusher = new Pusher(pusherKey, {
             cluster: pusherCluster,
@@ -87,8 +90,8 @@ class App extends React.Component {
         });
 
         const channel = pusher.subscribe(
-            drupalSettings.eventAccessCode
-            //this.props.data.eventAccessCode
+            //drupalSettings.eventAccessCode
+            this.props.data.eventAccessCode
         );
         channel.bind('upload', data => {
 
@@ -134,7 +137,7 @@ class App extends React.Component {
                     </StyledBadge> : null}
 
                 <SidebarComponent/>
-                {this.props.data.searchResultIsShown ?
+                {this.props.data.searchResultIsShown && this.props.view.showControls ?
                     <TopBarComponent/> : null}
 
                 <StyledGallery>
@@ -158,7 +161,8 @@ App.propTypes = {
     searchResult: PropTypes.array,
     attendee: PropTypes.string,
     searchResultIsShown: PropTypes.bool,
-    faceTaggingIsOpen: PropTypes.bool
+    faceTaggingIsOpen: PropTypes.bool,
+    showControls: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
@@ -173,5 +177,6 @@ export default connect(mapStateToProps, {
     setFinalResponse,
     setAlbumResponse,
     closeSearchPanel,
-    setSearchResult
+    setSearchResult,
+    toggleControls
 })(App);
