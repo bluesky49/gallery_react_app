@@ -12,18 +12,9 @@ import {
     SET_SEARCH_RESULT,
     SET_XCSRF_TOKEN,
     SET_ALBUM_OWNER_ID,
-    SEARCH_RESULT_IS_SHOWN
+    SEARCH_RESULT_IS_SHOWN,
+    SET_LANGUAGE
 } from '../actions/types';
-
-//const eventAccessCode = '123456';
-//const eventAccessCode = '214672';
-//const eventAccessCode = '164111';
-//const eventAccessCode = '736303';
-//const eventAccessCode = '444121';
-
-//const attendee = 'fbracq@pauzzle.pro';
-// const attendee = 'salon1@mariage.pro';
-// const attendee = 'marion.durand@pauzzle.pro';
 
 const initialState = {
     albumResponse: ['empty'],
@@ -37,7 +28,8 @@ const initialState = {
     totalResults: null,
     searchResult: ['empty'],
     xcsrfToken: 'empty',
-    searchResultIsShown: false
+    searchResultIsShown: false,
+    language: 'en'
 };
 
 export default function (state = initialState, action) {
@@ -111,6 +103,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 searchResultIsShown: action.payload
+            };
+        case SET_LANGUAGE:
+            return {
+                ...state,
+                language: action.payload
             };
         default:
             return state;

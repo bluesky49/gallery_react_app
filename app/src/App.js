@@ -12,6 +12,7 @@ import {Badge, Icon} from 'antd';
 import {
     setEventCode,
     setAttendee,
+    setLanguage,
     toggleGalleryLoading,
     setFinalResponse,
     setAlbumResponse,
@@ -79,10 +80,12 @@ class App extends React.Component {
         /*eslint no-undef: "error"*/
         /*this.props.setEventCode(drupalSettings.eventAccessCode);
         this.props.setAttendee(drupalSettings.attendee);
+        this.props.setLanguage(drupalSettings.language);
         const pusherKey = drupalSettings.pusherKey;
-        const pusherCluster = drupalSettings.pusherCluster;*/
-         const pusherKey = 'cca8fcdd475e44334b1c';
-         const pusherCluster = 'eu';
+        const pusherCluster = drupalSettings.pusherCluster;
+        const language = drupalSettings.language;*/
+        const pusherKey = 'cca8fcdd475e44334b1c';
+        const pusherCluster = 'eu';
 
         const pusher = new Pusher(pusherKey, {
             cluster: pusherCluster,
@@ -160,6 +163,7 @@ App.propTypes = {
     eventAccessCode: PropTypes.string,
     searchResult: PropTypes.array,
     attendee: PropTypes.string,
+    language: PropTypes.string,
     searchResultIsShown: PropTypes.bool,
     faceTaggingIsOpen: PropTypes.bool,
     showControls: PropTypes.bool
@@ -172,6 +176,7 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
     setEventCode,
+    setLanguage,
     setAttendee,
     toggleGalleryLoading,
     setFinalResponse,

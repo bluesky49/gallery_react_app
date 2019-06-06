@@ -58,4 +58,7 @@ function gallery_preprocess_paragraph__gallery(&$variables)
     $pusherCluster = $configPusher->get('cluster');
     $variables['#attached']['drupalSettings']['pusherKey'] = $pusherKey;
     $variables['#attached']['drupalSettings']['pusherCluster'] = $pusherCluster;
+
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $variables['#attached']['drupalSettings']['language'] = $language;
 }

@@ -113,7 +113,6 @@ const FormInModal = Form.create({name: 'form_in_modal'})(
 );
 
 class FaceTagComponent extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -132,7 +131,6 @@ class FaceTagComponent extends Component {
     doneTagging = () => {
         this.props.toggleFaceTagging(false);
     };
-
     handleMapperClick = (area) => {
 
         this.setState({
@@ -141,7 +139,6 @@ class FaceTagComponent extends Component {
             visible: true
         });
     };
-
     handleCancel = () => {
         this.setState({visible: false});
     };
@@ -154,10 +151,9 @@ class FaceTagComponent extends Component {
         this.setState({hoveredArea: null});
     }
 
-    getTipPosition(area) {
+    getTipPosition = area => {
         return {top: `${area.center[1]}px`, left: `${area.center[0]}px`};
-    }
-
+    };
     getFaceData = () => {
         const {currentImage} = this.props;
         const uuid = this.props.data.finalResponse[currentImage].uuid[0];
@@ -204,7 +200,6 @@ class FaceTagComponent extends Component {
                 console.log(error.config);
             });
     };
-
     handleCreate = () => {
         const form = this.formRef.props.form;
         form.validateFields((err, values) => {
@@ -298,7 +293,6 @@ class FaceTagComponent extends Component {
                 });
         })
     };
-
     saveFormRef = (formRef) => {
         this.formRef = formRef;
     };
