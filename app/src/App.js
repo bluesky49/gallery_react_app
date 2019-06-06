@@ -8,6 +8,11 @@ import FilestackComponent from "./components/FilestackComponent";
 import {Pagination} from "antd";
 import Pusher from 'pusher-js';
 import {Badge, Icon} from 'antd';
+import intl from 'react-intl-universal';
+import {LocaleProvider} from 'antd';
+import frFR from 'antd/lib/locale-provider/fr_FR';
+import enGB from 'antd/lib/locale-provider/en_GB';
+
 
 import {
     setEventCode,
@@ -55,13 +60,19 @@ const StyledBadge = styled(Badge)`
               }
 `;
 
+const locales = {
+    "en": require('./locales/en-US.json'),
+    "fr": require('./locales/fr-FR.json'),
+};
+
 class App extends React.Component {
     constructor() {
         super();
 
         this.state = {
             pusherUpdate: [],
-            newPuzzles: 0
+            newPuzzles: 0,
+            initDone: false
         };
     }
 
@@ -74,6 +85,19 @@ class App extends React.Component {
             },
             10);
     };
+
+    loadLocales() {
+        // init method will load CLDR locale data according to currentLocale
+        // react-intl-universal is singleton, so you should init it only once in your app
+        intl.init({
+            currentLocale: this.props.data.language, // TODO: determine locale here
+            locales,
+        })
+            .then(() => {
+                // After loading CLDR locale data, start to render
+                this.setState({initDone: true});
+            });
+    }
 
     componentDidMount() {
         /*global drupalSettings:true*/
@@ -103,6 +127,7 @@ class App extends React.Component {
                 newPuzzles: this.state.newPuzzles + 1
             });
         });
+        this.loadLocales();
     }
 
     handleRefreshClick = async e => {
@@ -130,29 +155,48 @@ class App extends React.Component {
     };
 
     render() {
-        const {newPuzzles} = this.state;
+        const {newPuzzles, initDone} = this.state;
+        const currentLocale = this.props.data.language;
+        let AntdLocale;
+        switch (currentLocale) {
+            case 'en': {
+                AntdLocale = enGB;
+                break;
+            }
+            case 'fr': {
+                AntdLocale = frFR;
+                break;
+            }
+            default: {
+                AntdLocale = enGB;
+                break;
+            }
+        }
 
         return (
-            <StyledWrapper>
-                {newPuzzles > 0 ?
-                    <StyledBadge count={newPuzzles} onClick={this.handleRefreshClick}>
-                        <Icon type="sync" theme="outlined" style={{fontSize: 20}}/>
-                    </StyledBadge> : null}
+            initDone ?
+                <LocaleProvider locale={AntdLocale}>
+                    <StyledWrapper>
+                        {newPuzzles > 0 ?
+                            <StyledBadge count={newPuzzles} onClick={this.handleRefreshClick}>
+                                <Icon type="sync" theme="outlined" style={{fontSize: 20}}/>
+                            </StyledBadge> : null}
 
-                <SidebarComponent/>
-                {this.props.data.searchResultIsShown && this.props.view.showControls ?
-                    <TopBarComponent/> : null}
+                        <SidebarComponent/>
+                        {this.props.data.searchResultIsShown && this.props.view.showControls ?
+                            <TopBarComponent/> : null}
 
-                <StyledGallery>
-                    <FilestackComponent/>
-                    {!this.props.view.faceTaggingIsOpen ?
-                        <PaginationWrapper>
-                            <Pagination onChange={this.onChange} defaultPageSize={50}
-                                        total={this.props.data.totalResults}/>
-                        </PaginationWrapper> : null}
-                </StyledGallery>
-
-            </StyledWrapper>
+                        <StyledGallery>
+                            <FilestackComponent/>
+                            {!this.props.view.faceTaggingIsOpen ?
+                                <PaginationWrapper>
+                                    <Pagination onChange={this.onChange} defaultPageSize={50}
+                                                total={this.props.data.totalResults}/>
+                                </PaginationWrapper> : null}
+                        </StyledGallery>
+                    </StyledWrapper>
+                </LocaleProvider>
+                : null
         );
     }
 }

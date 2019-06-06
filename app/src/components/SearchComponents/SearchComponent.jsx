@@ -17,6 +17,7 @@ import {
     setSearchResult,
     setSearchResultStatus
 } from "../../actions/dataActions";
+import intl from "react-intl-universal";
 
 // CSS starts
 
@@ -243,8 +244,9 @@ class SearchComponent extends Component {
                     </SearchComponentsWrapper>
                     <ButtonWrapper>
                         {this.state.showDisplayButton ?
-                            <DisplayResultsButton type="primary" onClick={this.handleApplyFilters}>Display
-                                Results</DisplayResultsButton>
+                            <DisplayResultsButton type="primary" onClick={this.handleApplyFilters}>
+                                {intl.get('DISPLAY_RESULTS')}
+                            </DisplayResultsButton>
                             :
                             <StyledNoResults>
                                 No results
