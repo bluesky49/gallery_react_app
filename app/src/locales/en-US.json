@@ -3,7 +3,10 @@
   "FILTER_BY_AUTHOR": "Filter by author",
   "ENTER_ATTENDEE’S_NAME": "Enter attendee’s name",
   "ENTER_AUTHOR’S_NAME": "Enter author’s name",
-  "RESULTS_FOUND_IN_MS": "results found in ms",
+  "RESULTS": "results",
+  "FOUND": "found",
+  "IN": "in",
+  "MS": "ms",
   "DISPLAY_RESULTS": "Display Results",
   "LOCATION": "Location",
   "ATTENDEE_GROUP": "Attendee group",
@@ -31,5 +34,11 @@
   "ENTER_YOUR_EMAIL": "Please enter your email",
   "ENTER_YOUR_PASSWORD": "Please enter your password",
   "NEXT_PAGE": "Next page",
-  "PREVIOUS_PAGE": "Previous page"
+  "PREVIOUS_PAGE": "Previous page",
+  "NEXT_PHOTO": "Next photo",
+  "PREVIOUS_PHOTO": "Previous photo",
+  "CLOSE": "Close",
+  "FROM": " from ",
+  "BY": "By ",
+  "ON": " on "
 }

@@ -11,6 +11,7 @@ import {toggleFaceTagging} from '../../actions/viewActions';
 import {Button, Icon, Tooltip, Modal, Form, Input} from "antd";
 import axios from "axios";
 import {fetchPassword, fetchUsername, prodURL} from "../../keys";
+import intl from "react-intl-universal";
 
 //CSS starts
 const FaceTaggingWrapper = styled.div`
@@ -87,7 +88,7 @@ const FormInModal = Form.create({name: 'form_in_modal'})(
                 <Modal
                     visible={visible}
                     closable={false}
-                    okText="Save"
+                    okText={intl.get('SAVE')}
                     onCancel={onCancel}
                     onOk={onCreate}
                     style={{top: '50%'}}
@@ -317,7 +318,7 @@ class FaceTagComponent extends Component {
                                                   maxWidth: maxWidth,
                                               }}>
                                 <ButtonWrapper>
-                                    <Tooltip placement="right" title="Done tagging">
+                                    <Tooltip placement="right" title={intl.get('DONE_TAGGING')}>
                                         <StyledButton type="ghost" onClick={this.doneTagging}>
                                             <Icon type="check" theme="outlined"
                                                   style={{fontSize: '22px', color: 'rgba(18, 175, 10, 1)'}}/>

@@ -1,43 +1,57 @@
 #lightboxBackdrop {
     z-index: 16777200 !important;
 }
+
 .datasearch__input {
     font-size: 14px !important;
     margin-top: 5px !important;
     margin-bottom: 5px !important;
 }
+
 .reactivelist__sortOptions {
     font-size: 14px !important;
     margin-top: 5px !important;
     margin-bottom: 10px !important;
 }
+
 .reactivelist__resultStats,
-.reactivelist__noResults {
+.reactivelist__noResults,
+.reactivelist__resultsInfo {
     color: white !important;
     font-size: 12px !important;
 }
+
 .datasearch__list li {
     font-size: 14px !important;
 }
+
 .multilist__label {
     font-size: 14px !important;
     color: white !important;
 }
+
 .multilist__count {
     padding-right: 10px;
     font-size: 14px !important;
     color: white !important;
 }
+
 .datasearch__title {
     margin-top: 5px !important;
     font-size: 16px !important;
     color: white !important;
 }
+
 .multilist__title {
     margin-top: -4px !important;
     font-size: 16px !important;
     color: white !important;
 }
+
+.css-1nqnto3 {
+    top: calc(50% - 12px) !important;
+}
+
 .sidebar {
     position: relative;
     overflow: hidden;
@@ -48,12 +62,15 @@
     border-radius: 4px;
     box-shadow: 2px 2px 2px rgba(30, 30, 30, 0.5);
 }
+
 .login-form-forgot {
     float: right;
 }
+
 .login-form-button {
     width: 100%;
 }
+
 .ant-avatar {
     width: 50px;
     height: 50px;
@@ -61,21 +78,26 @@
     border-radius: 50%;
     font-size: 3em !important;
 }
+
 .middle .ant-form-item-control {
     display: flex;
     justify-content: center;
 }
+
 .sidebar .ant-form-item {
     margin: 0;
 }
+
 .sidebar .ant-form-item-control {
     line-height: 29px;
 }
+
 .album-controls {
     background-color: rgba(30, 30, 30, 0.8);
     border-radius: 4px;
     box-shadow: 2px 2px 2px rgba(30, 30, 30, 0.5);
 }
+
 .album-icon {
     position: absolute;
     margin-left: 50px;
@@ -89,9 +111,11 @@
     background-color: rgba(30, 30, 30, 0.8) !important;
     box-shadow: 2px 2px 4px rgba(24, 144, 255, 0.4) !important;
 }
+
 .album-icon:hover {
     box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
 }
+
 .faces-icon {
     position: absolute;
     margin-left: 115px;
@@ -105,13 +129,16 @@
     background-color: rgba(30, 30, 30, 0.8) !important;
     box-shadow: 2px 2px 4px rgba(24, 144, 255, 0.4) !important;
 }
+
 .faces-icon:hover {
     box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
 }
+
 .react-select__control {
     background-color: transparent !important;
     border: 1px solid black !important;
 }
+
 .react-select__placeholder {
     color: white !important;
 }
@@ -121,6 +148,7 @@
     box-shadow: 2px 2px 2px rgba(30, 30, 30, 0.5) !important;
     color: white !important;
 }
+
 .react-select__option--is-focused {
     background-color: black !important;
 }
@@ -129,40 +157,52 @@
     background-color: transparent !important;
     border-style: none !important;
 }
+
 .react-select__multi-value__label {
     color: white !important;
 }
+
 .react-select__multi-value__remove {
     color: rgba(245, 34, 45, 1) !important;
 }
+
 .ant-collapse-item {
     border-bottom-style: none !important;
 }
+
 .ant-collapse-header {
     color: white !important;
     font-size: 16px !important;
 }
+
 .lightbox__tooltip {
     z-index: 16777201 !important;
 }
+
 .ant-modal-content {
-    background-color: rgba(0,0,0,0.3) !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
 }
+
 .ant-form-item-required {
     color: white !important;
 }
+
 .ant-modal {
     max-width: 300px !important;
 }
+
 .ant-modal-body {
     padding-bottom: 0 !important;
 }
+
 .ant-modal-footer {
     border-top-style: none !important;
 }
+
 .ant-form-item {
     margin-bottom: 0 !important;
 }
+
 /*
 .react-photo-gallery--gallery div img {
     height: 100% !important;

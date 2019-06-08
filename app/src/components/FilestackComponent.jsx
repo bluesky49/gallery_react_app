@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import {filestackPolicy, filestackSignature} from "../keys";
 import GalleryComponent from "./Gallery/GalleryComponent";
 import {toggleGalleryLoading, disableLoading, disableGalleryLoading, setPhotosToRender} from "../actions/dataActions";
+import intl from "react-intl-universal";
 
 // CSS starts
 const StyledWrapper = styled.div`
@@ -277,7 +278,7 @@ class FilestackComponent extends Component {
                                 height: parseInt(`${imageWidth}`, 10),
                                 sizes: '(max-width: 180px) 180px, (max-width: 360px) 360px, (max-width: 540px) 540px, (max-width: 720px) 720px, (max-width: 900px) 900px, (max-width: 1080px) 1080px, (max-width: 1296px) 1296px, (min-width: 1512px) 1512px, (max-width: 1728px) 1728px, (max-width: 1944px) 1944px, (max-width: 2160px) 2160px, (max-width: 2376px) 2376px, (max-width: 2592px) 2592px, (max-width: 2808px) 2808px, (max-width: 3024px) 3024px',
                                 srcSet: `${responseWithLightboxOptions.firstChild.attributes.srcset.textContent}`,
-                                caption: "By " + authorEmail + " on " + date + ". " + imageLocality,
+                                caption: intl.get('BY') + authorEmail + intl.get('ON') + date + ". " + imageLocality,
                                 alt: imageAlt,
                                 uuid: UUID,
                                 originalSizeSRC: `${responseWithLightboxOptions.lastChild.src}`
@@ -292,7 +293,7 @@ class FilestackComponent extends Component {
                                 height: parseInt(`${imageHeight}`, 10),
                                 sizes: '(max-width: 180px) 180px, (max-width: 360px) 360px, (max-width: 540px) 540px, (max-width: 720px) 720px, (max-width: 900px) 900px, (max-width: 1080px) 1080px, (max-width: 1296px) 1296px, (min-width: 1512px) 1512px, (max-width: 1728px) 1728px, (max-width: 1944px) 1944px, (max-width: 2160px) 2160px, (max-width: 2376px) 2376px, (max-width: 2592px) 2592px, (max-width: 2808px) 2808px, (max-width: 3024px) 3024px',
                                 srcSet: `${responseWithLightboxOptions.firstChild.attributes.srcset.textContent}`,
-                                caption: "By " + authorEmail + " on " + date + ". " + imageLocality,
+                                caption: intl.get('BY') + authorEmail + intl.get('ON') + date + ". " + imageLocality,
                                 alt: imageAlt,
                                 uuid: UUID,
                                 originalSizeSRC: `${responseWithLightboxOptions.lastChild.src}`

@@ -31,7 +31,7 @@ const StyledReactiveBase = styled(ReactiveBase)`
    flex-wrap: wrap;
 `;
 const ButtonWrapper = styled.div`
-width: 210px !important;
+width: 245px !important;
 `;
 const DisplayResultsButton = styled(Button)`
    width: 100% !important;
@@ -46,6 +46,7 @@ const SearchComponentsWrapper = styled.div`
    flex-wrap: wrap;
 `;
 const LeftColumn = styled.div`
+   min-width: 245px;
 `;
 const RightColumn = styled.div`
    display: flex;
@@ -181,6 +182,13 @@ class SearchComponent extends Component {
                                 loader="Loading..."
                                 render={this.handleSearchResult}
                                 renderNoResults={this.handleNoResults}
+                                renderResultStats={
+                                    function (stats) {
+                                        return (
+                                            `${stats.numberOfResults} ${intl.get('RESULTS')} ${intl.get('FOUND')} ${intl.get('IN')} ${stats.time} ${intl.get('MS')}`
+                                        )
+                                    }
+                                }
                                 innerClass={{
                                     resultsInfo: 'reactivelist__resultsInfo',
                                     sortOptions: 'reactivelist__sortOptions',

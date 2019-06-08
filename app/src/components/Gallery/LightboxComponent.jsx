@@ -13,9 +13,10 @@ import delay from 'delay';
 import styled from "styled-components";
 import FaceTagComponent from './FaceTagComponent';
 
-import {toggleLightbox, disableLightbox, toggleFaceTagging,toggleControls} from '../../actions/viewActions';
+import {toggleLightbox, disableLightbox, toggleFaceTagging, toggleControls} from '../../actions/viewActions';
 import {setAlbumResponse, setXcsrfToken, setAlbumOwnerID} from '../../actions/dataActions';
 import {fetchPassword, fetchUsername, prodURL} from "../../keys";
+import intl from "react-intl-universal";
 
 //CSS starts
 const StyledAlbumControls = styled.div`
@@ -197,7 +198,7 @@ class LightboxComponent extends Component {
         } else {
             return (
                 [{
-                    label: 'No albums created',
+                    label: intl.get('NO_ALBUMS'),
                     value: 'na'
                 }]
             )
@@ -423,7 +424,7 @@ class LightboxComponent extends Component {
         const albumButtons = <ControlsWrapper key="11">
             {albumsWithPhoto && albumsWithPhoto.length ?
                 <AlbumInfo>
-                    <StyledH3>Remove from Albums:</StyledH3>
+                    <StyledH3>{intl.get('REMOVE_FROM_ALBUMS')}:</StyledH3>
                     <StyledUL>
                         {albumsWithPhoto.map((item, index) => {
                                 return (
@@ -441,11 +442,11 @@ class LightboxComponent extends Component {
                         }
                     </StyledUL>
                 </AlbumInfo> :
-                <StyledH3>The photo is not in your albums yet</StyledH3>}
+                <StyledH3>{intl.get('NOT_IN_YOUR_ALBUMS')}</StyledH3>}
 
             {albumsWithoutPhoto && albumsWithoutPhoto.length ?
                 <AlbumInfo>
-                    <StyledH3>Add to Albums:</StyledH3>
+                    <StyledH3>{intl.get('REMOVE_FROM_ALBUMS')}:</StyledH3>
                     <StyledUL>
                         {albumsWithoutPhoto.map((item, index) => {
                                 return (
@@ -463,7 +464,7 @@ class LightboxComponent extends Component {
                         }
                     </StyledUL>
                 </AlbumInfo> :
-                <StyledH3>No albums</StyledH3>}
+                <StyledH3>{intl.get('NO_ALBUMS')}</StyledH3>}
         </ControlsWrapper>;
         const state = this.state.open ? 'open' : 'close';
         const items = [
@@ -474,7 +475,7 @@ class LightboxComponent extends Component {
                 color: albumsWithPhoto && albumsWithPhoto.length ? "rgba(18, 175, 10, 1)" : "#1890ff",
                 className: "album-icon"
             }}>
-                <Tooltip placement="bottom" title="Manage albums" overlayClassName="lightbox__tooltip">
+                <Tooltip placement="bottom" title={intl.get('MANAGE_ALBUMS')} overlayClassName="lightbox__tooltip">
                     <IoMdImages onClick={this.toggle}/>
                 </Tooltip>
             </IconContext.Provider>
@@ -484,7 +485,7 @@ class LightboxComponent extends Component {
                     color: albumsWithPhoto && albumsWithPhoto.length ? "rgba(18, 175, 10, 1)" : "#1890ff",
                     className: "faces-icon"
                 }}>
-                    <Tooltip placement="bottom" title="Tag attendees" overlayClassName="lightbox__tooltip">
+                    <Tooltip placement="bottom" title={intl.get('TAG_ATTENDEES')} overlayClassName="lightbox__tooltip">
                         <MdFace onClick={this.toggleFaceTag}/>
                     </Tooltip>
 
@@ -532,6 +533,9 @@ class LightboxComponent extends Component {
                                   currentImage={this.state.currentImage}
                                   isOpen={false}
                                   customControls={[albumControls]}
+                                  leftArrowTitle={intl.get('PREVIOUS_PHOTO')}
+                                  rightArrowTitle={intl.get('NEXT_PHOTO')}
+                                  closeButtonTitle={intl.get('CLOSE')}
                                   ref={this.lightboxRef}/>
                     </React.Fragment>
                     :
@@ -546,6 +550,10 @@ class LightboxComponent extends Component {
                                   currentImage={this.state.currentImage}
                                   isOpen={this.props.view.lightboxIsOpen}
                                   customControls={[albumControls]}
+                                  leftArrowTitle={intl.get('PREVIOUS_PHOTO')}
+                                  rightArrowTitle={intl.get('NEXT_PHOTO')}
+                                  closeButtonTitle={intl.get('CLOSE')}
+                                  imageCountSeparator={intl.get('FROM')}
                                   ref={this.lightboxRef}/>
                     </React.Fragment>
                 }

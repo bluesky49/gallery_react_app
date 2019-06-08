@@ -11,6 +11,7 @@ import SpinnerComponent from "./SpinnerComponent";
 import axios from "axios";
 import _ from 'lodash';
 import {fetchPassword, fetchUsername, prodURL} from "../keys";
+import intl from "react-intl-universal";
 
 
 //CSS starts
@@ -242,7 +243,7 @@ class TopBarComponent extends Component {
         const albumButtons = <ControlsWrapper key="11314">
             {albums && albums.length ?
                 <AlbumInfo>
-                    <StyledH3>Add all displayed photos to albums:</StyledH3>
+                    <StyledH3>{intl.get('ADD_ALL_PHOTOS')}:</StyledH3>
                     <StyledUL>
                         {albums.map((item, index) => {
                                 return (
@@ -260,7 +261,7 @@ class TopBarComponent extends Component {
                         }
                     </StyledUL>
                 </AlbumInfo> :
-                <StyledH3>No albums</StyledH3>}
+                <StyledH3>{intl.get('NO_ALBUMS')}</StyledH3>}
         </ControlsWrapper>;
         const state = this.state.open ? 'open' : 'close';
         const items = [
