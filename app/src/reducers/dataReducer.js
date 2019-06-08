@@ -29,7 +29,7 @@ const initialState = {
     searchResult: ['empty'],
     xcsrfToken: 'empty',
     searchResultIsShown: false,
-    language: 'en'
+    language: 'fr'
 };
 
 export default function (state = initialState, action) {

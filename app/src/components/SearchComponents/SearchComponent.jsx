@@ -137,6 +137,7 @@ class SearchComponent extends Component {
                                 dataField={["image_face_names", "author_last_name", "author_first_name", "author_email",
                                     "attendee_group", "image_locality"]}
                                 autosuggest={true}
+                                placeholder={intl.get('SEARCH')}
                                 innerClass={{
                                     title: 'datasearch__title',
                                     input: 'datasearch__input',
@@ -146,10 +147,10 @@ class SearchComponent extends Component {
                             <DataSearch
                                 showClear={true}
                                 componentId="SearchAttendee"
-                                title="Filter by attendee"
+                                title={intl.get('FILTER_BY_ATTENDEE')}
                                 dataField={["image_face_names"]}
                                 autosuggest={true}
-                                placeholder={"Enter attendee's name"}
+                                placeholder={intl.get('ENTER_ATTENDEE’S_NAME')}
                                 innerClass={{
                                     title: 'datasearch__title',
                                     input: 'datasearch__input',
@@ -159,10 +160,10 @@ class SearchComponent extends Component {
                             <DataSearch
                                 showClear={true}
                                 componentId="SearchAuthor"
-                                title="Filter by author"
+                                title={intl.get('FILTER_BY_AUTHOR')}
                                 dataField={["author_last_name", "author_first_name", "author_email"]}
                                 autosuggest={true}
-                                placeholder={"Enter author's name"}
+                                placeholder={intl.get('ENTER_AUTHOR’S_NAME')}
                                 innerClass={{
                                     title: 'datasearch__title',
                                     input: 'datasearch__input',
@@ -198,7 +199,7 @@ class SearchComponent extends Component {
                             <MultiList
                                 componentId="multiList_attendee_group"
                                 dataField="attendee_group"
-                                title="Attendee group"
+                                title={intl.get('ATTENDEE_GROUP')}
                                 showSearch={false}
                                 showCheckbox={true}
                                 innerClass={{
@@ -213,7 +214,7 @@ class SearchComponent extends Component {
                             <MultiList
                                 componentId="multiList_image_moment"
                                 dataField="image_moment"
-                                title="Moment"
+                                title={intl.get('MOMENT')}
                                 showSearch={false}
                                 showCheckbox={true}
                                 innerClass={{
@@ -228,7 +229,7 @@ class SearchComponent extends Component {
                             <MultiList
                                 componentId="multiList_locality"
                                 dataField="image_locality"
-                                title="Location"
+                                title={intl.get('LOCATION')}
                                 showSearch={false}
                                 showCheckbox={true}
                                 innerClass={{
@@ -249,7 +250,7 @@ class SearchComponent extends Component {
                             </DisplayResultsButton>
                             :
                             <StyledNoResults>
-                                No results
+                                {intl.get('NO_RESULTS')}
                             </StyledNoResults>
                         }
                     </ButtonWrapper>
