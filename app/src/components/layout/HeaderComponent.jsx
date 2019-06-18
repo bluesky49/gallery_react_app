@@ -9,10 +9,13 @@ import Moment from 'react-moment';
 //CSS starts
 const StyledHeader = styled.div`
    width: 100%;
-   height: 60px;
+   min-height: 60px;
    padding: 10px 15px 15px 265px;
    font-size: 26px;
    font-weight: bold;
+   @media (max-width: 1000px) {
+    padding: 60px 15px 15px 25px;
+  }
 `;
 
 //CSS ends
