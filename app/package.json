@@ -20,6 +20,7 @@
     "react-images": "^0.5.19",
     "react-intl-universal": "^2.0.3",
     "react-measure": "^2.2.2",
+    "react-moment": "^0.9.2",
     "react-photo-gallery": "^7.0.2",
     "react-redux": "^7.0.0-beta.0",
     "react-scripts": "3.0.1",

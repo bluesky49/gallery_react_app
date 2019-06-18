@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import SidebarComponent from "./components/SidebarComponent";
 import TopBarComponent from "./components/TopBarComponent";
 import FilestackComponent from "./components/FilestackComponent";
+import HeaderComponent from "./components/layout/HeaderComponent";
 import {Pagination} from "antd";
 import Pusher from 'pusher-js';
 import {Badge, Icon} from 'antd';
@@ -46,8 +47,8 @@ const PaginationWrapper = styled.div`
 `;
 const StyledBadge = styled(Badge)`
    position: absolute;
-   padding: 7px 15px;
-   top: 24px;
+   padding: 6px 15px;
+   top: 15px;
    right: 120px;
    cursor: pointer;
    z-index: 9999;
@@ -107,7 +108,7 @@ class App extends React.Component {
         await this.props.setLanguage(drupalSettings.language);
         const pusherKey = drupalSettings.pusherKey;
         const pusherCluster = drupalSettings.pusherCluster;
-        /*const pusherKey = 'cca8fcdd475e44334b1c';
+      /*  const pusherKey = 'cca8fcdd475e44334b1c';
         const pusherCluster = 'eu';*/
 
         const pusher = new Pusher(pusherKey, {
@@ -176,6 +177,7 @@ class App extends React.Component {
             initDone ?
                 <LocaleProvider locale={AntdLocale}>
                     <StyledWrapper>
+                        <HeaderComponent/>
                         {newPuzzles > 0 ?
                             <StyledBadge count={newPuzzles} onClick={this.handleRefreshClick}>
                                 <Icon type="sync" theme="outlined" style={{fontSize: 20}}/>

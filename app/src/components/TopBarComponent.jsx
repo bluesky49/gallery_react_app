@@ -17,7 +17,7 @@ import intl from "react-intl-universal";
 //CSS starts
 const StyledAlbumControls = styled.div`
    position: absolute;
-   top: 62px;
+   top: 54px;
    left: 95px;
    background-color: transparent;
    z-index: 2147483646;

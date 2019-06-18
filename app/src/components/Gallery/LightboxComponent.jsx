@@ -446,7 +446,7 @@ class LightboxComponent extends Component {
 
             {albumsWithoutPhoto && albumsWithoutPhoto.length ?
                 <AlbumInfo>
-                    <StyledH3>{intl.get('REMOVE_FROM_ALBUMS')}:</StyledH3>
+                    <StyledH3>{intl.get('ADD_TO_ALBUMS')}:</StyledH3>
                     <StyledUL>
                         {albumsWithoutPhoto.map((item, index) => {
                                 return (

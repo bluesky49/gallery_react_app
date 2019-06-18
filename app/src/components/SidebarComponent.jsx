@@ -22,7 +22,7 @@ const StyledSidebar = styled.div`
 `;
 const StyledIcon = styled(Icon)`
 position: absolute;
-    margin: 20px 20px 20px 25px;
+    margin: 10px 20px 20px 25px;
     color: #1890ff;
     font-size: 20px;
     cursor: pointer;

@@ -15,7 +15,7 @@ const StyledFullScreen = styled.div`
 const ButtonWrapper = styled.div`
     text-align: right;
     position: absolute;
-    top: 25px;
+    top: 15px;
     right: 30px;
     z-index: 9999;
 `;
