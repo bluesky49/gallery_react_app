@@ -203,6 +203,24 @@
     margin-bottom: 0 !important;
 }
 
+.ant-pagination-item-active,
+.ant-pagination-item-active a,
+.ant-pagination-item a:hover,
+.ant-pagination-item:hover {
+    border-color: #B01F5F !important;
+    color: #B01F5F !important;
+}
+
+.ant-btn-primary {
+    background-color: #B01F5F !important;
+    border-style: none !important;
+    box-shadow: 1px 1px 4px rgba(20, 20, 20, 0.6);
+}
+
+.ant-btn-primary:hover {
+    box-shadow: 1px 1px 8px rgba(20, 20, 20, 1);
+}
+
 /*
 .react-photo-gallery--gallery div img {
     height: 100% !important;

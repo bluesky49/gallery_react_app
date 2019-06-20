@@ -48,7 +48,7 @@ function gallery_preprocess_paragraph__gallery(&$variables)
 
     // Set component settings into drupal settings.
     $code = \Drupal::request()->get('EventAccessCode');
-    $attendee = \Drupal::request()->get('Attendee');
+    $attendee = $variables['user']->getDisplayName();
 
     $variables['#attached']['drupalSettings']['eventAccessCode'] = $code;
     $variables['#attached']['drupalSettings']['attendee'] = $attendee;

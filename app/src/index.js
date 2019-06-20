@@ -6,10 +6,14 @@ import * as serviceWorker from './serviceWorker';
 import FullscreenComponent from "./components/FullscreenComponent";
 import {Provider} from "react-redux";
 import store from "./store";
+import {ThemeProvider} from "styled-components";
+import {theme} from "./shared/theme";
 
 ReactDOM.render(
     <Provider store={store}>
-        <FullscreenComponent/>
+        <ThemeProvider theme={theme}>
+            <FullscreenComponent/>
+        </ThemeProvider>
     </Provider>, document.getElementById('gallery'));
 
 // If you want your app to work offline and load faster, you can change

@@ -48,11 +48,12 @@ class HeaderComponent extends Component {
             }
         })
             .then(response => {
-                this.setState({
-                    eventName: response.data.data[0].attributes.title,
-                    eventDate: response.data.data[0].attributes.field_event_date,
-                    eventLocation: response.data.data[0].attributes.field_event_location
+                const attributes = response.data.data[0].attributes;
 
+                this.setState({
+                    eventName: attributes.title,
+                    eventDate: attributes.field_event_date,
+                    eventLocation: attributes.field_event_address ? attributes.field_event_address.locality : null
                 })
             })
             .catch(error => console.log(error));

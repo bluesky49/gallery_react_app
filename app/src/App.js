@@ -155,6 +155,11 @@ class App extends React.Component {
     };
 
     render() {
+        const {attendee} = this.props.data;
+        let securityCheck = false;
+        if (attendee && attendee !== "Anonymous" && attendee !== "Anonyme") {
+            securityCheck = true;
+        }
         const {newPuzzles, initDone} = this.state;
         const currentLocale = this.props.data.language;
         let AntdLocale;
@@ -174,7 +179,7 @@ class App extends React.Component {
         }
 
         return (
-            initDone ?
+            initDone && securityCheck ?
                 <LocaleProvider locale={AntdLocale}>
                     <StyledWrapper>
                         <HeaderComponent/>
