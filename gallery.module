@@ -61,4 +61,7 @@ function gallery_preprocess_paragraph__gallery(&$variables)
 
     $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $variables['#attached']['drupalSettings']['language'] = $language;
+
+    $isAnonymous = \Drupal::currentUser()->isAnonymous();
+    $variables['#attached']['drupalSettings']['isAnonymous'] = $isAnonymous;
 }

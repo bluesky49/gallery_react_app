@@ -73,7 +73,8 @@ class App extends React.Component {
         this.state = {
             pusherUpdate: [],
             newPuzzles: 0,
-            initDone: false
+            initDone: false,
+            isAnonymous: null
         };
     }
 
@@ -108,6 +109,11 @@ class App extends React.Component {
         await this.props.setLanguage(drupalSettings.language);
         const pusherKey = drupalSettings.pusherKey;
         const pusherCluster = drupalSettings.pusherCluster;
+
+        this.setState({
+            isAnonymous: drupalSettings.isAnonymous
+        });
+
         /*const pusherKey = 'cca8fcdd475e44334b1c';
         const pusherCluster = 'eu';*/
 
@@ -155,12 +161,7 @@ class App extends React.Component {
     };
 
     render() {
-        const {attendee} = this.props.data;
-        let securityCheck = false;
-        if (attendee && attendee !== "Anonymous" && attendee !== "Anonyme") {
-            securityCheck = true;
-        }
-        const {newPuzzles, initDone} = this.state;
+        const {newPuzzles, initDone, isAnonymous} = this.state;
         const currentLocale = this.props.data.language;
         let AntdLocale;
         switch (currentLocale) {
@@ -179,7 +180,7 @@ class App extends React.Component {
         }
 
         return (
-            initDone && securityCheck ?
+            initDone && !isAnonymous ?
                 <LocaleProvider locale={AntdLocale}>
                     <StyledWrapper>
                         <HeaderComponent/>
