@@ -111,7 +111,7 @@ class App extends React.Component {
         const pusherCluster = drupalSettings.pusherCluster;
 
         this.setState({
-            isAnonymous: drupalSettings.isAnonymous
+            isAnonymous: drupalSettings.isAnonymous//false
         });
 
         /*const pusherKey = 'cca8fcdd475e44334b1c';
@@ -124,7 +124,7 @@ class App extends React.Component {
 
         const channel = pusher.subscribe(
             drupalSettings.eventAccessCode
-            //this.props.data.eventAccessCode
+            /*this.props.data.eventAccessCode*/
         );
         channel.bind('upload', data => {
 
