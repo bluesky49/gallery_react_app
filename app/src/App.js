@@ -40,7 +40,6 @@ const StyledGallery = styled.div`
 `;
 
 const PaginationWrapper = styled.div`
-   display: flex;
    justify-content: center;
    align-items: center;
    margin: 20px;
@@ -109,7 +108,6 @@ class App extends React.Component {
         await this.props.setLanguage(drupalSettings.language);
         const pusherKey = drupalSettings.pusherKey;
         const pusherCluster = drupalSettings.pusherCluster;
-
         this.setState({
             isAnonymous: drupalSettings.isAnonymous//false
         });
@@ -124,7 +122,7 @@ class App extends React.Component {
 
         const channel = pusher.subscribe(
             drupalSettings.eventAccessCode
-            /*this.props.data.eventAccessCode*/
+            //this.props.data.eventAccessCode
         );
         channel.bind('upload', data => {
 
@@ -195,11 +193,12 @@ class App extends React.Component {
 
                         <StyledGallery>
                             <FilestackComponent/>
-                            {!this.props.view.faceTaggingIsOpen ?
-                                <PaginationWrapper>
-                                    <Pagination onChange={this.onChange} defaultPageSize={50}
-                                                total={this.props.data.totalResults}/>
-                                </PaginationWrapper> : null}
+                            <PaginationWrapper style={{
+                                display: this.props.view.faceTaggingIsOpen ? "none" : "flex"
+                            }}>
+                                <Pagination onChange={this.onChange} defaultPageSize={50}
+                                            total={this.props.data.totalResults}/>
+                            </PaginationWrapper>
                         </StyledGallery>
                     </StyledWrapper>
                 </LocaleProvider>

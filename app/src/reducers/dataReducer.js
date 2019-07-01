@@ -22,8 +22,8 @@ const initialState = {
     photosToRender: ['empty'],
     isLoading: true,
     galleryIsLoading: false,
-    eventAccessCode: 'empty',//'697652',//444121//332280//767056
-    attendee: 'empty',//salon2@mariage.pro//test@frank.fr//eric.ferment@wanadoo.fr
+    eventAccessCode: 'empty',//'697652',//444121//332280//767056//589089
+    attendee: 'empty',//salon2@mariage.pro//test@frank.fr//eric.ferment@wanadoo.fr//Fbracq@eventstory.live
     albumOwnerID: 'empty',
     totalResults: null,
     searchResult: ['empty'],
