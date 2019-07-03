@@ -22,14 +22,14 @@ const initialState = {
     photosToRender: ['empty'],
     isLoading: true,
     galleryIsLoading: false,
-    eventAccessCode: 'empty',//'697652',//444121//332280//767056//589089
-    attendee: 'empty',//salon2@mariage.pro//test@frank.fr//eric.ferment@wanadoo.fr//Fbracq@eventstory.live
+    eventAccessCode: '589089',//'697652',//444121//332280//767056//589089
+    attendee: 'Fbracq@eventstory.live',//salon2@mariage.pro//test@frank.fr//eric.ferment@wanadoo.fr//Fbracq@eventstory.live
     albumOwnerID: 'empty',
     totalResults: null,
     searchResult: ['empty'],
     xcsrfToken: 'empty',
     searchResultIsShown: false,
-    language: 'empty'
+    language: 'en'
 };
 
 export default function (state = initialState, action) {

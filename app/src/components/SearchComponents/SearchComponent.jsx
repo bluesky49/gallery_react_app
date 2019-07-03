@@ -182,6 +182,13 @@ class SearchComponent extends Component {
                                 loader="Loading..."
                                 render={this.handleSearchResult}
                                 renderNoResults={this.handleNoResults}
+                                sortOptions={[
+                                    {
+                                        "label": "By date",
+                                        "dataField": "image_date",
+                                        "sortBy": "desc"
+                                    }
+                                ]}
                                 renderResultStats={
                                     function (stats) {
                                         return (

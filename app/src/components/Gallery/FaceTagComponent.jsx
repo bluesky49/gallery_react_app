@@ -8,7 +8,7 @@ import _ from 'lodash';
 import SpinnerComponent from "../SpinnerComponent";
 
 import {toggleFaceTagging} from '../../actions/viewActions';
-import {Button, Icon, Tooltip, Modal, Form, Input} from "antd";
+import {Button, Icon, Tooltip, Modal, Form, Input, AutoComplete} from "antd";
 import axios from "axios";
 import {fetchPassword, fetchUsername, prodURL} from "../../keys";
 import intl from "react-intl-universal";
@@ -81,8 +81,9 @@ const FormInModal = Form.create({name: 'form_in_modal'})(
     class extends React.Component {
         render() {
             const {
-                visible, onCancel, onCreate, form,
+                visible, onCancel, onCreate, form, dataSource
             } = this.props;
+
             const {getFieldDecorator} = form;
             return (
                 <Modal
@@ -102,8 +103,11 @@ const FormInModal = Form.create({name: 'form_in_modal'})(
                                 }, {
                                     required: true, message: 'Enter name',
                                 }],
-                            })(
-                                <Input placeholder={this.props.currentAttendeeName}/>
+                            })(<AutoComplete
+                                    dataSource={dataSource}
+                                >
+                                    <Input placeholder={this.props.currentAttendeeName}/>
+                                </AutoComplete>
                             )}
                         </Form.Item>
                     </Form>
@@ -125,7 +129,9 @@ class FaceTagComponent extends Component {
             currentAttendeeCoords: null,
             hoveredArea: null,
             isLoading: true,
-            nameFetching: false
+            nameFetching: false,
+            registeredAttendees: null,
+            dataSource: []
         }
     }
 
@@ -201,6 +207,50 @@ class FaceTagComponent extends Component {
                 console.log(error.config);
             });
     };
+    getRegisteredAttendees = () => {
+        const {eventAccessCode} = this.props.data;
+        axios({
+            method: 'get',
+            url: `${prodURL}/jsonapi/node/attendee/?filter[field_event_reference.field_event_access_code][value]=${eventAccessCode}&fields[node--attendee]=field_full_name`,
+            auth: {
+                username: `${fetchUsername}`,
+                password: `${fetchPassword}`
+            },
+            headers: {
+                'Accept': 'application/vnd.api+json',
+                'Content-Type': 'application/vnd.api+json'
+            }
+        })
+            .then(res => {
+                const responseData = res.data.data;
+                const filtered = responseData.filter(item => item.attributes.field_full_name);
+                const attendeeNames = filtered.map(item => item.attributes.field_full_name);
+
+                this.setState({
+                    registeredAttendees: responseData,
+                    dataSource: attendeeNames
+                });
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+            });
+    };
+
     handleCreate = () => {
         const form = this.formRef.props.form;
         form.validateFields((err, values) => {
@@ -300,12 +350,13 @@ class FaceTagComponent extends Component {
 
     componentDidMount() {
         this.getFaceData();
+        this.getRegisteredAttendees();
     }
 
     render() {
         const {currentImage} = this.props;
         const maxWidth = this.props.data.photosToRender[currentImage].width;
-        const {width, isLoading, currentAttendeeName, hoveredArea, visible, faceData, nameFetching} = this.state;
+        const {width, isLoading, currentAttendeeName, hoveredArea, visible, faceData, nameFetching, dataSource} = this.state;
         const src = this.props.data.photosToRender[currentImage].originalSizeSRC;
 
         return (
@@ -345,13 +396,16 @@ class FaceTagComponent extends Component {
                                     </AttendeeTooltip> : null}
 
                             </FaceTaggingInner>
+
                             <FormInModal
                                 wrappedComponentRef={this.saveFormRef}
                                 visible={visible}
                                 onCancel={this.handleCancel}
                                 onCreate={this.handleCreate}
                                 currentAttendeeName={currentAttendeeName}
+                                dataSource={dataSource}
                             />
+
                         </FaceTaggingWrapper>
                     )}
                 </Measure>
@@ -367,6 +421,8 @@ FaceTagComponent.propTypes = {
     photosToRender: PropTypes.array,
     finalResponse: PropTypes.array,
     xcsrfToken: PropTypes.string,
+    eventAccessCode: PropTypes.string
+
 };
 
 const
