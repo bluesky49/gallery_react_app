@@ -59,6 +59,12 @@ const RightColumn = styled.div`
    margin-right: 10px;
    }
 `;
+const StyledMultilist = styled(MultiList)`
+   @media (min-width: 600px) {
+   margin-left: 10px;
+   margin-right: 10px;
+   }
+`;
 
 // CSS ends
 
@@ -211,7 +217,7 @@ class SearchComponent extends Component {
                         </LeftColumn>
 
                         <RightColumn>
-                            <MultiList
+                            <StyledMultilist
                                 componentId="multiList_attendee_group"
                                 dataField="attendee_group"
                                 title={intl.get('ATTENDEE_GROUP')}
@@ -226,7 +232,7 @@ class SearchComponent extends Component {
                                     count: 'multilist__count'
                                 }}
                             />
-                            <MultiList
+                            <StyledMultilist
                                 componentId="multiList_image_moment"
                                 dataField="image_moment"
                                 title={intl.get('MOMENT')}
@@ -241,7 +247,7 @@ class SearchComponent extends Component {
                                     count: 'multilist__count'
                                 }}
                             />
-                            <MultiList
+                            <StyledMultilist
                                 componentId="multiList_locality"
                                 dataField="image_locality"
                                 title={intl.get('LOCATION')}

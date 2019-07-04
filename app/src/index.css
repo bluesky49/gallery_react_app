@@ -9,9 +9,13 @@
 }
 
 .reactivelist__sortOptions {
-    font-size: 14px !important;
-    margin-top: 5px !important;
+    font-size: 12px !important;
+    margin-top: 10px !important;
     margin-bottom: 10px !important;
+    background-color: transparent !important;
+    border-style: none !important;
+    outline-color: transparent !important;
+    color: white !important;
 }
 
 .reactivelist__resultStats,
@@ -19,6 +23,9 @@
 .reactivelist__resultsInfo {
     color: white !important;
     font-size: 12px !important;
+}
+.reactivelist__resultsInfo {
+   justify-content: space-between !important;
 }
 
 .datasearch__list li {
