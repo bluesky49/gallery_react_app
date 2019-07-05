@@ -125,6 +125,7 @@ class FaceTagComponent extends Component {
             visible: false,
             faceData: null,
             faceNames: null,
+            fieldPeople: null,
             currentAttendeeName: null,
             currentAttendeeCoords: null,
             hoveredArea: null,
@@ -178,7 +179,8 @@ class FaceTagComponent extends Component {
         }).then(res => {
                 this.setState({
                     faceData: JSON.parse(res.data.data.attributes.field_image_face_rectangles),
-                    faceNames: res.data.data.attributes.field_image_face_names
+                    faceNames: res.data.data.attributes.field_image_face_names,
+                    fieldPeople: res.data.data.relationships.field_people.data
                 })
             }
         )
@@ -262,40 +264,75 @@ class FaceTagComponent extends Component {
             const {currentImage} = this.props;
             const uuid = this.props.data.finalResponse[currentImage].uuid[0];
             const areas = this.state.faceData.areas;
-            const {currentAttendeeName, currentAttendeeCoords, faceNames} = this.state;
+            const {currentAttendeeName, currentAttendeeCoords, faceNames, registeredAttendees, fieldPeople} = this.state;
             const enteredName = values.name;
+            let dataBody;
+
+            const validatedAttendee = registeredAttendees.find(item => item.attributes.field_full_name === enteredName);//Validating if attendee is registered
 
             const newAreas = areas.map(i => {
-                if (_.isEqual(i.coords, currentAttendeeCoords)) {
+                if (_.isEqual(i.coords, currentAttendeeCoords) && validatedAttendee) {
+                    i = {...i, name: enteredName, UUID: validatedAttendee.id};//add UUID for registered attendees
+                } else if (_.isEqual(i.coords, currentAttendeeCoords) && !validatedAttendee) {
                     i = {...i, name: enteredName};
                 }
                 return i;
             });
 
-            const multipleNames = newAreas.some(i => i.name === currentAttendeeName);
-
             const newFaceData = {...this.state.faceData, areas: newAreas};
 
-            const nameAlreadyIncluded = faceNames.includes(enteredName);
-            const currentNameAlreadyIncluded = faceNames.includes(currentAttendeeName);
+            if (validatedAttendee) {
+                const attendeeAlreadyAdded = fieldPeople.some(item => item.id === validatedAttendee.id);//check if entered attendee is already in field_people
+                if (!attendeeAlreadyAdded) {
+                    const newFieldPeople = [...fieldPeople,
+                        {
+                            "type": "node--attendee",
+                            "id": validatedAttendee.id
+                        }
+                    ];
 
-            if (!nameAlreadyIncluded) {
-                if (currentNameAlreadyIncluded && !multipleNames) {
-                    faceNames[faceNames.indexOf(currentAttendeeName)] = enteredName;
-                } else {
-                    faceNames.push(enteredName)
+                    dataBody = {
+                        "type": "node--puzzle",
+                        "id": uuid,
+                        "attributes": {
+                            "field_image_face_rectangles": JSON.stringify(newFaceData)
+                        },
+                        "relationships": {
+                            "field_people": {
+                                "data": newFieldPeople
+                            }
+                        }
+                    }
+                }
+            } else {
+                const multipleNames = newAreas.some(i => i.name === currentAttendeeName);
+                const nameAlreadyIncluded = faceNames.includes(enteredName);
+                const currentNameAlreadyIncluded = faceNames.includes(currentAttendeeName);
+
+                if (!nameAlreadyIncluded) {
+                    if (currentNameAlreadyIncluded && !multipleNames) {
+                        faceNames[faceNames.indexOf(currentAttendeeName)] = enteredName;
+                    } else {
+                        faceNames.push(enteredName)
+                    }
+                }
+
+                const attributes = nameAlreadyIncluded ?
+                    {
+                        "field_image_face_rectangles": JSON.stringify(newFaceData),
+                    }
+                    :
+                    {
+                        "field_image_face_rectangles": JSON.stringify(newFaceData),
+                        "field_image_face_names": faceNames
+                    };
+
+                dataBody = {
+                    "type": "node--puzzle",
+                    "id": uuid,
+                    "attributes": attributes
                 }
             }
-
-            const attributes = nameAlreadyIncluded ?
-                {
-                    "field_image_face_rectangles": JSON.stringify(newFaceData),
-                }
-                :
-                {
-                    "field_image_face_rectangles": JSON.stringify(newFaceData),
-                    "field_image_face_names": faceNames
-                };
 
             axios({
                 method: 'patch',
@@ -310,11 +347,7 @@ class FaceTagComponent extends Component {
                     'X-CSRF-Token': this.props.data.xcsrfToken
                 },
                 data: {
-                    "data": {
-                        "type": "node--puzzle",
-                        "id": uuid,
-                        "attributes": attributes
-                    }
+                    "data": dataBody
                 }
             })
                 .then(res => {
