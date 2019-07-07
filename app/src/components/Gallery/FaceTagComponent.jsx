@@ -280,7 +280,7 @@ class FaceTagComponent extends Component {
                 if (_.isEqual(i.coords, currentAttendeeCoords) && validatedAttendee) {
                     i = {...i, name: enteredName, UUID: validatedAttendee.id};//add UUID for registered attendees
                 } else if (_.isEqual(i.coords, currentAttendeeCoords) && !validatedAttendee) {
-                    i = {...i, name: enteredName};
+                    i = {...i, name: enteredName, UUID: null};
                 }
                 return i;
             });
@@ -291,33 +291,33 @@ class FaceTagComponent extends Component {
             if (validatedAttendee) {
                 const filteredFaceNames = faceNames.filter(item => item !== currentAttendeeName); //remove existing name
 
-                    const newFieldPeople = [...filteredFieldPeople,
-                        {
-                            "type": "node--attendee",
-                            "id": validatedAttendee.id
-                        }
-                    ];
+                const newFieldPeople = [...filteredFieldPeople,
+                    {
+                        "type": "node--attendee",
+                        "id": validatedAttendee.id
+                    }
+                ];
 
-                    const attributes = multipleNames ?
-                        {
-                            "field_image_face_rectangles": JSON.stringify(newFaceData),
-                        }
-                        :
-                        {
-                            "field_image_face_rectangles": JSON.stringify(newFaceData),
-                            "field_image_face_names": filteredFaceNames //delete from this field
-                        };
+                const attributes = multipleNames ?
+                    {
+                        "field_image_face_rectangles": JSON.stringify(newFaceData),
+                    }
+                    :
+                    {
+                        "field_image_face_rectangles": JSON.stringify(newFaceData),
+                        "field_image_face_names": filteredFaceNames //delete from this field
+                    };
 
-                    dataBody = {
-                        "type": "node--puzzle",
-                        "id": uuid,
-                        "attributes": attributes,
-                        "relationships": {
-                            "field_people": {
-                                "data": newFieldPeople
-                            }
+                dataBody = {
+                    "type": "node--puzzle",
+                    "id": uuid,
+                    "attributes": attributes,
+                    "relationships": {
+                        "field_people": {
+                            "data": newFieldPeople
                         }
                     }
+                }
             } else {
                 const nameAlreadyIncluded = faceNames.includes(enteredName);
                 const currentNameAlreadyIncluded = faceNames.includes(currentAttendeeName);
@@ -365,18 +365,7 @@ class FaceTagComponent extends Component {
                     'X-CSRF-Token': this.props.data.xcsrfToken
                 },
                 data: {
-                    "data": dataBody /*{
-                "type": "node--puzzle",
-                    "id": uuid,
-                    "attributes": {
-                    "field_image_face_names": null
-                },
-                "relationships": {
-                    "field_people": {
-                        "data": null
-                    }
-                }
-            }*/
+                    "data": dataBody
                 }
             })
                 .then(res => {

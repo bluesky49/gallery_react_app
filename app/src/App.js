@@ -103,18 +103,18 @@ class App extends React.Component {
     async componentDidMount() {
         /*global drupalSettings:true*/
         /*eslint no-undef: "error"*/
-        /*this.props.setEventCode(drupalSettings.eventAccessCode);
+        this.props.setEventCode(drupalSettings.eventAccessCode);
         this.props.setAttendee(drupalSettings.attendee);
         await this.props.setLanguage(drupalSettings.language);
         const pusherKey = drupalSettings.pusherKey;
-        const pusherCluster = drupalSettings.pusherCluster;*/
+        const pusherCluster = drupalSettings.pusherCluster;
 
         this.setState({
-            isAnonymous: false//drupalSettings.isAnonymous
+            isAnonymous: drupalSettings.isAnonymous//false
         });
 
-        const pusherKey = 'cca8fcdd475e44334b1c';
-        const pusherCluster = 'eu';
+        /*const pusherKey = 'cca8fcdd475e44334b1c';
+        const pusherCluster = 'eu';*/
 
         const pusher = new Pusher(pusherKey, {
             cluster: pusherCluster,
@@ -122,8 +122,8 @@ class App extends React.Component {
         });
 
         const channel = pusher.subscribe(
-            //drupalSettings.eventAccessCode
-            this.props.data.eventAccessCode
+            drupalSettings.eventAccessCode
+            //this.props.data.eventAccessCode
         );
         channel.bind('upload', data => {
 
