@@ -4,6 +4,7 @@
     <list default="true" id="a64dbb82-062f-4db9-bfe4-227ddf365b6a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/Gallery/FaceTagComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Gallery/FaceTagComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,20 +20,11 @@
   <component name="DrupalConfiguration" enabled="true" updateIncludePath="false" version="8">
     <drupalPath />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="gallery" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/App.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4048">
-              <caret line="213" column="13" selection-start-line="213" selection-end-line="214" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/package.json">
           <provider selected="true" editor-type-id="text-editor">
@@ -57,8 +49,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/FaceTagComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="593">
-              <caret line="304" column="21" lean-forward="true" selection-start-line="304" selection-start-column="21" selection-end-line="304" selection-end-column="21" />
+            <state relative-caret-position="308">
+              <caret line="319" column="21" selection-start-line="319" selection-start-column="21" selection-end-line="319" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6776">
+              <caret line="326" column="59" selection-start-line="326" selection-start-column="53" selection-end-line="326" selection-end-column="59" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -155,7 +159,6 @@
       <find>item.image_rotation !== undefined</find>
       <find>loader</find>
       <find>LightboxComponent</find>
-      <find>currentAttendeeName</find>
       <find>console</find>
       <find>spinner</find>
       <find>Filter by attendee</find>
@@ -168,8 +171,9 @@
       <find>albumResponse</find>
       <find>setAlbumResponse</find>
       <find>.reactivelist__sortOptions</find>
-      <find>.reactivelist__sortOptions</find>
       <find>reactivelist__resultsInfo</find>
+      <find>currentAttendeeName</find>
+      <find>filter</find>
     </findStrings>
     <replaceStrings>
       <replace>grid_gallery</replace>
@@ -277,6 +281,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -350,7 +355,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -572,19 +576,20 @@
       <workItem from="1562066486978" duration="1260000" />
       <workItem from="1562134323386" duration="14612000" />
       <workItem from="1562227507985" duration="10980000" />
-      <workItem from="1562311911547" duration="9024000" />
+      <workItem from="1562311911547" duration="16629000" />
+      <workItem from="1562483903969" duration="6588000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1076723000" />
+    <option name="totallyTimeSpent" value="1090916000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.15778251" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49865228" visible="true" weight="0.15778251" />
+      <window_info id="Favorites" order="1" sideWeight="0.5013477" side_tool="true" weight="0.15778251" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Tail" order="0" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
@@ -850,16 +855,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1979">
-          <caret line="326" column="90" selection-start-line="326" selection-start-column="53" selection-end-line="326" selection-end-column="90" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4048">
@@ -881,6 +876,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5720">
           <caret line="273" column="77" selection-start-line="273" selection-start-column="27" selection-end-line="273" selection-end-column="87" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6776">
+          <caret line="326" column="59" selection-start-line="326" selection-start-column="53" selection-end-line="326" selection-end-column="59" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -940,8 +945,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/components/Gallery/FaceTagComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="304" column="21" lean-forward="true" selection-start-line="304" selection-start-column="21" selection-end-line="304" selection-end-column="21" />
+        <state relative-caret-position="308">
+          <caret line="319" column="21" selection-start-line="319" selection-start-column="21" selection-end-line="319" selection-end-column="21" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

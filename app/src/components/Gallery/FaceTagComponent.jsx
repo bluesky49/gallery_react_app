@@ -266,10 +266,16 @@ class FaceTagComponent extends Component {
             const areas = this.state.faceData.areas;
             const {currentAttendeeName, currentAttendeeCoords, faceNames, registeredAttendees, fieldPeople} = this.state;
             const enteredName = values.name;
-            let dataBody;
+            let dataBody, filteredFieldPeople;
 
             const validatedAttendee = registeredAttendees.find(item => item.attributes.field_full_name === enteredName);//Validating if attendee is registered
+            const currentRegisteredAttendee = registeredAttendees.find(item => item.attributes.field_full_name === currentAttendeeName);//Current registered attendee
 
+            if (currentRegisteredAttendee) {
+                filteredFieldPeople = fieldPeople.filter(item => item.id === !currentRegisteredAttendee.id);//removing old current registered attendee from filed_people
+            } else {
+                filteredFieldPeople = fieldPeople;
+            }
             const newAreas = areas.map(i => {
                 if (_.isEqual(i.coords, currentAttendeeCoords) && validatedAttendee) {
                     i = {...i, name: enteredName, UUID: validatedAttendee.id};//add UUID for registered attendees
@@ -280,32 +286,39 @@ class FaceTagComponent extends Component {
             });
 
             const newFaceData = {...this.state.faceData, areas: newAreas};
+            const multipleNames = newAreas.some(i => i.name === currentAttendeeName);
 
             if (validatedAttendee) {
-                const attendeeAlreadyAdded = fieldPeople.some(item => item.id === validatedAttendee.id);//check if entered attendee is already in field_people
-                if (!attendeeAlreadyAdded) {
-                    const newFieldPeople = [...fieldPeople,
+                const filteredFaceNames = faceNames.filter(item => item !== currentAttendeeName); //remove existing name
+
+                    const newFieldPeople = [...filteredFieldPeople,
                         {
                             "type": "node--attendee",
                             "id": validatedAttendee.id
                         }
                     ];
 
+                    const attributes = multipleNames ?
+                        {
+                            "field_image_face_rectangles": JSON.stringify(newFaceData),
+                        }
+                        :
+                        {
+                            "field_image_face_rectangles": JSON.stringify(newFaceData),
+                            "field_image_face_names": filteredFaceNames //delete from this field
+                        };
+
                     dataBody = {
                         "type": "node--puzzle",
                         "id": uuid,
-                        "attributes": {
-                            "field_image_face_rectangles": JSON.stringify(newFaceData)
-                        },
+                        "attributes": attributes,
                         "relationships": {
                             "field_people": {
                                 "data": newFieldPeople
                             }
                         }
                     }
-                }
             } else {
-                const multipleNames = newAreas.some(i => i.name === currentAttendeeName);
                 const nameAlreadyIncluded = faceNames.includes(enteredName);
                 const currentNameAlreadyIncluded = faceNames.includes(currentAttendeeName);
 
@@ -330,7 +343,12 @@ class FaceTagComponent extends Component {
                 dataBody = {
                     "type": "node--puzzle",
                     "id": uuid,
-                    "attributes": attributes
+                    "attributes": attributes,
+                    "relationships": {
+                        "field_people": {
+                            "data": filteredFieldPeople
+                        }
+                    }
                 }
             }
 
@@ -347,7 +365,18 @@ class FaceTagComponent extends Component {
                     'X-CSRF-Token': this.props.data.xcsrfToken
                 },
                 data: {
-                    "data": dataBody
+                    "data": dataBody /*{
+                "type": "node--puzzle",
+                    "id": uuid,
+                    "attributes": {
+                    "field_image_face_names": null
+                },
+                "relationships": {
+                    "field_people": {
+                        "data": null
+                    }
+                }
+            }*/
                 }
             })
                 .then(res => {

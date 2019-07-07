@@ -25,10 +25,10 @@
     "@ant-design/colors" "^3.1.0"
     babel-runtime "^6.26.0"
 
-"@ant-design/icons@~2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@ant-design/icons/-/icons-2.1.0.tgz#06b8ea9a02cbe331d523a20453fa5ee224328b11"
-  integrity sha512-o2q2GeamZ99dQEIsuls3zGkeAlUH/z9pJt9Kt3zrTdbFQlJtyFH2NjPXobcExINsg/2cYd8zvLcoSQ69UBvOeg==
+"@ant-design/icons@~2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@ant-design/icons/-/icons-2.1.1.tgz#7b9c08dffd4f5d41db667d9dbe5e0107d0bd9a4a"
+  integrity sha512-jCH+k2Vjlno4YWl6g535nHR09PwCEmTBKAG6VqF+rhkrSPRLfgpU2maagwbZPLjaHuU5Jd1DFQ2KJpQuI6uG8w==
 
 "@appbaseio/reactivecore@8.2.9":
   version "8.2.9"
@@ -1417,9 +1417,9 @@
     "@types/react" "*"
 
 "@types/react@*":
-  version "16.8.22"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.22.tgz#7f18bf5ea0c1cad73c46b6b1c804a3ce0eec6d54"
-  integrity sha512-C3O1yVqk4sUXqWyx0wlys76eQfhrQhiDhDlHBrjER76lR2S2Agiid/KpOU9oCqj1dISStscz7xXz1Cg8+sCQeA==
+  version "16.8.23"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.23.tgz#ec6be3ceed6353a20948169b6cb4c97b65b97ad2"
+  integrity sha512-abkEOIeljniUN9qB5onp++g0EY38h7atnDHxwKUFz1r3VH1+yG1OKi2sNPTyObL40goBmfKFpdii2lEzwLX1cA==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -1795,12 +1795,12 @@ ansi-styles@^3.2.0, ansi-styles@^3.2.1:
     color-convert "^1.9.0"
 
 antd@^3.15.2:
-  version "3.20.0"
-  resolved "https://registry.yarnpkg.com/antd/-/antd-3.20.0.tgz#da8b9b537dd27d2b8bea6b0b1518ed602e58783e"
-  integrity sha512-PnYXyCzB9S9SkWixYGi2D0u+FzAeDO2YJTD0x+/8zGZvcCrPahNuvZkLkjMxLd7eJnbfsg6yWHRB2ZRs6tJRZg==
+  version "3.20.1"
+  resolved "https://registry.yarnpkg.com/antd/-/antd-3.20.1.tgz#b6274517bab290754a10907a87a23b2fd8e39417"
+  integrity sha512-4F1XvFUj6V6b2Aki65pkKd/WlwfeNeE2HftJG0jBB6D5QBWCHU/Csv0cVph8n9UCcGNOAErNpi2dA26GmjjRFw==
   dependencies:
     "@ant-design/create-react-context" "^0.2.4"
-    "@ant-design/icons" "~2.1.0"
+    "@ant-design/icons" "~2.1.1"
     "@ant-design/icons-react" "~2.0.1"
     "@types/react-slick" "^0.23.4"
     array-tree-filter "^2.1.0"
