@@ -105,8 +105,8 @@ const FormInModal = Form.create({name: 'form_in_modal'})(
                                 }],
                             })(<AutoComplete
                                     dataSource={dataSource}
+                                    placeholder={this.props.currentAttendeeName}
                                 >
-                                    <Input placeholder={this.props.currentAttendeeName}/>
                                 </AutoComplete>
                             )}
                         </Form.Item>
@@ -272,10 +272,11 @@ class FaceTagComponent extends Component {
             const currentRegisteredAttendee = registeredAttendees.find(item => item.attributes.field_full_name === currentAttendeeName);//Current registered attendee
 
             if (currentRegisteredAttendee) {
-                filteredFieldPeople = fieldPeople.filter(item => item.id === !currentRegisteredAttendee.id);//removing old current registered attendee from filed_people
+                filteredFieldPeople = fieldPeople.filter(item => item.id !== currentRegisteredAttendee.id);//removing old current registered attendee from filed_people
             } else {
                 filteredFieldPeople = fieldPeople;
             }
+
             const newAreas = areas.map(i => {
                 if (_.isEqual(i.coords, currentAttendeeCoords) && validatedAttendee) {
                     i = {...i, name: enteredName, UUID: validatedAttendee.id};//add UUID for registered attendees
@@ -352,7 +353,7 @@ class FaceTagComponent extends Component {
                 }
             }
 
-            axios({
+            /*axios({
                 method: 'patch',
                 url: `${prodURL}/jsonapi/node/puzzle/${uuid}`,
                 auth: {
@@ -392,7 +393,7 @@ class FaceTagComponent extends Component {
                         console.log('Error', error.message);
                     }
                     console.log(error.config);
-                });
+                });*/
         })
     };
     saveFormRef = (formRef) => {
