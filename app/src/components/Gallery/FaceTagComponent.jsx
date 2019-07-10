@@ -8,7 +8,7 @@ import _ from 'lodash';
 import SpinnerComponent from "../SpinnerComponent";
 
 import {toggleFaceTagging} from '../../actions/viewActions';
-import {Button, Icon, Tooltip, Modal, Form, Input, AutoComplete} from "antd";
+import {Button, Icon, Tooltip, Modal, Form, AutoComplete} from "antd";
 import axios from "axios";
 import {fetchPassword, fetchUsername, prodURL} from "../../keys";
 import intl from "react-intl-universal";
@@ -19,6 +19,16 @@ const FaceTaggingWrapper = styled.div`
           justify-content: center;
           align-items: center;
           width: 100%;
+          @media (min-width: 800px) {
+          width: 80%;
+          }
+          @media (min-width: 1000px) {
+          width: 70%;
+          }
+          @media (min-width: 1200px) {
+          width: 60%;
+          }
+          margin: auto;
           height: auto;
           padding-bottom: 65px;
          `;
@@ -106,6 +116,9 @@ const FormInModal = Form.create({name: 'form_in_modal'})(
                             })(<AutoComplete
                                     dataSource={dataSource}
                                     placeholder={this.props.currentAttendeeName}
+                                    filterOption={(inputValue, option) =>
+                                        option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                                    }
                                 >
                                 </AutoComplete>
                             )}
@@ -353,7 +366,7 @@ class FaceTagComponent extends Component {
                 }
             }
 
-            /*axios({
+            axios({
                 method: 'patch',
                 url: `${prodURL}/jsonapi/node/puzzle/${uuid}`,
                 auth: {
@@ -393,7 +406,7 @@ class FaceTagComponent extends Component {
                         console.log('Error', error.message);
                     }
                     console.log(error.config);
-                });*/
+                });
         })
     };
     saveFormRef = (formRef) => {
