@@ -49,7 +49,7 @@ class GalleryComponent extends Component {
                         src: item.src,
                         height: item.height,
                         width: item.width,
-                        alt: item.alt,
+                        alt: item.alt
                     }
                 )
             });

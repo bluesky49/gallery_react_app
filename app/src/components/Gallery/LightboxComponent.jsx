@@ -248,8 +248,10 @@ class LightboxComponent extends Component {
                     src: puzzle.src,
                     width: puzzle.width,
                     height: puzzle.height,
-                    alt: puzzle.alt,
-                    filestack_handle: puzzleHandle
+                    name: puzzle.alt,
+                    filestack_handle: puzzleHandle,
+                    utcCreated: puzzle.utcCreated,
+                    type: puzzle.type
                 };
                 const puzzlesArray = item.puzzles;
                 const newPuzzlesArray = [...puzzlesArray, newPuzzle];

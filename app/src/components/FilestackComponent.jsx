@@ -256,8 +256,8 @@ class FilestackComponent extends Component {
                             item.image_width : item.image_width[0]
                         : 4;
 
-                    const imageAlt = item.image_alt ?
-                        typeof item.image_alt === 'string' ? item.image_alt : item.image_alt[0]
+                    const imageAlt = item.title ?
+                        typeof item.title === 'string' ? item.title : item.title[0]
                         : "EventStory Image";
 
                     const imageLocality = item.image_locality ?
@@ -268,6 +268,15 @@ class FilestackComponent extends Component {
 
                     const responseWithLightboxOptions = picture(filestackHandle, item.transformOptionsLightbox);
 
+                    const utcCreated = typeof item.image_date === 'number' ? item.image_date : item.image_date[0];
+
+                    const imageTitle = typeof item.title === 'string' ? item.title : item.title[0];
+
+                    const getExtension = filename => filename.split('.').pop();
+
+                    const imageExtension = getExtension(imageTitle);
+
+                    const imageType = `image/${imageExtension}`;
 
                     if (imageRotation == "Rotated 90 CW") {
 
@@ -281,7 +290,9 @@ class FilestackComponent extends Component {
                                 caption: intl.get('BY') + authorEmail + intl.get('ON') + date + ". " + imageLocality,
                                 alt: imageAlt,
                                 uuid: UUID,
-                                originalSizeSRC: `${responseWithLightboxOptions.lastChild.src}`
+                                originalSizeSRC: `${responseWithLightboxOptions.lastChild.src}`,
+                                utcCreated: utcCreated,
+                                type: imageType
                             }
                         )
                     } else {
@@ -296,7 +307,9 @@ class FilestackComponent extends Component {
                                 caption: intl.get('BY') + authorEmail + intl.get('ON') + date + ". " + imageLocality,
                                 alt: imageAlt,
                                 uuid: UUID,
-                                originalSizeSRC: `${responseWithLightboxOptions.lastChild.src}`
+                                originalSizeSRC: `${responseWithLightboxOptions.lastChild.src}`,
+                                utcCreated: utcCreated,
+                                type: imageType
                             }
                         )
                     }
