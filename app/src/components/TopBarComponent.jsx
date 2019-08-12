@@ -134,7 +134,7 @@ class TopBarComponent extends Component {
         e.preventDefault();
         this.setState({isLoading: true});
 
-        const puzzleHandles = this.props.data.finalResponse.map(puzzle => puzzle.filestack_handle[0]);
+        const puzzleHandle = this.props.data.finalResponse.map(puzzle => puzzle.filestack_handle[0]);
 
         const newPuzzles = this.props.data.photosToRender.map((puzzle, index) => {
             return (
@@ -143,8 +143,10 @@ class TopBarComponent extends Component {
                     src: puzzle.src,
                     width: puzzle.width,
                     height: puzzle.height,
-                    alt: puzzle.alt,
-                    filestack_handle: puzzleHandles[index]
+                    name: puzzle.alt,
+                    filestack_handle: puzzleHandle,
+                    utcCreated: puzzle.utcCreated,
+                    type: puzzle.type
                 }
             )
         });
