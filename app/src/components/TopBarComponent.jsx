@@ -7,7 +7,6 @@ import {IoMdImages} from 'react-icons/io';
 import {Keyframes, animated} from 'react-spring/renderprops';
 import delay from 'delay';
 import styled from "styled-components";
-import SpinnerComponent from "./SpinnerComponent";
 import axios from "axios";
 import _ from 'lodash';
 import {fetchPassword, fetchUsername, prodURL} from "../keys";
@@ -63,7 +62,12 @@ const StyledSpinner = styled.div`
 //CSS Ends
 
 const spinner = <StyledSpinner>
-    <SpinnerComponent/>
+    <img
+        src="https://eventstory.live/sites/default/files/loader.gif"
+        alt="Loading..."
+        height="20px"
+        width="20px"
+    />
 </StyledSpinner>;
 
 // Creates a spring with predefined animation slots
@@ -144,7 +148,7 @@ class TopBarComponent extends Component {
                     width: puzzle.width,
                     height: puzzle.height,
                     name: puzzle.alt,
-                    filestack_handle: puzzleHandle,
+                    filestack_handle: puzzleHandle[index],
                     utcCreated: puzzle.utcCreated,
                     type: puzzle.type
                 }
@@ -167,53 +171,54 @@ class TopBarComponent extends Component {
         });
 
         return (
-
-            axios({
-                method: 'patch',
-                url: `${prodURL}/jsonapi/node/attendee/${albumOwnerId}`,
-                auth: {
-                    username: `${fetchUsername}`,
-                    password: `${fetchPassword}`
-                },
-                headers: {
-                    'Accept': 'application/vnd.api+json',
-                    'Content-Type': 'application/vnd.api+json',
-                    'X-CSRF-Token': this.props.data.xcsrfToken
-                },
-                data: {
-                    "data": {
-                        "type": "node--attendee",
-                        "id": albumOwnerId,
-                        "attributes": {
-                            "field_attendee_albums_puzzles": JSON.stringify(newJSONfield)
-                        }
+        axios({
+            method: 'patch',
+            url: `${prodURL}/jsonapi/node/attendee/${albumOwnerId}`,
+            auth: {
+                username: `${fetchUsername}`,
+                password: `${fetchPassword}`
+            },
+            headers: {
+                'Accept': 'application/vnd.api+json',
+                'Content-Type': 'application/vnd.api+json',
+                'X-CSRF-Token': this.props.data.xcsrfToken
+            },
+            data: {
+                "data": {
+                    "type": "node--attendee",
+                    "id": albumOwnerId,
+                    "attributes": {
+                        "field_attendee_albums_puzzles": JSON.stringify(newJSONfield)
                     }
                 }
-            })
-        )
-            .then((res) => {
-                this.setState({
-                    isLoading: false
-                });
-            })
-            .catch(function (error) {
-                if (error.response) {
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                    // http.ClientRequest in node.js
-                    console.log(error.request);
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
-                }
-                console.log(error.config);
+            }
+        })
+    )
+    .
+        then((res) => {
+            this.setState({
+                isLoading: false
             });
+        })
+            .catch(function (error) {
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                        // http.ClientRequest in node.js
+                        console.log(error.request);
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        console.log('Error', error.message);
+                    }
+                    console.log(error.config);
+                }
+            );
     };
 
     componentDidMount() {

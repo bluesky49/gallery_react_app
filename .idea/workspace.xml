@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a64dbb82-062f-4db9-bfe4-227ddf365b6a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Gallery/LightboxComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/TopBarComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/TopBarComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/yarn.lock" afterDir="false" />
     </list>
@@ -29,62 +31,6 @@
         <option value="JavaScript File" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>sidebarWidth</find>
-      <find>the photo is</find>
-      <find>addToAlbum</find>
-      <find>fetchAllAlbums</find>
-      <find>albumsWithoutPuzzle</find>
-      <find>setstate</find>
-      <find>cache</find>
-      <find>format: 'pjpg'</find>
-      <find>width</find>
-      <find>grid_gallery</find>
-      <find>'webp', 'pjpg'</find>
-      <find>multilist__title</find>
-      <find>item.image_rotation !== undefined</find>
-      <find>loader</find>
-      <find>LightboxComponent</find>
-      <find>console</find>
-      <find>spinner</find>
-      <find>Filter by attendee</find>
-      <find>,</find>
-      <find>ReactiveList</find>
-      <find>save</find>
-      <find>albums</find>
-      <find>no albums</find>
-      <find>album</find>
-      <find>albumResponse</find>
-      <find>setAlbumResponse</find>
-      <find>.reactivelist__sortOptions</find>
-      <find>reactivelist__resultsInfo</find>
-      <find>currentAttendeeName</find>
-      <find>filter</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>grid_gallery</replace>
-      <replace>totalResults</replace>
-      <replace>filestackSignature</replace>
-      <replace>fetchAllAlbums</replace>
-      <replace>LightboxComponent</replace>
-      <replace>StyledAlbumControls</replace>
-      <replace>//this.fetchAlbumsSpecificToCurrentPhoto()</replace>
-      <replace>this.getAlbumsSpecificToCurrentPhoto();</replace>
-      <replace>fetchAlbumsSpecificToCurrentPhoto</replace>
-      <replace>albumsWithPhotoUnfiltered</replace>
-      <replace>await this.getAlbumsSpecificToCurrentPhoto</replace>
-      <replace>albumsWithoutPhoto</replace>
-      <replace>formats: ['webp', 'pjpg']</replace>
-      <replace>format: 'webp'</replace>
-      <replace>TopBarComponent</replace>
-      <replace>gallery</replace>
-      <replace>'pjpg','webp'</replace>
-      <replace>item.image_rotation</replace>
-      <replace>FaceTagComponent</replace>
-      <replace>:&quot;&quot;,</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -336,7 +282,8 @@
       <workItem from="1564508148718" duration="218000" />
       <workItem from="1565251486162" duration="202000" />
       <workItem from="1565256797577" duration="2505000" />
-      <workItem from="1565625037596" duration="3950000" />
+      <workItem from="1565625037596" duration="5248000" />
+      <workItem from="1565685896018" duration="3981000" />
     </task>
     <servers />
   </component>

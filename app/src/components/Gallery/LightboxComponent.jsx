@@ -69,7 +69,6 @@ const StyledSpinner = styled.div`
    display: flex;
    margin-right: 10px;
    margin-bottom: -3px;
-   width: 15px !important;
 `;
 //CSS Ends
 
