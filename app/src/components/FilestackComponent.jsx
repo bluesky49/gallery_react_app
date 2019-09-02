@@ -240,8 +240,8 @@ class FilestackComponent extends Component {
                         new Date(typeof item.image_date === 'number' ? item.image_date : item.image_date[0] * 1000).toLocaleString()
                         : "unknown date";
 
-                    const authorEmail = item.author_email ?
-                        typeof item.author_email === 'string' ? item.author_email : item.author_email[0]
+                    const authorFullName = item.author_full_name ?
+                        typeof item.author_full_name === 'string' ? item.author_full_name : item.author_full_name[0]
                         :
                         "unknown author";
                     const filestackHandle = typeof item.filestack_handle === 'string' ? item.filestack_handle : item.filestack_handle[0];
@@ -287,7 +287,7 @@ class FilestackComponent extends Component {
                                 height: parseInt(`${imageWidth}`, 10),
                                 sizes: '(max-width: 180px) 180px, (max-width: 360px) 360px, (max-width: 540px) 540px, (max-width: 720px) 720px, (max-width: 900px) 900px, (max-width: 1080px) 1080px, (max-width: 1296px) 1296px, (min-width: 1512px) 1512px, (max-width: 1728px) 1728px, (max-width: 1944px) 1944px, (max-width: 2160px) 2160px, (max-width: 2376px) 2376px, (max-width: 2592px) 2592px, (max-width: 2808px) 2808px, (max-width: 3024px) 3024px',
                                 srcSet: `${responseWithLightboxOptions.firstChild.attributes.srcset.textContent}`,
-                                caption: intl.get('BY') + authorEmail + intl.get('ON') + date + ". " + imageLocality,
+                                caption: intl.get('BY') + authorFullName + intl.get('ON') + date + ". " + imageLocality,
                                 alt: imageAlt,
                                 uuid: UUID,
                                 originalSizeSRC: `${responseWithLightboxOptions.lastChild.src}`,
@@ -304,7 +304,7 @@ class FilestackComponent extends Component {
                                 height: parseInt(`${imageHeight}`, 10),
                                 sizes: '(max-width: 180px) 180px, (max-width: 360px) 360px, (max-width: 540px) 540px, (max-width: 720px) 720px, (max-width: 900px) 900px, (max-width: 1080px) 1080px, (max-width: 1296px) 1296px, (min-width: 1512px) 1512px, (max-width: 1728px) 1728px, (max-width: 1944px) 1944px, (max-width: 2160px) 2160px, (max-width: 2376px) 2376px, (max-width: 2592px) 2592px, (max-width: 2808px) 2808px, (max-width: 3024px) 3024px',
                                 srcSet: `${responseWithLightboxOptions.firstChild.attributes.srcset.textContent}`,
-                                caption: intl.get('BY') + authorEmail + intl.get('ON') + date + ". " + imageLocality,
+                                caption: intl.get('BY') + authorFullName + intl.get('ON') + date + ". " + imageLocality,
                                 alt: imageAlt,
                                 uuid: UUID,
                                 originalSizeSRC: `${responseWithLightboxOptions.lastChild.src}`,

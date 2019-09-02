@@ -441,6 +441,7 @@ class FaceTagComponent extends Component {
                                         </StyledButton>
                                     </Tooltip>
                                 </ButtonWrapper>
+
                                 <ImageMapper
                                     src={src}
                                     map={faceData}

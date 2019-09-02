@@ -10,7 +10,7 @@ import {Pagination} from "antd";
 import Pusher from 'pusher-js';
 import {Badge, Icon} from 'antd';
 import intl from 'react-intl-universal';
-import {LocaleProvider} from 'antd';
+import {ConfigProvider} from 'antd';
 import frFR from 'antd/lib/locale-provider/fr_FR';
 import enGB from 'antd/lib/locale-provider/en_GB';
 
@@ -180,7 +180,7 @@ class App extends React.Component {
 
         return (
             initDone && !isAnonymous ?
-                <LocaleProvider locale={AntdLocale}>
+                <ConfigProvider locale={AntdLocale}>
                     <StyledWrapper>
                         <HeaderComponent/>
                         {newPuzzles > 0 ?
@@ -202,7 +202,7 @@ class App extends React.Component {
                             </PaginationWrapper>
                         </StyledGallery>
                     </StyledWrapper>
-                </LocaleProvider>
+                </ConfigProvider>
                 : null
         );
     }

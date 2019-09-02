@@ -99,9 +99,8 @@ class SearchComponent extends Component {
             },
             10);
     };
-    handleSearchResult = results => {
-
-        this.result = results.data;
+    handleSearchResult = data => {
+        this.result = data;
 
         if (this.result[0] && this.firstLoad === undefined) {
             this.handleApplyFilters();
@@ -141,7 +140,7 @@ class SearchComponent extends Component {
                             <DataSearch
                                 showClear={true}
                                 componentId="SearchSensor"
-                                dataField={["image_face_names", "author_last_name", "author_first_name", "author_email",
+                                dataField={["image_face_names", "author_last_name", "author_first_name", "author_full_name",
                                     "attendee_group", "image_locality"]}
                                 autosuggest={true}
                                 placeholder={intl.get('SEARCH')}
@@ -157,6 +156,7 @@ class SearchComponent extends Component {
                                 title={intl.get('FILTER_BY_ATTENDEE')}
                                 dataField={["image_face_names"]}
                                 autosuggest={true}
+                                queryFormat="and"
                                 placeholder={intl.get('ENTER_ATTENDEE’S_NAME')}
                                 innerClass={{
                                     title: 'datasearch__title',
@@ -168,8 +168,9 @@ class SearchComponent extends Component {
                                 showClear={true}
                                 componentId="SearchAuthor"
                                 title={intl.get('FILTER_BY_AUTHOR')}
-                                dataField={["author_last_name", "author_first_name", "author_email"]}
+                                dataField={["author_last_name", "author_first_name", "author_full_name"]}
                                 autosuggest={true}
+                                queryFormat="and"
                                 placeholder={intl.get('ENTER_AUTHOR’S_NAME')}
                                 innerClass={{
                                     title: 'datasearch__title',
@@ -185,8 +186,17 @@ class SearchComponent extends Component {
                                 }}
                                 size={9999}
                                 pagination={false}
-                                loader="Loading..."
-                                render={this.handleSearchResult}
+                                render={({ loading, error, data }) => {
+                                    this.handleSearchResult(data);
+                                    if (loading) {
+                                        return <div style={{display: 'none'}}>&nbsp;</div>;
+                                    }
+                                    if (error) {
+                                        return <div style={{display: 'none'}}>&nbsp;</div>;
+                                    }
+                                    return (
+                                        <ul style={{display: 'none'}}>&nbsp;</ul>
+                                    );}}
                                 renderNoResults={this.handleNoResults}
                                 sortOptions={[
                                     {
