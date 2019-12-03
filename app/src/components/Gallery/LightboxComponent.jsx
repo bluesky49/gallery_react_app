@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {Icon, Tooltip} from "antd";
 import axios from "axios";
 import {IconContext} from "react-icons";
-import {IoMdImages} from 'react-icons/io';
+import {IoMdImages, IoLogoTwitter} from 'react-icons/io';
 import {MdFace} from 'react-icons/md';
 import {Keyframes, animated} from 'react-spring/renderprops';
 import delay from 'delay';
@@ -491,6 +491,19 @@ class LightboxComponent extends Component {
                     </Tooltip>
 
                 </IconContext.Provider> : null}
+
+            <IconContext.Provider value={{
+                color: "#ffffff",
+                className: "tweet-icon"
+            }}>
+                <a className="twitter-share-button"
+                    href={`https://twitter.com/intent/tweet?url=${this.props.data.photosToRender[this.state.currentImage]['originalSizeSRC']}&lang=${this.props.data.language}`}
+                >
+                    <Tooltip placement="bottom" title={intl.get('TWEET_IMAGE')} overlayClassName="lightbox__tooltip">
+                        <IoLogoTwitter />
+                    </Tooltip>
+                </a>
+            </IconContext.Provider>
 
             <Sidebar native state={state}>
                 {({x}) => (
