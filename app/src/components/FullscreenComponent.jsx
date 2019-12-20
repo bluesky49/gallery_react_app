@@ -15,16 +15,25 @@ const StyledFullScreen = styled.div`
 const ButtonWrapper = styled.div`
     text-align: right;
     position: absolute;
-    top: 14px;
+    top: 20px;
+    @media (max-width: 1000px) {
+    top:70px;
+    }
+    @media (max-width: 700px) {
+    top:15px;
+    }
     right: 30px;
     z-index: 9999;
 `;
 const StyledButton = styled(Button)`
     border-style: none !important;
-    background-color: rgba(30, 30, 30, 0.8) !important;
-    box-shadow: 2px 2px 4px rgba(24, 144, 255, 0.4) !important;
-     &:hover {
-    box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
+    padding: 2px 20px 0 20px !important;
+    height: auto !important;
+    background-color: ${props => props.theme.colorPrimary} !important;
+    box-shadow: ${props => props.theme.boxShadow} !important;
+    &:hover {
+    box-shadow: ${props => props.theme.boxShadowHover} !important;;
+          } 
   }
 `;
 
@@ -65,20 +74,17 @@ export class FullscreenComponent extends Component {
         const {isFullscreen, toggleFullscreen} = this.props;
 
         const buttonLabel = isFullscreen ?
-            <Icon type="fullscreen-exit" theme="outlined" style={{fontSize: '22px', color: '#1890ff'}}/>
+            <Icon type="fullscreen-exit" theme="outlined" style={{fontSize: '18px', color: 'white'}}/>
             :
-            <Icon type="fullscreen" theme="outlined" style={{fontSize: '22px', color: '#1890ff'}}/>;
+            <Icon type="fullscreen" theme="outlined" style={{fontSize: '18px', color: 'white'}}/>;
 
         return (
             <StyledFullScreen>
-
-                {this.props.view.showControls ?
-                    <ButtonWrapper>
-                        <StyledButton type="ghost" onClick={toggleFullscreen}>
-                            {buttonLabel}
-                        </StyledButton>
-                    </ButtonWrapper> : null}
-
+                <ButtonWrapper>
+                    <StyledButton type="ghost" onClick={toggleFullscreen}>
+                        {buttonLabel}
+                    </StyledButton>
+                </ButtonWrapper>
                 <ScrollComponent isFullscreen={isFullscreen}/>
             </StyledFullScreen>
         );
@@ -94,8 +100,7 @@ FullscreenComponent.propTypes = {
     fullscreenON: PropTypes.func,
     fullscreenOFF: PropTypes.func,
     lightboxIsOpen: PropTypes.bool,
-    fullscreenTempDisabled: PropTypes.bool,
-    showControls: PropTypes.bool
+    fullscreenTempDisabled: PropTypes.bool
 };
 
 const FullscreenToggleComponent = Fullscreenable()(FullscreenComponent);

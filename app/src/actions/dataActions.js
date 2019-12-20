@@ -1,7 +1,7 @@
-// Set final response
-export const setFinalResponse = response => dispatch => {
+// Set puzzles response
+export const setPuzzlesResponse = response => dispatch => {
     dispatch({
-        type: 'SET_FINAL_RESPONSE',
+        type: 'SET_PUZZLES_RESPONSE',
         payload: response
     })
 };
@@ -57,24 +57,23 @@ export const setTotalResults = response => dispatch => {
         payload: response
     })
 };
-// Set search result
-export const setSearchResult = response => dispatch => {
-    dispatch({
-        type: 'SET_SEARCH_RESULT',
-        payload: response
-    })
-};
 // Set response from Drupal
-export const setAlbumResponse = response => dispatch => {
+export const setAlbumInfo = response => dispatch => {
     dispatch({
-        type: 'SET_ALBUM_RESPONSE',
+        type: 'SET_ALBUM_INFO',
         payload: response
     })
 };
-// Set Album Owner ID
-export const setAlbumOwnerID = response => dispatch => {
+export const setAlbumsList = response => dispatch => {
     dispatch({
-        type: 'SET_ALBUM_OWNER_ID',
+        type: 'SET_ALBUMS_LIST',
+        payload: response
+    })
+};
+// Set selected album ID
+export const setSelectedAlbumID = response => dispatch => {
+    dispatch({
+        type: 'SET_SELECTED_ALBUM_ID',
         payload: response
     })
 };
@@ -85,10 +84,41 @@ export const setXcsrfToken = response => dispatch => {
         payload: response
     })
 };
-// Set X-CSRF-Token
-export const setSearchResultStatus = response => dispatch => {
+// Set Album Owner ID
+export const setAlbumOwnerID = response => dispatch => {
     dispatch({
-        type: 'SEARCH_RESULT_IS_SHOWN',
+        type: 'SET_ALBUM_OWNER_ID',
+        payload: response
+    })
+};
+// Fetch data using DataFetchingComponent
+export const enableFetchRequest = () => dispatch => {
+    dispatch({
+        type: 'ENABLE_FETCH_REQUEST'
+    })
+};
+// Set Album Owner ID
+export const disableFetchRequest = () => dispatch => {
+    dispatch({
+        type: 'DISABLE_FETCH_REQUEST'
+    })
+};
+// Set Puzzles
+export const setPuzzles = response => dispatch => {
+    dispatch({
+        type: 'SET_PUZZLES',
+        payload: response
+    })
+};
+export const setAuthStatus = response => dispatch => {
+    dispatch({
+        type: 'SET_AUTHSTATUS',
+        payload: response
+    })
+};
+export const downloadZIP = response => dispatch => {
+    dispatch({
+        type: 'TRIGGER_DOWNLOAD_ZIP',
         payload: response
     })
 };
@@ -96,6 +126,13 @@ export const setSearchResultStatus = response => dispatch => {
 export const setLanguage = response => dispatch => {
     dispatch({
         type: 'SET_LANGUAGE',
+        payload: response
+    })
+};
+// Set button type
+export const setButtonType = response => dispatch => {
+    dispatch({
+        type: 'SET_BUTTON_TYPE',
         payload: response
     })
 };

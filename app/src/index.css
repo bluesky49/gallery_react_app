@@ -9,23 +9,9 @@
 }
 
 .reactivelist__sortOptions {
-    font-size: 12px !important;
-    margin-top: 10px !important;
+    font-size: 14px !important;
+    margin-top: 5px !important;
     margin-bottom: 10px !important;
-    background-color: transparent !important;
-    border-style: none !important;
-    outline-color: transparent !important;
-    color: white !important;
-}
-
-.reactivelist__resultStats,
-.reactivelist__noResults,
-.reactivelist__resultsInfo {
-    color: white !important;
-    font-size: 12px !important;
-}
-.reactivelist__resultsInfo {
-   justify-content: space-between !important;
 }
 
 .datasearch__list li {
@@ -43,20 +29,11 @@
     color: white !important;
 }
 
-.datasearch__title {
+.datasearch__title,
+.multilist__title {
     margin-top: 5px !important;
     font-size: 16px !important;
     color: white !important;
-}
-
-.multilist__title {
-    margin-top: -4px !important;
-    font-size: 16px !important;
-    color: white !important;
-}
-
-.css-1nqnto3 {
-    top: calc(50% - 12px) !important;
 }
 
 .sidebar {
@@ -108,10 +85,10 @@
 .album-icon {
     position: absolute;
     margin-left: 50px;
-    margin-top: -40px;
-    font-size: 32px;
+    margin-top: -38px;
+    font-size: 35px;
     cursor: pointer;
-    padding: 3px 10px;
+    padding: 5px 10px;
     width: 50px;
     border-radius: 4px;
     z-index: 2147483647;
@@ -120,42 +97,6 @@
 }
 
 .album-icon:hover {
-    box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
-}
-
-.faces-icon {
-    position: absolute;
-    margin-left: 115px;
-    margin-top: -40px;
-    font-size: 35px;
-    cursor: pointer;
-    padding: 5px 10px;
-    width: 50px;
-    border-radius: 4px;
-    z-index: 2147483647;
-    background-color: rgba(30, 30, 30, 0.8) !important;
-    box-shadow: 2px 2px 4px rgba(24, 144, 255, 0.4) !important;
-}
-
-.faces-icon:hover {
-    box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
-}
-
-.tweet-icon {
-    position: absolute;
-    margin-left: 180px;
-    margin-top: -40px;
-    font-size: 35px;
-    cursor: pointer;
-    padding: 5px 10px;
-    width: 50px;
-    border-radius: 4px;
-    z-index: 2147483647;
-    background-color: #55acee !important;
-    box-shadow: 2px 2px 4px rgba(24, 144, 255, 0.4) !important;
-}
-
-.tweet-icon:hover {
     box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
 }
 
@@ -191,41 +132,8 @@
     color: rgba(245, 34, 45, 1) !important;
 }
 
-.ant-collapse-item {
-    border-bottom-style: none !important;
-}
-
-.ant-collapse-header {
-    color: white !important;
-    font-size: 16px !important;
-}
-
-.lightbox__tooltip {
-    z-index: 16777201 !important;
-}
-
-.ant-modal-content {
-    background-color: rgba(0, 0, 0, 0.3) !important;
-}
-
-.ant-form-item-required {
-    color: white !important;
-}
-
-.ant-modal {
-    max-width: 300px !important;
-}
-
-.ant-modal-body {
-    padding-bottom: 0 !important;
-}
-
-.ant-modal-footer {
-    border-top-style: none !important;
-}
-
-.ant-form-item {
-    margin-bottom: 0 !important;
+#register_albumName {
+    min-width: 170px !important;
 }
 
 .ant-pagination-item-active,
@@ -245,8 +153,3 @@
 .ant-btn-primary:hover {
     box-shadow: 1px 1px 8px rgba(20, 20, 20, 1);
 }
-
-/*
-.react-photo-gallery--gallery div img {
-    height: 100% !important;
-}*/
