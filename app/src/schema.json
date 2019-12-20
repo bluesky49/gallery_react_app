@@ -1,38 +1,25 @@
 {
-  "album_id_1": {
-    "album-title": "Album 1",
-    "album-owner": "Frank",
-    "puzzles": [
-      {
-        "id": "5555-5555-5555",
-        "filestack_handle": "1111-1111-1111",
-        "image_width": 250,
-        "image_height": 300
-      },
-      {
-        "id": "6666-6666-6666",
-        "filestack_handle": "2222-2222-2222",
-        "image_width": 250,
-        "image_height": 300
-      }
-    ]
-  },
-  "album_id_2": {
-    "album-title": "Album 2",
-    "album-owner": "Frank",
-    "puzzles": [
-      {
-        "id": "5555-5555-5555",
-        "filestack_handle": "1111-1111-1111",
-        "image_width": 250,
-        "image_height": 300
-      },
-      {
-        "id": "6666-6666-6666",
-        "filestack_handle": "2222-2222-2222",
-        "image_width": 250,
-        "image_height": 300
-      }
-    ]
-  }
+  "name": "puzzleUUID",
+  "areas": [
+    {
+      "name": "attendee 1",
+      "shape": "rect",
+      "coords": [top-left-X, top-left-Y, bottom-right-X, bottom-right-Y]
+    },
+    {
+      "name": "attendee 2",
+      "shape": "rect",
+      "coords": [424, 189, 502, 279]
+    },
+    {
+      "name": "attendee 3",
+      "shape": "rect",
+      "coords": [269, 154, 356, 256]
+    },
+    {
+      "name": "attendee 4",
+      "shape": "rect",
+      "coords": [676, 128, 772, 239]
+    }
+  ]
 }

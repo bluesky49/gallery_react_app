@@ -1,7 +1,7 @@
-// Set puzzles response
-export const setPuzzlesResponse = response => dispatch => {
+// Set final response
+export const setFinalResponse = response => dispatch => {
     dispatch({
-        type: 'SET_PUZZLES_RESPONSE',
+        type: 'SET_FINAL_RESPONSE',
         payload: response
     })
 };
@@ -57,30 +57,17 @@ export const setTotalResults = response => dispatch => {
         payload: response
     })
 };
+// Set search result
+export const setSearchResult = response => dispatch => {
+    dispatch({
+        type: 'SET_SEARCH_RESULT',
+        payload: response
+    })
+};
 // Set response from Drupal
-export const setAlbumInfo = response => dispatch => {
+export const setAlbumResponse = response => dispatch => {
     dispatch({
-        type: 'SET_ALBUM_INFO',
-        payload: response
-    })
-};
-export const setAlbumsList = response => dispatch => {
-    dispatch({
-        type: 'SET_ALBUMS_LIST',
-        payload: response
-    })
-};
-// Set selected album ID
-export const setSelectedAlbumID = response => dispatch => {
-    dispatch({
-        type: 'SET_SELECTED_ALBUM_ID',
-        payload: response
-    })
-};
-// Set X-CSRF-Token
-export const setXcsrfToken = response => dispatch => {
-    dispatch({
-        type: 'SET_XCSRF_TOKEN',
+        type: 'SET_ALBUM_RESPONSE',
         payload: response
     })
 };
@@ -91,34 +78,17 @@ export const setAlbumOwnerID = response => dispatch => {
         payload: response
     })
 };
-// Fetch data using DataFetchingComponent
-export const enableFetchRequest = () => dispatch => {
+// Set X-CSRF-Token
+export const setXcsrfToken = response => dispatch => {
     dispatch({
-        type: 'ENABLE_FETCH_REQUEST'
-    })
-};
-// Set Album Owner ID
-export const disableFetchRequest = () => dispatch => {
-    dispatch({
-        type: 'DISABLE_FETCH_REQUEST'
-    })
-};
-// Set Puzzles
-export const setPuzzles = response => dispatch => {
-    dispatch({
-        type: 'SET_PUZZLES',
+        type: 'SET_XCSRF_TOKEN',
         payload: response
     })
 };
-export const setAuthStatus = response => dispatch => {
+// Set X-CSRF-Token
+export const setSearchResultStatus = response => dispatch => {
     dispatch({
-        type: 'SET_AUTHSTATUS',
-        payload: response
-    })
-};
-export const downloadZIP = response => dispatch => {
-    dispatch({
-        type: 'TRIGGER_DOWNLOAD_ZIP',
+        type: 'SEARCH_RESULT_IS_SHOWN',
         payload: response
     })
 };
@@ -126,13 +96,6 @@ export const downloadZIP = response => dispatch => {
 export const setLanguage = response => dispatch => {
     dispatch({
         type: 'SET_LANGUAGE',
-        payload: response
-    })
-};
-// Set button type
-export const setButtonType = response => dispatch => {
-    dispatch({
-        type: 'SET_BUTTON_TYPE',
         payload: response
     })
 };

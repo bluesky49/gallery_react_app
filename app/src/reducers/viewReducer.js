@@ -1,13 +1,23 @@
-import {TOGGLE_FULLSCREEN,
-        DISABLE_FULLSCREEN,
-        TOGGLE_TEMP_FULLSCREEN,
-        DISABLE_TEMP_FULLSCREEN
+import {
+    TOGGLE_FULLSCREEN,
+    DISABLE_FULLSCREEN,
+    TOGGLE_LIGHTBOX,
+    DISABLE_LIGHTBOX,
+    TOGGLE_TEMP_FULLSCREEN,
+    DISABLE_TEMP_FULLSCREEN,
+    OPEN_SEARCH_PANEL,
+    CLOSE_SEARCH_PANEL,
+    TOGGLE_FACE_TAGGING,
+    TOGGLE_CONTROLS
 } from '../actions/types';
 
 const initialState = {
     fullscreenCustom: false,
     lightboxIsOpen: false,
     fullscreenTempDisabled: false,
+    searchPanelIsOpen: false,
+    faceTaggingIsOpen: false,
+    showControls: true
 };
 
 export default function (state = initialState, action) {
@@ -22,6 +32,26 @@ export default function (state = initialState, action) {
                 ...state,
                 fullscreenCustom: false
             };
+        case TOGGLE_LIGHTBOX:
+            return {
+                ...state,
+                lightboxIsOpen: true
+            };
+        case DISABLE_LIGHTBOX:
+            return {
+                ...state,
+                lightboxIsOpen: false
+            };
+        case OPEN_SEARCH_PANEL:
+            return {
+                ...state,
+                searchPanelIsOpen: true
+            };
+        case CLOSE_SEARCH_PANEL:
+            return {
+                ...state,
+                searchPanelIsOpen: false
+            };
         case TOGGLE_TEMP_FULLSCREEN:
             return {
                 ...state,
@@ -31,6 +61,16 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 fullscreenTempDisabled: false
+            };
+        case TOGGLE_FACE_TAGGING:
+            return {
+                ...state,
+                faceTaggingIsOpen: action.payload
+            };
+        case TOGGLE_CONTROLS:
+            return {
+                ...state,
+                showControls: action.payload
             };
         default:
             return state;

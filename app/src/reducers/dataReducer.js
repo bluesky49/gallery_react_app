@@ -1,74 +1,48 @@
 import {
-    DISABLE_FETCH_REQUEST,
-    DISABLE_GALLERY_LOADING,
-    DISABLE_LOADING,
-    ENABLE_FETCH_REQUEST,
-    SET_ALBUM_INFO,
-    SET_ALBUM_OWNER_ID,
-    SET_ALBUMS_LIST,
-    SET_ATTENDEE,
-    SET_AUTHSTATUS,
-    SET_BUTTON_TYPE,
-    SET_EVENT_CODE,
-    SET_LANGUAGE,
+    SET_FINAL_RESPONSE,
+    SET_ALBUM_RESPONSE,
     SET_PHOTOS_TO_RENDER,
-    SET_PUZZLES,
-    SET_PUZZLES_RESPONSE,
-    SET_SELECTED_ALBUM_ID,
-    SET_TOTAL_RESULTS,
-    SET_XCSRF_TOKEN,
-    TOGGLE_GALLERY_LOADING,
     TOGGLE_LOADING,
-    TRIGGER_DOWNLOAD_ZIP
+    DISABLE_LOADING,
+    TOGGLE_GALLERY_LOADING,
+    DISABLE_GALLERY_LOADING,
+    SET_EVENT_CODE,
+    SET_ATTENDEE,
+    SET_TOTAL_RESULTS,
+    SET_SEARCH_RESULT,
+    SET_XCSRF_TOKEN,
+    SET_ALBUM_OWNER_ID,
+    SEARCH_RESULT_IS_SHOWN,
+    SET_LANGUAGE
 } from '../actions/types';
 
 const initialState = {
-    albumInfo: ['empty'],
-    albumsList: ['empty'],
-    selectedAlbumID: 'empty',
-    puzzlesResponse: ['empty'],
-    puzzles: ['empty'],
+    albumResponse: ['empty'],
+    finalResponse: ['empty'],
     photosToRender: ['empty'],
     isLoading: true,
-    galleryIsLoading: true,
-    eventAccessCode: 'empty',//'589089',//453045//996167
-    attendee: 'empty',//'salon2@mariage.pro',//Fbracq@eventstory.live//fbracq@eventstory.live
+    galleryIsLoading: false,
+    eventAccessCode: '996167',//589089
+    attendee: 'Fbracq@eventstory.live',//Fbracq@eventstory.live
     albumOwnerID: 'empty',
     totalResults: null,
+    searchResult: ['empty'],
     xcsrfToken: 'empty',
-    requestFetch: false,
-    authStatus: true,//false
-    language: 'empty',//'empty',
-    buttonType: 'Create photo book',
-    downloadingZip: false
+    searchResultIsShown: false,
+    language: 'en'//empty
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case TRIGGER_DOWNLOAD_ZIP:
+        case SET_FINAL_RESPONSE:
             return {
                 ...state,
-                downloadingZip: action.payload
+                finalResponse: action.payload
             };
-        case SET_PUZZLES_RESPONSE:
+        case SET_ALBUM_RESPONSE:
             return {
                 ...state,
-                puzzlesResponse: action.payload
-            };
-        case SET_ALBUM_INFO:
-            return {
-                ...state,
-                albumInfo: action.payload
-            };
-        case SET_ALBUMS_LIST:
-            return {
-                ...state,
-                albumsList: action.payload
-            };
-        case SET_SELECTED_ALBUM_ID:
-            return {
-                ...state,
-                selectedAlbumID: action.payload
+                albumResponse: action.payload
             };
         case SET_PHOTOS_TO_RENDER:
             return {
@@ -95,16 +69,6 @@ export default function (state = initialState, action) {
                 ...state,
                 galleryIsLoading: false
             };
-        case ENABLE_FETCH_REQUEST:
-            return {
-                ...state,
-                requestFetch: true
-            };
-        case DISABLE_FETCH_REQUEST:
-            return {
-                ...state,
-                requestFetch: false
-            };
         case SET_EVENT_CODE:
             return {
                 ...state,
@@ -120,6 +84,11 @@ export default function (state = initialState, action) {
                 ...state,
                 totalResults: action.payload
             };
+        case SET_SEARCH_RESULT:
+            return {
+                ...state,
+                searchResult: action.payload
+            };
         case SET_XCSRF_TOKEN:
             return {
                 ...state,
@@ -130,25 +99,15 @@ export default function (state = initialState, action) {
                 ...state,
                 albumOwnerID: action.payload
             };
-        case SET_PUZZLES:
+        case SEARCH_RESULT_IS_SHOWN:
             return {
                 ...state,
-                puzzles: action.payload
-            };
-        case SET_AUTHSTATUS:
-            return {
-                ...state,
-                authStatus: action.payload
+                searchResultIsShown: action.payload
             };
         case SET_LANGUAGE:
             return {
                 ...state,
                 language: action.payload
-            };
-        case SET_BUTTON_TYPE:
-            return {
-                ...state,
-                buttonType: action.payload
             };
         default:
             return state;
