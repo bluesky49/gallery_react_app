@@ -292,9 +292,9 @@ class FaceTagComponent extends Component {
 
             const newAreas = areas.map(i => {
                 if (_.isEqual(i.coords, currentAttendeeCoords) && validatedAttendee) {
-                    i = {...i, name: enteredName, UUID: validatedAttendee.id};//add UUID for registered attendees
+                    i = {...i, name: enteredName, UUID: validatedAttendee.id, manually: true};//add UUID for registered attendees
                 } else if (_.isEqual(i.coords, currentAttendeeCoords) && !validatedAttendee) {
-                    i = {...i, name: enteredName, UUID: null};
+                    i = {...i, name: enteredName, UUID: null, manually: true};
                 }
                 return i;
             });
@@ -365,7 +365,6 @@ class FaceTagComponent extends Component {
                     }
                 }
             }
-
             axios({
                 method: 'patch',
                 url: `${prodURL}/jsonapi/node/puzzle/${uuid}`,

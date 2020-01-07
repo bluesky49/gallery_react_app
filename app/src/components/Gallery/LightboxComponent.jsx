@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {Icon, Tooltip} from "antd";
 import axios from "axios";
 import {IconContext} from "react-icons";
-import {IoMdImages, IoLogoTwitter} from 'react-icons/io';
+import {IoMdImages} from 'react-icons/io';
 import {MdFace} from 'react-icons/md';
 import {Keyframes, animated} from 'react-spring/renderprops';
 import delay from 'delay';
@@ -419,7 +419,16 @@ class LightboxComponent extends Component {
     render() {
         const currentImage = this.state.currentImage;
         const faceData = this.props.data.finalResponse[currentImage].image_face_rectangles ? true : false;
-
+        const recognition_status = this.props.data.finalResponse[currentImage].recognition_status
+        let face_icon_color = '';
+        if(recognition_status) {
+            if(recognition_status[0] === 0)
+                face_icon_color= '#ff0000';
+            else if(recognition_status[0] === 1)
+                face_icon_color = '#ffa500';
+            else if(recognition_status[0] === 2)
+                face_icon_color = '#00ff00';
+        }
         const {albumsWithPhoto, albumsWithoutPhoto} = this.state;
 
         const albumButtons = <ControlsWrapper key="11">
@@ -483,7 +492,7 @@ class LightboxComponent extends Component {
 
             {faceData ?
                 <IconContext.Provider value={{
-                    color: albumsWithPhoto && albumsWithPhoto.length ? "rgba(18, 175, 10, 1)" : "#1890ff",
+                    color: face_icon_color,
                     className: "faces-icon"
                 }}>
                     <Tooltip placement="bottom" title={intl.get('TAG_ATTENDEES')} overlayClassName="lightbox__tooltip">
@@ -491,19 +500,6 @@ class LightboxComponent extends Component {
                     </Tooltip>
 
                 </IconContext.Provider> : null}
-
-            <IconContext.Provider value={{
-                color: "#ffffff",
-                className: "tweet-icon"
-            }}>
-                <a className="twitter-share-button"
-                    href={`https://twitter.com/intent/tweet?url=${this.props.data.photosToRender[this.state.currentImage]['originalSizeSRC']}&lang=${this.props.data.language}`}
-                >
-                    <Tooltip placement="bottom" title={intl.get('TWEET_IMAGE')} overlayClassName="lightbox__tooltip">
-                        <IoLogoTwitter />
-                    </Tooltip>
-                </a>
-            </IconContext.Provider>
 
             <Sidebar native state={state}>
                 {({x}) => (
