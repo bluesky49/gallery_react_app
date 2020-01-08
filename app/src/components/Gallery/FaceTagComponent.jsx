@@ -294,7 +294,7 @@ class FaceTagComponent extends Component {
                 if (_.isEqual(i.coords, currentAttendeeCoords) && validatedAttendee) {
                     i = {...i, name: enteredName, UUID: validatedAttendee.id, manually: true};//add UUID for registered attendees
                 } else if (_.isEqual(i.coords, currentAttendeeCoords) && !validatedAttendee) {
-                    i = {...i, name: enteredName, UUID: null, manually: true};
+                    i = {...i, name: enteredName, UUID: null};
                 }
                 return i;
             });
