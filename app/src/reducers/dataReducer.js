@@ -22,7 +22,7 @@ const initialState = {
     photosToRender: ['empty'],
     isLoading: true,
     galleryIsLoading: false,
-    eventAccessCode: '377867',//589089
+    eventAccessCode: '834116',//589089
     attendee: 'Fbracq@eventstory.live',//Fbracq@eventstory.live
     albumOwnerID: 'empty',
     totalResults: null,

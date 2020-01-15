@@ -190,6 +190,7 @@ class FaceTagComponent extends Component {
                 'Content-Type': 'application/vnd.api+json'
             }
         }).then(res => {
+            console.log(res.data)
                 this.setState({
                     faceData: JSON.parse(res.data.data.attributes.field_image_face_rectangles),
                     faceNames: res.data.data.attributes.field_image_face_names,
@@ -419,10 +420,10 @@ class FaceTagComponent extends Component {
 
     render() {
         const {currentImage} = this.props;
-        const maxWidth = this.props.data.photosToRender[currentImage].width;
+        const maxWidth = this.props.data.photosToRender[currentImage].width > 1920?1920:this.props.data.photosToRender[currentImage].width;
         const {width, isLoading, currentAttendeeName, hoveredArea, visible, faceData, nameFetching, dataSource} = this.state;
         const src = this.props.data.photosToRender[currentImage].originalSizeSRC;
-
+        console.log(faceData)
         return (
             !isLoading ?
                 <Measure bounds onResize={(contentRect) => this.setState({width: contentRect.bounds.width})}>

@@ -419,6 +419,7 @@ class LightboxComponent extends Component {
     render() {
         const currentImage = this.state.currentImage;
         const faceData = this.props.data.finalResponse[currentImage].image_face_rectangles ? true : false;
+
         const recognition_status = this.props.data.finalResponse[currentImage].recognition_status
         let face_icon_color = '';
         if(recognition_status) {

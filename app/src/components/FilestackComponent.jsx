@@ -79,6 +79,7 @@ class FilestackComponent extends Component {
                                 sizes: {
                                     fallback: '60vw',
                                 },
+                                resolutions: [640, 768, 1024, 1366],
                                 useValidator: false,
                                 transforms: {
                                     rotate: {
@@ -92,7 +93,7 @@ class FilestackComponent extends Component {
                                     },
                                     cache: {
                                         expiry: 31536000
-                                    }
+                                    },
                                 }
                             }
                         };
@@ -146,6 +147,7 @@ class FilestackComponent extends Component {
                                 sizes: {
                                     fallback: '60vw',
                                 },
+                                resolutions: [640, 768, 1024, 1366],
                                 useValidator: false,
                                 transforms: {
                                     rotate: {
@@ -159,7 +161,7 @@ class FilestackComponent extends Component {
                                     },
                                     cache: {
                                         expiry: 31536000
-                                    }
+                                    },
                                 }
                             }
                         };
@@ -210,6 +212,7 @@ class FilestackComponent extends Component {
                                 sizes: {
                                     fallback: '60vw',
                                 },
+                                resolutions: [640, 768, 1024, 1366],
                                 useValidator: false,
                                 transforms: {
                                     auto_image: true,
@@ -220,7 +223,7 @@ class FilestackComponent extends Component {
                                     },
                                     cache: {
                                         expiry: 31536000
-                                    }
+                                    },
                                 }
                             }
                         };
@@ -267,7 +270,7 @@ class FilestackComponent extends Component {
                     const UUID = typeof item.uuid === 'string' ? item.uuid : item.uuid[0];
 
                     const responseWithLightboxOptions = picture(filestackHandle, item.transformOptionsLightbox);
-
+                    console.log(responseWithLightboxOptions)
                     const utcCreated = typeof item.image_date === 'number' ? item.image_date : item.image_date[0];
 
                     const imageTitle = typeof item.title === 'string' ? item.title : item.title[0];
@@ -285,7 +288,7 @@ class FilestackComponent extends Component {
                                 src: `${picture(filestackHandle, item.transformOptions).lastChild.src}`,
                                 width: parseInt(`${imageHeight}`, 10),
                                 height: parseInt(`${imageWidth}`, 10),
-                                sizes: '(max-width: 180px) 180px, (max-width: 360px) 360px, (max-width: 540px) 540px, (max-width: 720px) 720px, (max-width: 900px) 900px, (max-width: 1080px) 1080px, (max-width: 1296px) 1296px, (min-width: 1512px) 1512px, (max-width: 1728px) 1728px, (max-width: 1944px) 1944px, (max-width: 2160px) 2160px, (max-width: 2376px) 2376px, (max-width: 2592px) 2592px, (max-width: 2808px) 2808px, (max-width: 3024px) 3024px',
+                                sizes: '(max-width: 640px) 640px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, (max-width: 1366px) 1366px',
                                 srcSet: `${responseWithLightboxOptions.firstChild.attributes.srcset.textContent}`,
                                 caption: intl.get('BY') + authorFullName + intl.get('ON') + date + ". " + imageLocality,
                                 alt: imageAlt,
@@ -302,7 +305,7 @@ class FilestackComponent extends Component {
                                 src: `${picture(filestackHandle, item.transformOptions).lastChild.src}`,
                                 width: parseInt(`${imageWidth}`, 10),
                                 height: parseInt(`${imageHeight}`, 10),
-                                sizes: '(max-width: 180px) 180px, (max-width: 360px) 360px, (max-width: 540px) 540px, (max-width: 720px) 720px, (max-width: 900px) 900px, (max-width: 1080px) 1080px, (max-width: 1296px) 1296px, (min-width: 1512px) 1512px, (max-width: 1728px) 1728px, (max-width: 1944px) 1944px, (max-width: 2160px) 2160px, (max-width: 2376px) 2376px, (max-width: 2592px) 2592px, (max-width: 2808px) 2808px, (max-width: 3024px) 3024px',
+                                sizes: '(max-width: 640px) 640px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, (max-width: 1366px) 1366px',
                                 srcSet: `${responseWithLightboxOptions.firstChild.attributes.srcset.textContent}`,
                                 caption: intl.get('BY') + authorFullName + intl.get('ON') + date + ". " + imageLocality,
                                 alt: imageAlt,
