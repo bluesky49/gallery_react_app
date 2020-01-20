@@ -420,10 +420,12 @@ class FaceTagComponent extends Component {
 
     render() {
         const {currentImage} = this.props;
-        const maxWidth = this.props.data.photosToRender[currentImage].width > 1920?1920:this.props.data.photosToRender[currentImage].width;
+        const rate = this.props.data.photosToRender[currentImage].width / this.props.data.photosToRender[currentImage].height;
+        const defaultWidth = 1920 * (rate > 1?1:rate)
+        const maxWidth = this.props.data.photosToRender[currentImage].width > 1920?defaultWidth:this.props.data.photosToRender[currentImage].width;
+
         const {width, isLoading, currentAttendeeName, hoveredArea, visible, faceData, nameFetching, dataSource} = this.state;
         const src = this.props.data.photosToRender[currentImage].originalSizeSRC;
-        console.log(faceData)
         return (
             !isLoading ?
                 <Measure bounds onResize={(contentRect) => this.setState({width: contentRect.bounds.width})}>
