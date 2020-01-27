@@ -40,7 +40,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                // formats: ['webp', 'pjpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -54,12 +54,12 @@ class FilestackComponent extends Component {
                                     rotate: {
                                         deg: 180
                                     },
-                                    auto_image: true,
                                     output: {
                                         strip: true,
                                         quality: 80,
                                         compress: true
                                     },
+                                    auto_image: true,
                                     cache: {
                                         expiry: 31536000
                                     }
@@ -74,7 +74,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                // formats: ['webp', 'pjpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -85,12 +85,12 @@ class FilestackComponent extends Component {
                                     rotate: {
                                         deg: 180
                                     },
-                                    auto_image: true,
                                     output: {
                                         strip: true,
                                         quality: 80,
                                         compress: true
                                     },
+                                    auto_image: true,
                                     cache: {
                                         expiry: 31536000
                                     },
@@ -109,7 +109,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                // formats: ['webp', 'pjpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -123,12 +123,12 @@ class FilestackComponent extends Component {
                                         width: 268,
                                         fit: 'max'
                                     },
-                                    auto_image: true,
                                     output: {
                                         strip: true,
                                         quality: 80,
                                         compress: true
                                     },
+                                    auto_image: true,
                                     cache: {
                                         expiry: 31536000
                                     }
@@ -142,7 +142,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                // formats: ['webp', 'pjpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -153,12 +153,12 @@ class FilestackComponent extends Component {
                                     rotate: {
                                         deg: 90
                                     },
-                                    auto_image: true,
                                     output: {
                                         strip: true,
                                         quality: 80,
                                         compress: true
                                     },
+                                    auto_image: true,
                                     cache: {
                                         expiry: 31536000
                                     },
@@ -176,7 +176,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                // formats: ['webp', 'pjpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -187,12 +187,12 @@ class FilestackComponent extends Component {
                                         width: 268,
                                         fit: 'max'
                                     },
-                                    auto_image: true,                                    
                                     output: {
                                         strip: true,
                                         quality: 80,
                                         compress: true
                                     },
+                                    auto_image: true,
                                     cache: {
                                         expiry: 31536000
                                     }
@@ -207,7 +207,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                // formats: ['webp', 'pjpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -215,12 +215,12 @@ class FilestackComponent extends Component {
                                 resolutions: [768, 1366, 1920],
                                 useValidator: false,
                                 transforms: {
-                                    auto_image: true,
                                     output: {
                                         strip: true,
                                         quality: 80,
                                         compress: true
                                     },
+                                    auto_image: true,
                                     cache: {
                                         expiry: 31536000
                                     },
