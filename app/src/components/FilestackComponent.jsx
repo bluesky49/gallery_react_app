@@ -40,7 +40,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                formats: ['webp', 'jpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -54,7 +54,7 @@ class FilestackComponent extends Component {
                                     rotate: {
                                         deg: 180
                                     },
-                                    auto_image: true,
+                                    // auto_image: true,
                                     output: {
                                         strip: true,
                                         quality: 80,
@@ -74,18 +74,18 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                formats: ['webp', 'jpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
                                 },
-                                resolutions: [640, 768, 1024, 1366],
+                                resolutions: [768, 1366, 1920],
                                 useValidator: false,
                                 transforms: {
                                     rotate: {
                                         deg: 180
                                     },
-                                    auto_image: true,
+                                    // auto_image: true,
                                     output: {
                                         strip: true,
                                         quality: 80,
@@ -109,7 +109,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                formats: ['webp', 'jpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -123,7 +123,7 @@ class FilestackComponent extends Component {
                                         width: 268,
                                         fit: 'max'
                                     },
-                                    auto_image: true,
+                                    // auto_image: true,
                                     output: {
                                         strip: true,
                                         quality: 80,
@@ -142,18 +142,18 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                formats: ['webp', 'jpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
                                 },
-                                resolutions: [640, 768, 1024, 1366],
+                                resolutions: [768, 1366, 1920],
                                 useValidator: false,
                                 transforms: {
                                     rotate: {
                                         deg: 90
                                     },
-                                    auto_image: true,
+                                    // auto_image: true,
                                     output: {
                                         strip: true,
                                         quality: 80,
@@ -176,7 +176,7 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                formats: ['webp', 'jpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
@@ -187,7 +187,7 @@ class FilestackComponent extends Component {
                                         width: 268,
                                         fit: 'max'
                                     },
-                                    auto_image: true,                                    
+                                    // auto_image: true,                                    
                                     output: {
                                         strip: true,
                                         quality: 80,
@@ -207,15 +207,15 @@ class FilestackComponent extends Component {
                                     policy: filestackPolicy,
                                     signature: filestackSignature
                                 },
-                                formats: ['webp', 'pjpg'],
+                                formats: ['webp', 'jpg'],
                                 keys: true,
                                 sizes: {
                                     fallback: '60vw',
                                 },
-                                resolutions: [640, 768, 1024, 1366],
+                                resolutions: [768, 1366, 1920],
                                 useValidator: false,
                                 transforms: {
-                                    auto_image: true,
+                                    // auto_image: true,
                                     output: {
                                         strip: true,
                                         quality: 80,
@@ -270,7 +270,6 @@ class FilestackComponent extends Component {
                     const UUID = typeof item.uuid === 'string' ? item.uuid : item.uuid[0];
 
                     const responseWithLightboxOptions = picture(filestackHandle, item.transformOptionsLightbox);
-                    console.log(responseWithLightboxOptions)
                     const utcCreated = typeof item.image_date === 'number' ? item.image_date : item.image_date[0];
 
                     const imageTitle = typeof item.title === 'string' ? item.title : item.title[0];
