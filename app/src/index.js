@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css'
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import FullscreenComponent from "./components/FullscreenComponent";
+import ButtonComponents from "./components/ButtonComponents";
 import {Provider} from "react-redux";
 import store from "./store";
 import {ThemeProvider} from "styled-components";
@@ -12,7 +12,7 @@ import {theme} from "./shared/theme";
 ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
-            <FullscreenComponent/>
+            <ButtonComponents/>
         </ThemeProvider>
     </Provider>, document.getElementById('gallery'));
 

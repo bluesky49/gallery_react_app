@@ -28,6 +28,13 @@ class ScrollComponent extends React.Component {
                 });
             }
         }
+
+        if (this.props.isRowView !== nextProps.isRowView) {
+            // Fullscreen status has changed.
+            this.setState({
+                isRowView: this.props.isRowView
+            });
+        }
     }
 
     render() {

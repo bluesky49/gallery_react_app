@@ -70,6 +70,7 @@ class GalleryComponent extends Component {
                             return <div ref={measureRef}></div>;
                         }
                         let columns = 1;
+
                         if (width >= 268) {
                             columns = 2;
                         }
@@ -133,7 +134,8 @@ GalleryComponent.propTypes = {
 
 const
     mapStateToProps = state => ({
-        data: state.data
+        data: state.data,
+        view: state.view
     });
 
 export default connect(mapStateToProps, {

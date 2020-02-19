@@ -18,6 +18,9 @@
     color: white !important;
 }
 
+.reactivelist__sortOptions option {
+    color:black;
+}
 .reactivelist__resultStats,
 .reactivelist__noResults,
 .reactivelist__resultsInfo {
@@ -141,6 +144,26 @@
     box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
 }
 
+.faces-icon-toggle {
+    font-size: 35px;
+    cursor: pointer;
+    padding: 5px 10px;
+    width: 50px;
+    border-radius: 4px;
+    z-index: 2147483647;
+    background-color: rgba(30, 30, 30, 0.8) !important;
+    box-shadow: 2px 2px 4px rgba(24, 144, 255, 0.4) !important;
+}
+
+.faces-icon-toggle.selected {
+    background-color: rgba(70, 70, 70, 0.8) !important;
+}
+
+
+.faces-icon-toggle:hover {
+    box-shadow: 2px 2px 10px rgba(24, 144, 255, 0.9) !important;
+}
+
 .react-select__control {
     background-color: transparent !important;
     border: 1px solid black !important;
@@ -183,7 +206,7 @@
 }
 
 .lightbox__tooltip {
-    z-index: 16777201 !important;
+    z-index: 5556777201 !important;
 }
 
 .ant-modal-content {

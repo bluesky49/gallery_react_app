@@ -553,7 +553,7 @@ class LightboxComponent extends Component {
                     <React.Fragment>
                         <Gallery photos={this.props.photos} columns={this.props.columns}
                                  onClick={this.openLightbox}
-                                 direction={"column"}/>
+                                 direction={this.props.view.isRowView?"row":"column"}/>
                         <Lightbox images={this.props.data.photosToRender}
                                   onClose={this.closeLightbox}
                                   onClickPrev={this.gotoPrevious}

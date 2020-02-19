@@ -17,6 +17,9 @@ import {
     setSearchResult,
     setSearchResultStatus
 } from "../../actions/dataActions";
+import {IconContext} from "react-icons";
+import {Icon, Tooltip} from "antd";
+import {MdFace} from 'react-icons/md';
 import intl from "react-intl-universal";
 
 // CSS starts
@@ -30,6 +33,13 @@ const StyledReactiveBase = styled(ReactiveBase)`
    flex-direction: column;
    flex-wrap: wrap;
 `;
+
+const StyledFaceWrapper = styled.div`
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+`;
+
 const ButtonWrapper = styled.div`
 width: 250px !important;
 `;
@@ -75,11 +85,16 @@ class SearchComponent extends Component {
         this.state = {
             firstUpdate: true,
             showDisplayButton: true,
-            methodAllowed: null
+            methodAllowed: null,
+            all_face: false,
+            some_face: false,
+            no_face_id: false,
+            no_face_in: false                
         };
     }
 
     handleApplyFilters = async () => {
+        const {all_face, some_face, no_face_in, no_face_id} = this.state;
         if (this.firstLoad === undefined) {
             this.firstLoad = false
         } else {
@@ -89,8 +104,27 @@ class SearchComponent extends Component {
         await this.props.toggleGalleryLoading();
         await this.props.closeSearchPanel();
 
-        const chunkedResults = _.chunk(this.result, 50);
-
+        let faceFilters = [];
+        if(all_face)
+            faceFilters.push(2);
+        if(some_face)
+            faceFilters.push(1);
+        if(no_face_id)
+            faceFilters.push(0);
+        if(no_face_in)
+            faceFilters.push(3);
+        const filterFaces = this.result.filter((el) => {
+            if(faceFilters.length === 0)
+                return true;
+            const isExist = el.recognition_status.filter((el) => {
+                return faceFilters.indexOf(el) !== -1;
+            });
+            if(isExist.length > 0)
+                return true;
+            return false;
+        });
+        console.log(filterFaces)
+        const chunkedResults = _.chunk(filterFaces, 50);
         await this.props.setSearchResult(chunkedResults);
         await this.props.setTotalResults(this.result.length);
 
@@ -125,9 +159,30 @@ class SearchComponent extends Component {
         this.setState({methodAllowed: "handleNoResults"})
     }
 
+    handleFaceSelect =(sel_id) => {
+        const {all_face, some_face, no_face_id, no_face_in} = this.state;
+        if(sel_id === 1) {
+            this.setState({
+                all_face: !all_face
+            });
+        }else if(sel_id === 2) {
+            this.setState({
+                some_face: !some_face
+            });
+        }else if(sel_id === 3) {
+            this.setState({
+                no_face_id: !no_face_id
+            });
+        }else if(sel_id === 4) {
+            this.setState({
+                no_face_in: !no_face_in
+            });
+        }
+    }
+
     render() {
         let elasticIndex = {['app']: `elasticsearch_index_bitnami_drupal8_${this.props.data.eventAccessCode}`};
-
+        const { all_face, some_face, no_face_id, no_face_in } = this.state;
         return (
             <StyledSearchWrapper>
                 <StyledReactiveBase
@@ -137,19 +192,7 @@ class SearchComponent extends Component {
                 >
                     <SearchComponentsWrapper>
                         <LeftColumn>
-                            <DataSearch
-                                showClear={true}
-                                componentId="SearchSensor"
-                                dataField={["image_face_names", "author_last_name", "author_first_name", "author_full_name",
-                                    "attendee_group", "image_locality"]}
-                                autosuggest={true}
-                                placeholder={intl.get('SEARCH')}
-                                innerClass={{
-                                    title: 'datasearch__title',
-                                    input: 'datasearch__input',
-                                    list: 'datasearch__list'
-                                }}
-                            />
+
                             <DataSearch
                                 showClear={true}
                                 componentId="SearchAttendee"
@@ -178,6 +221,40 @@ class SearchComponent extends Component {
                                     list: 'datasearch__list'
                                 }}
                             />
+                            <StyledFaceWrapper>
+                                <IconContext.Provider value={{
+                                    color: '#00ff00',
+                                    className: "faces-icon-toggle" + (all_face?" selected":"")
+                                }}>
+                                    <Tooltip placement="bottom" title={intl.get('ALL_FACES')} overlayClassName="lightbox__tooltip">
+                                        <MdFace onClick={() => this.handleFaceSelect(1)}/>
+                                    </Tooltip>
+                                </IconContext.Provider>
+                                <IconContext.Provider value={{
+                                    color: '#ffa500',
+                                    className: "faces-icon-toggle" + (some_face?" selected":"")
+                                }}>
+                                    <Tooltip placement="bottom" title={intl.get('SOME_FACES')} overlayClassName="lightbox__tooltip">
+                                        <MdFace onClick={() => this.handleFaceSelect(2)}/>
+                                    </Tooltip>
+                                </IconContext.Provider>
+                                <IconContext.Provider value={{
+                                    color: '#ff0000',
+                                    className: "faces-icon-toggle" + (no_face_id?" selected":"")
+                                }}>
+                                    <Tooltip placement="bottom" title={intl.get('NO_FACE_ID')} overlayClassName="lightbox__tooltip">
+                                        <MdFace onClick={() => this.handleFaceSelect(3)}/>
+                                    </Tooltip>
+                                </IconContext.Provider>
+                                <IconContext.Provider value={{
+                                    color: '#60636c',
+                                    className: "faces-icon-toggle" + (no_face_in?" selected":"")
+                                }}>
+                                    <Tooltip placement="bottom" title={intl.get('NO_FACE_IN')} overlayClassName="lightbox__tooltip">
+                                        <MdFace onClick={() => this.handleFaceSelect(4)}/>
+                                    </Tooltip>
+                                </IconContext.Provider>
+                            </StyledFaceWrapper>
                             <ReactiveList
                                 componentId="SearchResult"
                                 dataField="SearchSensor"
@@ -200,9 +277,14 @@ class SearchComponent extends Component {
                                 renderNoResults={this.handleNoResults}
                                 sortOptions={[
                                     {
-                                        "label": "By date",
+                                        "label": "Desc",
                                         "dataField": "image_date",
                                         "sortBy": "desc"
+                                    },
+                                    {
+                                        "label": "Asc",
+                                        "dataField": "image_date",
+                                        "sortBy": "asc"
                                     }
                                 ]}
                                 renderResultStats={
@@ -223,6 +305,13 @@ class SearchComponent extends Component {
                                     list: 'reactivelist__list',
                                     poweredBy: 'reactivelist__poweredBy'
                                 }}
+                                onQueryChange={
+                                    function(prevQuery, nextQuery) {
+                                      // use the query with other js code
+                                      console.log('prevQuery', prevQuery);
+                                      console.log('nextQuery', nextQuery);
+                                    }
+                                  }
                             />
                         </LeftColumn>
 

@@ -22,9 +22,9 @@ const initialState = {
     photosToRender: ['empty'],
     isLoading: true,
     galleryIsLoading: false,
-    eventAccessCode: '834116',//589089
-    attendee: 'Fbracq@eventstory.live',//Fbracq@eventstory.live
-    albumOwnerID: 'empty',
+    eventAccessCode: '390822',//589089
+    attendee: 'fbracq@eventstory.live',//Fbracq@eventstory.live
+    albumOwnerID: 'a385a319-335a-4508-95fd-35fe96f3a433',
     totalResults: null,
     searchResult: ['empty'],
     xcsrfToken: 'empty',

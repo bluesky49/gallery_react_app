@@ -12,6 +12,20 @@ export const fullscreenOFF = () => dispatch => {
     })
 };
 
+// Toggle Row
+export const rowOn = () => dispatch => {
+    dispatch({
+        type: 'TOGGLE_ROW'
+    })
+};
+
+// Toggle Col
+export const colOn = () => dispatch => {
+    dispatch({
+        type: 'TOGGLE_COL'
+    })
+};
+
 // Toggle lightbox
 export const toggleLightbox = () => dispatch => {
     dispatch({
