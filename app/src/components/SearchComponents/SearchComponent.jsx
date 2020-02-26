@@ -34,6 +34,16 @@ const StyledReactiveBase = styled(ReactiveBase)`
    flex-wrap: wrap;
 `;
 
+const StyledTickIcon = styled(Icon) `
+    font-size: 25px;
+    font-weight: 700;
+    color: rgb(255, 144, 144);
+    position: absolute;
+    z-index: 4444444444;
+    margin-left: -35px;
+    margin-top: 5px;
+`
+
 const StyledFaceWrapper = styled.div`
    display: flex;
    flex-direction: row;
@@ -61,19 +71,25 @@ const LeftColumn = styled.div`
 const RightColumn = styled.div`
    display: flex;
    flex-wrap: wrap;
+   margin-top: 10px;
    margin-left: 0;
    margin-right: 15px;
    
    @media (min-width: 600px) {
-   margin-left: 10px;
-   margin-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
    }
 `;
 const StyledMultilist = styled(MultiList)`
    @media (min-width: 600px) {
-   margin-left: 10px;
-   margin-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
    }
+`;
+
+const StyledFaceLabel = styled.span`
+   font-size: 15px;
+   color: white;
 `;
 
 // CSS ends
@@ -89,7 +105,8 @@ class SearchComponent extends Component {
             all_face: false,
             some_face: false,
             no_face_id: false,
-            no_face_in: false                
+            no_face_in: false,
+            searchLength: 0
         };
     }
 
@@ -123,8 +140,13 @@ class SearchComponent extends Component {
                 return true;
             return false;
         });
-        console.log(filterFaces)
+
         const chunkedResults = _.chunk(filterFaces, 50);
+        let searchLength = 0;
+        for(let i = 0; i < chunkedResults.length; i += 1) {
+            searchLength += chunkedResults[i].length;
+        }
+        this.setState({searchLength});
         await this.props.setSearchResult(chunkedResults);
         await this.props.setTotalResults(this.result.length);
 
@@ -182,7 +204,7 @@ class SearchComponent extends Component {
 
     render() {
         let elasticIndex = {['app']: `elasticsearch_index_bitnami_drupal8_${this.props.data.eventAccessCode}`};
-        const { all_face, some_face, no_face_id, no_face_in } = this.state;
+        const { all_face, some_face, no_face_id, no_face_in, searchLength } = this.state;
         return (
             <StyledSearchWrapper>
                 <StyledReactiveBase
@@ -221,6 +243,7 @@ class SearchComponent extends Component {
                                     list: 'datasearch__list'
                                 }}
                             />
+                            <StyledFaceLabel>Filter by recognition status</StyledFaceLabel>
                             <StyledFaceWrapper>
                                 <IconContext.Provider value={{
                                     color: '#00ff00',
@@ -228,6 +251,7 @@ class SearchComponent extends Component {
                                 }}>
                                     <Tooltip placement="bottom" title={intl.get('ALL_FACES')} overlayClassName="lightbox__tooltip">
                                         <MdFace onClick={() => this.handleFaceSelect(1)}/>
+                                        {all_face?<StyledTickIcon type="check" theme="outlined" onClick={() => this.handleFaceSelect(1)}/>:null}
                                     </Tooltip>
                                 </IconContext.Provider>
                                 <IconContext.Provider value={{
@@ -236,6 +260,7 @@ class SearchComponent extends Component {
                                 }}>
                                     <Tooltip placement="bottom" title={intl.get('SOME_FACES')} overlayClassName="lightbox__tooltip">
                                         <MdFace onClick={() => this.handleFaceSelect(2)}/>
+                                        {some_face?<StyledTickIcon type="check" theme="outlined" onClick={() => this.handleFaceSelect(2)}/>:null}
                                     </Tooltip>
                                 </IconContext.Provider>
                                 <IconContext.Provider value={{
@@ -244,6 +269,7 @@ class SearchComponent extends Component {
                                 }}>
                                     <Tooltip placement="bottom" title={intl.get('NO_FACE_ID')} overlayClassName="lightbox__tooltip">
                                         <MdFace onClick={() => this.handleFaceSelect(3)}/>
+                                        {no_face_id?<StyledTickIcon type="check" theme="outlined" onClick={() => this.handleFaceSelect(3)}/>:null}
                                     </Tooltip>
                                 </IconContext.Provider>
                                 <IconContext.Provider value={{
@@ -252,6 +278,7 @@ class SearchComponent extends Component {
                                 }}>
                                     <Tooltip placement="bottom" title={intl.get('NO_FACE_IN')} overlayClassName="lightbox__tooltip">
                                         <MdFace onClick={() => this.handleFaceSelect(4)}/>
+                                        {no_face_in?<StyledTickIcon type="check" theme="outlined" onClick={() => this.handleFaceSelect(4)}/>:null}
                                     </Tooltip>
                                 </IconContext.Provider>
                             </StyledFaceWrapper>
@@ -290,7 +317,7 @@ class SearchComponent extends Component {
                                 renderResultStats={
                                     function (stats) {
                                         return (
-                                            `${stats.numberOfResults} ${intl.get('RESULTS')} ${intl.get('FOUND')} ${intl.get('IN')} ${stats.time} ${intl.get('MS')}`
+                                            `${searchLength} ${intl.get('RESULTS')} ${intl.get('FOUND')} ${intl.get('IN')} ${stats.time} ${intl.get('MS')}`
                                         )
                                     }
                                 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Element} from 'react-scroll'
 import App from "../App";
+import {Element} from 'react-scroll'
 
 class ScrollComponent extends React.Component {
     constructor(props) {
