@@ -87,9 +87,10 @@ const StyledMultilist = styled(MultiList)`
    }
 `;
 
-const StyledFaceLabel = styled.span`
-   font-size: 15px;
-   color: white;
+const StyledFaceLabel = styled.h2`
+    margin-top: 5px !important;
+    font-size: 16px !important;
+    color: white !important;
 `;
 
 // CSS ends
@@ -200,6 +201,8 @@ class SearchComponent extends Component {
                 no_face_in: !no_face_in
             });
         }
+
+        this.handleApplyFilters()
     }
 
     render() {
@@ -302,18 +305,18 @@ class SearchComponent extends Component {
                                         <ul style={{display: 'none'}}>&nbsp;</ul>
                                     );}}
                                 renderNoResults={this.handleNoResults}
-                                sortOptions={[
-                                    {
-                                        "label": "Desc",
-                                        "dataField": "image_date",
-                                        "sortBy": "desc"
-                                    },
-                                    {
-                                        "label": "Asc",
-                                        "dataField": "image_date",
-                                        "sortBy": "asc"
-                                    }
-                                ]}
+                                // sortOptions={[
+                                //     {
+                                //         "label": "Desc",
+                                //         "dataField": "image_date",
+                                //         "sortBy": "desc"
+                                //     },
+                                //     {
+                                //         "label": "Asc",
+                                //         "dataField": "image_date",
+                                //         "sortBy": "asc"
+                                //     }
+                                // ]}
                                 renderResultStats={
                                     function (stats) {
                                         return (

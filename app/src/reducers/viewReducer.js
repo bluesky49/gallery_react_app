@@ -3,6 +3,8 @@ import {
     DISABLE_FULLSCREEN,
     TOGGLE_ROW,
     TOGGLE_COL,
+    TOGGLE_ASC,
+    TOGGLE_DESC,
     TOGGLE_LIGHTBOX,
     DISABLE_LIGHTBOX,
     TOGGLE_TEMP_FULLSCREEN,
@@ -16,6 +18,7 @@ import {
 const initialState = {
     fullscreenCustom: false,
     isRowView: false,
+    isAsc: false,
     lightboxIsOpen: false,
     fullscreenTempDisabled: false,
     searchPanelIsOpen: false,
@@ -44,6 +47,16 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 isRowView: false
+            };
+        case TOGGLE_ASC:
+            return {
+                ...state,
+                isAsc: true,
+            };
+        case TOGGLE_DESC:
+            return {
+                ...state,
+                isAsc: false,
             };
         case TOGGLE_LIGHTBOX:
             return {

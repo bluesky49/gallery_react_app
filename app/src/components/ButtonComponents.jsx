@@ -6,7 +6,7 @@ import styled from "styled-components";
 import ScrollComponent from "./ScrollComponent";
 import {connect} from 'react-redux';
 
-import {fullscreenON, fullscreenOFF, rowOn, colOn, disableTempFullscreen, toggleTempFullscreen} from '../actions/viewActions';
+import {fullscreenON, fullscreenOFF, rowOn, colOn, disableTempFullscreen, sortAsc, sortDesc, toggleTempFullscreen} from '../actions/viewActions';
 
 // CSS starts
 const StyledFullScreen = styled.div`
@@ -17,6 +17,14 @@ const FullScreenButtonWrapper = styled.div`
     position: absolute;
     top: 14px;
     right: 30px;
+    z-index: 9999;
+`;
+
+const SortButtonWrapper = styled.div`
+    text-align: right;
+    position: absolute;
+    top: 14px;
+    right: 170px;
     z-index: 9999;
 `;
 
@@ -81,8 +89,18 @@ export class ButtonComponents extends Component {
         }
     }
 
+    toggleSort = (ev) => {
+        ev.preventDefault();
+        const {view: {isAsc}, sortAsc, sortDesc} = this.props;
+        if(isAsc) {
+            sortDesc();
+        }else {
+            sortAsc();
+        }
+    }
+
     render() {
-        const {isFullscreen, toggleFullscreen, view: {isRowView}} = this.props;
+        const {isFullscreen, toggleFullscreen, view: {isRowView, isAsc}} = this.props;
 
         const fullscreenBut = isFullscreen ?
             <Icon type="fullscreen-exit" theme="outlined" style={{fontSize: '22px', color: '#1890ff'}}/>
@@ -92,8 +110,18 @@ export class ButtonComponents extends Component {
             <Icon type="column-height" theme="outlined" style={{fontSize: '22px', color: '#1890ff'}}/>
             :
             <Icon type="column-width" theme="outlined" style={{fontSize: '22px', color: '#1890ff'}}/>;
+        const sortAsc = isAsc ?
+            <Icon type="caret-up" theme="outlined" style={{fontSize: '22px', color: '#1890ff'}}/>
+            :
+            <Icon type="caret-down" theme="outlined" style={{fontSize: '22px', color: '#1890ff'}}/>;
         return (
             <StyledFullScreen>
+                {this.props.view.showControls ?
+                    <SortButtonWrapper>
+                        <StyledButton type="ghost" onClick={this.toggleSort}>
+                            {sortAsc}
+                        </StyledButton>
+                    </SortButtonWrapper> : null}
                 {this.props.view.showControls ?
                     <RowColButtonWrapper>
                         <StyledButton type="ghost" onClick={this.toggleRowCol}>
@@ -119,6 +147,7 @@ ButtonComponents.displayName = 'ButtonComponents';
 ButtonComponents.propTypes = {
     isRowView: PropTypes.bool,
     toggleRowCol: PropTypes.func,
+    toggleSort: PropTypes.func,
     isFullscreen: PropTypes.bool,
     toggleFullscreen: PropTypes.func,
     viewportDimensions: PropTypes.object,
@@ -127,6 +156,8 @@ ButtonComponents.propTypes = {
     lightboxIsOpen: PropTypes.bool,
     rowOn: PropTypes.func,
     colOn: PropTypes.func,
+    sortAsc: PropTypes.func,
+    sortDesc: PropTypes.func,
     fullscreenTempDisabled: PropTypes.bool,
     showControls: PropTypes.bool
 };
@@ -142,6 +173,8 @@ export default connect(mapStateToProps, {
     fullscreenOFF,
     rowOn,
     colOn,
+    sortAsc,
+    sortDesc,
     disableTempFullscreen,
     toggleTempFullscreen
 })(ButtonToggleComponent);

@@ -26,6 +26,20 @@ export const colOn = () => dispatch => {
     })
 };
 
+// Toggle ASC
+export const sortAsc = () => dispatch => {
+    dispatch({
+        type: 'TOGGLE_ASC'
+    })
+};
+
+// Toggle DESC
+export const sortDesc = () => dispatch => {
+    dispatch({
+        type: 'TOGGLE_DESC'
+    })
+};
+
 // Toggle lightbox
 export const toggleLightbox = () => dispatch => {
     dispatch({

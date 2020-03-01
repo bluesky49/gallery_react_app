@@ -40,6 +40,8 @@ export default function (state = initialState, action) {
                 finalResponse: action.payload
             };
         case SET_ALBUM_RESPONSE:
+            console.log(action.payload)
+
             return {
                 ...state,
                 albumResponse: action.payload
