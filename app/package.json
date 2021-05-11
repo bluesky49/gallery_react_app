@@ -9,7 +9,7 @@
     "axios": "^0.19.0",
     "delay": "^4.1.0",
     "filestack-adaptive": "^1.0.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "prop-types": "^15.6.2",
     "pusher-js": "^4.4.0",
     "react": "^16.8.5",
